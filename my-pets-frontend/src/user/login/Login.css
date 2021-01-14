@@ -1,0 +1,149 @@
+.login-container {
+	/* position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%); */
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 70vh;
+}
+
+.login-content {
+	font-family: 'Poppins';
+	background: #ffffff;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.67);
+	border-radius: 12px;
+	width: 400px;
+	display: inline-block;
+	margin-top: 30px;
+	vertical-align: middle;
+	position: relative;
+	padding: 35px;
+	height: 450px;
+}
+
+.login-content h1 {
+	font-family: 'Poppins';
+	font-weight: 600;
+	color: black;
+}
+
+.social-login {
+	background-color: transparent;
+}
+
+.social-login ul {
+	margin-left: -2rem;
+	list-style-type: none;
+}
+
+.social-login ul li a {
+	text-decoration: none;
+	color: black;
+	font-weight: 400;
+}
+
+.social-link {
+	background-color: transparent;
+	margin-bottom: 3rem;
+	padding: 0.5rem;
+	border-radius: 1px;
+	border-style: solid;
+}
+
+.social-btn {
+	margin-bottom: 15px;
+	font-weight: 400;
+	font-size: 16px;
+}
+
+.social-btn img {
+	height: 32px;
+	float: left;
+	margin-top: 10px;
+}
+
+.social-link.google {
+	/* background-color: #dd4b39; */
+	border-width: 1px;
+	border-color: #dd4b39;
+	box-shadow: 0 1px 6px #dd4b39;
+}
+
+.social-btn.google {
+	margin-top: 7px;
+}
+
+.fb-logo {
+	/* margin-left: -1rem; */
+	width: 25px;
+	position: fixed;
+	margin-top: -0.7rem;
+	background-color: transparent;
+}
+
+.google-logo {
+	/* background-color: red; */
+	/* margin-left: -1.2rem; */
+	width: 32px;
+	position: fixed;
+	margin-top: -1rem;
+	background-color: transparent;
+}
+
+.github-logo {
+	/* margin-left: -1rem; */
+	width: 25px;
+	position: fixed;
+	margin-top: -0.7rem;
+	background-color: transparent;
+}
+
+.social-btn.facebook img {
+	height: 24px;
+	margin-left: 3px;
+}
+
+.social-link.facebook {
+	/* background-color: #3b5998; */
+	border-width: 1px;
+	box-shadow: 0 1px 6px #3b5998;
+}
+
+.social-link.github {
+	/* background-color: #211f1f; */
+	/* background-color: red; */
+	border-width: 1px;
+	box-shadow: 0 1px 6px #211f1f;
+}
+
+.social-btn.github img {
+	height: 24px;
+	margin-left: 3px;
+}
+
+.signup-link {
+	color: rgba(0, 0, 0, 0.65);
+	font-size: 14px;
+}
+
+.login-title {
+	font-size: 1.5em;
+	font-weight: 500;
+	margin-top: 0;
+	margin-bottom: 30px;
+	color: rgba(0, 0, 0, 0.65);
+}
+
+.signup-link {
+	text-decoration: none;
+}
+
+.test {
+	background-color: red;
+}

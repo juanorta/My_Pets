@@ -1,0 +1,125 @@
+.app-header-wrapper {
+	background-color: transparent;
+	justify-content: center;
+}
+
+.app-header {
+	height: 60px;
+	position: relative;
+	z-index: 10;
+	background-color: transparent;
+	width: 1275px;
+}
+
+.app-title {
+	line-height: 60px;
+	vertical-align: middle;
+	font-size: 1.35em;
+}
+
+.app-branding {
+	list-style-type: none;
+	float: left;
+	background-color: transparent;
+	width: 250px;
+	height: 100%;
+	margin-top: 0rem;
+	padding-left: 4rem;
+}
+
+.app-branding li a {
+	text-decoration: none;
+	line-height: 60px;
+	margin-left: -5.5rem;
+}
+
+.app-options {
+	background-color: transparent;
+	float: right;
+}
+
+.app-nav ul {
+	list-style-position: none;
+	padding: 0;
+	color: red;
+	display: inline;
+}
+
+.app-nav ul li {
+	list-style-type: none;
+	display: inline-block;
+	cursor: pointer;
+	/* font-family: 'Poppins'; */
+}
+
+.app-nav ul li a {
+	display: inline-block;
+	line-height: 60px;
+	vertical-align: middle;
+	padding-left: 15px;
+	padding-right: 15px;
+	text-decoration: none;
+}
+
+.app-nav ul li a:hover {
+	color: #0f96f6;
+}
+
+.app-nav ul li a.active {
+	color: #0f96f6;
+}
+
+.menu-icon {
+	margin-top: 8px;
+}
+
+.navlink {
+	text-decoration: none;
+	color: black;
+}
+
+.menu-icon-authenticated {
+	background-color: transparent;
+	position: fixed;
+
+	margin-left: 2rem;
+	z-index: 100;
+	top: 10;
+	left: 0;
+}
+
+.avatar-picture {
+	position: relative;
+	z-index: 5000;
+	/* background-color: white; */
+}
+
+/* .app-nav .avatar-hidden {
+	display: none;
+	background-color: red;
+} */
+
+@media (max-width: 768px) {
+	.app-nav ul li a {
+		display: none;
+	}
+
+	/* .avatar {
+		background-color: transparent;
+		width: 60px;
+	} */
+
+	.app-nav .login-signup {
+		display: none;
+	}
+
+	.app-branding {
+		margin-left: 20%;
+	}
+}
+
+@media (min-width: 768px) {
+	.menu-icon {
+		display: none;
+	}
+}
