@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 
-import * as markerAnimation from './marker.json';
+import * as markerAnimation from './marker-accent.json';
 
 const defaultOptions = {
 	loop: true,

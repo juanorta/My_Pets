@@ -52,7 +52,7 @@ function Home() {
 			<Grid container className="grid-container-banner">
 				<Grid item lg={12} xs={12} className="grid-banner">
 					<div className="intro-statement">
-						<h1>Your Pet Info in One Place</h1>
+						<h1>Your Pet's Information in One Place</h1>
 					</div>
 					<NavLink
 						to="/signup"
@@ -79,7 +79,14 @@ function Home() {
 				<img src={dog}></img>
 			</div>
 			{/* body container */}
-			<Grid container className="grid-container-body">
+
+			<div className="stripe1"></div>
+			<Grid
+				container
+				className="grid-container-body"
+				// style={{ overflowY: 'hidden' }}
+				// style={{ overflowX: 'hidden' }}
+			>
 				<Grid item lg={8} xs={12} className="grid-body">
 					{/* <Grid item lg={12} className="grid-whitespace"></Grid> */}
 					{/* <div>body</div> */}
@@ -113,16 +120,33 @@ function Home() {
 										{' '}
 										|{' '}
 									</h2>{' '}
-									Store multiple pets
+									What is My Pets?
 								</h2>
 								<h3>
-									From dogs, cats, guinea pigs, you will be
+									My Pets is an all in one pet manager
+									dedicated
 								</h3>
 								<h3>
-									able to store each pet's vital information.
+									to help easily manage your furry friends.
+									From{' '}
 								</h3>
-								<h3>You can track your pet's weight, view</h3>
-								<h3>upcoming appointments, and much more!</h3>
+								<h3>
+									dogs, cats, guinea pigs, you will be able to
+									create
+								</h3>
+								<h3>
+									a profile and store each pet's vital
+									information.
+								</h3>
+								<h3>
+									{' '}
+									Track your pet's weight, create a favorite
+									foods
+								</h3>
+								<h3>
+									list, view upcoming appointments, find pet-
+								</h3>{' '}
+								<h3> friendly places and much more!</h3>
 							</div>
 						</Grid>
 
@@ -321,13 +345,48 @@ function Home() {
 									</h2>{' '}
 									Find nearby stores, vets, and dog parks
 								</h2>
-								<h3>View a map that shows all nearby pet</h3>
+								<h3>
+									View a map that shows all nearby
+									pet-friendly
+								</h3>
 								<h3>services near you!</h3>
 							</div>
 						</Grid>
 					</Grid>
 				</Grid>
+				<div className="stripe2"></div>
 			</Grid>
+
+			<div className="get-started-container">
+				<div className="get-started">
+					<h1>Ready to get started?</h1>
+					<h2>
+						Create an account with either your Google, Facebook, or
+						Github account and try it out now. Your pets will thank
+						you
+					</h2>{' '}
+					<NavLink
+						to="/signup"
+						style={{
+							textDecoration: 'none',
+						}}
+					>
+						<Button
+							classes={{
+								root: classes.root,
+							}}
+						>
+							Sign Up
+						</Button>
+					</NavLink>
+				</div>
+			</div>
+			<div className="footer">
+				<div className="footer-content">
+					<h3> © Copyright 2021 Juan Orta. All rights reserved.</h3>
+				</div>
+			</div>
+
 			{/* <div className="whitespace2">white</div> */}
 		</div>
 	);
