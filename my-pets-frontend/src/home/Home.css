@@ -6,28 +6,6 @@
 	margin-top: 64px;
 }
 
-.stripe1 {
-	position: absolute;
-	background-color: #ff6019;
-	margin-top: -4.7rem;
-	margin-left: -1rem;
-	width: 40rem;
-	height: 2rem;
-	transform: rotateY(0deg) rotate(-8deg);
-}
-
-.stripe2 {
-	z-index: 180;
-	position: absolute;
-	float: right;
-	background-color: #ff6019;
-	margin-left: 120rem;
-	width: 40rem;
-	height: 2rem;
-	transform: rotateY(0deg) rotate(-8deg);
-	margin-top: 147.6rem;
-}
-
 /* banner */
 .grid-container-banner {
 	background-color: blue;
@@ -41,10 +19,6 @@
 	width: 100%;
 	height: 100%;
 	text-align: center;
-}
-
-.grid-banner svg {
-	display: block;
 }
 
 .grid-banner h1 {
@@ -75,45 +49,6 @@
 	width: 100%;
 	margin-top: -4rem;
 }
-
-.dog-svg {
-	display: none;
-	background-color: white;
-	height: 86px;
-	width: 100px;
-	margin: auto;
-	position: relative;
-	z-index: 999;
-}
-
-.dog-svg img {
-	display: none;
-	width: 100%;
-	background-color: white;
-	height: 100%;
-}
-
-/* .whitespace {
-	background-color: white;
-	z-index: 10;
-	position: absolute;
-	width: 100%;
-	height: 80px;
-}
-
-.whitespace2 {
-	background-color: white;
-	z-index: 10;
-	position: absolute;
-	width: 100%;
-	height: 80px;
-	margin-top: -4rem;
-}
-
-.grid-whitespace {
-	background-color: white;
-	height: 5rem;
-} */
 
 .feature-grid {
 	background-color: royalblue;
@@ -240,17 +175,17 @@
 		margin-top: 25%;
 	}
 
-	.stripe1 {
+	/* .stripe1 {
 		position: absolute;
 		background-color: #ff6019;
 		margin-top: -1.8rem;
-		/* margin-leVft: -1rem; */
+		margin-leVft: -1rem;
 		width: 10rem;
 		height: 1rem;
 		transform: rotateY(0deg) rotate(-12deg);
-	}
+	} */
 
-	.stripe2 {
+	/* .stripe2 {
 		float: right;
 		background-color: #ff6019;
 		width: 10rem;
@@ -258,7 +193,7 @@
 		transform: rotateY(0deg) rotate(-12deg);
 		margin-top: -4.66rem;
 		margin-right: -1rem;
-	}
+	} */
 
 	.grid-container-body {
 		margin-top: 0rem;
@@ -283,6 +218,7 @@
 		left: 0;
 		transform-origin: top left;
 		transform: skewY(-12deg);
+		box-shadow: -70vw -10px 0px 10px #ff6019, 70vw 50px 0px -30px #ff6019;
 	}
 
 	.grid-body {
@@ -319,6 +255,11 @@
 
 	.feature-description h3 {
 		color: white;
+	}
+
+	.stripe2 {
+		margin-top: 255.45rem;
+		margin-left: 8.5rem;
 	}
 
 	.footer {
@@ -389,8 +330,9 @@
 /* laptops, desktops  */
 @media only screen and (min-width: 1200px) {
 	.home-main-container {
-		background-color: white;
-		height: 840vh;
+		background-color: transparent;
+		height: auto;
+		overflow-y: hidden;
 	}
 
 	.grid-banner h1 {
@@ -398,11 +340,19 @@
 		font-size: 80px;
 	}
 
+	.grid-banner {
+		background-color: transparent;
+	}
+
+	.grid-container-banner {
+		background-color: transparent;
+	}
+
 	.grid-container-body {
 		background-color: transparent;
 		position: relative;
 		box-sizing: border-box;
-		height: 200vh;
+		height: 170vh;
 	}
 
 	.grid-body {
@@ -420,16 +370,20 @@
 		left: 0;
 		transform-origin: top left;
 		transform: skewY(-8deg);
+		box-shadow: -70vw -10px 0px 10px #ff6019, 70vw 50px 0px -30px #ff6019;
+
+		/* border-bottom: 22px solid #f51c40; */
 	}
 
 	.feature-container {
 		background-color: transparent;
-		height: 110vh;
+		height: 48vh;
+		padding: 0rem;
 	}
 
 	.feature-grid {
 		background-color: transparent;
-		height: 100vh;
+		height: 140vh;
 	}
 
 	.feature-pic {
@@ -442,7 +396,7 @@
 	}
 
 	.feature-container.second-row {
-		margin-top: -40%;
+		margin-top: 0%;
 	}
 
 	.feature-description h2 {
@@ -455,6 +409,7 @@
 
 	.get-started-container {
 		background-color: transparent;
+		height: 60vh;
 		width: 100%;
 	}
 

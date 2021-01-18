@@ -75,15 +75,14 @@ function Home() {
 				</Grid>
 			</Grid>
 			{/* dog picture container */}
-			<div className="dog-svg">
-				<img src={dog}></img>
-			</div>
+
 			{/* body container */}
 
 			<div className="stripe1"></div>
 			<Grid
 				container
 				className="grid-container-body"
+				// style={{ overflowY: 'hidden' }}
 				// style={{ overflowY: 'hidden' }}
 				// style={{ overflowX: 'hidden' }}
 			>
