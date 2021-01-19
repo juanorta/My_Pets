@@ -1,39 +1,22 @@
 import React, { Component, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './AppHeader.css';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Fade from '@material-ui/core/Fade';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import PetsIcon from '@material-ui/icons/Pets';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import clsx from 'clsx';
-import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import SideDrawerNotLoggedIn from './SideDrawerNotLoggedIn';
+import SideDrawerLoggedIn from '../user/SideDrawerLoggedIn/SideDrawerLoggedIn';
 
 const drawerWidth = 300;
 
@@ -51,98 +34,20 @@ const useStyles = makeStyles((theme) => ({
 			// backgroundColor: 'green',
 			// color: 'white',
 		},
-		// '&:active': {
-		// 	backgroundColor: 'blue',
-		// },
+
 		fontFamily: 'Poppins',
 		fontWeight: '600',
 	},
-	avatarButton: {
-		color: 'white',
-		background: 'transparent',
-		height: 62,
-		borderRadius: 3,
-		border: 0,
-		padding: '0 30px',
-		boxShadow: 'none',
-	},
+
 	label: {
 		textTransform: 'capitalize',
-	},
-	appBar: {
-		transition: theme.transitions.create(['margin', 'width'], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
-	},
-	appBarShift: {
-		width: `calc(100% - ${drawerWidth}px)`,
-		marginLeft: drawerWidth,
-		transition: theme.transitions.create(['margin', 'width'], {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-	},
-	menuButton: {
-		marginRight: theme.spacing(2),
-		'&:hover': {
-			backgroundColor: '#FF6019',
-		},
-	},
-	closeMenuButton: {
-		'&:hover': {
-			backgroundColor: '#FF6019',
-		},
-	},
-	menuContents: {
-		color: 'white',
-		'&:hover': {
-			backgroundColor: '#FF6019',
-		},
-	},
-	hide: {
-		display: 'none',
-	},
-	drawer: {
-		width: drawerWidth,
-		flexShrink: 0,
-	},
-	drawerPaper: {
-		width: drawerWidth,
-		backgroundColor: '#1B2737',
-	},
-	drawerHeader: {
-		display: 'flex',
-		alignItems: 'center',
-		padding: theme.spacing(0, 1),
-		// necessary for content to be below app bar
-		...theme.mixins.toolbar,
-		justifyContent: 'flex-end',
-	},
-	content: {
-		flexGrow: 1,
-		padding: theme.spacing(3),
-		transition: theme.transitions.create('margin', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
-		marginLeft: -drawerWidth,
-	},
-	contentShift: {
-		transition: theme.transitions.create('margin', {
-			easing: theme.transitions.easing.easeOut,
-			duration: theme.transitions.duration.enteringScreen,
-		}),
-		marginLeft: 0,
 	},
 }));
 
 //hides navbar after some scrolling
 function HideOnScroll(props) {
 	const { children, window } = props;
-	// Note that you normally won't need to set the window ref as useScrollTrigger
-	// will default to window.
-	// This is only being set here because the demo is in an iframe.
+
 	const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
 	return (
@@ -152,16 +57,7 @@ function HideOnScroll(props) {
 	);
 }
 
-HideOnScroll.propTypes = {
-	children: PropTypes.element.isRequired,
-	/**
-	 * Injected by the documentation to work in an iframe.
-	 * You won't need it on your project.
-	 */
-	window: PropTypes.func,
-};
-
-//navbar + side drawer
+//navbar
 export default function AppHeader(props) {
 	console.log(props.authenticated);
 	console.log(props.currentUser);
@@ -172,26 +68,6 @@ export default function AppHeader(props) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [logoutClicked, setLogoutClicked] = useState(false);
 	const [open, setOpen] = React.useState(false);
-	const [authenticated, setAuthenticated] = useState(false);
-
-	//hook that gets set to true when the dashboard page gets loaded for the first time
-	//used to trigger a slide-open animation on first load
-	const [
-		dashboardLoadedForFirstTime,
-		setDashboardLoadedForFirstTime,
-	] = useState(false);
-
-	//waiting 250ms to open the side drawer if the page hasn't been loaded yet
-	setTimeout(function () {
-		if (
-			props.authenticated &&
-			window.innerWidth >= 768 &&
-			dashboardLoadedForFirstTime == false
-		) {
-			setDashboardLoadedForFirstTime(true);
-			setOpen(true);
-		}
-	}, 250);
 
 	let menuIconClass = 'menu-icon';
 
@@ -204,30 +80,14 @@ export default function AppHeader(props) {
 		setAnchorEl(null);
 	};
 
-	const handleDrawerOpen = () => {
-		setOpen(true);
-	};
-
-	const handleDrawerClose = () => {
-		setOpen(false);
-		setLogoutClicked(true);
-	};
-
 	const handleLogoutClose = () => {
 		setOpen(false);
 		props.onLogout();
 	};
 
-	//console.log(window.innerWidth);
-	// if (window.innerWidth <= 768) {
-	// 	handleDrawerOpen();
-	// }
-
 	if (props.authenticated) {
 		menuIconClass = 'menu-icon-authenticated';
 	}
-
-	//console.log(menuIconClass);
 
 	return (
 		<React.Fragment>
@@ -244,33 +104,21 @@ export default function AppHeader(props) {
 						className="app-header-wrapper"
 						style={{ color: 'red' }}
 					>
-						{/* sideDrawerNotLoggedIn component will go here*/}
+						{/* will load 2 different side drawers depending if user is authenticated or not*/}
 						<div className={menuIconClass}>
-							{/* load SideDrawerNotLoggedIn if not authenticated */}
-							<SideDrawerNotLoggedIn />
-
-							{/* <IconButton
-								style={{ color: '#1B2737' }}
-								aria-label="open drawer"
-								onClick={handleDrawerOpen}
-								edge="start"
-								className={clsx(
-									classes.menuButton,
-									open && classes.hide
-								)}
-							>
-								{/* {props.authenticated ? (
-									<Avatar
-										alt="Remy Sharp"
-										src={props.currentUser.imageUrl}
-									/>
-								) : ( */}
-
-							{/* <MenuIcon /> */}
-
-							{/* //)} 
-							</IconButton> */}
+							{props.authenticated ? (
+								<SideDrawerLoggedIn
+									handleLogoutClose={handleLogoutClose}
+									authenticated={props.authenticated}
+									name={props.currentUser.name}
+									imageUrl={props.currentUser.imageUrl}
+								/>
+							) : (
+								<SideDrawerNotLoggedIn />
+							)}
 						</div>
+
+						{/* goes to home when logo is clicked */}
 						<div className="app-header">
 							<ul className="app-branding">
 								<li>
@@ -282,8 +130,8 @@ export default function AppHeader(props) {
 									>
 										<Button
 											classes={{
-												root: classes.root, // class name, e.g. `classes-nesting-root-x`
-												label: classes.label, // class name, e.g. `classes-nesting-label-x`
+												root: classes.root,
+												label: classes.label,
 											}}
 											style={{ fontSize: '20px' }}
 										>
@@ -297,7 +145,9 @@ export default function AppHeader(props) {
 									</NavLink>
 								</li>
 							</ul>
+
 							<div className="app-options">
+								{/* will load different navbar content depending if user is authenticated */}
 								<nav className="app-nav">
 									{props.authenticated ? (
 										<ul>
@@ -307,9 +157,9 @@ export default function AppHeader(props) {
 														onClick={handleClick}
 														classes={{
 															root:
-																classes.avatarButton, // class name, e.g. `classes-nesting-root-x`
+																classes.avatarButton,
 															label:
-																classes.label, // class name, e.g. `classes-nesting-label-x`
+																classes.label,
 														}}
 														style={{
 															fontSize: '17px',
@@ -356,9 +206,9 @@ export default function AppHeader(props) {
 												<NavLink to="/login">
 													<Button
 														classes={{
-															root: classes.root, // class name, e.g. `classes-nesting-root-x`
+															root: classes.root,
 															label:
-																classes.label, // class name, e.g. `classes-nesting-label-x`
+																classes.label,
 														}}
 														style={{
 															fontSize: '17px',
@@ -378,9 +228,9 @@ export default function AppHeader(props) {
 												<NavLink to="/signup">
 													<Button
 														classes={{
-															root: classes.root, // class name, e.g. `classes-nesting-root-x`
+															root: classes.root,
 															label:
-																classes.label, // class name, e.g. `classes-nesting-label-x`
+																classes.label,
 														}}
 														style={{
 															fontSize: '17px',
@@ -389,12 +239,6 @@ export default function AppHeader(props) {
 																'2px solid #FF6019',
 														}}
 													>
-														{/* <PersonAddIcon
-															style={{
-																minWidth:
-																	'40px',
-															}}
-														/> */}
 														Sign Up
 													</Button>
 												</NavLink>
@@ -407,129 +251,6 @@ export default function AppHeader(props) {
 					</Toolbar>
 				</AppBar>
 			</HideOnScroll>
-
-			{/*  side drawer */}
-			{/* <Drawer
-				className={classes.drawer}
-				variant="persistent"
-				anchor="left"
-				open={open}
-				classes={{
-					paper: classes.drawerPaper,
-				}}
-			>
-				<div className={classes.drawerHeader}>
-					<IconButton
-						onClick={handleDrawerClose}
-						style={{ color: 'white' }}
-						className={clsx(classes.closeMenuButton)}
-					>
-						{theme.direction === 'ltr' ? (
-							<ChevronLeftIcon />
-						) : (
-							<ChevronRightIcon />
-						)}
-					</IconButton>
-				</div>
-				<Divider style={{ backgroundColor: '#FF6019' }} />
-				<List>
-					{props.authenticated ? (
-						<NavLink to="/login" className="navlink">
-							{window.innerWidth < 768 ? (
-								<div>
-									<ListItem style={{ color: 'white' }}>
-										<ListItemIcon>
-											<img
-												style={{
-													marginTop: '-1.25rem',
-													height: '2rem',
-													width: '2rem',
-												}}
-												className="avatar-picture-img"
-												src={props.currentUser.imageUrl}
-											/>
-										</ListItemIcon>
-										{props.currentUser.name}
-									</ListItem>
-									<Divider
-										style={{ backgroundColor: '#FF6019' }}
-									/>
-								</div>
-							) : null}
-							<ListItem
-								button
-								className={clsx(classes.menuContents)}
-							>
-								<ListItemIcon style={{ color: 'white' }}>
-									<VpnKeyIcon />
-								</ListItemIcon>
-								Dashboard
-							</ListItem>
-							{/* <Divider style={{ backgroundColor: '#FF6019' }} /> *
-							<ListItem
-								button
-								onClick={handleLogoutClose}
-								className={clsx(classes.menuContents)}
-							>
-								<ListItemIcon style={{ color: 'white' }}>
-									<ExitToAppIcon />
-								</ListItemIcon>
-								Log Out
-							</ListItem>
-						</NavLink>
-					) : (
-						<div>
-							<NavLink
-								to="/login"
-								className="navlink"
-								onClick={() => {
-									setOpen(false);
-								}}
-							>
-								<ListItem
-									button
-									style={{
-										color: 'white',
-									}}
-								>
-									<ListItemIcon
-										style={{
-											color: 'white',
-										}}
-									>
-										<VpnKeyIcon />
-									</ListItemIcon>
-									Login
-								</ListItem>
-							</NavLink>
-
-							<NavLink
-								to="/signup"
-								className="navlink"
-								onClick={() => {
-									setOpen(false);
-								}}
-							>
-								<ListItem
-									button
-									style={{
-										color: 'white',
-									}}
-								>
-									<ListItemIcon
-										style={{
-											color: 'white',
-										}}
-									>
-										<PersonAddIcon />
-									</ListItemIcon>
-									Sign Up
-								</ListItem>
-							</NavLink>
-						</div>
-					)}
-				</List>
-			</Drawer> */}
 		</React.Fragment>
 	);
 }
