@@ -102,6 +102,7 @@ const useStyles = makeStyles((theme) => ({
 	drawer: {
 		width: drawerWidth,
 		flexShrink: 0,
+		fontFamily: 'Poppins',
 	},
 	drawerPaper: {
 		width: drawerWidth,
@@ -133,6 +134,134 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SideDrawerNotLoggedIn.js(props){
-    
+export default function SideDrawerNotLoggedIn(props) {
+	const theme = useTheme();
+	const classes = useStyles();
+
+	const [open, setOpen] = useState(false);
+
+	const handleNotLoggedInDrawerOpen = () => {
+		setOpen(true);
+		console.log('hey');
+	};
+
+	const handleNotLoggedInDrawerClose = () => {
+		setOpen(false);
+	};
+
+	return (
+		<div>
+			<IconButton
+				style={{ color: '#1B2737' }}
+				aria-label="open drawer"
+				onClick={handleNotLoggedInDrawerOpen}
+				edge="start"
+				className={clsx(classes.menuButton, open && classes.hide)}
+				// className={clsx(classes.menuButton, open && classes.hide)}
+			>
+				<MenuIcon />
+			</IconButton>
+
+			<Drawer
+				className={classes.drawer}
+				anchor="left"
+				open={open}
+				classes={{
+					paper: classes.drawerPaper,
+				}}
+				// variant="persistent"
+			>
+				<div className={classes.drawerHeader}>
+					<IconButton
+						onClick={handleNotLoggedInDrawerClose}
+						style={{ color: 'white' }}
+						className={clsx(classes.closeMenuButton)}
+					>
+						{theme.direction === 'ltr' ? (
+							<ChevronLeftIcon />
+						) : (
+							<ChevronRightIcon />
+						)}
+					</IconButton>
+				</div>
+				{/* <Divider style={{ backgroundColor: '#FF6019' }} /> */}
+				<List>
+					<div>
+						<NavLink
+							to="/login"
+							className="navlink"
+							onClick={() => {
+								setOpen(false);
+							}}
+						>
+							<ListItem
+								button
+								style={{
+									color: 'white',
+								}}
+							>
+								<ListItemIcon
+									style={{
+										color: 'white',
+									}}
+								>
+									<VpnKeyIcon />
+								</ListItemIcon>
+								Login
+							</ListItem>
+						</NavLink>
+
+						<NavLink
+							to="/signup"
+							className="navlink"
+							onClick={() => {
+								setOpen(false);
+							}}
+						>
+							<ListItem
+								button
+								style={{
+									color: 'white',
+								}}
+							>
+								<ListItemIcon
+									style={{
+										color: 'white',
+									}}
+								>
+									<PersonAddIcon />
+								</ListItemIcon>
+								Sign Up
+							</ListItem>
+						</NavLink>
+					</div>
+				</List>
+			</Drawer>
+
+			{/* <Drawer
+				className={classes.drawer}
+				variant="persistent"
+				anchor="left"
+				open={open}
+				classes={{
+					paper: classes.drawerPaper,
+				}}
+			>
+				<div className={classes.drawerHeader}>
+					<IconButton
+						onClick={handleNotLoggedInDrawerClose}
+						style={{ color: 'white' }}
+						className={clsx(classes.closeMenuButton)}
+					>
+						{theme.direction === 'ltr' ? (
+							<ChevronLeftIcon />
+						) : (
+							<ChevronRightIcon />
+						)}
+					</IconButton>
+				</div>
+				<Divider style={{ backgroundColor: '#FF6019' }} />
+			</Drawer> */}
+		</div>
+	);
 }

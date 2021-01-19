@@ -33,6 +33,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import SideDrawerNotLoggedIn from './SideDrawerNotLoggedIn';
 
 const drawerWidth = 300;
 
@@ -171,6 +172,7 @@ export default function AppHeader(props) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [logoutClicked, setLogoutClicked] = useState(false);
 	const [open, setOpen] = React.useState(false);
+	const [authenticated, setAuthenticated] = useState(false);
 
 	//hook that gets set to true when the dashboard page gets loaded for the first time
 	//used to trigger a slide-open animation on first load
@@ -242,8 +244,12 @@ export default function AppHeader(props) {
 						className="app-header-wrapper"
 						style={{ color: 'red' }}
 					>
+						{/* sideDrawerNotLoggedIn component will go here*/}
 						<div className={menuIconClass}>
-							<IconButton
+							{/* load SideDrawerNotLoggedIn if not authenticated */}
+							<SideDrawerNotLoggedIn />
+
+							{/* <IconButton
 								style={{ color: '#1B2737' }}
 								aria-label="open drawer"
 								onClick={handleDrawerOpen}
@@ -260,10 +266,10 @@ export default function AppHeader(props) {
 									/>
 								) : ( */}
 
-								<MenuIcon />
+							{/* <MenuIcon /> */}
 
-								{/* //)} */}
-							</IconButton>
+							{/* //)} 
+							</IconButton> */}
 						</div>
 						<div className="app-header">
 							<ul className="app-branding">
@@ -403,7 +409,7 @@ export default function AppHeader(props) {
 			</HideOnScroll>
 
 			{/*  side drawer */}
-			<Drawer
+			{/* <Drawer
 				className={classes.drawer}
 				variant="persistent"
 				anchor="left"
@@ -459,7 +465,7 @@ export default function AppHeader(props) {
 								</ListItemIcon>
 								Dashboard
 							</ListItem>
-							{/* <Divider style={{ backgroundColor: '#FF6019' }} /> */}
+							{/* <Divider style={{ backgroundColor: '#FF6019' }} /> *
 							<ListItem
 								button
 								onClick={handleLogoutClose}
@@ -523,7 +529,7 @@ export default function AppHeader(props) {
 						</div>
 					)}
 				</List>
-			</Drawer>
+			</Drawer> */}
 		</React.Fragment>
 	);
 }
