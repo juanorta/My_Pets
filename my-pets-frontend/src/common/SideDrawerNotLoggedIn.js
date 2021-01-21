@@ -31,18 +31,18 @@ const useStyles = makeStyles((theme) => ({
 	menuButton: {
 		marginRight: theme.spacing(2),
 		'&:hover': {
-			backgroundColor: '#FF6019',
+			backgroundColor: '#FF4F00',
 		},
 	},
 	closeMenuButton: {
 		'&:hover': {
-			backgroundColor: '#FF6019',
+			backgroundColor: '#FF4F00',
 		},
 	},
 	menuContents: {
 		color: 'white',
 		'&:hover': {
-			backgroundColor: '#FF6019',
+			backgroundColor: '#FF4F00',
 		},
 	},
 	hide: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 
-import * as weightAnimation from './weight-animation-accent2.json';
+import * as weightAnimation from './weight-animation-new2.json';
 
 const defaultOptions = {
 	loop: true,

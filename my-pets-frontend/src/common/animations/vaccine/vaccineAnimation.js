@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 
-import * as vaccineAnimation from './vaccine-accent.json';
+import * as vaccineAnimation from './vaccine-new.json';
 
 const defaultOptions = {
 	loop: true,

@@ -4,7 +4,7 @@ import AppHeader from '../src/common/AppHeader';
 import Home from '../src/home/Home';
 import Login from '../src/user/login/Login';
 import Signup from '../src/user/signup/Signup';
-import Profile from '../src/user/profile/Profile';
+import Dashboard from '../src/user/dashboard/Dashboard';
 import OAuth2RedirectHandler from '../src/user/oauth2/OAuth2RedirectHandler';
 import NotFound from '../src/common/NotFound';
 import LoadingIndicator from '../src/common/LoadingIndicator';
@@ -87,7 +87,7 @@ class App extends Component {
 								currentUser={this.state.currentUser}
 								exact
 								path="/"
-								component={Profile}
+								component={Dashboard}
 							></PrivateRoute>
 						) : (
 							<Route exact path="/" component={Home}></Route>

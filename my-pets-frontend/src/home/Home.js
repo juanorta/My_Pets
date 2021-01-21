@@ -22,7 +22,7 @@ import { makeStyles, useTheme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		background: '#FF6019',
+		background: '#FF4F00',
 		borderRadius: 3,
 		border: 0,
 		borderRadius: '25px',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '0 30px',
 		boxShadow: 'none',
 		'&:hover': {
-			backgroundColor: '#FF6019',
+			backgroundColor: '#FF4F00',
 		},
 		fontFamily: 'Poppins',
 		fontWeight: '600',
@@ -113,7 +113,7 @@ function Home() {
 									<h2
 										style={{
 											display: 'inline-block',
-											color: '#FF6019',
+											color: '#FF4F00',
 										}}
 									>
 										{' '}
@@ -172,7 +172,7 @@ function Home() {
 									<h2
 										style={{
 											display: 'inline-block',
-											color: '#FF6019',
+											color: '#FF4F00',
 										}}
 									>
 										{' '}
@@ -218,7 +218,7 @@ function Home() {
 									<h2
 										style={{
 											display: 'inline-block',
-											color: '#FF6019',
+											color: '#FF4F00',
 										}}
 									>
 										{' '}
@@ -254,7 +254,7 @@ function Home() {
 									<h2
 										style={{
 											display: 'inline-block',
-											color: '#FF6019',
+											color: '#FF4F00',
 										}}
 									>
 										{' '}
@@ -300,7 +300,7 @@ function Home() {
 									<h2
 										style={{
 											display: 'inline-block',
-											color: '#FF6019',
+											color: '#FF4F00',
 										}}
 									>
 										{' '}
@@ -336,7 +336,7 @@ function Home() {
 									<h2
 										style={{
 											display: 'inline-block',
-											color: '#FF6019',
+											color: '#FF4F00',
 										}}
 									>
 										{' '}

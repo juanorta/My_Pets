@@ -46,12 +46,23 @@ const useStyles = makeStyles((theme) => ({
 
 //hides navbar after some scrolling
 function HideOnScroll(props) {
+	// console.log('ummm');
+	// console.log(props.authenticated);
 	const { children, window } = props;
+	let trigger = useScrollTrigger({ target: window ? window() : undefined });
+	let appear = false;
+	let direction = 'down';
+	let inn = !trigger;
 
-	const trigger = useScrollTrigger({ target: window ? window() : undefined });
+	//disables the hide on scroll effect if the user is logged in
+	if (props.authenticated === true) {
+		appear = true;
+		direction = '';
+		inn = true;
+	}
 
 	return (
-		<Slide appear={false} direction="down" in={!trigger}>
+		<Slide appear={appear} direction={direction} in={inn}>
 			{children}
 		</Slide>
 	);
@@ -92,6 +103,7 @@ export default function AppHeader(props) {
 	return (
 		<React.Fragment>
 			<CssBaseline />
+
 			<HideOnScroll {...props}>
 				<AppBar
 					position="fixed"
@@ -236,7 +248,7 @@ export default function AppHeader(props) {
 															fontSize: '17px',
 
 															border:
-																'2px solid #FF6019',
+																'2px solid #FF4F00',
 														}}
 													>
 														Sign Up

@@ -1,0 +1,8 @@
+.appointments-main-container {
+	background-color: seagreen;
+	height: 60vh;
+	width: 65%;
+	margin: 0 auto;
+	/* margin-top: 15rem; */
+	font-family: 'Poppins';
+}

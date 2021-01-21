@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import './SideDrawerLoggedIn.css';
+import { NavLink } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -21,6 +22,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
+import { TramOutlined } from '@material-ui/icons';
+import { Link } from 'react-scroll';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
 const drawerWidth = 300;
 
@@ -32,20 +37,47 @@ const useStyles = makeStyles((theme) => ({
 	menuButton: {
 		marginRight: theme.spacing(2),
 		'&:hover': {
-			backgroundColor: '#FF6019',
+			backgroundColor: '#FF4F00',
 		},
 	},
 	closeMenuButton: {
 		'&:hover': {
-			backgroundColor: '#FF6019',
+			backgroundColor: '#FF4F00',
 		},
 	},
 	menuContents: {
 		color: 'white',
 		'&:hover': {
-			backgroundColor: '#FF6019',
+			backgroundColor: '#FF4F00',
 		},
 	},
+
+	petMenuItem: {
+		color: 'white',
+		'&:hover': {
+			backgroundColor: '#FF4F00',
+		},
+	},
+	apptMenuItem: {
+		color: 'white',
+		'&:hover': {
+			backgroundColor: '#FF4F00',
+		},
+	},
+	weightsMenuItem: {
+		color: 'white',
+		'&:hover': {
+			backgroundColor: '#FF4F00',
+		},
+	},
+
+	//class that sets background color to orange
+
+	contentsActive: {
+		color: 'white',
+		backgroundColor: '#FF4F00',
+	},
+
 	hide: {
 		display: 'none',
 	},
@@ -66,6 +98,16 @@ const useStyles = makeStyles((theme) => ({
 		...theme.mixins.toolbar,
 		justifyContent: 'flex-end',
 	},
+
+	active: {
+		backgroundColor: 'black',
+	},
+
+	selected: {
+		'&.Mui-selected': {
+			backgroundColor: 'turquoise',
+		},
+	},
 }));
 
 export default function SideDrawerLoggedIn(props) {
@@ -74,6 +116,13 @@ export default function SideDrawerLoggedIn(props) {
 	const classes = useStyles();
 
 	const [open, setOpen] = useState(false);
+
+	const [menuClass, setMenuClass] = useState(classes.menuContents);
+	const [petMenuItem, setPetMenuItem] = useState(classes.menuContents);
+	const [apptMenuItem, setApptMenuItem] = useState(classes.menuContents);
+	const [weightsMenuItem, setWeightsMenuItem] = useState(
+		classes.menuContents
+	);
 
 	//hook that gets set to true when the dashboard page gets loaded for the first time
 	//used to trigger a slide-open animation on first load
@@ -112,8 +161,9 @@ export default function SideDrawerLoggedIn(props) {
 	console.log(props.name);
 	console.log(props.imageUrl);
 	console.log(props.authenticated);
-
 	// displayed only when user is logged in
+	// let menuClass = classes.menuContents;
+	console.log(menuClass);
 	return (
 		<div>
 			<IconButton
@@ -169,7 +219,7 @@ export default function SideDrawerLoggedIn(props) {
 								</ListItemIcon>
 								{props.name}
 							</ListItem>
-							<Divider style={{ backgroundColor: '#FF6019' }} />
+							<Divider style={{ backgroundColor: '#FF4F00' }} />
 						</div>
 					) : null}
 					<NavLink to="/" className="navlink">
@@ -180,6 +230,72 @@ export default function SideDrawerLoggedIn(props) {
 							Home
 						</ListItem>
 					</NavLink>
+
+					<Link
+						activeClass="active"
+						spy={true}
+						to="pets"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setPetMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setPetMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={petMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<PetsIcon />
+							</ListItemIcon>
+							Pets
+						</ListItem>
+					</Link>
+
+					<Link
+						activeClass="active"
+						spy={true}
+						to="appointments"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setApptMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setApptMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={apptMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<LocalHospitalIcon />
+							</ListItemIcon>
+							Appointments
+						</ListItem>
+					</Link>
+
+					<Link
+						activeClass="active"
+						spy={true}
+						to="weights"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setWeightsMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setWeightsMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={weightsMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<TrendingUpIcon />
+							</ListItemIcon>
+							<a>Weights</a>
+						</ListItem>
+					</Link>
 
 					<ListItem
 						button

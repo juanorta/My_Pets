@@ -94,6 +94,20 @@
 	/* background-color: white; */
 }
 
+.avatar-picture-img {
+	border-radius: 50%;
+	height: 2.75rem;
+	width: 2.75rem;
+	margin-top: 0.75rem;
+	transition: all 0.2s ease-in-out;
+	margin-top: -0.2rem;
+}
+
+.avatar-picture-img:hover {
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
 /* .app-nav .avatar-hidden {
 	display: none;
 	background-color: red;
