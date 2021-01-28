@@ -6,12 +6,20 @@ import Button from '@material-ui/core/Button';
 import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
+import PetList from './PetList/PetList';
 
 export default function Pets(props) {
+	// console.log(props);
 	return (
 		<div className="pets-main-container" id="pets">
 			<div className="title">
-				<h1>My Pets</h1>
+				<h1>Pets</h1>
+			</div>
+			<div className="table-container">
+				<PetList
+					forceUpdate={props.forceUpdate}
+					currentUser={props.currentUser}
+				/>
 			</div>
 		</div>
 	);

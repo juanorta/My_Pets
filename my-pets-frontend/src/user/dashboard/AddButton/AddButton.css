@@ -1,0 +1,24 @@
+.add-button-main-container {
+	position: fixed;
+	float: right;
+	right: 18%;
+	/* margin-right: 20rem; */
+	z-index: 999;
+	background-color: transparent;
+	height: 4rem;
+	color: black;
+	width: 4rem;
+}
+
+.add-button {
+	background-color: #ff4f00;
+	border-radius: 60%;
+	height: 100%;
+	text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+	.add-button-main-container {
+		right: 3%;
+	}
+}

@@ -80,3 +80,18 @@ export async function addPet(id, age, breed, name, type, sex) {
 		}),
 	});
 }
+
+export async function deletePet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	// console.log(token);
+	console.log('delete pet function called');
+	console.log('id: ' + id + ' petId: ' + petId);
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	});
+}

@@ -23,6 +23,7 @@ class App extends Component {
 			authenticated: false,
 			currentUser: null,
 			loading: false,
+			number: 0,
 		};
 
 		this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(
@@ -38,11 +39,17 @@ class App extends Component {
 
 		getCurrentUser()
 			.then((response) => {
-				this.setState({
-					currentUser: response,
-					authenticated: true,
-					loading: false,
-				});
+				this.setState(
+					{
+						currentUser: response,
+						authenticated: true,
+						loading: false,
+					},
+					() => {
+						console.log('pets');
+						console.log(this.state.currentUser.pets);
+					}
+				);
 			})
 			.catch((error) => {
 				this.setState({
@@ -64,12 +71,18 @@ class App extends Component {
 		this.loadCurrentlyLoggedInUser();
 	}
 
+	refresh() {
+		// this.loadCurrentlyLoggedInUser();
+		this.forceUpdate();
+		// this.componentDidMount();
+	}
+
 	render() {
 		if (this.state.loading) {
 			return <LoadingIndicator />;
 		}
 
-		console.log(this.state.authenticated);
+		// console.log(this.state.authenticated);
 		return (
 			<div className="app">
 				<div className="app-top-box">
@@ -88,6 +101,7 @@ class App extends Component {
 								exact
 								path="/"
 								component={Dashboard}
+								forceUpdate={this.loadCurrentlyLoggedInUser}
 							></PrivateRoute>
 						) : (
 							<Route exact path="/" component={Home}></Route>

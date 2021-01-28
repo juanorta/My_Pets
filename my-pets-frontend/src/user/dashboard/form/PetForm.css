@@ -1,0 +1,22 @@
+.pet-form-main-container {
+	background-color: transparent;
+	height: auto;
+}
+.pet-form {
+	background-color: transparent;
+	width: 50%;
+	margin: 0 auto;
+	color: red;
+}
+
+.button-group {
+	/* margin-top: 5rem; */
+	background-color: transparent;
+	width: 80%;
+	margin: 3rem auto;
+}
+
+/* .select-fields {
+	display: inline;
+	background-color: red;
+} */

@@ -38,7 +38,9 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: theme.spacing(2),
 		'&:hover': {
 			backgroundColor: '#FF4F00',
+			color: 'white',
 		},
+		color: '#1B2737',
 	},
 	closeMenuButton: {
 		'&:hover': {
@@ -72,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	//class that sets background color to orange
-
 	contentsActive: {
 		color: 'white',
 		backgroundColor: '#FF4F00',
@@ -141,7 +142,7 @@ export default function SideDrawerLoggedIn(props) {
 			setDashboardLoadedForFirstTime(true);
 			setOpen(true);
 		}
-	}, 250);
+	}, 400);
 
 	//functions to handle drawer open/close
 	const handleLoggedInDrawerOpen = () => {
@@ -157,17 +158,17 @@ export default function SideDrawerLoggedIn(props) {
 		setOpen(false);
 	};
 
-	console.log('props below');
-	console.log(props.name);
-	console.log(props.imageUrl);
-	console.log(props.authenticated);
+	// console.log('props below');
+	// console.log(props.name);
+	// console.log(props.imageUrl);
+	// console.log(props.authenticated);
 	// displayed only when user is logged in
 	// let menuClass = classes.menuContents;
-	console.log(menuClass);
+	// console.log(menuClass);
 	return (
 		<div>
 			<IconButton
-				style={{ color: '#1B2737' }}
+				// style={{ color: '#1B2737' }}
 				aria-label="open drawer"
 				onClick={handleLoggedInDrawerOpen}
 				edge="start"

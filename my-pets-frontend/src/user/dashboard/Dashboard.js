@@ -10,6 +10,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Pets from './views/pets/Pets';
 import Appointments from './views/appointments/Appointments';
 import Weights from './views/weights/Weights';
+import AddButton from './AddButton/AddButton';
+// import '../dashboard/modal/AddPetModal';
+import MaterialModal from './modal/MaterialModal';
 
 const useStyles = makeStyles({
 	root: {
@@ -72,9 +75,18 @@ const rows = [
 export default function Dashboard(props) {
 	const theme = useTheme();
 	const classes = useStyles();
+	// console.log(props);
 	return (
 		<div className="dashboard-main-container">
-			<Pets />
+			<AddButton
+				forceUpdate={props.forceUpdate}
+				currentUser={props.currentUser}
+			/>
+
+			<Pets
+				forceUpdate={props.forceUpdate}
+				currentUser={props.currentUser}
+			/>
 			<Appointments />
 			<Weights />
 			{/* <h1>Pets</h1

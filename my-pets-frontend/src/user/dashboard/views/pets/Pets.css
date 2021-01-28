@@ -1,6 +1,6 @@
 .pets-main-container {
-	background-color: aquamarine;
-	height: 60vh;
+	background-color: transparent;
+	height: auto;
 	width: 65%;
 	margin: 0 auto;
 	/* margin-top: 15rem; */
@@ -8,7 +8,7 @@
 }
 
 .title {
-	background-color: orangered;
+	background-color: transparent;
 	/* display: inline-block; */
 	/* height: 5rem; */
 	/* margin-top: 6rem; */
@@ -21,4 +21,22 @@
 	margin-left: 1rem;
 	/* margin-top: 2rem; */
 	padding-top: 3rem;
+}
+
+.table-container {
+	margin-top: -1rem;
+	background-color: white;
+	height: 71%;
+}
+
+@media only screen and (max-width: 1000px) {
+	.pets-main-container {
+		width: 95%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.pets-main-container {
+		width: 100%;
+	}
 }

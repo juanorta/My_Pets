@@ -17,11 +17,13 @@ public class PetController {
     @Autowired
     private PetRepository petRepository;
 
+    //get all pets from a user
     @GetMapping("users/{userId}/pets")
     public List<Pet> getPetsByUser(@PathVariable(value = "userId") Long userId){
         return petRepository.findByUserId(userId);
     }
 
+    //add pet
     @PostMapping("users/{userId}/addPet")
     public Pet createPet(@PathVariable(value = "userId") Long userId, @RequestBody Pet pet){
         return userRepository.findById(userId).map(user -> {
@@ -30,5 +32,23 @@ public class PetController {
         }).orElseThrow();
     }
 
+    //update pet
+    @PutMapping("/users/{userId}/pets/update")
+    public Pet updatePet(@PathVariable(value="userId") Long userId, @RequestBody Pet pet){
+        Pet existingPet = petRepository.findById(pet.getId()).orElse(null);
+        existingPet.setPetName(pet.getPetName());
+        existingPet.setPetType(pet.getPetType());
+        existingPet.setBreed(pet.getBreed());
+        existingPet.setSex(pet.getSex());
+        existingPet.setAge(pet.getAge());
+        return petRepository.save(existingPet);
+    }
+
+    //delete pet
+    @DeleteMapping("/users/{userId}/pets/{petId}")
+    public String deletePet(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId){
+        petRepository.deleteById(petId);
+        return "pet removed! " + petId;
+    }
 
 }
