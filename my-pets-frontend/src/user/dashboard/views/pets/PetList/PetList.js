@@ -41,32 +41,40 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+//displays list of pets as cards
+//each card has 3 options: edit pet, view profile, delete pet
+//each option will display a unique modal for further action when clicked
 export default function PetList(props) {
 	const theme = useTheme();
 	const classes = useStyles();
 
+	//getting the current user and list of pets from Pets component
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pets, setPets] = useState(props.currentUser.pets);
+
+	//hook used to close modal
 	const [openModal, setOpenModal] = useState(false);
+
+	//hook that is later sent to MaterialModal to load the correct modal for pet deletion
 	const [deleteButtonPressed, setDeleteButtonPressed] = useState(false);
+
+	//hook used to store a single pet
 	const [pet, setPet] = useState('');
 
 	console.log('dashboard');
 	console.log(props.currentUser.pets);
 
+	//function that is later passed to MaterialModal so that setOpenModal can be reset after each use
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
 		props.forceUpdate();
 		// console.log(props.currentUser.pets);
 	};
 
+	//used to send the correct pet information to MaterialModal
 	function deletePetHandler(petObj, currentUser) {
-		// setPet(petObj);
 		setPet(petObj);
-		// console.log(petObj);
-		// console.log(currentUser);
 		setOpenModal(true);
-		// console.log('delete called');
 		setDeleteButtonPressed(true);
 	}
 

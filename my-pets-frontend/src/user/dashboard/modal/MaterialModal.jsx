@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './AddPetModal.css';
+import './MaterialModal.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
-import PetForm from '../form/PetForm';
+import AddPetForm from '../AddPet/form/AddPetForm';
 import DeleteConfirmation from '../views/pets/deleteConfirmation/DeleteConfirmation';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,8 +37,22 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+//reusable modal used to display AddPetForm, DeleteConfirmation, and EditPetForm
+
+//receives data from AddButton
+//modal is customized and uses 'AddPetForm' style when isAddPet prop is true
+//isAddPet is true when AddButton is clicked
+
+//also receives data from PetList
+//modal is customized and uses 'DeleteConfirmation' style when deleteButtonPressed is true
+//deleteButtonPressed is true when the 'delete' button on the pet card is pressed
+
+//will display appropriate form/view depending on option clicked
 export default function MaterialModal(props) {
 	const classes = useStyles();
+
+	//hooks that are passed from parent components
+	//used to display appropriate content
 	const [open, setOpen] = useState(props.openModal);
 	const [isAddPet, setIsAddPet] = useState(props.isAddPet);
 	const [isDeletePetConfirmation, setDeletePetConfirmation] = useState(
@@ -58,6 +72,7 @@ export default function MaterialModal(props) {
 		// setPaperStyle('');
 	};
 
+	//used to display appropriate content
 	let style = '';
 
 	if (isAddPet === true) {
@@ -86,7 +101,7 @@ export default function MaterialModal(props) {
 				<Fade in={open}>
 					<div className={style}>
 						{isAddPet ? (
-							<PetForm
+							<AddPetForm
 								handleClose={handleClose}
 								currentUser={props.currentUser}
 								handleClose={handleClose}

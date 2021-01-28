@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './PetForm.css';
+import './AddPetForm.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +14,7 @@ import {
 	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { addPet } from '../../../util/APIUtils';
+import { addPet } from '../../../../util/APIUtils';
 import Alert from 'react-s-alert';
 
 const useStyles = makeStyles((theme) => ({
@@ -97,9 +97,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function PetForm(props) {
+//form used to add a pet
+export default function AddPetForm(props) {
 	const classes = useStyles();
 
+	//stores information as user is typing
 	const [id, setID] = useState(props.currentUser.id);
 	const [name, setName] = useState('');
 	const [petType, setPetType] = useState('');
@@ -132,6 +134,7 @@ export default function PetForm(props) {
 		setAge(event.target.value);
 	};
 
+	//makes API call to submit form information
 	const submitHandler = (event) => {
 		addPet(id, age, breed, name, petType, sex);
 

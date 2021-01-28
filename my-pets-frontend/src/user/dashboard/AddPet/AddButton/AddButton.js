@@ -3,8 +3,9 @@ import './AddButton.css';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MaterialModal from '../modal/MaterialModal';
+import MaterialModal from '../../modal/MaterialModal';
 
+//button styles
 const useStyles = makeStyles((theme) => ({
 	root: {
 		color: 'white',
@@ -23,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+//responsible for showing button and triggering the opening of a modal when clicked
+//passes data to MaterialModal
 export default function AddButton(props) {
 	const theme = useTheme();
 	const classes = useStyles();

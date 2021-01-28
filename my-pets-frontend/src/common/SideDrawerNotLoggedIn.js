@@ -77,7 +77,6 @@ export default function SideDrawerNotLoggedIn(props) {
 	//functions to handle drawer open/close
 	const handleNotLoggedInDrawerOpen = () => {
 		setOpen(true);
-		// console.log('hey');
 	};
 
 	const handleNotLoggedInDrawerClose = () => {

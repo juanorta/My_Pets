@@ -108,20 +108,10 @@
 	transform: scale(1.1);
 }
 
-/* .app-nav .avatar-hidden {
-	display: none;
-	background-color: red;
-} */
-
 @media (max-width: 768px) {
 	.app-nav ul li a {
 		display: none;
 	}
-
-	/* .avatar {
-		background-color: transparent;
-		width: 60px;
-	} */
 
 	.app-nav .login-signup {
 		display: none;

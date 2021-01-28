@@ -46,8 +46,6 @@ const useStyles = makeStyles((theme) => ({
 
 //hides navbar after some scrolling
 function HideOnScroll(props) {
-	// console.log('ummm');
-	// console.log(props.authenticated);
 	const { children, window } = props;
 	let trigger = useScrollTrigger({ target: window ? window() : undefined });
 	let appear = false;
@@ -70,9 +68,6 @@ function HideOnScroll(props) {
 
 //navbar
 export default function AppHeader(props) {
-	// console.log(props.authenticated);
-	// console.log(props.currentUser);
-
 	let drawerAuthenticated = false;
 	const theme = useTheme();
 	const classes = useStyles();
