@@ -39,7 +39,7 @@ export default function AddButton(props) {
 
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
-		props.forceUpdate();
+		// props.forceUpdate();
 	};
 	// console.log(props.currentUser);
 	// console.log('openModal =>' + openModal);

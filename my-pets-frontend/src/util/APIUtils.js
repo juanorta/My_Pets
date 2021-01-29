@@ -1,4 +1,5 @@
 import { API_BASE_URL, ACCESS_TOKEN } from '../constants/index';
+import Alert from 'react-s-alert';
 
 const request = (options) => {
 	const headers = new Headers({
@@ -76,6 +77,28 @@ export async function addPet(id, age, breed, name, type, sex) {
 			breed: breed,
 			petName: name,
 			petType: type,
+			sex: sex,
+		}),
+	});
+}
+
+export async function editPet(id, petId, petName, petType, breed, sex, age) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('edit function called');
+
+	await fetch(API_BASE_URL + `/users/${id}/pets/update`, {
+		method: 'PUT',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			id: petId,
+			age: age,
+			breed: breed,
+			petName: petName,
+			petType: petType,
 			sex: sex,
 		}),
 	});

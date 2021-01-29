@@ -18,6 +18,7 @@
 }
 
 .app-branding {
+	/* display: none; */
 	list-style-type: none;
 	float: left;
 	background-color: transparent;
@@ -25,6 +26,7 @@
 	height: 100%;
 	margin-top: 0rem;
 	padding-left: 4rem;
+	margin-left: -12rem;
 }
 
 .app-branding li a {
@@ -95,6 +97,7 @@
 }
 
 .avatar-picture-img {
+	display: none;
 	border-radius: 50%;
 	height: 2.75rem;
 	width: 2.75rem;

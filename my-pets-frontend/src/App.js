@@ -39,17 +39,11 @@ class App extends Component {
 
 		getCurrentUser()
 			.then((response) => {
-				this.setState(
-					{
-						currentUser: response,
-						authenticated: true,
-						loading: false,
-					},
-					() => {
-						console.log('pets');
-						console.log(this.state.currentUser.pets);
-					}
-				);
+				this.setState({
+					currentUser: response,
+					authenticated: true,
+					loading: false,
+				});
 			})
 			.catch((error) => {
 				this.setState({

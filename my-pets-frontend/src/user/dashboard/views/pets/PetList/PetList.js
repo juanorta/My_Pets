@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			transform: 'scale(1.05)',
 		},
+		borderRadius: 10,
 	},
 	control: {
 		padding: theme.spacing(2),
@@ -55,19 +56,27 @@ export default function PetList(props) {
 	//hook used to close modal
 	const [openModal, setOpenModal] = useState(false);
 
+	const [openEditModal, setEditOpenModal] = useState(false);
+
+	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
 	//hook that is later sent to MaterialModal to load the correct modal for pet deletion
 	const [deleteButtonPressed, setDeleteButtonPressed] = useState(false);
+
+	const [editButtonPressed, setEditButtonPressed] = useState(false);
 
 	//hook used to store a single pet
 	const [pet, setPet] = useState('');
 
-	console.log('dashboard');
-	console.log(props.currentUser.pets);
+	// console.log('dashboard');
+	// console.log(props.currentUser.pets);
 
 	//function that is later passed to MaterialModal so that setOpenModal can be reset after each use
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
-		props.forceUpdate();
+		setEditOpenModal(false);
+		setOpenDeleteModal(false);
+		// props.forceUpdate();
 		// console.log(props.currentUser.pets);
 	};
 
@@ -75,7 +84,19 @@ export default function PetList(props) {
 	function deletePetHandler(petObj, currentUser) {
 		setPet(petObj);
 		setOpenModal(true);
+		setOpenDeleteModal(true);
+		setEditOpenModal(false);
 		setDeleteButtonPressed(true);
+	}
+
+	function editPetHandler(petObj, currentUser) {
+		console.log('edit pressed');
+		console.log(petObj);
+		setPet(petObj);
+		setOpenModal(true);
+		setEditOpenModal(true);
+		setEditButtonPressed(true);
+		setOpenDeleteModal(false);
 	}
 
 	console.log('delete');
@@ -115,6 +136,9 @@ export default function PetList(props) {
 									data-tip
 									data-for="editTip"
 									style={{ color: '#1B2737' }}
+									onClick={() => {
+										editPetHandler(pet, currentUser);
+									}}
 								>
 									<EditIcon />
 								</Button>
@@ -141,8 +165,22 @@ export default function PetList(props) {
 						</Paper>
 					))}
 				</Grid>
-				{openModal ? (
+
+				{openEditModal && editButtonPressed ? (
 					<MaterialModal
+						forceUpdate={props.forceUpdate}
+						currentUser={currentUser}
+						pet={pet}
+						SetOpenModalToFalse={SetOpenModalToFalse}
+						openModal={openModal}
+						openEditModal={openEditModal}
+						editButtonPressed={editButtonPressed}
+					/>
+				) : null}
+
+				{openDeleteModal && deleteButtonPressed ? (
+					<MaterialModal
+						forceUpdate={props.forceUpdate}
 						currentUser={currentUser}
 						pet={pet}
 						SetOpenModalToFalse={SetOpenModalToFalse}

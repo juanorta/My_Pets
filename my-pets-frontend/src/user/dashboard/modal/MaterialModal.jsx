@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 import AddPetForm from '../AddPet/form/AddPetForm';
 import DeleteConfirmation from '../views/pets/deleteConfirmation/DeleteConfirmation';
+import EditPet from '../views/pets/EditPet/EditPet';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -58,6 +59,7 @@ export default function MaterialModal(props) {
 	const [isDeletePetConfirmation, setDeletePetConfirmation] = useState(
 		props.deleteButtonPressed
 	);
+	const [isEditPet, setIsEditPet] = useState(props.editButtonPressed);
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
 	const handleOpen = () => {
@@ -69,13 +71,14 @@ export default function MaterialModal(props) {
 		setIsAddPet(false);
 		props.SetOpenModalToFalse();
 		setDeletePetConfirmation(false);
+		setIsEditPet(false);
 		// setPaperStyle('');
 	};
 
 	//used to display appropriate content
 	let style = '';
 
-	if (isAddPet === true) {
+	if (isAddPet || isEditPet === true) {
 		style = classes.AddPetForm;
 	} else if (isDeletePetConfirmation === true) {
 		style = classes.DeleteConfirmation;
@@ -102,18 +105,28 @@ export default function MaterialModal(props) {
 					<div className={style}>
 						{isAddPet ? (
 							<AddPetForm
+								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}
 								handleClose={handleClose}
 							/>
 						) : null}
 
+						{isEditPet ? (
+							<EditPet
+								forceUpdate={props.forceUpdate}
+								currentUser={props.currentUser}
+								handleClose={handleClose}
+								pet={props.pet}
+							/>
+						) : null}
+
 						{isDeletePetConfirmation ? (
 							<DeleteConfirmation
+								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}
 								pet={props.pet}
-								handleClose={handleClose}
 							/>
 						) : null}
 					</div>

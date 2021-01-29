@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button';
 import { deletePet } from '../../../../../util/APIUtils';
 import Alert from 'react-s-alert';
 
+//a confirmation display
+//will delete selected pet if user clicks 'Yes'
 export default function DeleteConfirmation(props) {
 	// console.log('delete confirmation');
 	// console.log(props);
@@ -14,10 +16,13 @@ export default function DeleteConfirmation(props) {
 
 	function agreeClickHandler(id, petId) {
 		deletePet(id, petId);
+		props.handleClose();
+		Alert.success('PET DELETED');
+
 		setTimeout(() => {
-			props.handleClose();
-			Alert.success('pet deleted!');
-		}, 250);
+			Alert.closeAll();
+			props.forceUpdate();
+		}, 500);
 	}
 
 	const close = () => {

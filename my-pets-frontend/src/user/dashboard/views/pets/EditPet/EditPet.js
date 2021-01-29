@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AddPetForm.css';
+import './EditPet.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
@@ -8,14 +8,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-	MuiPickersUtilsProvider,
-	KeyboardTimePicker,
-	KeyboardDatePicker,
-} from '@material-ui/pickers';
-import { addPet } from '../../../../util/APIUtils';
 import Alert from 'react-s-alert';
+import { editPet } from '../../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -97,18 +91,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-//form used to add a pet
-
-export default function AddPetForm(props) {
+export default function EditPet(props) {
 	const classes = useStyles();
 
 	//stores information as user is typing
 	const [id, setID] = useState(props.currentUser.id);
-	const [name, setName] = useState('');
-	const [petType, setPetType] = useState('');
-	const [breed, setBreed] = useState('');
-	const [sex, setSex] = useState('');
-	const [age, setAge] = useState(0);
+	const [petId, setPetId] = useState(props.pet.id);
+	const [name, setName] = useState(props.pet.petName);
+	const [petType, setPetType] = useState(props.pet.petType);
+	const [breed, setBreed] = useState(props.pet.breed);
+	const [sex, setSex] = useState(props.pet.sex);
+	const [age, setAge] = useState(props.pet.age);
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
@@ -137,21 +130,19 @@ export default function AddPetForm(props) {
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
-		addPet(id, age, breed, name, petType, sex);
+		editPet(id, petId, name, petType, breed, sex, age);
 		props.handleClose();
-		Alert.success('PET ADDED');
+		Alert.success('PET EDITED');
 		setTimeout(() => {
 			Alert.closeAll();
 			props.forceUpdate();
 		}, 500);
 	};
 
-	// const [name2, setName2] = useState('Male');
-	// console.log('props');
-	// console.log(props);
+	console.log(props);
 	return (
-		<div className="pet-form-main-container">
-			<h1 className="modal-title">Add Pet</h1>
+		<div className="edit-pet-main-container">
+			<h1 className="modal-title">Edit Pet</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onNameChange}
@@ -164,6 +155,7 @@ export default function AddPetForm(props) {
 					}}
 					id="standard-basic"
 					label="Name"
+					value={name}
 				/>
 				<TextField
 					onChange={onPetTypeChange}
@@ -176,6 +168,7 @@ export default function AddPetForm(props) {
 					}}
 					id="standard-basic"
 					label="Pet Type (dog, cat, etc)"
+					value={petType}
 				/>
 				<TextField
 					onChange={onBreedChange}
@@ -186,6 +179,7 @@ export default function AddPetForm(props) {
 					}}
 					id="standard-basic"
 					label="Breed"
+					value={breed}
 				/>
 
 				<FormControl className={classes.formControl}>
@@ -200,6 +194,7 @@ export default function AddPetForm(props) {
 						labelId="demo-controlled-open-select-label"
 						id="demo-controlled-open-select"
 						onChange={onSexChange}
+						value={sex}
 					>
 						<MenuItem value={'Male'}>Male</MenuItem>
 						<MenuItem value={'Female'}>Female</MenuItem>
@@ -217,6 +212,7 @@ export default function AddPetForm(props) {
 						labelId="demo-controlled-open-select-label"
 						id="demo-controlled-open-select"
 						onChange={onAgeChange}
+						value={age}
 					>
 						<MenuItem value={1}>1</MenuItem>
 						<MenuItem value={2}>2</MenuItem>
@@ -239,7 +235,7 @@ export default function AddPetForm(props) {
 						Cancel
 					</Button>
 					<Button type="submit" className={classes.submitButton}>
-						Submit
+						Edit
 					</Button>
 				</div>
 			</form>
