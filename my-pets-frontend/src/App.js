@@ -15,6 +15,7 @@ import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
+import PetProfile from './user/dashboard/PetProfile/PetProfile';
 
 class App extends Component {
 	constructor(props) {
@@ -89,14 +90,24 @@ class App extends Component {
 				<div className="app-body">
 					<Switch>
 						{this.state.authenticated ? (
-							<PrivateRoute
-								authenticated={this.state.authenticated}
-								currentUser={this.state.currentUser}
-								exact
-								path="/"
-								component={Dashboard}
-								forceUpdate={this.loadCurrentlyLoggedInUser}
-							></PrivateRoute>
+							<div>
+								<PrivateRoute
+									authenticated={this.state.authenticated}
+									currentUser={this.state.currentUser}
+									exact
+									path="/"
+									component={Dashboard}
+									forceUpdate={this.loadCurrentlyLoggedInUser}
+								></PrivateRoute>
+
+								<Route
+									exact
+									authenticated={this.state.authenticated}
+									currentUser={this.state.currentUser}
+									path="/petprofile/:petID/:petName"
+									component={PetProfile}
+								></Route>
+							</div>
 						) : (
 							<Route exact path="/" component={Home}></Route>
 						)}

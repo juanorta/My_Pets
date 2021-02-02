@@ -1,5 +1,8 @@
 import { API_BASE_URL, ACCESS_TOKEN } from '../constants/index';
 import Alert from 'react-s-alert';
+// import React, { useState } from 'react';
+
+const currentUser = '';
 
 const request = (options) => {
 	const headers = new Headers({
@@ -116,5 +119,17 @@ export async function deletePet(id, petId) {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
+	});
+}
+
+export function getPet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get pet function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}`,
+		method: 'GET',
 	});
 }

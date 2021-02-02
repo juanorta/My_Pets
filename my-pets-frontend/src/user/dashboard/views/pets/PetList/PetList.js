@@ -21,6 +21,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ReactTooltip from 'react-tooltip';
 import MaterialModal from '../../../modal/MaterialModal';
 import axios from 'axios';
+import { Link, NavLink } from 'react-router-dom';
+import PetProfile from '../../../PetProfile/PetProfile';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -99,6 +101,12 @@ export default function PetList(props) {
 		setOpenDeleteModal(false);
 	}
 
+	function viewProfileHandler(petObj, currentUser) {
+		console.log('view profile pressed');
+		console.log(petObj);
+		// <PetProfile />;
+	}
+
 	console.log('delete');
 	console.log(deleteButtonPressed);
 	return (
@@ -143,13 +151,21 @@ export default function PetList(props) {
 									<EditIcon />
 								</Button>
 
-								<Button
-									data-tip
-									data-for="viewTip"
-									style={{ color: '#FF4F00' }}
+								<NavLink
+									to={`/petprofile/${pet.id}/${pet.petName}`}
+									// to={{
+									// 	pathname: `/petprofile/${pet.id}/${pet.petName}`,
+									// 	// pet: pet,
+									// }}
 								>
-									<VisibilityIcon />
-								</Button>
+									<Button
+										data-tip
+										data-for="viewTip"
+										style={{ color: '#FF4F00' }}
+									>
+										<VisibilityIcon />
+									</Button>
+								</NavLink>
 
 								<Button
 									data-tip

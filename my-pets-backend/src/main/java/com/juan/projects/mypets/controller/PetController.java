@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PetController {
@@ -21,6 +22,12 @@ public class PetController {
     @GetMapping("users/{userId}/pets")
     public List<Pet> getPetsByUser(@PathVariable(value = "userId") Long userId){
         return petRepository.findByUserId(userId);
+    }
+
+    //finds pet from user and pet id
+    @GetMapping("users/{userId}/pets/{petId}")
+    public Pet getPetByUser(@PathVariable(value ="userId") Long userId, @PathVariable(value = "petId") Long petId){
+        return petRepository.findByIdAndUserId(petId, userId);
     }
 
     //add pet
