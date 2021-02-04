@@ -16,6 +16,7 @@ import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import Appointments from './Appointments/Appointments';
 import Weights from './Weights/Weights';
 import Food from './Food/Food';
+import ReactTooltip from 'react-tooltip';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -225,9 +226,32 @@ export default function PetProfile(props) {
 						</div>
 						<div className="tabs-container">
 							<div className="tabs">
+								<ReactTooltip
+									id="appt"
+									place="top"
+									effect="solid"
+								>
+									View 'Appointments' section
+								</ReactTooltip>
+								<ReactTooltip
+									id="weights"
+									place="top"
+									effect="solid"
+								>
+									View 'Weights' section
+								</ReactTooltip>
+								<ReactTooltip
+									id="food"
+									place="top"
+									effect="solid"
+								>
+									View 'Food' section
+								</ReactTooltip>
 								<ul className="tabs-list">
 									<li>
 										<IconButton
+											data-tip
+											data-for="appt"
 											className={buttonClass1}
 											onMouseOver={iconHoverHandler}
 											onMouseLeave={iconHoverLeaveHandler}
@@ -240,6 +264,8 @@ export default function PetProfile(props) {
 									</li>
 									<li>
 										<IconButton
+											data-tip
+											data-for="weights"
 											className={buttonClass2}
 											onMouseOver={iconHoverHandler2}
 											onMouseLeave={
@@ -261,6 +287,8 @@ export default function PetProfile(props) {
 									</li>
 									<li>
 										<IconButton
+											data-tip
+											data-for="food"
 											className={buttonClass3}
 											onMouseOver={iconHoverHandler3}
 											onMouseLeave={
