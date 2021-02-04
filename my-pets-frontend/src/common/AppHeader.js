@@ -103,7 +103,7 @@ export default function AppHeader(props) {
 				<AppBar
 					position="fixed"
 					style={{
-						background: 'white',
+						background: 'transparent',
 						boxShadow: 'none',
 					}}
 				>
