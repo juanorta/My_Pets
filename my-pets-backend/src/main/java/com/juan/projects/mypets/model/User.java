@@ -40,6 +40,7 @@ public class User {
     @Column
     private String role;
 
+    //relationship with pets
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Pet> pets;
 
@@ -55,6 +56,20 @@ public class User {
     public Long getId() {
         return id;
     }
+
+    //relationship with appointments
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Appointment> appointments;
+
+    @JsonManagedReference(value = "user-appt")
+    public List<Appointment> getAppointments(){
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments){
+        this.appointments = appointments;
+    }
+
 
     public void setId(Long id) {
         this.id = id;
