@@ -60,16 +60,3 @@ public class PetController {
 
 }
 
-
-//    @PostMapping("/users/{userId}/pets/{petId}/addAppointment")
-//    public Appointment createAppointment(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId, @RequestBody Appointment appointment){
-//        return userRepository.findById(userId).map(user -> {
-//            appointment.setUser(user);
-//            return petRepository.findById(petId).map(pet -> {
-//                appointment.setPet(pet);
-//
-//                return appointmentRepository.save(appointment);
-//            }).orElseThrow();
-//        }).orElseThrow();
-//
-//    }

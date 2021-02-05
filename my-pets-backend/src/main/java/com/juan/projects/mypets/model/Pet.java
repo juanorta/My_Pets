@@ -44,7 +44,7 @@ public class Pet {
     @OneToMany(mappedBy = "pet", orphanRemoval = true)
     private List<Appointment> appointments;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "pet-appt")
     public List<Appointment> getAppointments(){
         return appointments;
     }
@@ -52,6 +52,19 @@ public class Pet {
         this.appointments = appointments;
     }
 
+
+    //creating relationships with weights
+    @OneToMany(mappedBy = "pet", orphanRemoval = true)
+    public List<Weight> weights;
+
+    @JsonManagedReference(value = "pet-weight")
+    public List<Weight> getWeights(){
+        return weights;
+    }
+
+    public void setWeights(List<Weight> weights){
+        this.weights = weights;
+    }
 
 
 

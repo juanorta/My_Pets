@@ -13,30 +13,28 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "appointments")
-public class Appointment {
+@Table(name = "weights")
+public class Weight {
     @Id
     @GeneratedValue
     private Long id;
-    private String type;
-    private String reason;
-    private String date;
-    private String time;
-    private String vetOrGroomerName;
-    private String location;
+    private float weightValue;
+    private float lastWeightValue;
+    private float weightChange;
+    private String unit;
+    private String dateWeighed;
+    private String lastDateWeighed;
     private String notes;
-
 
     //creating relationship with pet
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    @JsonBackReference(value = "pet-appt")
+    @JsonBackReference(value = "pet-weight")
     public Pet getPet(){
         return pet;
     }
-
     public void setPet(Pet pet){
         this.pet = pet;
     }
@@ -46,12 +44,12 @@ public class Appointment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonBackReference(value = "user-appt")
-    public User getUser() {
+    @JsonBackReference(value = "user-weight")
+    public User getUser(){
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(User user){
         this.user = user;
     }
 

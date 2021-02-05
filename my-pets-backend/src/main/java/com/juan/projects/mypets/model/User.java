@@ -53,9 +53,7 @@ public class User {
         this.pets = pets;
     }
 
-    public Long getId() {
-        return id;
-    }
+
 
     //relationship with appointments
     @OneToMany(mappedBy = "user", orphanRemoval = true)
@@ -65,11 +63,27 @@ public class User {
     public List<Appointment> getAppointments(){
         return appointments;
     }
-
     public void setAppointments(List<Appointment> appointments){
         this.appointments = appointments;
     }
 
+    //relationship with weights
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Weight> weights;
+
+    @JsonManagedReference(value = "user-weight")
+    public List<Weight> getWeights(){
+        return weights;
+    }
+
+    public void setWeights(List<Weight> weights){
+        this.weights = weights;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;
