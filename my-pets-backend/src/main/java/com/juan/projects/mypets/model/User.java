@@ -80,6 +80,18 @@ public class User {
         this.weights = weights;
     }
 
+    //relationship with food
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Food> food;
+
+    @JsonManagedReference(value = "user-food")
+    public List<Food> getFood(){
+        return food;
+    }
+
+    public void setFood(List<Food> food) {
+        this.food = food;
+    }
 
     public Long getId() {
         return id;

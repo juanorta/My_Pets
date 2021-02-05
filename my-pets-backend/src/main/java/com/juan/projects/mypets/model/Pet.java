@@ -66,6 +66,25 @@ public class Pet {
         this.weights = weights;
     }
 
+    //creating relationship with food
+    @OneToMany(mappedBy = "pet", orphanRemoval = true)
+    public List<Food> food;
+
+    @JsonManagedReference(value = "pet-food")
+    public List<Food> getFood(){
+        return food;
+    }
+
+    public void setFood(List<Food> food){
+        this.food = food;
+    }
+
+
+
+
+
+
+
 
 
 
