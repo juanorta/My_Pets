@@ -211,7 +211,7 @@ export default function AddPetForm(props) {
 	console.log('date: ' + selectedDate);
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Add Appointment</h1>
+			<h1 className="modal-title">Add New Appointment</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
 				{/* <DatePicker
 					label="Basic example"

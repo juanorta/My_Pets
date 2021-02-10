@@ -1,5 +1,6 @@
 import { API_BASE_URL, ACCESS_TOKEN } from '../constants/index';
 import Alert from 'react-s-alert';
+import AddFoodForm from '../user/dashboard/AddPet/form/AddFoodForm/AddFoodForm';
 // import React, { useState } from 'react';
 
 const currentUser = '';
@@ -198,6 +199,36 @@ export async function addWeight(
 			lastWeightValue: lastWeightValue,
 			lastDateWeighed: lastDateWeighed,
 			weightChange: weightChange,
+			notes: notes,
+		}),
+	});
+}
+
+export async function addFood(
+	id,
+	petId,
+	foodName,
+	type,
+	wetOrDry,
+	flavor,
+	whereToBuy,
+	notes
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addFood`, {
+		method: 'POST',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			foodName: foodName,
+			type: type,
+			wetOrDry: wetOrDry,
+			flavor: flavor,
+			whereToBuy: whereToBuy,
 			notes: notes,
 		}),
 	});

@@ -18,7 +18,7 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { addAppointment } from '../../../../../util/APIUtils';
+import { addFood } from '../../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
 	inputLabel: {
 		marginTop: '-1rem',
-		marginLeft: '18%',
+		marginLeft: '28%',
 	},
 
 	inputLabel1: {
@@ -96,8 +96,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	selectDropdown2: {
-		marginLeft: '1rem',
+		marginLeft: '2.8rem',
 		marginTop: '0rem',
+		width: '7rem',
 	},
 
 	birthday: {
@@ -138,29 +139,23 @@ export default function AddFoodForm(props) {
 	//stores information as user is typing
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const [time, setTime] = useState('');
-	const [amOrPm, setAmOrPm] = useState('');
+	const [foodName, setFoodName] = useState('');
 	const [type, setType] = useState('');
-	const [reason, setReason] = useState('');
-	const [vetOrGroomerName, setVetOrGroomerName] = useState('');
+	const [wetOrDry, setWetOrDry] = useState('');
+	const [flavor, setFlavor] = useState('');
+	const [whereToBuy, setWhereToBuy] = useState('');
+
+	// const [selectedDate, setSelectedDate] = useState(new Date());
+	// const [time, setTime] = useState('');
+	// const [amOrPm, setAmOrPm] = useState('');
+	// const [type, setType] = useState('');
+	// const [reason, setReason] = useState('');
+	// const [vetOrGroomerName, setVetOrGroomerName] = useState('');
 	const [notes, setNotes] = useState('');
 
-	const onDateChange = (date) => {
-		console.log('on date change called');
-		console.log(date);
-		const formattedDate = moment(date).format('dddd MMM DD, YYYY');
-		setSelectedDate(formattedDate);
-	};
-
-	const onTimeChange = (event) => {
-		console.log('time: ' + event.target.value);
-		setTime(event.target.value);
-	};
-
-	const onAmOrPmChange = (event) => {
-		console.log('am/pm: ' + event.target.value);
-		setAmOrPm(event.target.value);
+	const onFoodNameChange = (event) => {
+		console.log('Foodname: ' + event.target.value);
+		setFoodName(event.target.value);
 	};
 
 	const onTypeChange = (event) => {
@@ -168,14 +163,19 @@ export default function AddFoodForm(props) {
 		setType(event.target.value);
 	};
 
-	const onReasonChange = (event) => {
-		console.log('reason: ' + event.target.value);
-		setReason(event.target.value);
+	const onWetOrDryChange = (event) => {
+		console.log('wet or dry: ' + event.target.value);
+		setWetOrDry(event.target.value);
 	};
 
-	const onVetOrGroomerChange = (event) => {
-		console.log('vet/groomer: ' + event.target.value);
-		setVetOrGroomerName(event.target.value);
+	const onFlavorChange = (event) => {
+		console.log('flavor: ' + event.target.value);
+		setFlavor(event.target.value);
+	};
+
+	const onWhereToBuyChange = (event) => {
+		console.log('where to buy: ' + event.target.value);
+		setWhereToBuy(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
@@ -185,93 +185,49 @@ export default function AddFoodForm(props) {
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
-		// props.handleClose();
-		// addAppointment(
-		// 	currentUser.id,
-		// 	pet.id,
-		// 	selectedDate,
-		// 	time,
-		// 	amOrPm,
-		// 	type,
-		// 	reason,
-		// 	vetOrGroomerName,
-		// 	notes
-		// );
-		// props.handleClose();
-		// Alert.success('Appointment Added');
-		// setTimeout(() => {
-		// 	Alert.closeAll();
-		// 	props.forceUpdate();
-		// }, 500);
+		event.preventDefault();
+
+		addFood(
+			currentUser.id,
+			pet.id,
+			foodName,
+			type,
+			wetOrDry,
+			flavor,
+			whereToBuy,
+			notes
+		);
+
+		props.handleClose();
+		Alert.success('Food Added');
+		setTimeout(() => {
+			Alert.closeAll();
+			props.forceUpdate();
+		}, 500);
 	};
 
+	console.log('food props');
 	console.log(props);
-	console.log('date: ' + selectedDate);
+
 	return (
 		<div className="pet-form-main-container">
 			<h1 className="modal-title">Add New Food</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
-				{/* <TextField
-					onChange={onNameChange}
+				<TextField
+					onChange={onFoodNameChange}
 					className={classes.TextField1}
 					variant="standard"
-					required
-					id="date"
-					type="date"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					defaultValue="02-08-2021"
-					InputLabelProps={{
-						shrink: true,
-					}}
-					label="Date (MM/DD/YYYY)"
-				/> */}
-				{/* {/* <TextField
-					onChange={onPetTypeChange}
-					className={classes.TextField2}
-					variant="standard"
-					required
 					id="standard-required"
 					inputProps={{
 						style: { textAlign: 'center' },
 					}}
 					id="standard-basic"
-					label="Pet Type (dog, cat, etc)"
-				/> */}
-				<TextField
-					onChange={onTimeChange}
-					className={classes.TextField2}
 					required
-					variant="standard"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Time"
+					label="Food Name"
 				/>
 				<FormControl className={classes.formControl}>
 					<InputLabel
 						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						AM/PM
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown2}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onAmOrPmChange}
-					>
-						<MenuItem value={'AM'}>AM</MenuItem>
-						<MenuItem value={'PM'}>PM</MenuItem>
-					</Select>
-				</FormControl>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel1}
 						id="demo-controlled-open-select-label"
 					>
 						Type
@@ -279,28 +235,36 @@ export default function AddFoodForm(props) {
 					<Select
 						required
 						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown}
+						className={classes.selectDropdown2}
 						labelId="demo-controlled-open-select-label"
 						id="demo-controlled-open-select"
 						onChange={onTypeChange}
 					>
-						<MenuItem value={'Vet'}>Vet</MenuItem>
-						<MenuItem value={'Grooming'}>Grooming</MenuItem>
+						<MenuItem value={'Primary'}>Primary</MenuItem>
+						<MenuItem value={'Treat'}>Treat</MenuItem>
+					</Select>
+				</FormControl>
+				<FormControl className={classes.formControl}>
+					<InputLabel
+						className={classes.inputLabel}
+						id="demo-controlled-open-select-label"
+					>
+						Wet/Dry
+					</InputLabel>
+					<Select
+						required
+						style={{ marginTop: '0rem' }}
+						className={classes.selectDropdown2}
+						labelId="demo-controlled-open-select-label"
+						id="demo-controlled-open-select"
+						onChange={onWetOrDryChange}
+					>
+						<MenuItem value={'Wet'}>Wet</MenuItem>
+						<MenuItem value={'Dry'}>Dry</MenuItem>
 					</Select>
 				</FormControl>
 				<TextField
-					onChange={onReasonChange}
-					className={classes.TextField3}
-					variant="standard"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Reason"
-				/>
-
-				<TextField
-					onChange={onVetOrGroomerChange}
+					onChange={onFlavorChange}
 					className={classes.TextField1}
 					variant="standard"
 					id="standard-required"
@@ -308,8 +272,19 @@ export default function AddFoodForm(props) {
 						style: { textAlign: 'center' },
 					}}
 					id="standard-basic"
-					label="Vet / Groomer name"
+					label="Flavor"
 				/>
+				<TextField
+					onChange={onWhereToBuyChange}
+					className={classes.TextField1}
+					variant="standard"
+					inputProps={{
+						style: { textAlign: 'center' },
+					}}
+					id="standard-basic"
+					label="Where to buy"
+				/>
+
 				<TextField
 					onChange={onNotesChange}
 					className={classes.TextField1}
