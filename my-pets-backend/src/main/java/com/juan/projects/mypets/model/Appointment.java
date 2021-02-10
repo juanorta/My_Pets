@@ -22,6 +22,7 @@ public class Appointment {
     private String reason;
     private String date;
     private String time;
+    private String amOrPm;
     private String vetOrGroomerName;
     private String location;
     private String notes;

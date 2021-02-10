@@ -38,6 +38,26 @@
 	bottom: -4rem;
 }
 
+.settings-button {
+	background-color: #1b2737;
+	border-radius: 60%;
+	height: 4rem;
+	width: 4rem;
+	float: left;
+	margin-top: -6rem;
+	margin-left: 2rem;
+	overflow: auto;
+}
+
+.add-button-profile {
+	background-color: transparent;
+	height: 4rem;
+	width: 4rem;
+	float: right;
+	margin-top: -9rem;
+	margin-right: 2rem;
+}
+
 .general-info {
 	background-color: white;
 	margin: 0 auto;

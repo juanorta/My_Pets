@@ -17,6 +17,8 @@ import Appointments from './Appointments/Appointments';
 import Weights from './Weights/Weights';
 import Food from './Food/Food';
 import ReactTooltip from 'react-tooltip';
+import AddBtnPetProfile from './AddBtnPetProfile/AddBtnPetProfile';
+import SettingsBtnProfile from './SettingsBtnProfile/SettingsBtnProfile';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -65,43 +67,44 @@ const useStyles = makeStyles((theme) => ({
 export default function PetProfile(props) {
 	const theme = useTheme();
 	const classes = useStyles();
+
+	const [user, setUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.location.pet);
 	const [petId, setPetId] = useState(props.match.params.petID);
 	const [isLoading, setLoading] = useState(true);
+
+	//different styles for each icon
 	const [iconClass, setIconClass] = useState(classes.TabIcon);
 	const [iconClass1, setIconClass1] = useState(classes.TabIcon);
 	const [iconClass2, setIconClass2] = useState(classes.TabIcon);
 	const [iconClass3, setIconClass3] = useState(classes.TabIcon);
+
+	//used to detect when a button is clicked
 	const [apptClicked, setApptClicked] = useState(false);
 	const [weightClicked, setWeightClicked] = useState(false);
 	const [foodClicked, setFoodClicked] = useState(false);
+
+	//different styles for each button
 	const [buttonClass1, setButtonClass1] = useState(classes.TabButton);
 	const [buttonClass2, setButtonClass2] = useState(classes.TabButton);
 	const [buttonClass3, setButtonClass3] = useState(classes.TabButton);
 
+	//gets pet data on component load
 	useEffect(() => {
-		getCurrentUser()
-			.then((user) => {
-				console.log(user.id);
-				getPet(user.id, petId)
-					.then((response) => {
-						console.log(response);
-						setPet(response);
-						setLoading(false);
-					})
-					.catch((error) => {
-						console.log(error);
-					});
+		getPet(user.id, petId)
+			.then((response) => {
+				//	console.log(response);
+				setPet(response);
+				setLoading(false);
 			})
 			.catch((error) => {
-				console.log('user not found');
+				//console.log(error);
 			});
-
-		// getPet(50);
 	}, []);
 
-	console.log(props.match.params.petID);
+	//console.log(props.match.params.petID);
 
+	//changes icon color when hovered over
 	const iconHoverHandler = () => {
 		console.log('hover');
 		setIconClass1(classes.TabIconMouseHover);
@@ -113,6 +116,8 @@ export default function PetProfile(props) {
 		setIconClass3(classes.TabIconMouseHover);
 	};
 
+	//changes icon to normal
+	//will only change to normal when not clicked
 	const iconHoverLeaveHandler = () => {
 		if (apptClicked === false) {
 			setIconClass1(classes.TabIcon);
@@ -129,8 +134,11 @@ export default function PetProfile(props) {
 		}
 	};
 
+	//changes button color to orange
+	//changes icon color to white
+	//sets other 2 buttons back to normal colors
 	const handleApptClick = () => {
-		console.log('appt clicked');
+		//console.log('appt clicked');
 		setApptClicked(true);
 		setButtonClass1(classes.TabButtonClicked);
 		iconHoverHandler();
@@ -146,7 +154,7 @@ export default function PetProfile(props) {
 	};
 
 	const handleWeightClick = () => {
-		console.log('weight clicked');
+		//		console.log('weight clicked');
 		setWeightClicked(true);
 		setButtonClass2(classes.TabButtonClicked);
 		iconHoverHandler2();
@@ -162,7 +170,7 @@ export default function PetProfile(props) {
 	};
 
 	const handleFoodClick = () => {
-		console.log('food clicked');
+		//console.log('food clicked');
 		setFoodClicked(true);
 		setButtonClass3(classes.TabButtonClicked);
 		iconHoverHandler3();
@@ -176,8 +184,9 @@ export default function PetProfile(props) {
 		setIconClass2(classes.TabIcon);
 	};
 
-	console.log('appt = ' + apptClicked);
+	//	console.log('appt = ' + apptClicked);
 	// console.log(props.currentUser);
+	console.log(props);
 	return (
 		<div className="pet-profile-main-container">
 			{isLoading ? (
@@ -203,6 +212,16 @@ export default function PetProfile(props) {
 					<div className="general-info">
 						<div className="name">
 							<h2>{pet.petName}</h2>
+						</div>
+						<div className="settings-button">
+							<SettingsBtnProfile />
+						</div>
+						<div className="add-button-profile">
+							<AddBtnPetProfile
+								forceUpdate={props.forceUpdate}
+								pet={pet}
+								currentUser={user}
+							/>
 						</div>
 						<div className="age-type-sex-breed">
 							<ul className="info-list">
@@ -309,6 +328,7 @@ export default function PetProfile(props) {
 										</IconButton>
 									</li>
 								</ul>
+								{/* shows appopriate component when selected */}
 								{apptClicked &&
 								weightClicked === false &&
 								foodClicked === false ? (

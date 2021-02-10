@@ -133,3 +133,72 @@ export function getPet(id, petId) {
 		method: 'GET',
 	});
 }
+
+export async function addAppointment(
+	id,
+	petId,
+	date,
+	time,
+	amOrPm,
+	type,
+	reason,
+	vetOrGroomerName,
+	notes
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+	console.log('add appointment called');
+
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addAppointment`, {
+		method: 'POST',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			date: date,
+			time: time,
+			amOrPm: amOrPm,
+			type: type,
+			vetOrGroomerName: vetOrGroomerName,
+			reason: reason,
+			notes: notes,
+		}),
+	});
+}
+
+//create add weight, add food
+
+export async function addWeight(
+	id,
+	petId,
+	weightValue,
+	unit,
+	selectedDate,
+	lastWeightValue,
+	lastDateWeighed,
+	weightChange,
+	notes
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('add appointment called');
+
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addWeight`, {
+		method: 'POST',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			weightValue: weightValue,
+			unit: unit,
+			dateWeighed: selectedDate,
+			lastWeightValue: lastWeightValue,
+			lastDateWeighed: lastDateWeighed,
+			weightChange: weightChange,
+			notes: notes,
+		}),
+	});
+}

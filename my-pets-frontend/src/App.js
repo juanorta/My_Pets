@@ -16,6 +16,7 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
 import PetProfile from './user/dashboard/PetProfile/PetProfile';
+import PrivateRouteProfile from './common/PrivateRouteProfile';
 
 class App extends Component {
 	constructor(props) {
@@ -100,13 +101,14 @@ class App extends Component {
 									forceUpdate={this.loadCurrentlyLoggedInUser}
 								></PrivateRoute>
 
-								<Route
+								<PrivateRouteProfile
 									exact
 									authenticated={this.state.authenticated}
 									currentUser={this.state.currentUser}
 									path="/petprofile/:petID/:petName"
 									component={PetProfile}
-								></Route>
+									forceUpdate={this.loadCurrentlyLoggedInUser}
+								></PrivateRouteProfile>
 							</div>
 						) : (
 							<Route exact path="/" component={Home}></Route>

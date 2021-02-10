@@ -22,16 +22,19 @@ public class FoodController {
     @Autowired
     private FoodRepository foodRepository;
 
+    //get all food for a pet
     @GetMapping("/users/{userId}/pets/{petId}/food")
     public List<Food> getFoodByPet(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId){
         return foodRepository.findByPetId(petId);
     }
 
+    //get all food for a user
     @GetMapping("/users/{userId}/food")
     public List<Food> getFoodByUser(@PathVariable(value = "userId") Long userId){
         return foodRepository.findByUserId(userId);
     }
 
+    //add food
     @PostMapping("/users/{userId}/pets/{petId}/addFood")
     public Food createFood(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId, @RequestBody Food food){
         return userRepository.findById(userId).map(user -> {
@@ -44,12 +47,14 @@ public class FoodController {
         }).orElseThrow();
     }
 
+    //delete food
     @DeleteMapping("/users/{userId}/pets/{petId}/food/{foodId}")
     public String deleteFood(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId, @PathVariable(value = "foodId") Long foodId){
         foodRepository.deleteById(foodId);
         return "food removed! " + foodId;
     }
 
+    //update food
     @PutMapping("/users/{userId}/pets/{petId}/food/{foodId}/update")
     public Food updateFood(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId, @PathVariable(value = "foodId") Long foodId, @RequestBody Food food){
         Food existingFood = foodRepository.findById(food.getId()).orElse(null);

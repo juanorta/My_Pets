@@ -155,7 +155,7 @@ export default function PetList(props) {
 									to={`/petprofile/${pet.id}/${pet.petName}`}
 									// to={{
 									// 	pathname: `/petprofile/${pet.id}/${pet.petName}`,
-									// 	// pet: pet,
+									// 	currentUser: currentUser,
 									// }}
 								>
 									<Button
