@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import './AddWeightForm.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -146,15 +146,37 @@ export default function AddWeightForm(props) {
 	const [unit, setUnit] = useState('lbs');
 	const [notes, setNotes] = useState('');
 	const [dateChanged, setDateChanged] = useState(false);
+	const [lastDateWeighed, setLastWeightDate] = useState('');
+	const [lastWeightValue, setLastWeightValue] = useState(0);
 
-	const [lastDateWeighed, setLastWeightDate] = useState(
-		pet.weights[pet.weights.length - 1].dateWeighed
-	);
-	const [lastWeightValue, setLastWeightValue] = useState(
-		pet.weights[pet.weights.length - 1].weightValue
-	);
+	//accesses last weight record and stores it for later use
+	// const [lastDateWeighed, setLastWeightDate] = useState(
+	// 	pet.weights[pet.weights.length - 1].dateWeighed
+	// );
+	// const [lastWeightValue, setLastWeightValue] = useState(
+	// 	pet.weights[pet.weights.length - 1].weightValue
+	// );
 	const [weightChange, setWeightChange] = useState(0);
 
+	useEffect(() => {
+		console.log('pet');
+		console.log(pet);
+		console.log(pet.weights.length);
+		if (pet.weights.length > 0) {
+			console.log(
+				'last weight date:' +
+					pet.weights[pet.weights.length - 1].dateWeighed
+			);
+			console.log(
+				'last weight value:' +
+					pet.weights[pet.weights.length - 1].weightValue
+			);
+			setLastWeightDate(pet.weights[pet.weights.length - 1].dateWeighed);
+			setLastWeightValue(pet.weights[pet.weights.length - 1].weightValue);
+		}
+	}, []);
+
+	//handles input changes from all fields
 	const onDateChange = (date) => {
 		setDateChanged(true);
 		console.log('on date change called');
@@ -183,13 +205,16 @@ export default function AddWeightForm(props) {
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
+		let change = 0;
 
 		// if (dateChanged === false) {
 		// 	setSelectedDate(moment(selectedDate).format('dddd MMM DD, YYYY'));
 		// }
 
-		let change =
-			weightValue - pet.weights[pet.weights.length - 1].weightValue;
+		if (pet.weights.length > 0) {
+			change =
+				weightValue - pet.weights[pet.weights.length - 1].weightValue;
+		}
 		// setWeightChange(change);
 
 		console.log('current weight: ' + weightValue);
@@ -231,9 +256,10 @@ export default function AddWeightForm(props) {
 					className={classes.Weight}
 					required
 					variant="standard"
-					type="number"
+					type="text"
 					inputProps={{
 						style: { textAlign: 'center' },
+						pattern: '\\d+(\\.\\d+)?',
 					}}
 					id="standard-basic"
 					label="Weight"

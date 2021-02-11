@@ -42,14 +42,18 @@ export default function MaterialModalProfile(props) {
 	const classes = useStyles();
 
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
+	const [pet, setPet] = useState(props.pet);
 	//hooks that are passed from parent components
 	//used to display appropriate content
 	const [open, setOpen] = useState(props.openModal);
+
+	//received from AddBtnProfile
+	//will display certain content whether a hook is true or false
 	const [isAppointment, setIsAppointment] = useState(props.isAppointment);
 	const [isWeight, setIsWeight] = useState(props.isWeight);
 	const [isFood, setIsFood] = useState(props.isFood);
 	const [user, setUser] = useState('ok');
-	const [pet, setPet] = useState(props.pet);
+
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
 	const handleOpen = () => {
@@ -84,6 +88,7 @@ export default function MaterialModalProfile(props) {
 			>
 				<Fade in={open}>
 					<div className={style}>
+						{/* depending on the props passed in, a unique form will be shown */}
 						{isAppointment ? (
 							<AddAppointmentForm
 								handleClose={handleClose}

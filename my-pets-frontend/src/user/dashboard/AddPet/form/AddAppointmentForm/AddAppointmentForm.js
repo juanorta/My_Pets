@@ -146,6 +146,7 @@ export default function AddPetForm(props) {
 	const [vetOrGroomerName, setVetOrGroomerName] = useState('');
 	const [notes, setNotes] = useState('');
 
+	//handles input changes from all fields
 	const onDateChange = (date) => {
 		console.log('on date change called');
 		console.log(date);
@@ -213,16 +214,6 @@ export default function AddPetForm(props) {
 		<div className="pet-form-main-container">
 			<h1 className="modal-title">Add New Appointment</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
-				{/* <DatePicker
-					label="Basic example"
-					value={value}
-					onChange={(newValue) => {
-						setValue(newValue);
-					}}
-					renderInput={(params) => (
-						<TextField {...params} variant="standard" />
-					)}
-				/> */}
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
@@ -242,34 +233,6 @@ export default function AddPetForm(props) {
 					</Fragment>
 				</MuiPickersUtilsProvider>
 
-				{/* <TextField
-					onChange={onNameChange}
-					className={classes.TextField1}
-					variant="standard"
-					required
-					id="date"
-					type="date"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					defaultValue="02-08-2021"
-					InputLabelProps={{
-						shrink: true,
-					}}
-					label="Date (MM/DD/YYYY)"
-				/> */}
-				{/* {/* <TextField
-					onChange={onPetTypeChange}
-					className={classes.TextField2}
-					variant="standard"
-					required
-					id="standard-required"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Pet Type (dog, cat, etc)"
-				/> */}
 				<TextField
 					onChange={onTimeChange}
 					className={classes.TextField2}
@@ -329,7 +292,6 @@ export default function AddPetForm(props) {
 					id="standard-basic"
 					label="Reason"
 				/>
-
 				<TextField
 					onChange={onVetOrGroomerChange}
 					className={classes.TextField1}
@@ -351,7 +313,6 @@ export default function AddPetForm(props) {
 					// value={value}
 					// onChange={handleChange}
 				/>
-
 				<div className="button-group">
 					<Button
 						onClick={props.handleClose}

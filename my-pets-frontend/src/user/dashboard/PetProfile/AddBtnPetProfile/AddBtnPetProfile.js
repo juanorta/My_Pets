@@ -52,6 +52,12 @@ export default function AddBtnPetProfile(props) {
 		console.log('profile add clicked');
 	};
 
+	//sets the modal and respective option flag to true.
+	//these hooks will then get passed down to MaterialModalProfile
+	//MaterialModalProfile will take in isWeight, isAppointment, or
+	//isFood and will decide which form to show based off which one
+	//is set to true
+
 	const newAppointmentHandler = () => {
 		setOpenModal(true);
 		setIsAppointment(true);
@@ -77,6 +83,7 @@ export default function AddBtnPetProfile(props) {
 		setAnchorEl(null);
 	};
 
+	//sets all flags to false
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
 		setIsAppointment(false);
@@ -121,6 +128,10 @@ export default function AddBtnPetProfile(props) {
 						New Food/Treat
 					</MenuItem>
 				</Menu>
+
+				{/* depending on which option the user clicked, it will trigger which type of
+					'is' flag is sent to the MaterialModalProfile
+				*/}
 				{openModal && isAppointment ? (
 					<MaterialModalProfile
 						currentUser={props.currentUser}

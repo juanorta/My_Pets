@@ -216,6 +216,7 @@ export default function PetProfile(props) {
 						<div className="settings-button">
 							<SettingsBtnProfile />
 						</div>
+						{/* when clicked, opens a menu that allows you to pick what you want to add */}
 						<div className="add-button-profile">
 							<AddBtnPetProfile
 								forceUpdate={props.forceUpdate}

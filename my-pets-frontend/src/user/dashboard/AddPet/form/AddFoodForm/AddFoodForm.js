@@ -145,12 +145,7 @@ export default function AddFoodForm(props) {
 	const [flavor, setFlavor] = useState('');
 	const [whereToBuy, setWhereToBuy] = useState('');
 
-	// const [selectedDate, setSelectedDate] = useState(new Date());
-	// const [time, setTime] = useState('');
-	// const [amOrPm, setAmOrPm] = useState('');
-	// const [type, setType] = useState('');
-	// const [reason, setReason] = useState('');
-	// const [vetOrGroomerName, setVetOrGroomerName] = useState('');
+	//handles input changes from all fields
 	const [notes, setNotes] = useState('');
 
 	const onFoodNameChange = (event) => {
