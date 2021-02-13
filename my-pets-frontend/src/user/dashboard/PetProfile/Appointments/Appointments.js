@@ -6,12 +6,16 @@ import { TextField } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import MaterialModalProfile from '../../modal/MaterialModalProfile/MaterialModalProfile';
+import MaterialModalEditAppt from '../../modal/MaterialModalEdit/MaterialModalEditAppt';
+import EditButton from './EditButton';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
 		borderRadius: '69%',
 		height: '3.4rem',
 		width: '0rem',
+		marginLeft: '-0.5rem',
 		// backgroundColor: 'red',
 	},
 	EditIcon: {
@@ -31,24 +35,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Appointments(props) {
 	const classes = useStyles();
+	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [isEditAppt, setIsEditAppt] = useState(false);
+	const [isDeleteAppt, setIsDeleteAppt] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
+	const [editParams, setEditParams] = useState('');
 
-	let rows = [];
-	for (let i = 0; i < pet.appointments.length; i++) {
-		rows[i] = {
-			id: i,
-			Date: pet.appointments[i].date,
-			Time: pet.appointments[i].time + pet.appointments[i].amOrPm,
-			Type: pet.appointments[i].type,
-			Reason: pet.appointments[i].reason,
-			Notes: pet.appointments[i].notes,
-			VetGroomer: pet.appointments[i].vetOrGroomerName,
-		};
-	}
-
-	let columns = [];
-	// for (let i = 0; i < pet.appointments.length; i++) {
-	columns = [
+	//defining columns fields
+	//using TextField in order to prevent cell data from extending past cell width
+	//disabling TextField in order to prevent user from altering data
+	//taking in params.value (row cell value) as TextField value
+	//using renderCell to show JSX
+	const columns = [
 		{
 			field: 'Date',
 			headerName: 'Date',
@@ -143,15 +142,31 @@ export default function Appointments(props) {
 		{
 			field: 'Edit',
 			headerName: 'Edit',
-			renderCell: () => (
-				<Button className={classes.Button}>
+			width: 77,
+			renderCell: (params) => (
+				<Button
+					onClick={() => {
+						//console.log(params);
+						setOpenModal(true);
+						setIsEditAppt(true);
+						setEditParams(params.row);
+					}}
+					className={classes.Button}
+				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
+
+				// <EditButton
+				// 	onClick={(params) => {
+				// 		console.log(params);
+				// 	}}
+				// />
 			),
 		},
 		{
 			field: 'Delete',
 			headerName: 'Delete',
+			width: 94,
 			renderCell: () => (
 				<Button className={classes.Button}>
 					<DeleteIcon className={classes.DeleteIcon} />
@@ -159,21 +174,59 @@ export default function Appointments(props) {
 			),
 		},
 	];
-	// }
 
-	// const rows = [
-	// 	{ id: 1, Date: 'Snow', Time: 'Jon', Type: 35 },
-	// 	{ id: 2, Date: 'Lannister', Time: 'Cersei', Type: 42 },
-	// 	{ id: 3, Date: 'Lannister', Time: 'Jaime', Type: 45 },
-	// 	{ id: 4, Date: 'Stark', Time: 'Arya', Type: 16 },
-	// 	{ id: 5, Date: 'Targaryen', Time: 'Daenerys', Type: 34 },
-	// 	{ id: 6, Date: 'Melisandre', Time: null, Type: 150 },
-	// 	{ id: 7, Date: 'Clifford', Time: 'Ferrara', Type: 44 },
-	// 	{ id: 8, Date: 'Frances', Time: 'Rossini', Type: 36 },
-	// 	{ id: 9, Date: 'Roxie', Time: 'Harvey', Type: 65 },
-	// ];
+	//loading each row with a pet appointment object
+	let rows = [];
+	for (let i = 0; i < pet.appointments.length; i++) {
+		rows[i] = {
+			id: i,
+			Date: pet.appointments[i].date,
+			Time: pet.appointments[i].time + pet.appointments[i].amOrPm,
+			Type: pet.appointments[i].type,
+			Reason: pet.appointments[i].reason,
+			Notes: pet.appointments[i].notes,
+			VetGroomer: pet.appointments[i].vetOrGroomerName,
+		};
+	}
 
-	console.log(props);
+	const cellClickHandler = (params) => {
+		if (params.field == 'Edit') {
+			editHandler(params);
+		} else if (params.field == 'Delete') {
+			deleteHandler(params);
+		}
+	};
+
+	const editHandler = (params) => {
+		setOpenModal(true);
+		setIsEditAppt(true);
+		setIsDeleteAppt(false);
+		console.log(params);
+		console.log('edit');
+		// console.log(pet);
+		console.log(pet.appointments[params.row.id]);
+	};
+
+	const deleteHandler = (params) => {
+		setOpenModal(true);
+		setIsDeleteAppt(true);
+		setIsEditAppt(true);
+		console.log(params);
+		console.log('delete');
+		console.log(pet.appointments[params.row.id]);
+	};
+
+	//sets all flags to false
+	const SetOpenModalToFalse = () => {
+		// setOpenModal(false);
+		setOpenModal(false);
+		setIsEditAppt(false);
+		setIsDeleteAppt(false);
+		// props.forceUpdate();
+	};
+
+	// console.log(props);
+	// console.log('params : ' editParams);
 	return (
 		<div className="appointments-profile-main-container">
 			<div className="appointments-title">
@@ -190,14 +243,28 @@ export default function Appointments(props) {
 					rows={rows}
 					columns={columns}
 					pageSize={5}
-					// checkboxSelection
 					rowHeight={72}
-					onCellClick={(CellParams) => {
-						console.log(CellParams);
-					}}
+					// onCellClick={(CellParams) => {}}
 				/>
 			</div>
-			;
+			{isEditAppt ? (
+				<EditButton
+					forceUpdate={props.force}
+					currentUser={currentUser}
+					pet={pet}
+					isEditAppt={isEditAppt}
+					openModal={openModal}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					editParams={editParams}
+				/>
+			) : null}
+			{/* {openModal && isEditAppt ? (
+				<MaterialModalEditAppt
+					openModal={openModal}
+					isEditAppt={isEditAppt}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+				/>
+			) : null} */}
 		</div>
 	);
 }

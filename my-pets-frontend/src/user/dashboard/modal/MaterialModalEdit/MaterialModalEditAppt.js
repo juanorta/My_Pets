@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import './MaterialModalProfile.css';
+import '../MaterialModalProfile/MaterialModalProfile.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 import AddAppointmentForm from '../../../dashboard/AddPet/form/AddAppointmentForm/AddAppointmentForm';
-import AddWeightForm from '../../../dashboard/AddPet/form/AddWeightForm/AddWeightForm';
-import AddFoodForm from '../../../dashboard/AddPet/form/AddFoodForm/AddFoodForm';
+import EditAppointmentForm from '../../AddPet/form/EditAppointmentForm';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -43,15 +42,13 @@ export default function MaterialModalProfile(props) {
 
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [rowData, setRowData] = useState(props.rowData);
 	//hooks that are passed from parent components
 	//used to display appropriate content
 	const [open, setOpen] = useState(props.openModal);
 
 	//received from AddBtnProfile
 	//will display certain content whether a hook is true or false
-	const [isAppointment, setIsAppointment] = useState(props.isAppointment);
-	const [isWeight, setIsWeight] = useState(props.isWeight);
-	const [isFood, setIsFood] = useState(props.isFood);
 	const [isEditAppt, setIsEditAppt] = useState(props.isEditAppt);
 	const [user, setUser] = useState('ok');
 
@@ -64,7 +61,6 @@ export default function MaterialModalProfile(props) {
 	const handleClose = () => {
 		setOpen(false);
 		props.SetOpenModalToFalse();
-		setIsAppointment(false);
 	};
 
 	//used to display appropriate content
@@ -89,34 +85,15 @@ export default function MaterialModalProfile(props) {
 			>
 				<Fade in={open}>
 					<div className={style}>
-						{/* depending on the props passed in, a unique form will be shown */}
-						{isAppointment ? (
-							<AddAppointmentForm
-								handleClose={handleClose}
-								currentUser={currentUser}
-								pet={pet}
-								forceUpdate={props.forceUpdate}
-							/>
-						) : null}
-						{isWeight ? (
-							<AddWeightForm
-								handleClose={handleClose}
-								currentUser={currentUser}
-								pet={pet}
-								forceUpdate={props.forceUpdate}
-							/>
-						) : null}
-						{isFood ? (
-							<AddFoodForm
-								handleClose={handleClose}
-								currentUser={currentUser}
-								pet={pet}
-								forceUpdate={props.forceUpdate}
-							/>
-						) : null}
 						{isEditAppt ? (
-							<AddAppointmentForm/>
-						):null}
+							<EditAppointmentForm
+								forceUpdate={props.forceUpdate}
+								currentUser={currentUser}
+								pet={pet}
+								rowData={rowData}
+								handleClose={handleClose}
+							/>
+						) : null}
 					</div>
 				</Fade>
 			</Modal>

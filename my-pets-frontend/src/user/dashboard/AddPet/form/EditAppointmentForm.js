@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import './AddAppointmentForm.css';
+// import './AddAppointmentForm.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +18,7 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { addAppointment } from '../../../../../util/APIUtils';
+import { editAppointment } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -134,17 +134,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddPetForm(props) {
 	const classes = useStyles();
+	let amPmIndex = props.rowData.id;
+	console.log(amPmIndex);
 
 	//stores information as user is typing
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const [time, setTime] = useState('');
-	const [amOrPm, setAmOrPm] = useState('');
-	const [type, setType] = useState('');
-	const [reason, setReason] = useState('');
-	const [vetOrGroomerName, setVetOrGroomerName] = useState('');
-	const [notes, setNotes] = useState('');
+	const [rowData, setRowData] = useState(props.rowData);
+	const [selectedDate, setSelectedDate] = useState(
+		moment(props.rowData.Date).format('MM/DD/YYYY')
+	);
+	const [time, setTime] = useState(props.pet.appointments[amPmIndex].time);
+	const [amOrPm, setAmOrPm] = useState(
+		props.pet.appointments[amPmIndex].amOrPm
+	);
+	const [type, setType] = useState(props.rowData.Type);
+	const [reason, setReason] = useState(props.rowData.Reason);
+	const [vetOrGroomerName, setVetOrGroomerName] = useState(
+		props.rowData.VetGroomer
+	);
+	const [notes, setNotes] = useState(props.rowData.Notes);
 
 	//handles input changes from all fields
 	const onDateChange = (date) => {
@@ -186,11 +195,10 @@ export default function AddPetForm(props) {
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
-		// props.handleClose();
-
-		addAppointment(
+		editAppointment(
 			currentUser.id,
 			pet.id,
+			pet.appointments[rowData.id].id,
 			selectedDate,
 			time,
 			amOrPm,
@@ -200,25 +208,26 @@ export default function AddPetForm(props) {
 			notes
 		);
 		props.handleClose();
-		Alert.success('Appointment Added');
+		Alert.success('Appointment Edited');
 		setTimeout(() => {
 			Alert.closeAll();
 			props.forceUpdate();
 		}, 500);
 	};
-	// const minDate = new Date(new Date().getTime() + 86400000);
-	// console.log(console.log(minDate);
-	// console.log('appointment props');
-	// console.log(props);
-	// console.log('date: ' + selectedDate);
+
+	console.log('am pm hook');
+	console.log(amOrPm);
+	console.log('date: ' + moment(props.rowData.Date).format('MM/DD/YYYY'));
+
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Add New Appointment</h1>
+			<h1 className="modal-title">Edit Appointment</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
 							className={classes.TextField1}
+							// disablePast
 							clearable
 							required
 							value={selectedDate}
@@ -227,7 +236,9 @@ export default function AddPetForm(props) {
 							onChange={(date) => {
 								onDateChange(date);
 							}}
-							minDate="01/01/2010"
+							minDate="02/01/2010"
+							// minDate={new Date(new Date().getTime() + 86400000)}
+							// minDate={new Date()}
 							format="MM/dd/yyyy"
 						/>
 					</Fragment>
@@ -243,6 +254,7 @@ export default function AddPetForm(props) {
 					}}
 					id="standard-basic"
 					label="Time"
+					value={time}
 				/>
 				<FormControl className={classes.formControl}>
 					<InputLabel
@@ -258,6 +270,7 @@ export default function AddPetForm(props) {
 						labelId="demo-controlled-open-select-label"
 						id="demo-controlled-open-select"
 						onChange={onAmOrPmChange}
+						value={amOrPm}
 					>
 						<MenuItem value={'AM'}>AM</MenuItem>
 						<MenuItem value={'PM'}>PM</MenuItem>
@@ -277,6 +290,7 @@ export default function AddPetForm(props) {
 						labelId="demo-controlled-open-select-label"
 						id="demo-controlled-open-select"
 						onChange={onTypeChange}
+						value={type}
 					>
 						<MenuItem value={'Vet'}>Vet</MenuItem>
 						<MenuItem value={'Grooming'}>Grooming</MenuItem>
@@ -291,6 +305,7 @@ export default function AddPetForm(props) {
 					}}
 					id="standard-basic"
 					label="Reason"
+					value={reason}
 				/>
 				<TextField
 					onChange={onVetOrGroomerChange}
@@ -302,6 +317,7 @@ export default function AddPetForm(props) {
 					}}
 					id="standard-basic"
 					label="Vet / Groomer name"
+					value={vetOrGroomerName}
 				/>
 				<TextField
 					onChange={onNotesChange}
@@ -310,6 +326,7 @@ export default function AddPetForm(props) {
 					label="Notes"
 					multiline
 					rowsMax={2}
+					value={notes}
 					// value={value}
 					// onChange={handleChange}
 				/>

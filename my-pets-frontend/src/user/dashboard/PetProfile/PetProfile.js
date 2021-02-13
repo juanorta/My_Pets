@@ -187,7 +187,7 @@ export default function PetProfile(props) {
 
 	//	console.log('appt = ' + apptClicked);
 	// console.log(props.currentUser);
-	// console.log(props);
+	//console.log(props);
 	return (
 		<div
 			className="pet-profile-main-container"
@@ -208,7 +208,8 @@ export default function PetProfile(props) {
 									horizontal
 									vertical
 									rotate={180}
-									color="#ff4f00"
+									color="#1b2737"
+									// color="#ff4f00"
 								/>
 							</IconButton>
 						</div>
@@ -340,7 +341,11 @@ export default function PetProfile(props) {
 								{apptClicked &&
 								weightClicked === false &&
 								foodClicked === false ? (
-									<Appointments pet={pet} />
+									<Appointments
+										forceUpdate={props.forceUpdate}
+										currentUser={user}
+										pet={pet}
+									/>
 								) : null}
 
 								{weightClicked &&

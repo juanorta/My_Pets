@@ -61,6 +61,7 @@ public class AppointmentController {
         Appointment existingAppointment = appointmentRepository.findById(appointment.getId()).orElse(null);
         existingAppointment.setDate(appointment.getDate());
         existingAppointment.setTime(appointment.getTime());
+        existingAppointment.setAmOrPm(appointment.getAmOrPm());
         existingAppointment.setLocation(appointment.getLocation());
         existingAppointment.setVetOrGroomerName(appointment.getVetOrGroomerName());
         existingAppointment.setReason(appointment.getReason());

@@ -169,6 +169,45 @@ export async function addAppointment(
 	});
 }
 
+export async function editAppointment(
+	id,
+	petId,
+	apptId,
+	date,
+	time,
+	amOrPm,
+	type,
+	reason,
+	vetOrGroomerName,
+	notes
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('edit appointment function called');
+
+	await fetch(
+		API_BASE_URL +
+			`/users/${id}/pets/${petId}/appointments/${apptId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id: apptId,
+				date: date,
+				time: time,
+				amOrPm: amOrPm,
+				type: type,
+				vetOrGroomerName: vetOrGroomerName,
+				reason: reason,
+				notes: notes,
+			}),
+		}
+	);
+}
+
 //create add weight, add food
 
 export async function addWeight(
