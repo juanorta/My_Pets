@@ -133,16 +133,16 @@ export default function SideDrawerLoggedIn(props) {
 	] = useState(false);
 
 	//waiting 250ms to open the side drawer if the page hasn't been loaded yet
-	setTimeout(function () {
-		if (
-			props.authenticated &&
-			window.innerWidth >= 768 &&
-			dashboardLoadedForFirstTime == false
-		) {
-			setDashboardLoadedForFirstTime(true);
-			setOpen(true);
-		}
-	}, 400);
+	// setTimeout(function () {
+	// 	if (
+	// 		props.authenticated &&
+	// 		window.innerWidth >= 768 &&
+	// 		dashboardLoadedForFirstTime == false
+	// 	) {
+	// 		setDashboardLoadedForFirstTime(true);
+	// 		setOpen(true);
+	// 	}
+	// }, 400);
 
 	//functions to handle drawer open/close
 	const handleLoggedInDrawerOpen = () => {

@@ -1,0 +1,12 @@
+.appointments-profile-main-profile {
+	justify-content: center;
+}
+
+.appointments-title {
+	font-family: 'Poppins';
+	color: #1b2737;
+	margin: 0 auto;
+	background-color: transparent;
+	/* margin-left: 0 auto; */
+	width: 70%;
+}

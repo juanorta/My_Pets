@@ -80,12 +80,12 @@ export default function PetProfile(props) {
 	const [iconClass3, setIconClass3] = useState(classes.TabIcon);
 
 	//used to detect when a button is clicked
-	const [apptClicked, setApptClicked] = useState(false);
+	const [apptClicked, setApptClicked] = useState(true);
 	const [weightClicked, setWeightClicked] = useState(false);
 	const [foodClicked, setFoodClicked] = useState(false);
 
 	//different styles for each button
-	const [buttonClass1, setButtonClass1] = useState(classes.TabButton);
+	const [buttonClass1, setButtonClass1] = useState(classes.TabButtonClicked);
 	const [buttonClass2, setButtonClass2] = useState(classes.TabButton);
 	const [buttonClass3, setButtonClass3] = useState(classes.TabButton);
 
@@ -100,6 +100,7 @@ export default function PetProfile(props) {
 			.catch((error) => {
 				//console.log(error);
 			});
+		iconHoverHandler();
 	}, []);
 
 	//console.log(props.match.params.petID);
@@ -186,9 +187,12 @@ export default function PetProfile(props) {
 
 	//	console.log('appt = ' + apptClicked);
 	// console.log(props.currentUser);
-	console.log(props);
+	// console.log(props);
 	return (
-		<div className="pet-profile-main-container">
+		<div
+			className="pet-profile-main-container"
+			style={{ overflowY: 'hidden' }}
+		>
 			{isLoading ? (
 				<LoadingIndicator />
 			) : (
@@ -209,7 +213,10 @@ export default function PetProfile(props) {
 							</IconButton>
 						</div>
 					</div>
-					<div className="general-info">
+					<div
+						className="general-info"
+						style={{ overflowY: 'hidden' }}
+					>
 						<div className="name">
 							<h2>{pet.petName}</h2>
 						</div>
@@ -333,7 +340,7 @@ export default function PetProfile(props) {
 								{apptClicked &&
 								weightClicked === false &&
 								foodClicked === false ? (
-									<Appointments />
+									<Appointments pet={pet} />
 								) : null}
 
 								{weightClicked &&
