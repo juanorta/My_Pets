@@ -208,6 +208,24 @@ export async function editAppointment(
 	);
 }
 
+export async function deleteAppointment(id, petId, apptId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	// console.log(token);
+	console.log('delete appointment function called');
+	console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + apptId);
+	await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/appointments/${apptId}`,
+		{
+			method: 'DELETE',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+}
+
 //create add weight, add food
 
 export async function addWeight(

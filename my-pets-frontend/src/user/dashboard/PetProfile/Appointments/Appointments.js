@@ -8,7 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MaterialModalProfile from '../../modal/MaterialModalProfile/MaterialModalProfile';
 import MaterialModalEditAppt from '../../modal/MaterialModalEdit/MaterialModalEditAppt';
-import EditButton from './EditButton';
+import EditDeleteApptButtonHandler from './EditDeleteApptButtonHandler';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -167,8 +167,15 @@ export default function Appointments(props) {
 			field: 'Delete',
 			headerName: 'Delete',
 			width: 94,
-			renderCell: () => (
-				<Button className={classes.Button}>
+			renderCell: (params) => (
+				<Button
+					onClick={() => {
+						setOpenModal(true);
+						setIsDeleteAppt(true);
+						setEditParams(params.row);
+					}}
+					className={classes.Button}
+				>
 					<DeleteIcon className={classes.DeleteIcon} />
 				</Button>
 			),
@@ -248,7 +255,7 @@ export default function Appointments(props) {
 				/>
 			</div>
 			{isEditAppt ? (
-				<EditButton
+				<EditDeleteApptButtonHandler
 					forceUpdate={props.force}
 					currentUser={currentUser}
 					pet={pet}
@@ -258,13 +265,18 @@ export default function Appointments(props) {
 					editParams={editParams}
 				/>
 			) : null}
-			{/* {openModal && isEditAppt ? (
-				<MaterialModalEditAppt
+
+			{isDeleteAppt ? (
+				<EditDeleteApptButtonHandler
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					isDeleteAppt={isDeleteAppt}
 					openModal={openModal}
-					isEditAppt={isEditAppt}
 					SetOpenModalToFalse={SetOpenModalToFalse}
+					editParams={editParams}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }
