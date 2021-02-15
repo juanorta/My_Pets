@@ -6,9 +6,11 @@ export default function LoadingIndicator(props) {
 		<div
 			className="loading-indicator"
 			style={{
+				backgroundColor: 'transparent',
+				height: '0.5rem',
 				display: 'block',
 				textAlign: 'center',
-				marginTop: '30px',
+				marginTop: '1rem',
 				width: '100%',
 			}}
 		>

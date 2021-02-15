@@ -16,7 +16,7 @@ const defaultOptions = {
 const Loading = () => {
 	return (
 		<div style={{}}>
-			<Lottie options={defaultOptions} height="10%" width="180px" />
+			<Lottie options={defaultOptions} />
 		</div>
 	);
 };
