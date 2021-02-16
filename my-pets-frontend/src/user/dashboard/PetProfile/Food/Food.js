@@ -5,6 +5,8 @@ import { TextField } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Notes } from '@material-ui/icons';
+import EditDeleteFoodButtonHandler from './EditDeleteFoodButtonHandler';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -45,8 +47,8 @@ export default function Appointments(props) {
 	//using renderCell to show JSX
 	const columns = [
 		{
-			field: 'Date',
-			headerName: 'Date',
+			field: 'Food',
+			headerName: 'Food Name ',
 			width: 130,
 
 			renderCell: (params) => (
@@ -61,8 +63,8 @@ export default function Appointments(props) {
 			),
 		},
 		{
-			field: 'Time',
-			headerName: 'Time',
+			field: 'Type',
+			headerName: 'Type',
 			width: 90,
 			renderCell: (params) => (
 				<TextField
@@ -76,8 +78,8 @@ export default function Appointments(props) {
 			),
 		},
 		{
-			field: 'Type',
-			headerName: 'Type',
+			field: 'WetDry',
+			headerName: 'Wet/Dry',
 			width: 130,
 			renderCell: (params) => (
 				<TextField
@@ -91,8 +93,23 @@ export default function Appointments(props) {
 			),
 		},
 		{
-			field: 'Reason',
-			headerName: 'Reason',
+			field: 'Flavor',
+			headerName: 'Flavor',
+			width: 130,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'Location',
+			headerName: 'Location',
 			width: 130,
 			renderCell: (params) => (
 				<TextField
@@ -121,31 +138,16 @@ export default function Appointments(props) {
 			),
 		},
 		{
-			field: 'VetGroomer',
-			headerName: 'Vet/Groomer',
-			width: 130,
-			renderCell: (params) => (
-				<TextField
-					className={classes.TextField}
-					// style={{ color: 'black' }}
-					InputProps={{ disableUnderline: true }}
-					multiline
-					disabled={true}
-					value={params.value}
-				/>
-			),
-		},
-		{
 			field: 'Edit',
 			headerName: 'Edit',
 			width: 77,
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						//console.log(params);
-						// setOpenModal(true);
-						// setIsEditAppt(true);
-						// setEditParams(params.row);
+						console.log(params);
+						setOpenModal(true);
+						setIsEditFood(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -166,9 +168,10 @@ export default function Appointments(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// setOpenModal(true);
-						// setIsDeleteAppt(true);
-						// setEditParams(params.row);
+						// console.log(params);
+						setOpenModal(true);
+						setIsDeleteFood(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -180,33 +183,32 @@ export default function Appointments(props) {
 
 	//loading each row with a pet appointment object
 	let rows = [];
-	// for (let i = 0; i < pet.appointments.length; i++) {
-	// 	rows[i] = {
-	// 		id: i,
-	// 		Date: pet.appointments[i].date,
-	// 		Time: pet.appointments[i].time + pet.appointments[i].amOrPm,
-	// 		Type: pet.appointments[i].type,
-	// 		Reason: pet.appointments[i].reason,
-	// 		Notes: pet.appointments[i].notes,
-	// 		VetGroomer: pet.appointments[i].vetOrGroomerName,
-	// 	};
-	// }
+	for (let i = 0; i < pet.food.length; i++) {
+		rows[i] = {
+			id: i,
+			Food: pet.food[i].foodName,
+			Type: pet.food[i].type,
+			WetDry: pet.food[i].wetOrDry,
+			Flavor: pet.food[i].flavor,
+			Location: pet.food[i].whereToBuy,
+			Notes: pet.food[i].notes,
+		};
+		// console.log(pet.food[i].wetOrDry);
+	}
 
 	//sets all flags to false
 	const SetOpenModalToFalse = () => {
-		// setOpenModal(false);
-		// setOpenModal(false);
-		// setIsEditAppt(false);
-		// setIsDeleteAppt(false);
+		setOpenModal(false);
+		setIsEditFood(false);
+		setIsDeleteFood(false);
 		// props.forceUpdate();
 	};
 
-	// console.log(props);
 	// console.log('params : ' editParams);
 	return (
 		<div className="appointments-profile-main-container">
 			<div className="appointments-title">
-				<h1>Appointments</h1>
+				<h1>Food</h1>
 			</div>
 			<div
 				style={{
@@ -220,9 +222,30 @@ export default function Appointments(props) {
 					columns={columns}
 					pageSize={5}
 					rowHeight={72}
-					// onCellClick={(CellParams) => {}}
 				/>
 			</div>
+			{isEditFood ? (
+				<EditDeleteFoodButtonHandler
+					isEditFood={isEditFood}
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					openModal={openModal}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					rowData={rowData}
+				/>
+			) : null}
+			{isDeleteFood ? (
+				<EditDeleteFoodButtonHandler
+					isDeleteFood={isDeleteFood}
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					openModal={openModal}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					rowData={rowData}
+				/>
+			) : null}
 		</div>
 	);
 }

@@ -357,7 +357,11 @@ export default function PetProfile(props) {
 								{foodClicked &&
 								weightClicked === false &&
 								apptClicked === false ? (
-									<Food />
+									<Food
+										forceUpdate={props.forceUpdate}
+										currentUser={user}
+										pet={pet}
+									/>
 								) : null}
 							</div>
 						</div>

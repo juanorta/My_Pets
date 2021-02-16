@@ -9,6 +9,7 @@ import AddPetForm from '../AddPet/form/AddPetForm';
 import DeleteConfirmation from '../views/pets/deleteConfirmation/DeleteConfirmation';
 import EditPet from '../views/pets/EditPet/EditPet';
 import DeleteApptConfirmation from '../views/pets/deleteConfirmation/DeleteApptConfirmation';
+import DeleteFoodConfirmation from '../views/pets/deleteConfirmation/DeleteFoodConfirmation';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -62,6 +63,7 @@ export default function MaterialModal(props) {
 	);
 	const [isEditPet, setIsEditPet] = useState(props.editButtonPressed);
 	const [isDeleteAppt, setIsDeleteAppt] = useState(props.isDeleteAppt);
+	const [isDeleteFood, setIsDeleteFood] = useState(props.isDeleteFood);
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
 	const handleOpen = () => {
@@ -82,7 +84,11 @@ export default function MaterialModal(props) {
 
 	if (isAddPet || isEditPet === true) {
 		style = classes.AddPetForm;
-	} else if (isDeletePetConfirmation === true || isDeleteAppt === true) {
+	} else if (
+		isDeletePetConfirmation === true ||
+		isDeleteAppt === true ||
+		isDeleteFood === true
+	) {
 		style = classes.DeleteConfirmation;
 	}
 
@@ -133,6 +139,15 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteAppt ? (
 							<DeleteApptConfirmation
+								forceUpdate={props.forceUpdate}
+								handleClose={handleClose}
+								currentUser={props.currentUser}
+								pet={props.pet}
+								rowData={props.rowData}
+							/>
+						) : null}
+						{isDeleteFood ? (
+							<DeleteFoodConfirmation
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}

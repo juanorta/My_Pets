@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import TextField from '@material-ui/core/TextField';
 import AddAppointmentForm from '../../../dashboard/AddPet/form/AddAppointmentForm/AddAppointmentForm';
 import EditAppointmentForm from '../../AddPet/form/EditAppointmentForm';
+import EditFoodForm from '../../AddPet/form/EditFoodForm';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -50,6 +51,7 @@ export default function MaterialModalProfile(props) {
 	//received from AddBtnProfile
 	//will display certain content whether a hook is true or false
 	const [isEditAppt, setIsEditAppt] = useState(props.isEditAppt);
+	const [isEditFood, setIsEditFood] = useState(props.isEditFood);
 	const [user, setUser] = useState('ok');
 
 	// const [paperStyle, setPaperStyle] = useState(props.style);
@@ -87,6 +89,15 @@ export default function MaterialModalProfile(props) {
 					<div className={style}>
 						{isEditAppt ? (
 							<EditAppointmentForm
+								forceUpdate={props.forceUpdate}
+								currentUser={currentUser}
+								pet={pet}
+								rowData={rowData}
+								handleClose={handleClose}
+							/>
+						) : null}
+						{isEditFood ? (
+							<EditFoodForm
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
 								pet={pet}

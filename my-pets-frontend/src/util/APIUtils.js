@@ -290,3 +290,54 @@ export async function addFood(
 		}),
 	});
 }
+
+export async function editFood(
+	id,
+	petId,
+	foodId,
+	foodName,
+	type,
+	wetOrDry,
+	flavor,
+	whereToBuy,
+	notes
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('edit food function called');
+
+	await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/food/${foodId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id: foodId,
+				foodName: foodName,
+				type: type,
+				wetOrDry: wetOrDry,
+				flavor: flavor,
+				whereToBuy: whereToBuy,
+				notes: notes,
+			}),
+		}
+	);
+}
+
+export async function deleteFood(id, petId, foodId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	// console.log(token);
+	console.log('delete food function called');
+	console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/food/${foodId}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	});
+}

@@ -256,7 +256,7 @@ export default function Appointments(props) {
 			</div>
 			{isEditAppt ? (
 				<EditDeleteApptButtonHandler
-					forceUpdate={props.force}
+					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
 					isEditAppt={isEditAppt}
