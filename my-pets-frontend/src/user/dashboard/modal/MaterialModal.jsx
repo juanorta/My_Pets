@@ -64,6 +64,7 @@ export default function MaterialModal(props) {
 	const [isEditPet, setIsEditPet] = useState(props.editButtonPressed);
 	const [isDeleteAppt, setIsDeleteAppt] = useState(props.isDeleteAppt);
 	const [isDeleteFood, setIsDeleteFood] = useState(props.isDeleteFood);
+	const [isDeleteWeight, setIsDeleteWeight] = useState(props.isDeleteWeight);
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
 	const handleOpen = () => {

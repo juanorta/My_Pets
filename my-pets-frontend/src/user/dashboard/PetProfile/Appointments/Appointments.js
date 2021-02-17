@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MaterialModalProfile from '../../modal/MaterialModalProfile/MaterialModalProfile';
 import MaterialModalEditAppt from '../../modal/MaterialModalEdit/MaterialModalEditAppt';
 import EditDeleteApptButtonHandler from './EditDeleteApptButtonHandler';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -185,9 +186,10 @@ export default function Appointments(props) {
 	//loading each row with a pet appointment object
 	let rows = [];
 	for (let i = 0; i < pet.appointments.length; i++) {
+		let date = moment(pet.appointments[i].date).format('MM/DD/YYYY');
 		rows[i] = {
 			id: i,
-			Date: pet.appointments[i].date,
+			Date: date,
 			Time: pet.appointments[i].time + pet.appointments[i].amOrPm,
 			Type: pet.appointments[i].type,
 			Reason: pet.appointments[i].reason,

@@ -1,10 +1,82 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Weights.css';
+import './Weights.css';
+import Alert from 'react-s-alert';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import { DataGrid } from '@material-ui/data-grid';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import TableContainer from '@material-ui/core/TableContainer';
+import WeightsGraph from './WeightsGraph/WeightsGraph';
+import WeightsTable from './WeightsTable/WeightsTable';
+
+const useStyles = makeStyles((theme) => ({
+	GraphView: {
+		color: '#1b2737',
+	},
+	GraphViewSelected: {
+		borderBottom: '3px solid #ff4f00',
+	},
+	TableView: {
+		color: '#1b2737',
+	},
+
+	TableViewSelected: {
+		borderBottom: '3px solid #ff4f00',
+	},
+}));
 
 export default function Weights(props) {
+	const classes = useStyles();
+
+	const [currentUser, setCurrentUser] = useState(props.currentUser);
+	const [pet, setPet] = useState(props.pet);
+	const [graphViewSelected, setGraphViewSelected] = useState(true);
+	const [tableViewSelected, setTableViewSelected] = useState(false);
+	const [graphStyle, setGraphStyle] = useState(classes.GraphViewSelected);
+	const [tableStyle, setTableStyle] = useState(classes.TableView);
+
+	const graphViewHandler = () => {
+		// console.log('graph view clicked');
+		setTableViewSelected(false);
+		setGraphViewSelected(true);
+		setGraphStyle(classes.GraphViewSelected);
+		setTableStyle(classes.TableView);
+	};
+	const tableViewHandler = () => {
+		// console.log('table view clicked');
+		setGraphViewSelected(false);
+		setTableViewSelected(true);
+		setTableStyle(classes.TableViewSelected);
+		setGraphStyle(classes.GraphView);
+	};
 	return (
-		<div>
-			<h1>Weights</h1>
+		<div className="weights-profile-main-container">
+			<div className="weights-title">
+				<h1>Weights</h1>
+				<ul className="view-selector-group">
+					<li className={graphStyle} onClick={graphViewHandler}>
+						<h2 style={{ fontWeight: '500' }}>Graph View</h2>
+					</li>
+					<li className={tableStyle} onClick={tableViewHandler}>
+						<h2 style={{ fontWeight: '500' }}>Table View</h2>
+					</li>
+				</ul>
+			</div>
+			{graphViewSelected ? (
+				<WeightsGraph
+					pet={pet}
+					currentUser={currentUser}
+					forceUpdate={props.forceUpdate}
+				/>
+			) : null}
+			{tableViewSelected ? (
+				<WeightsTable
+					pet={pet}
+					currentUser={currentUser}
+					forceUpdate={props.forceUpdate}
+				/>
+			) : null}
 		</div>
 	);
 }

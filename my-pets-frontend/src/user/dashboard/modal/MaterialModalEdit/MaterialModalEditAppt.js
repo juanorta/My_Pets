@@ -52,6 +52,7 @@ export default function MaterialModalProfile(props) {
 	//will display certain content whether a hook is true or false
 	const [isEditAppt, setIsEditAppt] = useState(props.isEditAppt);
 	const [isEditFood, setIsEditFood] = useState(props.isEditFood);
+	const [isEditWeight, setIsEditWeight] = useState(props.isEditWeight);
 	const [user, setUser] = useState('ok');
 
 	// const [paperStyle, setPaperStyle] = useState(props.style);

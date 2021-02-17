@@ -1,0 +1,9 @@
+.weights-graph-main-container {
+	background-color: transparent;
+	font-family: 'Poppins';
+	color: #1b2737;
+	margin: 0 auto;
+	height: auto;
+	/* margin-left: 0 auto; */
+	width: 70%;
+}

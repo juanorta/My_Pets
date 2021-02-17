@@ -80,14 +80,16 @@ export default function PetProfile(props) {
 	const [iconClass3, setIconClass3] = useState(classes.TabIcon);
 
 	//used to detect when a button is clicked
-	const [apptClicked, setApptClicked] = useState(true);
+	const [apptClicked, setApptClicked] = useState(false);
 	const [weightClicked, setWeightClicked] = useState(false);
 	const [foodClicked, setFoodClicked] = useState(false);
 
 	//different styles for each button
-	const [buttonClass1, setButtonClass1] = useState(classes.TabButtonClicked);
+	const [buttonClass1, setButtonClass1] = useState(classes.TabButton);
 	const [buttonClass2, setButtonClass2] = useState(classes.TabButton);
 	const [buttonClass3, setButtonClass3] = useState(classes.TabButton);
+
+	const [defaultView, setDefaultView] = useState('APPOINTMENTS');
 
 	//gets pet data on component load
 	useEffect(() => {
@@ -100,8 +102,17 @@ export default function PetProfile(props) {
 			.catch((error) => {
 				//console.log(error);
 			});
+		// iconHoverHandler();
+		setApptClicked(true);
+		setButtonClass1(classes.TabButtonClicked);
 		iconHoverHandler();
+
+		defaultViewHandler(defaultView);
 	}, []);
+
+	const defaultViewHandler = (viewName) => {
+		console.log(viewName);
+	};
 
 	//console.log(props.match.params.petID);
 
@@ -351,7 +362,11 @@ export default function PetProfile(props) {
 								{weightClicked &&
 								apptClicked === false &&
 								foodClicked === false ? (
-									<Weights />
+									<Weights
+										forceUpdate={props.forceUpdate}
+										currentUser={user}
+										pet={pet}
+									/>
 								) : null}
 
 								{foodClicked &&

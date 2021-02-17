@@ -1,0 +1,31 @@
+.weights-profile-main-container {
+	justify-content: center;
+	background-color: transparent;
+	height: 15rem;
+}
+
+.weights-title {
+	font-family: 'Poppins';
+	color: #1b2737;
+	margin: 0 auto;
+	background-color: transparent;
+	/* margin-left: 0 auto; */
+	width: 70%;
+}
+
+.view-selector-group {
+	list-style-type: none;
+	display: flex;
+	background-color: transparent;
+}
+
+.view-selector-group li {
+	background-color: transparent;
+	height: 3.5rem;
+	margin-left: -2.3rem;
+	margin-right: 4rem;
+}
+
+.view-selector-group li:hover {
+	cursor: pointer;
+}
