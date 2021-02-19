@@ -140,6 +140,9 @@ export default function AddBtnPetProfile(props) {
 						isAppointment={isAppointment}
 						pet={pet}
 						forceUpdate={props.forceUpdate}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
 					/>
 				) : null}
 
@@ -151,6 +154,9 @@ export default function AddBtnPetProfile(props) {
 						isWeight={isWeight}
 						pet={pet}
 						forceUpdate={props.forceUpdate}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
 					/>
 				) : null}
 
@@ -162,6 +168,9 @@ export default function AddBtnPetProfile(props) {
 						isFood={isFood}
 						pet={pet}
 						forceUpdate={props.forceUpdate}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
 					/>
 				) : null}
 			</div>

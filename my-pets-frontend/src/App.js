@@ -26,12 +26,16 @@ class App extends Component {
 			currentUser: null,
 			loading: false,
 			number: 0,
+			defaultView: 'APPOINTMENTS',
 		};
 
 		this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(
 			this
 		);
 		this.handleLogout = this.handleLogout.bind(this);
+		this.changeDefaultViewsAndRefresh = this.changeDefaultViewsAndRefresh.bind(
+			this
+		);
 	}
 
 	loadCurrentlyLoggedInUser() {
@@ -54,6 +58,28 @@ class App extends Component {
 			});
 	}
 
+	changeDefaultViewsAndRefresh(view) {
+		console.log('yooo');
+		console.log(view);
+		this.setState({
+			defaultView: view,
+		});
+
+		// getCurrentUser()
+		// 	.then((response) => {
+		// 		this.setState({
+		// 			currentUser: response,
+		// 			authenticated: true,
+		// 			loading: false,
+		// 		});
+		// 	})
+		// 	.catch((error) => {
+		// 		this.setState({
+		// 			loading: false,
+		// 		});
+		// 	});
+	}
+
 	handleLogout() {
 		localStorage.removeItem(ACCESS_TOKEN);
 		this.setState({
@@ -65,6 +91,7 @@ class App extends Component {
 
 	componentDidMount() {
 		this.loadCurrentlyLoggedInUser();
+		// this.changeDefaultViewsAndRefresh();
 	}
 
 	refresh() {
@@ -108,6 +135,10 @@ class App extends Component {
 									path="/petprofile/:petID/:petName"
 									component={PetProfile}
 									forceUpdate={this.loadCurrentlyLoggedInUser}
+									changeDefaultViewsAndRefresh={
+										this.changeDefaultViewsAndRefresh
+									}
+									defaultView={this.state.defaultView}
 								></PrivateRouteProfile>
 							</div>
 						) : (

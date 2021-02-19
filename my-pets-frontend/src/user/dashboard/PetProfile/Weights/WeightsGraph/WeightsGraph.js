@@ -6,28 +6,37 @@ import moment from 'moment';
 export default function WeightsGraph(props) {
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
 
-	const weightObject = pet.weights;
-	console.log(pet.weights);
+	//holds an array of weight objects
+	// let weightObject = [];
 
-	weightObject.sort(function compare(a, b) {
-		var dateA = new Date(a.dateWeighed);
-		var dateB = new Date(b.dateWeighed);
-		return dateA - dateB;
-	});
-	console.log(pet.weights);
-	// console.log(weightObject);
-
+	//wil be used
 	let dates = [];
 	let weightValues = [];
-	for (var i = 0; i < pet.weights.length; i++) {
-		let date = moment(pet.weights[i].dateWeighed).format('MM/DD/YYYY');
+	// console.log(pet.weights);
+
+	// for (var i = 0; i < pet.weights.length; i++) {
+	// 	weightObject[i] = pet.weights[i];
+	// }
+
+	// weightObject.sort(function compare(a, b) {
+	// 	var dateA = new Date(a.dateWeighed);
+	// 	var dateB = new Date(b.dateWeighed);
+	// 	return dateA - dateB;
+	// });
+	// console.log(pet.weights);
+	// console.log(weightObject);
+
+	for (var i = 0; i < sortedWeights.length; i++) {
+		let date = moment(sortedWeights[i].dateWeighed).format('MM/DD/YYYY');
 		dates[i] = date;
 		// console.log(date);
-		weightValues[i] = pet.weights[i].weightValue;
+		weightValues[i] = sortedWeights[i].weightValue;
 	}
 
-	console.log(pet.weights);
+	// console.log(weightObject);
+	// console.log(pet.weights);
 
 	const data = {
 		labels: dates,
@@ -70,8 +79,7 @@ export default function WeightsGraph(props) {
 					},
 					scaleLabel: {
 						display: true,
-						labelString:
-							'Weight ' + '(' + pet.weights[0].unit + ')',
+						labelString: 'Weight (lbs) ',
 						fontSize: 18,
 						fontColor: '#1b2737',
 						fontStyle: 'bold',
@@ -111,9 +119,9 @@ export default function WeightsGraph(props) {
 		},
 	};
 
-	console.log('weights graph');
-	console.log(props.currentUser);
-	console.log(props.pet);
+	// console.log('weights graph');
+	// console.log(props.currentUser);
+	// console.log(props.pet);
 	return (
 		<div className="weights-graph-main-container">
 			{/* <h1>Weights Graph</h1> */}

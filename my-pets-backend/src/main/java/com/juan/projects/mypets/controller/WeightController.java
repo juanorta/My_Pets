@@ -59,11 +59,10 @@ public class WeightController {
     public Weight updateWeight(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId, @PathVariable(value = "weightId") Long weightId, @RequestBody Weight weight){
         Weight existingWeight = weightRepository.findById(weight.getId()).orElse(null);
         existingWeight.setWeightValue(weight.getWeightValue());
-        existingWeight.setLastWeightValue(weight.getLastWeightValue());
+
         existingWeight.setUnit(weight.getUnit());
         existingWeight.setDateWeighed(weight.getDateWeighed());
-        existingWeight.setWeightChange(weight.getWeightChange());
-        existingWeight.setLastDateWeighed(weight.getLastDateWeighed());
+
         existingWeight.setNotes(weight.getNotes());
 
         return weightRepository.save(existingWeight);

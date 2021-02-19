@@ -39,6 +39,11 @@ export default function WeightsTable(props) {
 	const [isDeleteWeight, setIsDeleteWeight] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const [rowData, setRowData] = useState('');
+	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
+	// console.log('unsorted weights');
+	// console.log(pet.weights);
+	// console.log('sorted weights');
+	// console.log(sortedWeights);
 
 	const columns = [
 		{
@@ -134,16 +139,18 @@ export default function WeightsTable(props) {
 	];
 
 	let rows = [];
-	for (let i = 0; i < pet.weights.length; i++) {
-		let date = moment(pet.weights[i].dateWeighed).format('MM/DD/YYYY');
-		rows[i] = {
+	let j = 0;
+	for (let i = sortedWeights.length - 1; i >= 0; i--) {
+		let date = moment(sortedWeights[i].dateWeighed).format('MM/DD/YYYY');
+		rows[j] = {
 			id: i,
 			Date: date,
-			Weight: pet.weights[i].weightValue + pet.weights[i].unit,
-			Notes: pet.weights[i].notes,
+			Weight: sortedWeights[i].weightValue + sortedWeights[i].unit,
+			Notes: sortedWeights[i].notes,
 		};
+		j++;
 	}
-	console.log(pet.weights);
+	// console.log(pet.weights);
 
 	const SetOpenModalToFalse = () => {
 		// setOpenModal(false);
@@ -152,6 +159,7 @@ export default function WeightsTable(props) {
 		setIsDeleteWeight(false);
 		// props.forceUpdate();
 	};
+	// console.log(sortedWeights);
 	return (
 		<div
 			style={{
@@ -166,6 +174,12 @@ export default function WeightsTable(props) {
 				columns={columns}
 				pageSize={5}
 				rowHeight={72}
+				// sortModel={[
+				// 	{
+				// 		field: 'commodity',
+				// 		sort: 'asc',
+				// 	},
+				// ]}
 				// onCellClick={(CellParams) => {}}
 			/>
 			{isEditWeight ? (
@@ -177,6 +191,10 @@ export default function WeightsTable(props) {
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
+					sortedWeights={sortedWeights}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 			{isDeleteWeight ? (
@@ -188,6 +206,11 @@ export default function WeightsTable(props) {
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
+					sortedWeights={sortedWeights}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 		</div>

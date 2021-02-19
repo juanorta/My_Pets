@@ -233,6 +233,9 @@ export default function Appointments(props) {
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 			{isDeleteFood ? (
@@ -244,6 +247,9 @@ export default function Appointments(props) {
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 		</div>

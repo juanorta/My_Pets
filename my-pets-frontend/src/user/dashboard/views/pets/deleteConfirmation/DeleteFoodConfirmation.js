@@ -23,6 +23,9 @@ export default function DeleteFoodConfirmation(props) {
 		Alert.success('APPOINTMENT DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
+
+			props.changeDefaultViewsAndRefresh('FOOD');
+
 			props.forceUpdate();
 		}, 500);
 	}

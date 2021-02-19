@@ -27,6 +27,9 @@ export default function EditDeleteApptButtonHandler(props) {
 					openModal={openModal}
 					isEditFood={isEditFood}
 					SetOpenModalToFalse={props.SetOpenModalToFalse}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 			{openModal && isDeleteFood ? (
@@ -38,6 +41,9 @@ export default function EditDeleteApptButtonHandler(props) {
 					pet={pet}
 					forceUpdate={props.forceUpdate}
 					SetOpenModalToFalse={props.SetOpenModalToFalse}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 		</div>

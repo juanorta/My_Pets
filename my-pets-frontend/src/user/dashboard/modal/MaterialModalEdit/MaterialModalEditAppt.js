@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import AddAppointmentForm from '../../../dashboard/AddPet/form/AddAppointmentForm/AddAppointmentForm';
 import EditAppointmentForm from '../../AddPet/form/EditAppointmentForm';
 import EditFoodForm from '../../AddPet/form/EditFoodForm';
+import EditWeightForm from '../../AddPet/form/EditWeightForm';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -43,6 +44,7 @@ export default function MaterialModalProfile(props) {
 
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
 	const [rowData, setRowData] = useState(props.rowData);
 	//hooks that are passed from parent components
 	//used to display appropriate content
@@ -69,7 +71,7 @@ export default function MaterialModalProfile(props) {
 	//used to display appropriate content
 	let style = classes.AddForm;
 
-	console.log(props);
+	// console.log(props.changeDefaultViewsAndRefresh);
 	// console.log('open => ' + open);
 
 	return (
@@ -95,6 +97,10 @@ export default function MaterialModalProfile(props) {
 								pet={pet}
 								rowData={rowData}
 								handleClose={handleClose}
+								defaultViewHandler={props.defaultViewHandler}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						) : null}
 						{isEditFood ? (
@@ -104,6 +110,23 @@ export default function MaterialModalProfile(props) {
 								pet={pet}
 								rowData={rowData}
 								handleClose={handleClose}
+								defaultViewHandler={props.defaultViewHandler}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isEditWeight ? (
+							<EditWeightForm
+								forceUpdate={props.forceUpdate}
+								currentUser={currentUser}
+								pet={pet}
+								rowData={rowData}
+								handleClose={handleClose}
+								sortedWeights={sortedWeights}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						) : null}
 					</div>

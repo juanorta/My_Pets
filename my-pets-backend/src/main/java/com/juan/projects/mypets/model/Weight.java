@@ -19,11 +19,11 @@ public class Weight {
     @GeneratedValue
     private Long id;
     private float weightValue;
-    private float lastWeightValue;
-    private float weightChange;
+//    private float lastWeightValue;
+//    private float weightChange;
     private String unit;
     private String dateWeighed;
-    private String lastDateWeighed;
+//    private String lastDateWeighed;
     private String notes;
 
     //creating relationship with pet

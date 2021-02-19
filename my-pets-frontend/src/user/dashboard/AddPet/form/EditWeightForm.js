@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from 'react';
-// import './AddAppointmentForm.css';
+import React, { useState, Fragment, useEffect } from 'react';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +18,8 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { editAppointment } from '../../../../util/APIUtils';
+import { editWeight } from '../../../../util/APIUtils';
+// import { addAppointment, addWeight } from '../../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	TextField1: {
 		marginLeft: '15%',
-		marginBottom: '1rem',
+		marginBottom: '2rem',
 		// marginTop: '1rem',
 		width: '19rem',
 		'& label.Mui-focused': {
@@ -53,10 +54,12 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 
-	TextField2: {
+	Weight: {
 		marginLeft: '15%',
+		marginBottom: '2rem',
+		marginTop: '2rem',
 		// marginTop: '1rem',
-		width: '5rem',
+		width: '6rem',
 		'& label.Mui-focused': {
 			color: '#1B2737',
 		},
@@ -77,8 +80,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	inputLabel: {
-		marginTop: '-1rem',
-		marginLeft: '18%',
+		marginTop: '1rem',
+		marginLeft: '12%',
 	},
 
 	inputLabel1: {
@@ -95,9 +98,9 @@ const useStyles = makeStyles((theme) => ({
 		// width: 'rem',
 	},
 
-	selectDropdown2: {
+	Unit: {
 		marginLeft: '1rem',
-		marginTop: '0rem',
+		marginTop: '2rem',
 	},
 
 	birthday: {
@@ -132,60 +135,76 @@ const useStyles = makeStyles((theme) => ({
 
 //form used to add a pet
 
-export default function AddPetForm(props) {
+export default function EditWeightForm(props) {
 	const classes = useStyles();
-	let amPmIndex = props.rowData.id;
-	console.log(amPmIndex);
 
 	//stores information as user is typing
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
 	const [rowData, setRowData] = useState(props.rowData);
 	const [selectedDate, setSelectedDate] = useState(
-		moment(props.rowData.Date).format('MM/DD/YYYY')
+		sortedWeights[rowData.id].dateWeighed
 	);
-	const [time, setTime] = useState(props.pet.appointments[amPmIndex].time);
-	const [amOrPm, setAmOrPm] = useState(
-		props.pet.appointments[amPmIndex].amOrPm
+	const [dateWeighed, setDateWeighed] = useState(
+		sortedWeights[rowData.id].dateWeighed
 	);
-	const [type, setType] = useState(props.rowData.Type);
-	const [reason, setReason] = useState(props.rowData.Reason);
-	const [vetOrGroomerName, setVetOrGroomerName] = useState(
-		props.rowData.VetGroomer
+	const [weightValue, setWeightValue] = useState(
+		sortedWeights[rowData.id].weightValue
 	);
-	const [notes, setNotes] = useState(props.rowData.Notes);
+	const [unit, setUnit] = useState(sortedWeights[rowData.id].unit);
+	const [notes, setNotes] = useState(sortedWeights[rowData.id].notes);
+	// const [dateChanged, setDateChanged] = useState();
+
+	//accesses last weight record and stores it for later use
+	// const [lastDateWeighed, setLastWeightDate] = useState(
+	// 	pet.weights[pet.weights.length - 1].dateWeighed
+	// );
+	// const [lastWeightValue, setLastWeightValue] = useState(
+	// 	pet.weights[pet.weights.length - 1].weightValue
+	// );
+
+	useEffect(() => {
+		// console.log('pet');
+		// console.log(pet.weights);
+		// // console.log('next pet');
+		// console.log(pet.weights[rowData.id]);
+		// console.log(pet.weights[rowData.id + 1]);
+		// console.log(nextWeight);
+		//console.log(pet.weights.length);
+		// if (pet.weights.length > 0) {
+		// 	// console.log(
+		// 	// 	'last weight date:' +
+		// 	// 		pet.weights[pet.weights.length - 1].dateWeighed
+		// 	// );
+		// 	// console.log(
+		// 	// 	'last weight value:' +
+		// 	// 		pet.weights[pet.weights.length - 1].weightValue
+		// 	// );
+		// 	setLastWeightDate(pet.weights[pet.weights.length - 1].dateWeighed);
+		// 	setLastWeightValue(pet.weights[pet.weights.length - 1].weightValue);
+		// }
+	}, []);
 
 	//handles input changes from all fields
 	const onDateChange = (date) => {
+		// setDateChanged(true);
 		console.log('on date change called');
 		console.log(date);
 		const formattedDate = moment(date).format('dddd MMM DD, YYYY');
 		setSelectedDate(formattedDate);
 	};
 
-	const onTimeChange = (event) => {
-		console.log('time: ' + event.target.value);
-		setTime(event.target.value);
+	const onWeightValueChange = (event) => {
+		console.log('weight: ' + event.target.value);
+		setWeightValue(event.target.value);
+		// setTime(event.target.value);
 	};
 
-	const onAmOrPmChange = (event) => {
-		console.log('am/pm: ' + event.target.value);
-		setAmOrPm(event.target.value);
-	};
-
-	const onTypeChange = (event) => {
-		console.log('type: ' + event.target.value);
-		setType(event.target.value);
-	};
-
-	const onReasonChange = (event) => {
-		console.log('reason: ' + event.target.value);
-		setReason(event.target.value);
-	};
-
-	const onVetOrGroomerChange = (event) => {
-		console.log('vet/groomer: ' + event.target.value);
-		setVetOrGroomerName(event.target.value);
+	const onUnitChange = (event) => {
+		console.log('unit: ' + event.target.value);
+		setUnit(event.target.value);
+		// setAmOrPm(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
@@ -195,42 +214,77 @@ export default function AddPetForm(props) {
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
-		editAppointment(
+		event.preventDefault();
+
+		props.handleClose();
+		editWeight(
 			currentUser.id,
 			pet.id,
-			pet.appointments[rowData.id].id,
+			sortedWeights[rowData.id].id,
+			weightValue,
+			unit,
 			selectedDate,
-			time,
-			amOrPm,
-			type,
-			reason,
-			vetOrGroomerName,
 			notes
 		);
-		props.handleClose();
-		Alert.success('Appointment Edited');
+		// props.handleClose();
+		Alert.success('Weight Added');
+		// console.log(props.forceUpdate);
+
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('APPOINTMENTS');
+			props.changeDefaultViewsAndRefresh('WEIGHTS');
+			//props.changeDefaultViewAndRefresh('WEIGHTS');
 
 			props.forceUpdate();
 		}, 500);
 	};
 
-	console.log('am pm hook');
-	console.log(amOrPm);
-	console.log('date: ' + moment(props.rowData.Date).format('MM/DD/YYYY'));
+	// console.log('weight props');
+	// console.log(props.changeDefaultViewsAndRefresh);
+	// console.log('date: ' + selectedDate);
 
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Edit Appointment</h1>
+			<h1 className="modal-title"> Edit Weight</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
+				<TextField
+					onChange={onWeightValueChange}
+					className={classes.Weight}
+					required
+					variant="standard"
+					type="text"
+					inputProps={{
+						style: { textAlign: 'center' },
+						pattern: '\\d+(\\.\\d+)?',
+					}}
+					id="standard-basic"
+					label="Weight"
+					value={weightValue}
+				/>
+				<FormControl className={classes.formControl}>
+					<InputLabel
+						className={classes.inputLabel}
+						id="demo-controlled-open-select-label"
+					>
+						Unit
+					</InputLabel>
+					<Select
+						required
+						style={{ marginTop: '2rem' }}
+						className={classes.Unit}
+						labelId="demo-controlled-open-select-label"
+						id="demo-controlled-open-select"
+						value={unit}
+						onChange={onUnitChange}
+					>
+						<MenuItem value={'lbs'}>lbs</MenuItem>
+						<MenuItem value={'kg'}>kg</MenuItem>
+					</Select>
+				</FormControl>
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
 							className={classes.TextField1}
-							// disablePast
 							clearable
 							required
 							value={selectedDate}
@@ -239,89 +293,11 @@ export default function AddPetForm(props) {
 							onChange={(date) => {
 								onDateChange(date);
 							}}
-							minDate="02/01/2010"
-							// minDate={new Date(new Date().getTime() + 86400000)}
-							// minDate={new Date()}
 							format="MM/dd/yyyy"
 						/>
 					</Fragment>
 				</MuiPickersUtilsProvider>
 
-				<TextField
-					onChange={onTimeChange}
-					className={classes.TextField2}
-					required
-					variant="standard"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Time"
-					value={time}
-				/>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						AM/PM
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown2}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onAmOrPmChange}
-						value={amOrPm}
-					>
-						<MenuItem value={'AM'}>AM</MenuItem>
-						<MenuItem value={'PM'}>PM</MenuItem>
-					</Select>
-				</FormControl>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel1}
-						id="demo-controlled-open-select-label"
-					>
-						Type
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onTypeChange}
-						value={type}
-					>
-						<MenuItem value={'Vet'}>Vet</MenuItem>
-						<MenuItem value={'Grooming'}>Grooming</MenuItem>
-					</Select>
-				</FormControl>
-				<TextField
-					onChange={onReasonChange}
-					className={classes.TextField3}
-					variant="standard"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Reason"
-					value={reason}
-				/>
-				<TextField
-					onChange={onVetOrGroomerChange}
-					className={classes.TextField1}
-					variant="standard"
-					id="standard-required"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Vet / Groomer name"
-					value={vetOrGroomerName}
-				/>
 				<TextField
 					onChange={onNotesChange}
 					className={classes.TextField1}
@@ -333,8 +309,10 @@ export default function AddPetForm(props) {
 					// value={value}
 					// onChange={handleChange}
 				/>
+
 				<div className="button-group">
 					<Button
+						// onClick={setLastAndWeightChange}
 						onClick={props.handleClose}
 						className={classes.cancelButton}
 					>
