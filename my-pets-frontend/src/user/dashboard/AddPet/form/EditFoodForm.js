@@ -164,6 +164,9 @@ export default function EditFoodForm(props) {
 		Alert.success('Food Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
+
+			props.changeDefaultViewsAndRefresh('FOOD');
+
 			props.forceUpdate();
 		}, 500);
 	};

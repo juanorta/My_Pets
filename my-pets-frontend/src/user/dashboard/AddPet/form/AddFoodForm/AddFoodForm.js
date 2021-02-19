@@ -197,6 +197,7 @@ export default function AddFoodForm(props) {
 		Alert.success('Food Added');
 		setTimeout(() => {
 			Alert.closeAll();
+			props.changeDefaultViewsAndRefresh('FOOD');
 			props.forceUpdate();
 		}, 500);
 	};

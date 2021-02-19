@@ -89,7 +89,7 @@ export default function PetProfile(props) {
 	const [buttonClass2, setButtonClass2] = useState(classes.TabButton);
 	const [buttonClass3, setButtonClass3] = useState(classes.TabButton);
 
-	const [defaultView, setDefaultView] = useState('APPOINTMENTS');
+	const [defaultView, setDefaultView] = useState(props.defaultView);
 
 	//gets pet data on component load
 	useEffect(() => {
@@ -103,14 +103,21 @@ export default function PetProfile(props) {
 				//console.log(error);
 			});
 		// iconHoverHandler();
-		setApptClicked(true);
-		setButtonClass1(classes.TabButtonClicked);
-		iconHoverHandler();
+		// setApptClicked(true);
+		// setButtonClass1(classes.TabButtonClicked);
+		// iconHoverHandler();
 
 		defaultViewHandler(defaultView);
 	}, []);
 
 	const defaultViewHandler = (viewName) => {
+		if (defaultView == 'APPOINTMENTS') {
+			handleApptClick();
+		} else if (defaultView == 'WEIGHTS') {
+			handleWeightClick();
+		} else if (defaultView == 'FOOD') {
+			handleFoodClick();
+		}
 		console.log(viewName);
 	};
 
@@ -241,6 +248,9 @@ export default function PetProfile(props) {
 								forceUpdate={props.forceUpdate}
 								pet={pet}
 								currentUser={user}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						</div>
 						<div className="age-type-sex-breed">
@@ -356,6 +366,10 @@ export default function PetProfile(props) {
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
+										defaultViewHandler={defaultViewHandler}
+										changeDefaultViewsAndRefresh={
+											props.changeDefaultViewsAndRefresh
+										}
 									/>
 								) : null}
 
@@ -366,6 +380,10 @@ export default function PetProfile(props) {
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
+										defaultViewHandler={defaultViewHandler}
+										changeDefaultViewsAndRefresh={
+											props.changeDefaultViewsAndRefresh
+										}
 									/>
 								) : null}
 
@@ -376,6 +394,10 @@ export default function PetProfile(props) {
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
+										defaultViewHandler={defaultViewHandler}
+										changeDefaultViewsAndRefresh={
+											props.changeDefaultViewsAndRefresh
+										}
 									/>
 								) : null}
 							</div>

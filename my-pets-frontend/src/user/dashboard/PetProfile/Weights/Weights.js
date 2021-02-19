@@ -50,6 +50,22 @@ export default function Weights(props) {
 		setTableStyle(classes.TableViewSelected);
 		setGraphStyle(classes.GraphView);
 	};
+
+	let sortedWeights = [];
+
+	for (var i = 0; i < pet.weights.length; i++) {
+		sortedWeights[i] = pet.weights[i];
+	}
+
+	sortedWeights.sort(function compare(a, b) {
+		var dateA = new Date(a.dateWeighed);
+		var dateB = new Date(b.dateWeighed);
+		return dateA - dateB;
+	});
+
+	// console.log('sorted weights');
+	// console.log(sortedWeights);
+	// console.log(pet.weights);
 	return (
 		<div className="weights-profile-main-container">
 			<div className="weights-title">
@@ -68,6 +84,8 @@ export default function Weights(props) {
 					pet={pet}
 					currentUser={currentUser}
 					forceUpdate={props.forceUpdate}
+					sortedWeights={sortedWeights}
+					defaultViewHandler={props.defaultViewHandler}
 				/>
 			) : null}
 			{tableViewSelected ? (
@@ -75,6 +93,10 @@ export default function Weights(props) {
 					pet={pet}
 					currentUser={currentUser}
 					forceUpdate={props.forceUpdate}
+					sortedWeights={sortedWeights}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 		</div>

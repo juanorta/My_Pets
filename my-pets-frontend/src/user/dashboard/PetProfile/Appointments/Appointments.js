@@ -265,6 +265,10 @@ export default function Appointments(props) {
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					editParams={editParams}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 
@@ -277,6 +281,10 @@ export default function Appointments(props) {
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					editParams={editParams}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 		</div>

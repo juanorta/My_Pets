@@ -12,10 +12,13 @@ export default function EditDeleteWeightButtonHandler(props) {
 	const [isDeleteWeight, setIsDeleteWeight] = useState(props.isDeleteWeight);
 	const [pet, setPet] = useState(props.pet);
 	const [rowData, setRowData] = useState(props.rowData);
+	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
 
-	console.log(rowData);
-	console.log(pet);
-	console.log(currentUser);
+	// console.log(rowData);
+	// console.log(pet);
+	// console.log(currentUser);
+	// console.log(sortedWeights);
+	console.log(props.changeDefaultViewsAndRefresh);
 	return (
 		<div className="edit-appt-main-container">
 			{/* opening a different modal depending on what button the user pressed */}
@@ -28,6 +31,11 @@ export default function EditDeleteWeightButtonHandler(props) {
 					openModal={openModal}
 					isEditWeight={isEditWeight}
 					SetOpenModalToFalse={props.SetOpenModalToFalse}
+					sortedWeights={sortedWeights}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 			{openModal && isDeleteWeight ? (
@@ -39,6 +47,10 @@ export default function EditDeleteWeightButtonHandler(props) {
 					pet={pet}
 					forceUpdate={props.forceUpdate}
 					SetOpenModalToFalse={props.SetOpenModalToFalse}
+					sortedWeights={sortedWeights}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 		</div>

@@ -234,9 +234,6 @@ export async function addWeight(
 	weightValue,
 	unit,
 	selectedDate,
-	lastWeightValue,
-	lastDateWeighed,
-	weightChange,
 	notes
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
@@ -253,12 +250,59 @@ export async function addWeight(
 			weightValue: weightValue,
 			unit: unit,
 			dateWeighed: selectedDate,
-			lastWeightValue: lastWeightValue,
-			lastDateWeighed: lastDateWeighed,
-			weightChange: weightChange,
 			notes: notes,
 		}),
 	});
+}
+
+export async function editWeight(
+	id,
+	petId,
+	weightId,
+	weightValue,
+	unit,
+	selectedDate,
+	notes
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('edit food function called');
+
+	await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/weights/${weightId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				id: weightId,
+				weightValue: weightValue,
+				unit: unit,
+				dateWeighed: selectedDate,
+				notes: notes,
+			}),
+		}
+	);
+}
+
+export async function deleteWeight(id, petId, weightId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	// console.log(token);
+	console.log('delete weight function called');
+	console.log('id: ' + id + ' petId: ' + petId + ' weightId: ' + weightId);
+	await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/weights/${weightId}`,
+		{
+			method: 'DELETE',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		}
+	);
 }
 
 export async function addFood(

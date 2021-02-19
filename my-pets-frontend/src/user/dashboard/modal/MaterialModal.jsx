@@ -10,6 +10,7 @@ import DeleteConfirmation from '../views/pets/deleteConfirmation/DeleteConfirmat
 import EditPet from '../views/pets/EditPet/EditPet';
 import DeleteApptConfirmation from '../views/pets/deleteConfirmation/DeleteApptConfirmation';
 import DeleteFoodConfirmation from '../views/pets/deleteConfirmation/DeleteFoodConfirmation';
+import DeleteWeightConfirmation from '../views/pets/deleteConfirmation/DeleteWeightConfirmation';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -65,6 +66,7 @@ export default function MaterialModal(props) {
 	const [isDeleteAppt, setIsDeleteAppt] = useState(props.isDeleteAppt);
 	const [isDeleteFood, setIsDeleteFood] = useState(props.isDeleteFood);
 	const [isDeleteWeight, setIsDeleteWeight] = useState(props.isDeleteWeight);
+	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
 	const handleOpen = () => {
@@ -88,13 +90,15 @@ export default function MaterialModal(props) {
 	} else if (
 		isDeletePetConfirmation === true ||
 		isDeleteAppt === true ||
-		isDeleteFood === true
+		isDeleteFood === true ||
+		isDeleteWeight === true
 	) {
 		style = classes.DeleteConfirmation;
 	}
 
 	// console.log(props);
 	// console.log('open => ' + open);
+	// console.log(props.changeDefaultViewsAndRefresh);
 
 	return (
 		<div className="add-pet-modal-main-container">
@@ -145,6 +149,9 @@ export default function MaterialModal(props) {
 								currentUser={props.currentUser}
 								pet={props.pet}
 								rowData={props.rowData}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						) : null}
 						{isDeleteFood ? (
@@ -154,6 +161,22 @@ export default function MaterialModal(props) {
 								currentUser={props.currentUser}
 								pet={props.pet}
 								rowData={props.rowData}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isDeleteWeight ? (
+							<DeleteWeightConfirmation
+								forceUpdate={props.forceUpdate}
+								handleClose={handleClose}
+								currentUser={props.currentUser}
+								pet={props.pet}
+								rowData={props.rowData}
+								sortedWeights={sortedWeights}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						) : null}
 					</div>

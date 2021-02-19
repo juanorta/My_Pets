@@ -141,13 +141,13 @@ export default function AddWeightForm(props) {
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
 	const [selectedDate, setSelectedDate] = useState(new Date());
-	const [dateWeighed, setDateWeighed] = useState(new Date());
+	// const [dateWeighed, setDateWeighed] = useState(new Date());
 	const [weightValue, setWeightValue] = useState(0.0);
 	const [unit, setUnit] = useState('lbs');
 	const [notes, setNotes] = useState('');
-	const [dateChanged, setDateChanged] = useState(false);
-	const [lastDateWeighed, setLastWeightDate] = useState('');
-	const [lastWeightValue, setLastWeightValue] = useState(0);
+	// const [dateChanged, setDateChanged] = useState(false);
+	// const [lastDateWeighed, setLastWeightDate] = useState('');
+	// const [lastWeightValue, setLastWeightValue] = useState(0);
 
 	//accesses last weight record and stores it for later use
 	// const [lastDateWeighed, setLastWeightDate] = useState(
@@ -156,32 +156,50 @@ export default function AddWeightForm(props) {
 	// const [lastWeightValue, setLastWeightValue] = useState(
 	// 	pet.weights[pet.weights.length - 1].weightValue
 	// );
-	const [weightChange, setWeightChange] = useState(0);
+	// const [weightChange, setWeightChange] = useState(0);
 
-	useEffect(() => {
-		console.log('pet');
-		console.log(pet);
-		console.log(pet.weights.length);
-		if (pet.weights.length > 0) {
-			console.log(
-				'last weight date:' +
-					pet.weights[pet.weights.length - 1].dateWeighed
-			);
-			console.log(
-				'last weight value:' +
-					pet.weights[pet.weights.length - 1].weightValue
-			);
-			setLastWeightDate(pet.weights[pet.weights.length - 1].dateWeighed);
-			setLastWeightValue(pet.weights[pet.weights.length - 1].weightValue);
-		}
-	}, []);
+	let sortedWeights = [];
+
+	for (var i = 0; i < pet.weights.length; i++) {
+		sortedWeights[i] = pet.weights[i];
+	}
+
+	sortedWeights.sort(function compare(a, b) {
+		var dateA = new Date(a.dateWeighed);
+		var dateB = new Date(b.dateWeighed);
+		return dateA - dateB;
+	});
+
+	console.log('sorted weights');
+	console.log(sortedWeights);
+	console.log(pet.weights);
+	// useEffect(() => {
+	// 	console.log('pet');
+	// 	console.log(pet);
+	// 	console.log(pet.weights.length);
+	// 	if (sortedWeights.length > 0) {
+	// 		console.log(
+	// 			'last weight date:' +
+	// 				sortedWeights[sortedWeights.length - 1].dateWeighed
+	// 		);
+	// 		console.log(
+	// 			'last weight value:' +
+	// 				sortedWeights[sortedWeights.length - 1].weightValue
+	// 		);
+	// 		setLastWeightDate(
+	// 			sortedWeights[sortedWeights.length - 1].dateWeighed
+	// 		);
+	// 		setLastWeightValue(
+	// 			sortedWeights[sortedWeights.length - 1].weightValue
+	// 		);
+	// 	}
+	// }, []);
 
 	//handles input changes from all fields
 	const onDateChange = (date) => {
-		setDateChanged(true);
 		console.log('on date change called');
 		console.log(date);
-		const formattedDate = moment(date).format('dddd MMM DD, YYYY');
+		const formattedDate = moment(date).format('MM/DD/YYYY');
 		setSelectedDate(formattedDate);
 	};
 
@@ -211,18 +229,19 @@ export default function AddWeightForm(props) {
 		// 	setSelectedDate(moment(selectedDate).format('dddd MMM DD, YYYY'));
 		// }
 
-		if (pet.weights.length > 0) {
+		if (sortedWeights.length > 0) {
 			change =
-				weightValue - pet.weights[pet.weights.length - 1].weightValue;
+				weightValue -
+				sortedWeights[sortedWeights.length - 1].weightValue;
 		}
 		// setWeightChange(change);
 
 		console.log('current weight: ' + weightValue);
 		console.log('unit: ' + unit);
 		console.log('date: ' + selectedDate);
-		console.log('last weight value' + lastWeightValue);
-		console.log('last date weighed: ' + lastDateWeighed);
-		console.log('weight change' + change);
+		// console.log('last weight value' + lastWeightValue);
+		// console.log('last date weighed: ' + lastDateWeighed);
+		// console.log('weight change' + change);
 		props.handleClose();
 		addWeight(
 			currentUser.id,
@@ -230,15 +249,13 @@ export default function AddWeightForm(props) {
 			weightValue,
 			unit,
 			selectedDate,
-			lastWeightValue,
-			lastDateWeighed,
-			change,
 			notes
 		);
 		props.handleClose();
 		Alert.success('Weight Added');
 		setTimeout(() => {
 			Alert.closeAll();
+			props.changeDefaultViewsAndRefresh('WEIGHTS');
 			props.forceUpdate();
 		}, 500);
 	};
@@ -279,9 +296,9 @@ export default function AddWeightForm(props) {
 						id="demo-controlled-open-select"
 						value={unit}
 						onChange={onUnitChange}
+						// disabled={true}
 					>
 						<MenuItem value={'lbs'}>lbs</MenuItem>
-						<MenuItem value={'kg'}>kg</MenuItem>
 					</Select>
 				</FormControl>
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>

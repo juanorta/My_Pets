@@ -28,6 +28,10 @@ export default function EditDeleteApptButtonHandler(props) {
 					openModal={openModal}
 					isEditAppt={isEditAppt}
 					SetOpenModalToFalse={props.SetOpenModalToFalse}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 			{openModal && isDeleteAppt ? (
@@ -39,6 +43,10 @@ export default function EditDeleteApptButtonHandler(props) {
 					pet={pet}
 					forceUpdate={props.forceUpdate}
 					SetOpenModalToFalse={props.SetOpenModalToFalse}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
 			) : null}
 		</div>

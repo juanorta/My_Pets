@@ -96,6 +96,9 @@ export default function MaterialModalProfile(props) {
 								currentUser={currentUser}
 								pet={pet}
 								forceUpdate={props.forceUpdate}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						) : null}
 						{isWeight ? (
@@ -104,6 +107,9 @@ export default function MaterialModalProfile(props) {
 								currentUser={currentUser}
 								pet={pet}
 								forceUpdate={props.forceUpdate}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						) : null}
 						{isFood ? (
@@ -112,11 +118,12 @@ export default function MaterialModalProfile(props) {
 								currentUser={currentUser}
 								pet={pet}
 								forceUpdate={props.forceUpdate}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
 							/>
 						) : null}
-						{isEditAppt ? (
-							<AddAppointmentForm/>
-						):null}
+						{isEditAppt ? <AddAppointmentForm /> : null}
 					</div>
 				</Fade>
 			</Modal>
