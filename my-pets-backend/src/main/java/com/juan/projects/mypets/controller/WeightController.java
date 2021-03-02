@@ -65,6 +65,11 @@ public class WeightController {
 
         existingWeight.setNotes(weight.getNotes());
 
+        //new
+        existingWeight.setPetName(weight.getPetName());
+        existingWeight.setPetWeightId(weight.getPetWeightId());
+
+
         return weightRepository.save(existingWeight);
     }
 }

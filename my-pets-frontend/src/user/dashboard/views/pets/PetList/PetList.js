@@ -23,13 +23,14 @@ import MaterialModal from '../../../modal/MaterialModal';
 import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import PetProfile from '../../../PetProfile/PetProfile';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
 	},
 	paper: {
-		height: 280,
+		height: 300,
 		width: 250,
 		display: 'inline-block',
 		margin: '1rem',
@@ -37,7 +38,19 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			transform: 'scale(1.05)',
 		},
-		borderRadius: 10,
+		borderRadius: 4,
+	},
+	paperSmall: {
+		height: 280,
+		width: 450,
+		display: 'inline-block',
+		margin: '1rem',
+		transition: 'all 0.2s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.05)',
+		},
+		borderRadius: 2,
+		// justifyContent: 'center',
 	},
 	control: {
 		padding: theme.spacing(2),
@@ -50,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PetList(props) {
 	const theme = useTheme();
 	const classes = useStyles();
+	const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
 	//getting the current user and list of pets from Pets component
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
@@ -129,21 +143,27 @@ export default function PetList(props) {
 				</ReactTooltip>
 				<Grid item lg={12} xs={12}>
 					{pets.map((pet) => (
-						<Paper className={classes.paper} elevation={8}>
+						<Paper
+							className={
+								matches ? classes.paperSmall : classes.paper
+							}
+							elevation={8}
+						>
 							<div className="pet-card">
-								<h4>id: {pet.id}</h4>
+								{/* <h4>id: {pet.id}</h4>
 								<h4>name: {pet.petName}</h4>
 								<h4>type: {pet.petType}</h4>
 								<h4>breed: {pet.breed}</h4>
 								<h4>sex: {pet.sex}</h4>
-								<h4>age: {pet.age}</h4>
+								<h4>age: {pet.age}</h4> */}
 							</div>
 
 							<div className="card-options">
+								<h4>{pet.petName}</h4>
 								<Button
 									data-tip
 									data-for="editTip"
-									style={{ color: '#1B2737' }}
+									style={{ color: 'teal' }}
 									onClick={() => {
 										editPetHandler(pet, currentUser);
 									}}

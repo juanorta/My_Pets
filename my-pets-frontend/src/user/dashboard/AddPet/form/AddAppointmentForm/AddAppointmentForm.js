@@ -138,6 +138,8 @@ export default function AddPetForm(props) {
 	//stores information as user is typing
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [petName, setPetName] = useState(props.pet.petName);
+	const [petAptId, setPetAptId] = useState(props.pet.id);
 	const [selectedDate, setSelectedDate] = useState(new Date());
 	const [time, setTime] = useState('');
 	const [amOrPm, setAmOrPm] = useState('');
@@ -197,7 +199,9 @@ export default function AddPetForm(props) {
 			type,
 			reason,
 			vetOrGroomerName,
-			notes
+			notes,
+			petName,
+			petAptId
 		);
 		props.handleClose();
 		Alert.success('Appointment Added');

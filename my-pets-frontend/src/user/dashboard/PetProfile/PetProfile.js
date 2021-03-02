@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
 	TabIcon: {
 		color: '#1b2737',
 		fontSize: '50px',
-		'&:hover': {
-			color: 'white',
-		},
+		// '&:hover': {
+		// 	color: 'white',
+		// },
 	},
 
 	TabIconMouseHover: {
@@ -43,19 +43,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	TabButton: {
-		height: '6rem',
-		width: '6rem',
+		height: '5rem',
+		width: '5rem',
 		'&:hover': {
-			backgroundColor: '#FF4F00',
+			backgroundColor: 'grey',
 		},
 	},
 
 	TabButtonClicked: {
-		height: '6rem',
-		width: '6rem',
+		height: '5rem',
+		width: '5rem',
 		backgroundColor: '#FF4F00',
 		'&:hover': {
-			backgroundColor: '#FF4F00',
+			backgroundColor: 'grey',
 		},
 	},
 
@@ -302,8 +302,8 @@ export default function PetProfile(props) {
 											data-tip
 											data-for="appt"
 											className={buttonClass1}
-											onMouseOver={iconHoverHandler}
-											onMouseLeave={iconHoverLeaveHandler}
+											// onMouseOver={iconHoverHandler}
+											// onMouseLeave={iconHoverLeaveHandler}
 											onClick={handleApptClick}
 										>
 											<LocalHospitalIcon
@@ -316,10 +316,10 @@ export default function PetProfile(props) {
 											data-tip
 											data-for="weights"
 											className={buttonClass2}
-											onMouseOver={iconHoverHandler2}
-											onMouseLeave={
-												iconHoverLeaveHandler2
-											}
+											// onMouseOver={iconHoverHandler2}
+											// onMouseLeave={
+											// 	iconHoverLeaveHandler2
+											// }
 											onClick={handleWeightClick}
 										>
 											<Icon
@@ -339,10 +339,10 @@ export default function PetProfile(props) {
 											data-tip
 											data-for="food"
 											className={buttonClass3}
-											onMouseOver={iconHoverHandler3}
-											onMouseLeave={
-												iconHoverLeaveHandler3
-											}
+											// onMouseOver={iconHoverHandler3}
+											// onMouseLeave={
+											// 	iconHoverLeaveHandler3
+											// }
 											onClick={handleFoodClick}
 										>
 											<Icon

@@ -249,7 +249,9 @@ export default function AddWeightForm(props) {
 			weightValue,
 			unit,
 			selectedDate,
-			notes
+			notes,
+			pet.petName,
+			pet.id
 		);
 		props.handleClose();
 		Alert.success('Weight Added');

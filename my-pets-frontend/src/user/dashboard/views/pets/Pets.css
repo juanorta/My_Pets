@@ -17,8 +17,9 @@
 .title h1 {
 	text-align: left;
 	color: #1b2737;
+	font-weight: 700;
 	/* float: left; */
-	margin-left: 1rem;
+	margin-left: 2rem;
 	/* margin-top: 2rem; */
 	padding-top: 3rem;
 }

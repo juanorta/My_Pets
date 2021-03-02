@@ -67,8 +67,8 @@
 	height: 180vh;
 	margin-bottom: 10rem;
 	overflow: auto;
-	border-radius: 15px;
-	box-shadow: 0 1px 20px rgba(0, 0, 0, 0.67);
+	border-radius: 10px;
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.67);
 	/* justify-content: center;
 	display: flex; */
 }
@@ -153,8 +153,8 @@
 .tabs-list li {
 	/* margin-top: -2rem; */
 	background-color: rgb(230, 230, 230);
-	width: 6rem;
-	height: 6rem;
+	width: 5rem;
+	height: 5rem;
 	margin: 2rem;
 	border-radius: 50%;
 	/* border-style: solid 1px;

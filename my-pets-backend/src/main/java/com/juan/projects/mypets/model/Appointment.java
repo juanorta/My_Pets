@@ -27,6 +27,10 @@ public class Appointment {
     private String location;
     private String notes;
 
+    //used to identify which pet is associated with which appointment in dashboard
+    private String petName;
+    private String petAptId;
+
 
     //creating relationship with pet
     @ManyToOne(fetch = FetchType.EAGER)

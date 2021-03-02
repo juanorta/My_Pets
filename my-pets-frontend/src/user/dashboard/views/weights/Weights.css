@@ -1,8 +1,35 @@
 .weights-main-container {
-	background-color: slategrey;
-	height: 60vh;
+	background-color: transparent;
+	height: auto;
 	width: 65%;
 	margin: 0 auto;
 	/* margin-top: 15rem; */
 	font-family: 'Poppins';
+}
+
+.weights-main-container h2 {
+	/* margin-left: 1rem; */
+	margin-top: 3rem;
+	font-weight: 500;
+}
+
+.weights-main-container ul {
+	background-color: transparent;
+	list-style-type: none;
+	display: inline-flex;
+}
+
+.weights-main-container ul li {
+	/* color: white; */
+	color: #1b2737;
+	list-style-position: inside;
+	margin: 0;
+	margin-left: -1.5rem;
+	margin-right: 4rem;
+	/* background-color: green; */
+	text-align: center;
+}
+
+.weights-main-container ul li:hover {
+	cursor: pointer;
 }

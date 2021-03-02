@@ -1,0 +1,13 @@
+.greeting-main-container {
+	background-color: transparent;
+	height: auto;
+	width: 65%;
+	margin: 0 auto;
+	margin-top: 15rem;
+}
+
+.greeting-main-container h1 {
+	background-color: transparent;
+	text-align: left;
+	margin-left: 1rem;
+}

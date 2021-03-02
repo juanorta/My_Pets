@@ -26,6 +26,10 @@ public class Weight {
 //    private String lastDateWeighed;
     private String notes;
 
+    //used to identify pet-apt relationship in dashboard
+    private String petName;
+    private String petWeightId;
+
     //creating relationship with pet
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")

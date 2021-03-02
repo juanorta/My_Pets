@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './Appointments.css';
 import Alert from 'react-s-alert';
 import Avatar from '@material-ui/core/Avatar';
@@ -6,53 +6,232 @@ import Button from '@material-ui/core/Button';
 import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
+import { getAllAppointments } from '../../../../util/APIUtils';
+import { TextField } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import moment from 'moment';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		color: 'black',
+		'.MuiDataGrid-colCellCheckbox': {
+			backgroundColor: 'red',
+		},
+		// marginTop: '0rem',
+		// backgroundColor: 'blue',
+		// borderRadius: ,
+	},
+	Button: {
+		borderRadius: '69%',
+		height: '3.4rem',
+		width: '0rem',
+		marginLeft: '-0.5rem',
+		// backgroundColor: 'red',
+	},
+	EditIcon: {
+		color: 'teal',
+	},
+	DeleteIcon: {
+		color: 'red',
+	},
+	TextField: {
+		color: 'black',
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+			fontSize: '0.85rem',
+		},
+	},
+}));
 
 export default function Appointments(props) {
+	const classes = useStyles();
+	const [currentUser, setCurrentUser] = useState(props.currentUser);
+
+	useEffect(() => {
+		getAllAppointments(currentUser.id)
+			.then((response) => {
+				//console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, []);
+
 	const columns = [
-		{ field: 'id', headerName: 'ID', width: 70 },
-		{ field: 'firstName', headerName: 'First name', width: 130 },
-		{ field: 'lastName', headerName: 'Last name', width: 130 },
 		{
-			field: 'age',
-			headerName: 'Age',
-			type: 'number',
-			width: 90,
+			field: 'Date',
+			headerName: 'Date',
+			width: 130,
+
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
 		},
 		{
-			field: 'fullName',
-			headerName: 'Full name',
-			description: 'This column has a value getter and is not sortable.',
-			sortable: false,
-			width: 160,
-			valueGetter: (params) =>
-				`${params.getValue('firstName') || ''} ${
-					params.getValue('lastName') || ''
-				}`,
+			field: 'Pet',
+			headerName: 'Pet',
+			width: 90,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'Time',
+			headerName: 'Time',
+			width: 90,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'Type',
+			headerName: 'Type',
+			width: 130,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'Reason',
+			headerName: 'Reason',
+			width: 130,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'Notes',
+			headerName: 'Notes',
+			width: 130,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'VetGroomer',
+			headerName: 'Vet/Groomer',
+			width: 130,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'Edit',
+			headerName: 'Edit',
+			width: 77,
+			renderCell: (params) => (
+				<Button
+					onClick={() => {
+						//console.log(params);
+					}}
+					className={classes.Button}
+				>
+					<EditIcon className={classes.EditIcon} />
+				</Button>
+
+				// <EditButton
+				// 	onClick={(params) => {
+				// 		console.log(params);
+				// 	}}
+				// />
+			),
+		},
+		{
+			field: 'Delete',
+			headerName: 'Delete',
+			width: 94,
+			renderCell: (params) => (
+				<Button onClick={() => {}} className={classes.Button}>
+					<DeleteIcon className={classes.DeleteIcon} />
+				</Button>
+			),
 		},
 	];
 
-	const rows = [
-		{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-		{ id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-		{ id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-		{ id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-		{ id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-		{ id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-		{ id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-		{ id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-		{ id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-	];
+	//loading each row with a pet appointment object
+	let rows = [];
+	for (let i = 0; i < currentUser.appointments.length; i++) {
+		let date = moment(currentUser.appointments[i].date).format(
+			'MM/DD/YYYY'
+		);
+		rows[i] = {
+			id: i,
+			Date: date,
+			Pet: currentUser.appointments[i].petName,
+			Time:
+				currentUser.appointments[i].time +
+				currentUser.appointments[i].amOrPm,
+			Type: currentUser.appointments[i].type,
+			Reason: currentUser.appointments[i].reason,
+			Notes: currentUser.appointments[i].notes,
+			VetGroomer: currentUser.appointments[i].vetOrGroomerName,
+		};
+	}
 	return (
 		<div className="appointments-main-container" id="appointments">
 			<div className="title">
 				<h1>Appointments</h1>
 			</div>
-			<div style={{ height: 400, width: '100%' }}>
+			<div
+				className="appointments-table"
+				style={{ height: 400, width: '100%' }}
+			>
 				<DataGrid
+					className={classes.root}
 					rows={rows}
 					columns={columns}
 					pageSize={5}
-					checkboxSelection
+					rowHeight={55}
 				/>
 			</div>
 		</div>

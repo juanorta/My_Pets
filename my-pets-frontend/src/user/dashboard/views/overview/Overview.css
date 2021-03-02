@@ -1,0 +1,10 @@
+.overview-main-container {
+	background-color: saddlebrown;
+	height: 35rem;
+	width: 65%;
+	margin: 0 auto;
+}
+
+.overview-main-container h1 {
+	margin-left: 0rem;
+}

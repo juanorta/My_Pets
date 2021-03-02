@@ -11,7 +11,7 @@
 	flex-flow: row wrap;
 
 	/* justify-content: flex-end; */
-	background-color: red;
+	background-color: transparent;
 	width: 100%;
 	height: 100%;
 	margin: auto;
@@ -49,21 +49,30 @@
 }
 
 .pet-card {
-	background-color: transparent;
+	background-color: teal;
 	font-family: 'Poppins';
 	height: 70%;
-	margin-top: -1.2rem;
+	/* margin-top: -2rem; */
+	border-top-left-radius: 2%;
+	border-top-right-radius: 2%;
+	/* border-radius: 50%; */
 }
 
 .card-options {
-	background-color: transparent;
-	height: 30%;
+	background-color: white;
+	height: 20%;
+	justify-content: center;
+	margin-top: -2rem;
 }
 
 h4 {
+	font-size: 16px;
+	font-weight: 700;
+	color: #1b2737;
 	text-align: center;
 	background-color: transparent;
 	margin-bottom: -0.5rem;
+	padding-top: 0.25rem;
 }
 
 .card-options Button {
@@ -74,4 +83,19 @@ h4 {
 	border-radius: 100%;
 	height: 3.5rem;
 	width: 3.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+	.pet-table-main-container {
+		background-color: transparent;
+	}
+
+	.card-options Button {
+		background-color: transparent;
+		margin-left: 4rem;
+		margin-top: 1rem;
+	}
+	/* .pet-card {
+		background-color: red;
+	} */
 }

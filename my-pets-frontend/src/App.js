@@ -8,7 +8,7 @@ import Dashboard from '../src/user/dashboard/Dashboard';
 import OAuth2RedirectHandler from '../src/user/oauth2/OAuth2RedirectHandler';
 import NotFound from '../src/common/NotFound';
 import LoadingIndicator from '../src/common/LoadingIndicator';
-import { getCurrentUser } from '../src/util/APIUtils';
+import { getAllWeights, getCurrentUser } from '../src/util/APIUtils';
 import { ACCESS_TOKEN } from '../src/constants/index';
 import PrivateRoute from '../src/common/PrivateRoute';
 import Alert from 'react-s-alert';
@@ -56,6 +56,12 @@ class App extends Component {
 					loading: false,
 				});
 			});
+
+		// getAllWeights(currentUser.id).then((response) => {
+		// 	this.setState({
+		// 		weights: response,
+		// 	});
+		// });
 	}
 
 	changeDefaultViewsAndRefresh(view) {

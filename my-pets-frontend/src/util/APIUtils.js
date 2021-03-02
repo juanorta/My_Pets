@@ -144,7 +144,9 @@ export async function addAppointment(
 	type,
 	reason,
 	vetOrGroomerName,
-	notes
+	notes,
+	petName,
+	petAptId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);
@@ -165,6 +167,8 @@ export async function addAppointment(
 			vetOrGroomerName: vetOrGroomerName,
 			reason: reason,
 			notes: notes,
+			petName: petName,
+			petAptId: petAptId,
 		}),
 	});
 }
@@ -179,7 +183,9 @@ export async function editAppointment(
 	type,
 	reason,
 	vetOrGroomerName,
-	notes
+	notes,
+	petName,
+	petAptId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log('edit appointment function called');
@@ -203,6 +209,8 @@ export async function editAppointment(
 				vetOrGroomerName: vetOrGroomerName,
 				reason: reason,
 				notes: notes,
+				petName: petName,
+				petAptId: petAptId,
 			}),
 		}
 	);
@@ -234,7 +242,9 @@ export async function addWeight(
 	weightValue,
 	unit,
 	selectedDate,
-	notes
+	notes,
+	petName,
+	petWeightId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log('add appointment called');
@@ -251,6 +261,8 @@ export async function addWeight(
 			unit: unit,
 			dateWeighed: selectedDate,
 			notes: notes,
+			petName: petName,
+			petWeightId: petWeightId,
 		}),
 	});
 }
@@ -262,7 +274,9 @@ export async function editWeight(
 	weightValue,
 	unit,
 	selectedDate,
-	notes
+	notes,
+	petName,
+	petWeightId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log('edit food function called');
@@ -282,6 +296,8 @@ export async function editWeight(
 				unit: unit,
 				dateWeighed: selectedDate,
 				notes: notes,
+				petName: petName,
+				petWeightId: petWeightId,
 			}),
 		}
 	);
@@ -383,5 +399,29 @@ export async function deleteFood(id, petId, foodId) {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
+	});
+}
+
+export function getAllAppointments(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all appointments function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/appointments`,
+		method: 'GET',
+	});
+}
+
+export function getAllWeights(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all weights function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/weights`,
+		method: 'GET',
 	});
 }

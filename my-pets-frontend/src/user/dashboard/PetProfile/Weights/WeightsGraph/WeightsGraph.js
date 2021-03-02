@@ -1,42 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer, useRef } from 'react';
 import './WeightsGraph.css';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
+import ChartJs from 'chart.js';
 
 export default function WeightsGraph(props) {
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
-	const [pet, setPet] = useState(props.pet);
+	const [pet, setPet] = useState('');
 	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
+	const chartContainer = useRef(null);
+	const [chartInstance, setChartInstance] = useState(null);
+	const [, forceUpdate] = useReducer((x) => x + 1, 0);
+	const [label, setLabel] = useState('');
+	const [dates, setDates] = useState('');
+	const [weightValues, setWeightValues] = useState('');
+	const [chartStyle, setChartStyle] = useState(
+		'weights-graph-main-container'
+	);
 
-	//holds an array of weight objects
-	// let weightObject = [];
+	//will re-mount when props.sortedWeights is changed
+	//can receive data from PetProfile or Dashboard/Weights
+	//assigns values to initially empty 'pet', 'dates', and 'weightValues' hooks.
+	//those values are then used to populate chart
+	useEffect(() => {
+		let dates = [];
+		let weightValues = [];
 
-	//wil be used
-	let dates = [];
-	let weightValues = [];
-	// console.log(pet.weights);
+		for (var i = 0; i < props.sortedWeights.length; i++) {
+			let date = moment(props.sortedWeights[i].dateWeighed).format(
+				'MM/DD/YYYY'
+			);
+			dates[i] = date;
+			// console.log(date);
+			weightValues[i] = props.sortedWeights[i].weightValue;
+		}
 
-	// for (var i = 0; i < pet.weights.length; i++) {
-	// 	weightObject[i] = pet.weights[i];
-	// }
-
-	// weightObject.sort(function compare(a, b) {
-	// 	var dateA = new Date(a.dateWeighed);
-	// 	var dateB = new Date(b.dateWeighed);
-	// 	return dateA - dateB;
-	// });
-	// console.log(pet.weights);
-	// console.log(weightObject);
-
-	for (var i = 0; i < sortedWeights.length; i++) {
-		let date = moment(sortedWeights[i].dateWeighed).format('MM/DD/YYYY');
-		dates[i] = date;
-		// console.log(date);
-		weightValues[i] = sortedWeights[i].weightValue;
-	}
-
-	// console.log(weightObject);
-	// console.log(pet.weights);
+		if (props.isDashboardWeight) {
+			setChartStyle('dashboard-graph-main-container');
+		}
+		setPet(props.pet);
+		setDates(dates);
+		setWeightValues(weightValues);
+	}, [props.sortedWeights]);
 
 	const data = {
 		labels: dates,
@@ -46,7 +51,7 @@ export default function WeightsGraph(props) {
 				fill: false,
 				lineTension: 0,
 				backgroundColor: 'rgba(75,192,192,0.4)',
-				borderColor: '#ff4f00',
+				borderColor: 'teal',
 				borderCapStyle: 'butt',
 				borderDash: [],
 				borderDashOffset: 0.0,
@@ -66,6 +71,7 @@ export default function WeightsGraph(props) {
 	};
 
 	const options = {
+		// maintainAspectRatio: false,
 		scales: {
 			yAxes: [
 				{
@@ -119,13 +125,16 @@ export default function WeightsGraph(props) {
 		},
 	};
 
-	// console.log('weights graph');
-	// console.log(props.currentUser);
-	// console.log(props.pet);
 	return (
-		<div className="weights-graph-main-container">
+		<div className={chartStyle}>
 			{/* <h1>Weights Graph</h1> */}
-			<Line data={data} options={options} />
+			<Line
+				data={data}
+				options={options}
+				redraw={true}
+				// key={Date.now(0)}
+				ref={chartContainer}
+			/>
 		</div>
 	);
 }

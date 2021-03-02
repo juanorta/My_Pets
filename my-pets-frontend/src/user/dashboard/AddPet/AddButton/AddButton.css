@@ -2,6 +2,7 @@
 	position: fixed;
 	float: right;
 	right: 18%;
+	margin-top: -2.3rem;
 	/* margin-right: 20rem; */
 	z-index: 999;
 	background-color: transparent;

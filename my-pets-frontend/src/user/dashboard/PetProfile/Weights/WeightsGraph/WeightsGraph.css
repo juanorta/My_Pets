@@ -7,3 +7,10 @@
 	/* margin-left: 0 auto; */
 	width: 70%;
 }
+
+.dashboard-graph-main-container {
+	background-color: transparent;
+	margin-top: 5rem;
+	width: 100%;
+	margin-bottom: 5rem;
+}
