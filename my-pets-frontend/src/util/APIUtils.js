@@ -2,6 +2,8 @@ import { API_BASE_URL, ACCESS_TOKEN } from '../constants/index';
 import Alert from 'react-s-alert';
 import AddFoodForm from '../user/dashboard/AddPet/form/AddFoodForm/AddFoodForm';
 // import React, { useState } from 'react';
+import axios from 'axios';
+import { fil } from 'date-fns/locale';
 
 const currentUser = '';
 
@@ -10,6 +12,7 @@ const request = (options) => {
 		'Content-Type': 'application/json',
 	});
 
+	console.log(localStorage.getItem(ACCESS_TOKEN));
 	if (localStorage.getItem(ACCESS_TOKEN)) {
 		headers.append(
 			'Authorization',
@@ -424,4 +427,59 @@ export function getAllWeights(id) {
 		url: API_BASE_URL + `/users/${id}/weights`,
 		method: 'GET',
 	});
+}
+
+// export function getImage(id, petId)
+export async function addPetImage(id, petId, file) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('ADD PET FUNCTION CALLED');
+	// console.log('file ->');
+	// console.log(file);
+	const formData = new FormData();
+	formData.append('file', file);
+	for (var pair of formData.entries()) {
+		console.log(pair[1]);
+	}
+
+	// console.log(formData.entries());
+
+	const response = await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/uploadImage`,
+		{
+			method: 'POST',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				// 'Content-Type': 'multipart/form-data',
+			},
+			body: formData,
+		}
+	);
+
+	console.log(response);
+}
+
+export async function editPetImage(id, petId, imageId, file) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('EDIT PET FUNCTION CALLED');
+
+	const formData = new FormData();
+	formData.append('file', file);
+
+	for (var pair of formData.entries()) {
+		console.log(pair[1]);
+	}
+
+	const response = await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/petImages/${imageId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				// 'Content-Type': 'multipart/form-data',
+			},
+			body: formData,
+		}
+	);
+
+	console.log(response);
 }

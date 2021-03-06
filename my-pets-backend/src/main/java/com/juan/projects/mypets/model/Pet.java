@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,6 +30,7 @@ public class Pet {
     //creating relationship with user
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @NotFound(action = NotFoundAction.IGNORE)
     private User user;
 
     @JsonBackReference
@@ -38,6 +41,19 @@ public class Pet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    //creating relationship with PetImage
+    @OneToOne(mappedBy = "pet", orphanRemoval = true)
+    private PetImage petImage;
+
+    @JsonManagedReference(value = "pet-petimage")
+    public PetImage getPetImage(){
+        return petImage;
+    }
+
+    public void setPetImage(PetImage petImage){
+        this.petImage = petImage;
     }
 
     //creating relationship with appointments

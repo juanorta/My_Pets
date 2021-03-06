@@ -54,6 +54,11 @@ public class AppointmentController {
         appointmentRepository.deleteById(apptId);
         return "appointment removed! " + apptId;
     }
+    @DeleteMapping("/appointments/{apptId}")
+    public String deleteAppt(@PathVariable(value = "apptId") Long apptId){
+        appointmentRepository.deleteById(apptId);
+        return "appointment removed!!!! " + apptId;
+    }
 
     //update pet
     @PutMapping("/users/{userId}/pets/{petId}/appointments/{apptId}/update")

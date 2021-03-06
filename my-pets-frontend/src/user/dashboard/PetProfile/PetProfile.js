@@ -219,16 +219,29 @@ export default function PetProfile(props) {
 						<div className="picture">
 							<IconButton className={classes.root}>
 								{/* <h2>hey</h2> */}
-								<Icon
-									path={mdiDog}
-									title="Dog Profile"
-									size={5}
-									horizontal
-									vertical
-									rotate={180}
-									color="#1b2737"
-									// color="#ff4f00"
-								/>
+								{pet.petImage == null ? (
+									<Icon
+										path={mdiDog}
+										title="Dog Profile"
+										size={5}
+										horizontal
+										vertical
+										rotate={180}
+										color="#1b2737"
+										// color="#ff4f00"
+									/>
+								) : (
+									<img
+										className="image"
+										style={{
+											borderRadius: '55%',
+											marginTop: '-0.5rem',
+											height: '8rem',
+											width: '8rem',
+										}}
+										src={`data:image/jpeg;base64,${pet.petImage.data}`}
+									/>
+								)}
 							</IconButton>
 						</div>
 					</div>
@@ -240,7 +253,11 @@ export default function PetProfile(props) {
 							<h2>{pet.petName}</h2>
 						</div>
 						<div className="settings-button">
-							<SettingsBtnProfile />
+							<SettingsBtnProfile
+								currentUser={user}
+								pet={pet}
+								forceUpdate={props.forceUpdate}
+							/>
 						</div>
 						{/* when clicked, opens a menu that allows you to pick what you want to add */}
 						<div className="add-button-profile">

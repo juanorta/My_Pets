@@ -5,6 +5,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import java.util.List;
 
@@ -53,6 +55,19 @@ public class User {
         this.pets = pets;
     }
 
+    //creating relationship with PetImage
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @NotFound(action = NotFoundAction.IGNORE)
+    private List<PetImage> petImages;
+
+    @JsonManagedReference(value = "user-petimage")
+    public List<PetImage> getPetImages(){
+        return petImages;
+    }
+
+    public void setPetImages(List<PetImage> petImages){
+        this.petImages = petImages;
+    }
 
 
     //relationship with appointments

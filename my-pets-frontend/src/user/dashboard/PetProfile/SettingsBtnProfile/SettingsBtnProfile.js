@@ -7,6 +7,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MaterialModal from '../../modal/MaterialModal';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -31,20 +33,49 @@ const useStyles = makeStyles((theme) => ({
 	label: {
 		textTransform: 'capitalize',
 	},
+	EditIcon: {
+		color: 'teal',
+	},
+	DeleteIcon: {
+		color: 'red',
+	},
 }));
 
 export default function SettingsBtnProfile(props) {
 	const theme = useTheme();
 	const classes = useStyles();
+	const [currentUser, setCurrentUser] = useState(props.currentUser);
+	const [pet, setPet] = useState(props.pet);
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [editButtonPressed, setEditButtonPressed] = useState(false);
+	const [deleteButtonPressed, setDeleteButtonPressed] = useState(false);
+	const [openModal, setOpenModal] = useState(false);
+
+	const SetOpenModalToFalse = () => {
+		setOpenModal(false);
+		setEditButtonPressed(false);
+		setDeleteButtonPressed(false);
+	};
 
 	const settingsButtonHandler = (event) => {
 		setAnchorEl(event.currentTarget);
-		console.log('profile add clicked');
+		console.log(props);
 	};
 
 	const handleClose = () => {
 		setAnchorEl(null);
+	};
+
+	const handleEdit = () => {
+		setOpenModal(true);
+		setEditButtonPressed(true);
+		setDeleteButtonPressed(false);
+	};
+
+	const handleDelete = () => {
+		setOpenModal(true);
+		setDeleteButtonPressed(true);
+		setEditButtonPressed(false);
 	};
 
 	return (
@@ -59,13 +90,36 @@ export default function SettingsBtnProfile(props) {
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
 			>
-				<MenuItem className={classes.MenuItem} onClick={handleClose}>
-					Edit
+				<MenuItem className={classes.MenuItem} onClick={handleEdit}>
+					<EditIcon className={classes.EditIcon} />
+					<span className="settings-option">Edit Pet</span>
 				</MenuItem>
-				<MenuItem className={classes.MenuItem} onClick={handleClose}>
-					Delete
+				<MenuItem className={classes.MenuItem} onClick={handleDelete}>
+					<DeleteIcon className={classes.DeleteIcon} />{' '}
+					<span className="settings-option">Delete Pet</span>
 				</MenuItem>
 			</Menu>
+
+			{openModal && editButtonPressed ? (
+				<MaterialModal
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					openModal={openModal}
+					editButtonPressed={editButtonPressed}
+				/>
+			) : null}
+			{openModal && deleteButtonPressed ? (
+				<MaterialModal
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					openModal={openModal}
+					deleteButtonPressed={deleteButtonPressed}
+				/>
+			) : null}
 		</div>
 	);
 }

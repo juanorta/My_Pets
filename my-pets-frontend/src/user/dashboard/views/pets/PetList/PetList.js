@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 	},
 	paper: {
-		height: 300,
-		width: 250,
+		height: 320,
+		width: 270,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
@@ -121,8 +121,10 @@ export default function PetList(props) {
 		// <PetProfile />;
 	}
 
-	console.log('delete');
-	console.log(deleteButtonPressed);
+	// console.log('delete');
+	// console.log(deleteButtonPressed);
+	console.log(pets);
+	// const data = pets[0].petImage.data;
 	return (
 		<div className="pet-table-main-container">
 			<Grid
@@ -150,6 +152,13 @@ export default function PetList(props) {
 							elevation={8}
 						>
 							<div className="pet-card">
+								{pet.petImage == null ? null : (
+									<img
+										className="image"
+										src={`data:image/jpeg;base64,${pet.petImage.data}`}
+									/>
+								)}
+
 								{/* <h4>id: {pet.id}</h4>
 								<h4>name: {pet.petName}</h4>
 								<h4>type: {pet.petType}</h4>

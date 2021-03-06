@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './EditPet.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -9,7 +9,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Alert from 'react-s-alert';
-import { editPet } from '../../../../../util/APIUtils';
+import {
+	editPet,
+	addPetImage,
+	editPetImage,
+} from '../../../../../util/APIUtils';
+import PublishIcon from '@material-ui/icons/Publish';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -89,6 +94,11 @@ const useStyles = makeStyles((theme) => ({
 
 		width: '5rem',
 	},
+	imageName: {
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+		},
+	},
 }));
 
 export default function EditPet(props) {
@@ -102,6 +112,31 @@ export default function EditPet(props) {
 	const [breed, setBreed] = useState(props.pet.breed);
 	const [sex, setSex] = useState(props.pet.sex);
 	const [age, setAge] = useState(props.pet.age);
+	const [image, setImage] = useState('');
+	const [hasImage, setHasImage] = useState('');
+	const [petImageId, setPetImageId] = useState('');
+	const [imageName, setImageName] = useState('');
+
+	//checking to see if the pet currently has a photo
+	//if so, will grab the photo and store it
+	useEffect(() => {
+		if (props.pet.petImage == null) {
+			console.log('doent have pic');
+			setHasImage(false);
+		} else {
+			console.log('has pic');
+			setPetImageId(props.pet.petImage.id);
+			setImage(props.pet.petImage.fileName);
+			setImageName(props.pet.petImage.fileName);
+			setHasImage(true);
+		}
+	}, []);
+
+	const handleFileChange = (event) => {
+		console.log(event.target.files[0]);
+		setImage(event.target.files[0]);
+		setImageName(event.target.files[0].name);
+	};
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
@@ -130,16 +165,36 @@ export default function EditPet(props) {
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
+		event.preventDefault();
+
 		editPet(id, petId, name, petType, breed, sex, age);
-		props.handleClose();
-		Alert.success('PET EDITED');
+		// // props.handleClose();
+
+		//will call two different endpoints depending if use is editing a current photo
+		//or if user is adding photo to pet for the first time
 		setTimeout(() => {
-			Alert.closeAll();
-			props.forceUpdate();
-		}, 500);
+			if (hasImage === false) {
+				// Alert.success('image is null');
+				// props.handleClose();
+				addPetImage(id, petId, image);
+				Alert.success('PET EDITED');
+				props.handleClose();
+				// Alert.success('PET EDITED');
+			} else {
+				editPetImage(id, petId, petImageId, image);
+				Alert.success('NO INITIAL IMAGE');
+				//edit pic endpoint goes here
+			}
+
+			setTimeout(() => {
+				Alert.closeAll();
+				props.forceUpdate();
+			}, 500);
+		}, 1000);
 	};
 
-	console.log(props);
+	console.log(hasImage);
+
 	return (
 		<div className="edit-pet-main-container">
 			<h1 className="modal-title">Edit Pet</h1>
@@ -226,6 +281,43 @@ export default function EditPet(props) {
 						<MenuItem value={10}>10</MenuItem>
 					</Select>
 				</FormControl>
+				<label htmlFor="upload-photo" style={{ marginLeft: '3.7rem' }}>
+					<input
+						style={{ display: 'none' }}
+						id="upload-photo"
+						name="upload-photo"
+						type="file"
+						onChange={handleFileChange}
+					/>
+					<Button
+						// color="secondary"
+						variant="contained"
+						component="span"
+						style={{
+							marginTop: '1rem',
+							backgroundColor: 'white',
+							color: 'teal',
+							width: '7rem',
+							border: 'solid 1px teal',
+							// fontSize: '12px',
+						}}
+					>
+						<PublishIcon />{' '}
+						<span style={{ marginLeft: '0.25rem' }}>Picture</span>
+					</Button>{' '}
+					{image == '' ? null : (
+						<TextField
+							disabled={true}
+							style={{
+								marginTop: '1.25rem',
+								marginLeft: '1rem',
+								width: '10rem',
+							}}
+							className={classes.imageName}
+							value={imageName}
+						></TextField>
+					)}
+				</label>
 
 				<div className="button-group">
 					<Button

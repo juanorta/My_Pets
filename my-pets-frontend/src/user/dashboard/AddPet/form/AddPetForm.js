@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import Fab from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns';
@@ -14,8 +15,9 @@ import {
 	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { addPet } from '../../../../util/APIUtils';
+import { addPet, addPetImage, getCurrentUser } from '../../../../util/APIUtils';
 import Alert from 'react-s-alert';
+import PublishIcon from '@material-ui/icons/Publish';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -95,6 +97,11 @@ const useStyles = makeStyles((theme) => ({
 
 		width: '5rem',
 	},
+	imageName: {
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+		},
+	},
 }));
 
 //form used to add a pet
@@ -109,6 +116,12 @@ export default function AddPetForm(props) {
 	const [breed, setBreed] = useState('');
 	const [sex, setSex] = useState('');
 	const [age, setAge] = useState(0);
+	const [image, setImage] = useState('');
+
+	const handleFileChange = (event) => {
+		console.log(event.target.files[0]);
+		setImage(event.target.files[0]);
+	};
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
@@ -137,13 +150,45 @@ export default function AddPetForm(props) {
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
+		event.preventDefault();
+		// console.log('image');
+		// console.log(image);
+		// addPetImage(1, 109, image);
 		addPet(id, age, breed, name, petType, sex);
-		props.handleClose();
-		Alert.success('PET ADDED');
 		setTimeout(() => {
-			Alert.closeAll();
-			props.forceUpdate();
-		}, 500);
+			getCurrentUser()
+				.then((response) => {
+					console.log(response);
+					console.log(response.pets.length);
+					if (image != '') {
+						addPetImage(
+							id,
+							response.pets[response.pets.length - 1].id,
+							image
+						);
+
+						props.handleClose();
+						Alert.success('PET ADDED');
+						setTimeout(() => {
+							Alert.closeAll();
+							props.forceUpdate();
+						}, 500);
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}, 1000);
+
+		// console.log(props.currentUser.pets);
+		if (image == '') {
+			props.handleClose();
+			Alert.success('PET ADDED');
+			setTimeout(() => {
+				Alert.closeAll();
+				props.forceUpdate();
+			}, 500);
+		}
 	};
 
 	// const [name2, setName2] = useState('Male');
@@ -231,14 +276,76 @@ export default function AddPetForm(props) {
 					</Select>
 				</FormControl>
 
+				{/* picture upload */}
+				<label htmlFor="upload-photo" style={{ marginLeft: '3.7rem' }}>
+					<input
+						style={{ display: 'none' }}
+						id="upload-photo"
+						name="upload-photo"
+						type="file"
+						onChange={handleFileChange}
+					/>
+					<Button
+						// color="secondary"
+						variant="contained"
+						component="span"
+						style={{
+							marginTop: '1rem',
+							backgroundColor: 'white',
+							color: 'teal',
+							width: '7rem',
+							border: 'solid 1px teal',
+							// fontSize: '12px',
+						}}
+					>
+						<PublishIcon />{' '}
+						<span style={{ marginLeft: '0.25rem' }}>Picture</span>
+					</Button>{' '}
+					{image.name == '' ? null : (
+						<TextField
+							disabled={true}
+							style={{
+								marginTop: '1.25rem',
+								marginLeft: '1rem',
+								width: '10rem',
+							}}
+							className={classes.imageName}
+							value={image.name}
+						></TextField>
+					)}
+				</label>
+
+				{/* <Button
+					style={{
+						backgroundColor: 'teal',
+						marginLeft: '3.7rem',
+						marginTop: '1rem',
+						color: 'white',
+						width: '18rem',
+					}}
+				>
+					<input
+						type="file"
+						className="custom-file-input"
+						id="customFile"
+						onChange={handleFileChange}
+						style={{ display: 'none' }}
+					/>{' '}
+					Upload Picture
+				</Button> */}
 				<div className="button-group">
 					<Button
+						variant="contained"
 						onClick={props.handleClose}
 						className={classes.cancelButton}
 					>
 						Cancel
 					</Button>
-					<Button type="submit" className={classes.submitButton}>
+					<Button
+						variant="contained"
+						type="submit"
+						className={classes.submitButton}
+					>
 						Submit
 					</Button>
 				</div>
