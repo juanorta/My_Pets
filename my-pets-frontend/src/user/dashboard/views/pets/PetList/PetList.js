@@ -123,7 +123,7 @@ export default function PetList(props) {
 
 	// console.log('delete');
 	// console.log(deleteButtonPressed);
-	console.log(pets);
+	// console.log(pets);
 	// const data = pets[0].petImage.data;
 	return (
 		<div className="pet-table-main-container">

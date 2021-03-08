@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MaterialModal from '../../modal/MaterialModal';
+import ReactTooltip from 'react-tooltip';
 
 //button styles
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +47,12 @@ export default function AddButton(props) {
 	return (
 		<div className="add-button-main-container">
 			<div className="add-button">
+				<ReactTooltip id="addPet" place="bottom" effect="solid">
+					Add Pet
+				</ReactTooltip>
 				<Button
+					data-tip
+					data-for="addPet"
 					className={classes.root}
 					onClick={AddButtonClickHandler}
 				>

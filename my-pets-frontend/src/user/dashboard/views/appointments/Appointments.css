@@ -23,6 +23,15 @@
 	/* border-radius: 5%; */
 }
 
+/* .icon-button-appt {
+	background-color: green;
+	height: 2rem;
+} */
+.appt-image {
+	height: 2rem;
+	width: 2rem;
+	border-radius: 50%;
+}
 @media only screen and (max-width: 600px) {
 	.appointments-main-container {
 		width: 95%;

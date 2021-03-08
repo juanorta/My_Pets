@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import './AddAppointmentForm.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -147,6 +147,13 @@ export default function AddPetForm(props) {
 	const [reason, setReason] = useState('');
 	const [vetOrGroomerName, setVetOrGroomerName] = useState('');
 	const [notes, setNotes] = useState('');
+	const [pictureData, setPictureData] = useState('');
+
+	useEffect(() => {
+		if (pet.petImage != null) {
+			setPictureData(pet.petImage.data);
+		}
+	}, []);
 
 	//handles input changes from all fields
 	const onDateChange = (date) => {
@@ -201,7 +208,8 @@ export default function AddPetForm(props) {
 			vetOrGroomerName,
 			notes,
 			petName,
-			petAptId
+			petAptId,
+			pictureData
 		);
 		props.handleClose();
 		Alert.success('Appointment Added');

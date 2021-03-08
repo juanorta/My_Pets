@@ -7,10 +7,17 @@ import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
 import { getAllAppointments } from '../../../../util/APIUtils';
-import { TextField } from '@material-ui/core';
+import { IconButton, TextField } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import {
+	mdiAccount,
+	mdiDog,
+	mdiFoodDrumstick,
+	mdiScaleBathroom,
+} from '@mdi/js';
+import Icon from '@mdi/react';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -42,20 +49,38 @@ const useStyles = makeStyles((theme) => ({
 			fontSize: '0.85rem',
 		},
 	},
+	TextFieldPet: {
+		color: 'black',
+
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+			fontSize: '0.85rem',
+			fontWeight: 700,
+		},
+
+		marginTop: '1.25rem',
+	},
 }));
 
 export default function Appointments(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
+	const [pets, setPets] = useState(props.currentUser.pets);
+	const [appointments, setAppointments] = useState(currentUser.appointments);
+	const [sortedAppointments, setSortedAppointments] = useState('');
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		getAllAppointments(currentUser.id)
-			.then((response) => {
-				//console.log(response);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		console.log(pets);
+		let sortedAppointmentsArray = appointments.slice();
+		sortedAppointmentsArray.sort(function compare(a, b) {
+			var dateA = new Date(a.date);
+			var dateB = new Date(b.date);
+			return dateB - dateA;
+		});
+		// console.log(sortedAppointmentsArray);
+		setSortedAppointments(sortedAppointmentsArray);
+		setLoading(false);
 	}, []);
 
 	const columns = [
@@ -78,16 +103,44 @@ export default function Appointments(props) {
 		{
 			field: 'Pet',
 			headerName: 'Pet',
-			width: 90,
+			width: 160,
 			renderCell: (params) => (
-				<TextField
-					className={classes.TextField}
-					// style={{ color: 'black' }}
-					InputProps={{ disableUnderline: true }}
-					multiline
-					disabled={true}
-					value={params.value}
-				/>
+				<div style={{ backgroundColor: 'transparent' }}>
+					{params.row.Picture == '' ? (
+						<IconButton className="icon-button-appt">
+							<Icon
+								path={mdiDog}
+								title="Dog Profile"
+								size={1.4}
+								horizontal
+								vertical
+								rotate={180}
+								color="#1b2737"
+								// color="#ff4f00"
+							/>
+						</IconButton>
+					) : (
+						<IconButton className="icon-button-appt">
+							<img
+								className="appt-image"
+								src={`data:image/jpeg;base64,${params.row.Picture}`}
+							/>
+						</IconButton>
+					)}
+
+					<TextField
+						style={{ cursor: 'pointer' }}
+						onClick={() => {
+							console.log(params);
+						}}
+						className={classes.TextFieldPet}
+						// style={{ color: 'red' }}
+						InputProps={{ disableUnderline: true }}
+						multiline
+						disabled={true}
+						value={params.value}
+					/>
+				</div>
 			),
 		},
 		{
@@ -199,39 +252,41 @@ export default function Appointments(props) {
 	];
 
 	//loading each row with a pet appointment object
+
+	//only complete when the component finishes loading
 	let rows = [];
-	for (let i = 0; i < currentUser.appointments.length; i++) {
-		let date = moment(currentUser.appointments[i].date).format(
-			'MM/DD/YYYY'
-		);
-		rows[i] = {
-			id: i,
-			Date: date,
-			Pet: currentUser.appointments[i].petName,
-			Time:
-				currentUser.appointments[i].time +
-				currentUser.appointments[i].amOrPm,
-			Type: currentUser.appointments[i].type,
-			Reason: currentUser.appointments[i].reason,
-			Notes: currentUser.appointments[i].notes,
-			VetGroomer: currentUser.appointments[i].vetOrGroomerName,
-		};
+	if (loading === false) {
+		for (let i = 0; i < sortedAppointments.length; i++) {
+			let date = moment(sortedAppointments[i].date).format('MM/DD/YYYY');
+			rows[i] = {
+				id: i,
+				Date: date,
+				Picture: sortedAppointments[i].data,
+				Pet: sortedAppointments[i].petName,
+				Time: sortedAppointments[i].time + sortedAppointments[i].amOrPm,
+				Type: sortedAppointments[i].type,
+				Reason: sortedAppointments[i].reason,
+				Notes: sortedAppointments[i].notes,
+				VetGroomer: sortedAppointments[i].vetOrGroomerName,
+			};
+		}
 	}
+	console.log(sortedAppointments);
 	return (
 		<div className="appointments-main-container" id="appointments">
 			<div className="title">
-				<h1>Appointments</h1>
+				<h1>All Appointments</h1>
 			</div>
 			<div
 				className="appointments-table"
-				style={{ height: 400, width: '100%' }}
+				style={{ height: 450, width: '100%' }}
 			>
 				<DataGrid
 					className={classes.root}
 					rows={rows}
 					columns={columns}
 					pageSize={5}
-					rowHeight={55}
+					rowHeight={65}
 				/>
 			</div>
 		</div>

@@ -149,7 +149,8 @@ export async function addAppointment(
 	vetOrGroomerName,
 	notes,
 	petName,
-	petAptId
+	petAptId,
+	pictureData
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);
@@ -172,6 +173,7 @@ export async function addAppointment(
 			notes: notes,
 			petName: petName,
 			petAptId: petAptId,
+			data: pictureData,
 		}),
 	});
 }
@@ -188,7 +190,8 @@ export async function editAppointment(
 	vetOrGroomerName,
 	notes,
 	petName,
-	petAptId
+	petAptId,
+	pictureData
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log('edit appointment function called');
@@ -214,6 +217,7 @@ export async function editAppointment(
 				notes: notes,
 				petName: petName,
 				petAptId: petAptId,
+				data: pictureData,
 			}),
 		}
 	);

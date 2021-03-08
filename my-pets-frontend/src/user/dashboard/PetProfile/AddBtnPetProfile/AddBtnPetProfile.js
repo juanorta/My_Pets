@@ -8,6 +8,7 @@ import MaterialModal from '../../modal/MaterialModal';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MaterialModalProfile from '../../modal/MaterialModalProfile/MaterialModalProfile';
+import ReactTooltip from 'react-tooltip';
 
 //button styles
 const useStyles = makeStyles((theme) => ({
@@ -99,7 +100,15 @@ export default function AddBtnPetProfile(props) {
 	return (
 		<div className="add-button-profile-main-container">
 			<div className="add-button">
-				<Button className={classes.root} onClick={addButtonHandler}>
+				<ReactTooltip id="add-btn-profile" place="top" effect="solid">
+					Add New Entry
+				</ReactTooltip>
+				<Button
+					data-tip
+					data-for="add-btn-profile"
+					className={classes.root}
+					onClick={addButtonHandler}
+				>
 					<AddIcon className={classes.AddIcon} />
 				</Button>
 				<Menu

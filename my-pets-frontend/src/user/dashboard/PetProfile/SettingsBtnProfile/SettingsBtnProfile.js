@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ReactTooltip from 'react-tooltip';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -80,7 +81,15 @@ export default function SettingsBtnProfile(props) {
 
 	return (
 		<div className="settings-main-container">
-			<Button className={classes.root} onClick={settingsButtonHandler}>
+			<ReactTooltip id="settingsButton" place="top" effect="solid">
+				Settings
+			</ReactTooltip>
+			<Button
+				data-tip
+				data-for="settingsButton"
+				className={classes.root}
+				onClick={settingsButtonHandler}
+			>
 				<SettingsIcon className={classes.AddIcon} />
 			</Button>
 			<Menu

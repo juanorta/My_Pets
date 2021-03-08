@@ -76,6 +76,7 @@ public class AppointmentController {
         //new
         existingAppointment.setPetName(appointment.getPetName());
         existingAppointment.setPetAptId(appointment.getPetAptId());
+        existingAppointment.setData(appointment.getData());
         return appointmentRepository.save(existingAppointment);
     }
 

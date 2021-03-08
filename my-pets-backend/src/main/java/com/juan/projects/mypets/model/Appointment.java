@@ -30,6 +30,8 @@ public class Appointment {
     //used to identify which pet is associated with which appointment in dashboard
     private String petName;
     private String petAptId;
+    @Lob
+    private byte[] data;
 
 
     //creating relationship with pet

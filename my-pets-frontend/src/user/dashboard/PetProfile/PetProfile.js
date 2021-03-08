@@ -206,6 +206,7 @@ export default function PetProfile(props) {
 	//	console.log('appt = ' + apptClicked);
 	// console.log(props.currentUser);
 	//console.log(props);
+	console.log(pet);
 	return (
 		<div
 			className="pet-profile-main-container"
