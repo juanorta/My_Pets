@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 // import './AddAppointmentForm.css';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -18,7 +18,13 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { editFood } from '../../../../util/APIUtils';
+import {
+	editFood,
+	addFoodImage,
+	editFoodImage,
+	editPetImage,
+} from '../../../../util/APIUtils';
+import PublishIcon from '@material-ui/icons/Publish';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -128,6 +134,11 @@ const useStyles = makeStyles((theme) => ({
 
 		width: '5rem',
 	},
+	imageName: {
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+		},
+	},
 }));
 
 //form used to edit food
@@ -143,7 +154,23 @@ export default function EditFoodForm(props) {
 	const [wetOrDry, setWetOrDry] = useState(rowData.WetDry);
 	const [flavor, setFlavor] = useState(rowData.Flavor);
 	const [whereToBuy, setWhereToBuy] = useState(rowData.Location);
+	const [image, setImage] = useState('');
+	const [imageName, setImageName] = useState('');
+	const [foodImageId, setFoodImageId] = useState('');
+	const [hasImage, setHasImage] = useState('');
 
+	useEffect(() => {
+		if (pet.food[rowData.id].foodImage == null) {
+			console.log('doent have pic');
+			setHasImage(false);
+		} else {
+			console.log('has pic');
+			setFoodImageId(props.pet.food[rowData.id].foodImage.id);
+			setImage(props.pet.food[rowData.id].foodImage.fileName);
+			setImageName(props.pet.food[rowData.id].foodImage.fileName);
+			setHasImage(true);
+		}
+	}, []);
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
@@ -160,17 +187,46 @@ export default function EditFoodForm(props) {
 			notes
 		);
 
-		props.handleClose();
-		Alert.success('Food Edited!');
 		setTimeout(() => {
-			Alert.closeAll();
+			if (hasImage === false) {
+				// Alert.success('no image');
+				addFoodImage(
+					currentUser.id,
+					pet.id,
+					pet.food[rowData.id].id,
+					image
+				);
+				// props.handleClose();
+			} else {
+				// Alert.success('has image');
+				editFoodImage(
+					currentUser.id,
+					pet.id,
+					pet.food[rowData.id].id,
+					foodImageId,
+					image
+				);
+			}
+			props.handleClose(0);
+			Alert.success('Food Edited!');
+			setTimeout(() => {
+				Alert.closeAll();
 
-			props.changeDefaultViewsAndRefresh('FOOD');
+				props.changeDefaultViewsAndRefresh('FOOD');
 
-			props.forceUpdate();
-		}, 500);
+				props.forceUpdate();
+			}, 500);
+		}, 1000);
+		// props.handleClose();
 	};
 	const [notes, setNotes] = useState(rowData.Notes);
+
+	const handleFileChange = (event) => {
+		console.log(event.target.files[0]);
+		console.log(event.target.files[0].name);
+		setImage(event.target.files[0]);
+		setImageName(event.target.files[0].name);
+	};
 
 	const onFoodNameChange = (event) => {
 		console.log('Foodname: ' + event.target.value);
@@ -204,12 +260,19 @@ export default function EditFoodForm(props) {
 
 	//makes API call to submit form informati
 
-	console.log('food props');
-	console.log(props);
+	// console.log('food props');
+	// // console.log(props);
+	// console.log(pet.food[rowData.id]);
+	console.log('image');
+	console.log(image);
+	console.log('imageName');
+	console.log(imageName);
 
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Edit Food</h1>
+			<h1 className="modal-title" style={{ marginTop: '0.25rem' }}>
+				Edit Food
+			</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onFoodNameChange}
@@ -287,7 +350,6 @@ export default function EditFoodForm(props) {
 					label="Where to buy"
 					value={whereToBuy}
 				/>
-
 				<TextField
 					onChange={onNotesChange}
 					className={classes.TextField1}
@@ -299,7 +361,44 @@ export default function EditFoodForm(props) {
 					// value={value}
 					// onChange={handleChange}
 				/>
-
+				<label htmlFor="upload-photo" style={{ marginLeft: '3.7rem' }}>
+					<input
+						style={{ display: 'none' }}
+						id="upload-photo"
+						name="upload-photo"
+						type="file"
+						onChange={handleFileChange}
+					/>
+					<Button
+						// color="secondary"
+						variant="contained"
+						component="span"
+						style={{
+							marginTop: '1rem',
+							backgroundColor: 'white',
+							color: 'teal',
+							width: '7rem',
+							border: 'solid 1px teal',
+							// marginLeft: '4rem',
+							// fontSize: '12px',
+						}}
+					>
+						<PublishIcon />{' '}
+						<span style={{ marginLeft: '0.25rem' }}>Picture</span>
+					</Button>{' '}
+					{image == '' ? null : (
+						<TextField
+							disabled={true}
+							style={{
+								marginTop: '1.25rem',
+								marginLeft: '1rem',
+								width: '11rem',
+							}}
+							className={classes.imageName}
+							value={imageName}
+						></TextField>
+					)}
+				</label>
 				<div className="button-group">
 					<Button
 						onClick={props.handleClose}

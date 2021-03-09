@@ -26,6 +26,16 @@ const useStyles = makeStyles((theme) => ({
 		height: '35rem',
 		width: '55rem',
 	},
+	AddFoodForm: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid none',
+		outline: 'none',
+		borderRadius: '20px',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
+		height: '37rem',
+		width: '55rem',
+	},
 	DeleteConfirmation: {
 		backgroundColor: theme.palette.background.paper,
 		border: '2px solid none',
@@ -69,6 +79,9 @@ export default function MaterialModalProfile(props) {
 
 	//used to display appropriate content
 	let style = classes.AddForm;
+	if (isFood) {
+		style = classes.AddFoodForm;
+	}
 
 	console.log(props);
 	// console.log('open => ' + open);

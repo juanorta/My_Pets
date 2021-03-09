@@ -1,6 +1,7 @@
 package com.juan.projects.mypets.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,20 @@ public class Food {
     private String wetOrDry;
     private String flavor;
     private String notes;
+
+
+    //creating relationship with foodImage
+    @OneToOne(mappedBy = "food", orphanRemoval = true)
+    private FoodImage foodImage;
+
+    @JsonManagedReference(value = "food-foodImage")
+    public FoodImage getFoodImage(){ return foodImage;}
+
+    public void setFoodImage(FoodImage foodImage){
+        this.foodImage = foodImage;
+    }
+
+
 
     //creating relationship with pet
     @ManyToOne(fetch = FetchType.EAGER)
@@ -52,5 +67,7 @@ public class Food {
     public void setUser(User user){
         this.user = user;
     }
+
+
 
 }

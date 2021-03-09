@@ -18,7 +18,13 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { addFood } from '../../../../../util/APIUtils';
+import {
+	addFood,
+	addFoodImage,
+	getCurrentUser,
+	getPet,
+} from '../../../../../util/APIUtils';
+import PublishIcon from '@material-ui/icons/Publish';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -129,6 +135,11 @@ const useStyles = makeStyles((theme) => ({
 
 		width: '5rem',
 	},
+	imageName: {
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+		},
+	},
 }));
 
 //form used to add a pet
@@ -144,9 +155,18 @@ export default function AddFoodForm(props) {
 	const [wetOrDry, setWetOrDry] = useState('');
 	const [flavor, setFlavor] = useState('');
 	const [whereToBuy, setWhereToBuy] = useState('');
+	const [image, setImage] = useState('');
+	const [imageName, setImageName] = useState('');
 
 	//handles input changes from all fields
 	const [notes, setNotes] = useState('');
+
+	const handleFileChange = (event) => {
+		console.log(event.target.files[0]);
+		console.log(event.target.files[0].name);
+		setImage(event.target.files[0]);
+		setImageName(event.target.files[0].name);
+	};
 
 	const onFoodNameChange = (event) => {
 		console.log('Foodname: ' + event.target.value);
@@ -193,13 +213,40 @@ export default function AddFoodForm(props) {
 			notes
 		);
 
-		props.handleClose();
-		Alert.success('Food Added');
-		setTimeout(() => {
-			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('FOOD');
-			props.forceUpdate();
-		}, 500);
+		if (image != '') {
+			setTimeout(() => {
+				getPet(currentUser.id, pet.id)
+					.then((response) => {
+						console.log(response);
+						//if user selected an image
+						addFoodImage(
+							currentUser.id,
+							pet.id,
+							response.food[response.food.length - 1].id,
+							image
+						);
+						props.handleClose();
+						Alert.success('Food Added');
+						setTimeout(() => {
+							Alert.closeAll();
+							props.changeDefaultViewsAndRefresh('FOOD');
+							props.forceUpdate();
+						}, 500);
+						// response[response.food.length-1].id;
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+			}, 1000);
+		} else {
+			props.handleClose();
+			Alert.success('Food Added');
+			setTimeout(() => {
+				Alert.closeAll();
+				props.changeDefaultViewsAndRefresh('FOOD');
+				props.forceUpdate();
+			}, 500);
+		}
 	};
 
 	console.log('food props');
@@ -207,7 +254,9 @@ export default function AddFoodForm(props) {
 
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Add New Food</h1>
+			<h1 className="modal-title" style={{ marginTop: '0.25rem' }}>
+				Add New Food
+			</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onFoodNameChange}
@@ -280,7 +329,6 @@ export default function AddFoodForm(props) {
 					id="standard-basic"
 					label="Where to buy"
 				/>
-
 				<TextField
 					onChange={onNotesChange}
 					className={classes.TextField1}
@@ -291,7 +339,42 @@ export default function AddFoodForm(props) {
 					// value={value}
 					// onChange={handleChange}
 				/>
-
+				<label htmlFor="upload-photo" style={{ marginLeft: '3.7rem' }}>
+					<input
+						style={{ display: 'none' }}
+						id="upload-photo"
+						name="upload-photo"
+						type="file"
+						onChange={handleFileChange}
+					/>
+					<Button
+						// color="secondary"
+						variant="contained"
+						component="span"
+						style={{
+							marginTop: '1rem',
+							backgroundColor: 'white',
+							color: 'teal',
+							width: '7rem',
+							border: 'solid 1px teal',
+							// marginLeft: '4rem',
+							// fontSize: '12px',
+						}}
+					>
+						<PublishIcon />{' '}
+						<span style={{ marginLeft: '0.25rem' }}>Picture</span>
+					</Button>{' '}
+					<TextField
+						disabled={true}
+						style={{
+							marginTop: '1.25rem',
+							marginLeft: '1rem',
+							width: '11rem',
+						}}
+						className={classes.imageName}
+						value={imageName}
+					></TextField>
+				</label>
 				<div className="button-group">
 					<Button
 						onClick={props.handleClose}

@@ -69,6 +69,18 @@ public class User {
         this.petImages = petImages;
     }
 
+    //creating relationships with FoodImage
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<FoodImage> foodImages;
+
+    @JsonManagedReference(value = "user-foodImage")
+    public List<FoodImage> getFoodImages(){ return foodImages;}
+
+    public void setFoodImages(List<FoodImage> foodImages){
+        this.foodImages = foodImages;
+    }
+
+
 
     //relationship with appointments
     @OneToMany(mappedBy = "user", orphanRemoval = true)

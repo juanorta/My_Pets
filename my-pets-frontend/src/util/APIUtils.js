@@ -487,3 +487,58 @@ export async function editPetImage(id, petId, imageId, file) {
 
 	console.log(response);
 }
+
+export async function addFoodImage(id, petId, foodId, file) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('ADD FOOD IMAGE FUNCTION CALLED');
+	// console.log('file ->');
+	// console.log(file);
+	const formData = new FormData();
+	formData.append('file', file);
+	for (var pair of formData.entries()) {
+		console.log(pair[1]);
+	}
+
+	// console.log(formData.entries());
+
+	const response = await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/food/${foodId}/uploadImage`,
+		{
+			method: 'POST',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				// 'Content-Type': 'multipart/form-data',
+			},
+			body: formData,
+		}
+	);
+
+	console.log(response);
+}
+
+export async function editFoodImage(id, petId, foodId, imageId, file) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log('EDIT PET FUNCTION CALLED');
+
+	const formData = new FormData();
+	formData.append('file', file);
+
+	for (var pair of formData.entries()) {
+		console.log(pair[1]);
+	}
+
+	const response = await fetch(
+		API_BASE_URL +
+			`/users/${id}/pets/${petId}/food/${foodId}/foodImage/${imageId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				// 'Content-Type': 'multipart/form-data',
+			},
+			body: formData,
+		}
+	);
+
+	console.log(response);
+}

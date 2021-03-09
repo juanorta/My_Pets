@@ -15,10 +15,12 @@ import {
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import Appointments from './Appointments/Appointments';
 import Weights from './Weights/Weights';
-import Food from './Food/Food';
+// import Food from './Food/Food';
 import ReactTooltip from 'react-tooltip';
 import AddBtnPetProfile from './AddBtnPetProfile/AddBtnPetProfile';
 import SettingsBtnProfile from './SettingsBtnProfile/SettingsBtnProfile';
+import FoodTable from './Food/FoodTable/FoodTable';
+import Food from './Food/Food';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
