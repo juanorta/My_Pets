@@ -64,7 +64,7 @@
 	margin: 0 auto;
 	margin-top: -1rem;
 	width: 70vw;
-	height: 180vh;
+	height: 280vh;
 	margin-bottom: 10rem;
 	overflow: auto;
 	border-radius: 10px;
@@ -161,39 +161,3 @@
 	border-color: #ff4f00; */
 	/* margin: 0 auto; */
 }
-/* columns = [
-			{
-				field: 'Date',
-				headerName: 'Date',
-				width: 130,
-				renderCell: () => (
-					<TextField
-						style={{ color: 'black' }}
-						InputProps={{ disableUnderline: true }}
-						multiline
-						disabled={true}
-						value={pet.appointments[i].date}
-					/>
-				),
-			},
-			{ field: 'Time', headerName: 'Time', width: 90 },
-			{ field: 'Type', headerName: 'Type', width: 130 },
-			{
-				field: 'Edit',
-				headerName: 'Edit',
-				renderCell: () => (
-					<Button className={classes.Button}>
-						<EditIcon className={classes.EditIcon} />
-					</Button>
-				),
-			},
-			{
-				field: 'Delete',
-				headerName: 'Delete',
-				renderCell: () => (
-					<Button className={classes.Button}>
-						<DeleteIcon className={classes.DeleteIcon} />
-					</Button>
-				),
-			},
-		]; */

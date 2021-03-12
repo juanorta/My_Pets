@@ -48,8 +48,13 @@
 	/* margin-left: 5rem; */
 }
 
+.no-picture {
+	background-color: #1b2737;
+	height: 100%;
+}
+
 .pet-card {
-	background-color: teal;
+	/* background-color: teal; */
 	font-family: 'Poppins';
 	height: 70%;
 	/* margin-top: -2rem; */
@@ -88,6 +93,9 @@ h4 {
 .image {
 	height: 95%;
 	width: 100%;
+	border-top-left-radius: 3%;
+
+	border-top-right-radius: 3%;
 }
 
 @media only screen and (max-width: 600px) {

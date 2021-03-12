@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			transform: 'scale(1.05)',
 		},
-		borderRadius: 4,
+		borderRadius: 6,
 	},
 	paperSmall: {
 		height: 280,
@@ -152,7 +152,9 @@ export default function PetList(props) {
 							elevation={8}
 						>
 							<div className="pet-card">
-								{pet.petImage == null ? null : (
+								{pet.petImage == null ? (
+									<div className="no-picture"></div>
+								) : (
 									<img
 										className="image"
 										src={`data:image/jpeg;base64,${pet.petImage.data}`}

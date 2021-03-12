@@ -207,9 +207,10 @@ export default function FoodTable(props) {
 	// console.log('params : ' editParams);
 	return (
 		<div className="appointments-profile-main-container">
-			<div className="appointments-title">
+			{/* <div className="appointments-title">
 				<h1>Food</h1>
-			</div>
+			</div> */}
+			<div className="spacer" style={{ marginBottom: '3rem' }}></div>
 			<div
 				style={{
 					height: 400,
