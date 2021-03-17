@@ -132,6 +132,9 @@ class App extends Component {
 									path="/"
 									component={Dashboard}
 									forceUpdate={this.loadCurrentlyLoggedInUser}
+									changeDefaultViewsAndRefresh={
+										this.changeDefaultViewsAndRefresh
+									}
 								></PrivateRoute>
 
 								<PrivateRouteProfile

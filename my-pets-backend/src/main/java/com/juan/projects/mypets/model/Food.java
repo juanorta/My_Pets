@@ -26,6 +26,12 @@ public class Food {
     private String flavor;
     private String notes;
 
+    //used to identify which pet is associated with food in dashboard
+    private String petName;
+    private String petFoodId;  
+    @Lob
+    private byte[] data;
+
 
     //creating relationship with foodImage
     @OneToOne(mappedBy = "food", orphanRemoval = true)

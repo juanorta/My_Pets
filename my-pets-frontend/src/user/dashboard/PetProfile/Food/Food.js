@@ -27,6 +27,7 @@ export default function Food(props) {
 	const [tableViewSelected, setTableViewSelected] = useState(false);
 	const [cardStyle, setCardStyle] = useState(classes.CardViewSelected);
 	const [tableStyle, setTableStyle] = useState(classes.TableView);
+	const [isDashboard, setIsDashboard] = useState(false);
 
 	const cardViewHandler = () => {
 		console.log('card view clicked');
@@ -68,6 +69,7 @@ export default function Food(props) {
 			) : null}
 			{cardViewSelected ? (
 				<FoodCards
+					isDashboard={isDashboard}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}

@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		// border: 'none',
 	},
+	backDrop: {
+		background: 'rgba(255,255,255,0.2)',
+	},
 	AddPetForm: {
 		backgroundColor: theme.palette.background.paper,
 		border: '2px solid none',
@@ -112,6 +115,9 @@ export default function MaterialModal(props) {
 				BackdropComponent={Backdrop}
 				BackdropProps={{
 					timeout: 500,
+					// classes: {
+					// 	root: classes.backDrop,
+					// },
 				}}
 			>
 				<Fade in={open}>

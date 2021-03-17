@@ -346,7 +346,7 @@ export default function AddPetForm(props) {
 						type="submit"
 						className={classes.submitButton}
 					>
-						Submit
+						Save
 					</Button>
 				</div>
 			</form>

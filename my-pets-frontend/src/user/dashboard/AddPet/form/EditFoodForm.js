@@ -145,15 +145,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditFoodForm(props) {
 	const classes = useStyles();
-	let amPmIndex = props.rowData.id;
+	// let amPmIndex = props.rowData.id;
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
 	const [rowData, setRowData] = useState(props.rowData);
-	const [foodName, setFoodName] = useState(rowData.Food);
-	const [type, setType] = useState(rowData.Type);
-	const [wetOrDry, setWetOrDry] = useState(rowData.WetDry);
-	const [flavor, setFlavor] = useState(rowData.Flavor);
-	const [whereToBuy, setWhereToBuy] = useState(rowData.Location);
+	const [foodName, setFoodName] = useState(rowData.foodName);
+	const [type, setType] = useState(rowData.type);
+	const [wetOrDry, setWetOrDry] = useState(rowData.wetOrDry);
+	const [flavor, setFlavor] = useState(rowData.flavor);
+	const [whereToBuy, setWhereToBuy] = useState(rowData.whereToBuy);
+	const [notes, setNotes] = useState(rowData.notes);
 	const [image, setImage] = useState('');
 	const [imageName, setImageName] = useState('');
 	const [foodImageId, setFoodImageId] = useState('');
@@ -219,7 +220,6 @@ export default function EditFoodForm(props) {
 		}, 1000);
 		// props.handleClose();
 	};
-	const [notes, setNotes] = useState(rowData.Notes);
 
 	const handleFileChange = (event) => {
 		console.log(event.target.files[0]);
@@ -263,10 +263,9 @@ export default function EditFoodForm(props) {
 	// console.log('food props');
 	// // console.log(props);
 	// console.log(pet.food[rowData.id]);
-	console.log('image');
-	console.log(image);
-	console.log('imageName');
-	console.log(imageName);
+	console.log('row data');
+	console.log(rowData);
+	console.log(pet.food[0]);
 
 	return (
 		<div className="pet-form-main-container">
@@ -407,7 +406,7 @@ export default function EditFoodForm(props) {
 						Cancel
 					</Button>
 					<Button type="submit" className={classes.submitButton}>
-						Submit
+						Save
 					</Button>
 				</div>
 			</form>

@@ -71,7 +71,7 @@ export default function Appointments(props) {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		console.log(pets);
+		// console.log(pets);
 		let sortedAppointmentsArray = appointments.slice();
 		sortedAppointmentsArray.sort(function compare(a, b) {
 			var dateA = new Date(a.date);
@@ -271,7 +271,7 @@ export default function Appointments(props) {
 			};
 		}
 	}
-	console.log(sortedAppointments);
+	// console.log(sortedAppointments);
 	return (
 		<div className="appointments-main-container" id="appointments">
 			<div className="title">

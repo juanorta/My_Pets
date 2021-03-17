@@ -47,7 +47,7 @@ export default function FoodTable(props) {
 	//using renderCell to show JSX
 	const columns = [
 		{
-			field: 'Food',
+			field: 'foodName',
 			headerName: 'Food Name ',
 			width: 130,
 
@@ -63,7 +63,7 @@ export default function FoodTable(props) {
 			),
 		},
 		{
-			field: 'Type',
+			field: 'type',
 			headerName: 'Type',
 			width: 90,
 			renderCell: (params) => (
@@ -78,7 +78,7 @@ export default function FoodTable(props) {
 			),
 		},
 		{
-			field: 'WetDry',
+			field: 'wetOrDry',
 			headerName: 'Wet/Dry',
 			width: 130,
 			renderCell: (params) => (
@@ -93,7 +93,7 @@ export default function FoodTable(props) {
 			),
 		},
 		{
-			field: 'Flavor',
+			field: 'flavor',
 			headerName: 'Flavor',
 			width: 130,
 			renderCell: (params) => (
@@ -108,7 +108,7 @@ export default function FoodTable(props) {
 			),
 		},
 		{
-			field: 'Location',
+			field: 'whereToBuy',
 			headerName: 'Location',
 			width: 130,
 			renderCell: (params) => (
@@ -123,7 +123,7 @@ export default function FoodTable(props) {
 			),
 		},
 		{
-			field: 'Notes',
+			field: 'notes',
 			headerName: 'Notes',
 			width: 130,
 			renderCell: (params) => (
@@ -186,12 +186,12 @@ export default function FoodTable(props) {
 	for (let i = 0; i < pet.food.length; i++) {
 		rows[i] = {
 			id: i,
-			Food: pet.food[i].foodName,
-			Type: pet.food[i].type,
-			WetDry: pet.food[i].wetOrDry,
-			Flavor: pet.food[i].flavor,
-			Location: pet.food[i].whereToBuy,
-			Notes: pet.food[i].notes,
+			foodName: pet.food[i].foodName,
+			type: pet.food[i].type,
+			wetOrDry: pet.food[i].wetOrDry,
+			flavor: pet.food[i].flavor,
+			whereToBuy: pet.food[i].whereToBuy,
+			notes: pet.food[i].notes,
 		};
 		// console.log(pet.food[i].wetOrDry);
 	}

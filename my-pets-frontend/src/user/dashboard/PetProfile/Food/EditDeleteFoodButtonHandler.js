@@ -13,8 +13,8 @@ export default function EditDeleteApptButtonHandler(props) {
 	const [pet, setPet] = useState(props.pet);
 	const [rowData, setRowData] = useState(props.rowData);
 	console.log(rowData);
-	console.log(pet);
-	console.log(currentUser);
+	// console.log(pet);
+	// console.log(currentUser);
 	return (
 		<div className="edit-appt-main-container">
 			{/* opening a different modal depending on what button the user pressed */}

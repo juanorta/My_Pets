@@ -64,6 +64,9 @@ public class FoodController {
         existingFood.setWetOrDry(food.getWetOrDry());
         existingFood.setFlavor(food.getFlavor());
         existingFood.setNotes(food.getNotes());
+        existingFood.setPetName(food.getPetName());
+        existingFood.setPetFoodId(food.getPetFoodId());
+        existingFood.setData(food.getData());
         return foodRepository.save(existingFood);
     }
 }

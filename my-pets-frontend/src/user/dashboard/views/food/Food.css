@@ -1,0 +1,56 @@
+.food-main-container {
+	background-color: transparent;
+	height: 35rem;
+	width: 65%;
+	margin: 0 auto;
+	font-family: 'Poppins';
+}
+/* 
+.food-dash {
+	background-color: red;
+	justify-content: left;
+} */
+
+.food-main-container h2 {
+	/* margin-left: 1rem; */
+	margin-top: 0rem;
+	font-weight: 500;
+}
+
+.food-main-container ul {
+	background-color: transparent;
+	list-style-type: none;
+	display: inline-flex;
+}
+
+.food-main-container ul li {
+	/* color: white; */
+	color: #1b2737;
+	list-style-position: inside;
+	margin: 0;
+	margin-left: -1.75rem;
+	margin-right: 4rem;
+	/* background-color: green; */
+	text-align: center;
+}
+
+.food-main-container ul li:hover {
+	cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+	.food-main-container {
+		width: 95%;
+	}
+
+	.weights-main-container ul li {
+		/* color: white; */
+		color: #1b2737;
+		list-style-position: inside;
+		margin: 0;
+		margin-left: -1.5rem;
+		margin-right: 4rem;
+		/* background-color: green; */
+		text-align: center;
+	}
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './FoodCards.css';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -15,6 +15,7 @@ import {
 	mdiFoodDrumstick,
 	mdiScaleBathroom,
 } from '@mdi/js';
+import EditDeleteFoodButtonHandler from '../EditDeleteFoodButtonHandler';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,14 +27,15 @@ const useStyles = makeStyles((theme) => ({
 		width: '40%',
 		display: 'flex',
 		justifyContent: 'center',
-		marginTop: '2rem',
+		marginTop: '1.5rem',
 		marginLeft: '3rem',
 		flexWrap: 'wrap',
 		'& > *': {
 			margin: theme.spacing(0.5),
 		},
 	},
-	paper: {
+	paperXL: {
+		backgroundColor: 'transparent',
 		height: 270,
 		width: 570,
 		display: 'inline-block',
@@ -44,6 +46,19 @@ const useStyles = makeStyles((theme) => ({
 		},
 		borderRadius: 8,
 		marginRight: '2rem',
+	},
+	paperLarge: {
+		backgroundColor: 'transparent',
+		height: 250,
+		width: 490,
+		display: 'inline-block',
+		margin: '1rem',
+		transition: 'all 0.2s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.05)',
+		},
+		borderRadius: 8,
+		marginRight: '1rem',
 	},
 	paperSmall: {
 		height: 280,
@@ -67,12 +82,19 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: 'teal',
 	},
 	editButton: {
-		marginLeft: '1rem',
+		position: 'absolute',
+		left: -15,
+		top: -35,
+		// marginLeft: '1rem',
 		// height: '1.5rem',
 		// width: '1.5rem',
 	},
 	button: {
-		marginLeft: '12.3rem',
+		position: 'absolute',
+		right: -18,
+		top: -35,
+		// marginLeft: '50%',
+		// marginLeft: '12.3rem',
 		// height: '1.5rem',
 		// width: '1.5rem',
 	},
@@ -85,8 +107,11 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: 6,
 	},
 	noPicture: {
-		marginTop: '4rem',
+		position: 'absolute',
+		backgroundColor: 'transparent',
+		marginTop: '-4rem',
 		marginLeft: '3rem',
+		// marginLeft: '3rem',
 		color: '#1b2737',
 	},
 }));
@@ -96,13 +121,114 @@ export default function FoodCards(props) {
 	const theme = useTheme();
 	const classes = useStyles();
 	const matches = useMediaQuery(theme.breakpoints.down('xs'));
+	const mediumScreen = useMediaQuery(theme.breakpoints.down('md'));
+	const largeScreen = useMediaQuery(theme.breakpoints.down('lg'));
+	const extraLargeScreen = useMediaQuery(theme.breakpoints.down('xl'));
+
+	const [isDashboard, setIsDashboard] = useState(props.isDashboard);
+	const [style, setStyle] = useState('');
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [food, setFood] = useState(pet.food);
-	console.log(food);
+	const [food, setFood] = useState(props.pet.food);
+	const [openModal, setOpenModal] = useState(false);
+	const [isEditFood, setIsEditFood] = useState(false);
+	const [isDeleteFood, setIsDeleteFood] = useState(false);
+	const [rowData, setRowData] = useState('');
 
+	useEffect(() => {
+		if (isDashboard === false) {
+			setStyle('food-cards-main-container');
+		}
+		let rowDataObject = {
+			id: '',
+			foodName: '',
+			flavor: '',
+			type: '',
+			wetOrDry: '',
+			whereToBuy: '',
+			notes: '',
+		};
+		console.log(props.pet);
+		setFood(props.pet.food);
+		setRowData(rowDataObject);
+	}, [props.pet]);
+
+	const SetOpenModalToFalse = () => {
+		setOpenModal(false);
+		setIsEditFood(false);
+		setIsDeleteFood(false);
+		// props.forceUpdate();
+	};
+	// console.log(food);
+	// console.log(rowData);
+
+	function editButtonHandler(
+		id,
+		foodName,
+		flavor,
+		type,
+		wetOrDry,
+		whereToBuy,
+		notes
+	) {
+		// console.log(id);
+		// console.log(foodName);
+		// console.log(flavor);
+		// console.log(type);
+		// console.log(wetOrDry);
+		// console.log(whereToBuy);
+		// console.log(notes);
+
+		let rowDataObject = {
+			id: id,
+			foodName: foodName,
+			flavor: flavor,
+			type: type,
+			wetOrDry: wetOrDry,
+			whereToBuy: whereToBuy,
+			notes: notes,
+		};
+
+		setRowData(rowDataObject);
+		setOpenModal(true);
+		setIsEditFood(true);
+		setIsDeleteFood(false);
+	}
+
+	function deleteButtonHandler(
+		id,
+		foodName,
+		flavor,
+		type,
+		wetOrDry,
+		whereToBuy,
+		notes
+	) {
+		let rowDataObject = {
+			id: id,
+			foodName: foodName,
+			flavor: flavor,
+			type: type,
+			wetOrDry: wetOrDry,
+			whereToBuy: whereToBuy,
+			notes: notes,
+		};
+
+		setRowData(rowDataObject);
+		setOpenModal(true);
+		setIsEditFood(false);
+		setIsDeleteFood(true);
+	}
+
+	console.log('large screen');
+	console.log(largeScreen);
+	console.log('XL screen');
+	console.log(extraLargeScreen);
+	// console.log(rowData);
+	//sends data to EditDeleteFoodButtonHandler, which will reorganize data and open a
+	//delete modal or edit modal
 	return (
-		<div className="food-cards-main-container">
+		<div className={style}>
 			<Grid
 				container
 				justify="center"
@@ -110,10 +236,12 @@ export default function FoodCards(props) {
 				spacing={0}
 			>
 				<Grid item lg={12} xs={12}>
-					{food.map((food) => (
+					{food.map((food, i) => (
 						<Paper
 							className={
-								matches ? classes.paperSmall : classes.paper
+								largeScreen
+									? classes.paperLarge
+									: classes.paperXL
 							}
 							elevation={10}
 						>
@@ -202,7 +330,15 @@ export default function FoodCards(props) {
 											data-for="editTip"
 											style={{ color: '#1b2737' }}
 											onClick={() => {
-												// editPetHandler(pet, currentUser);
+												editButtonHandler(
+													i,
+													food.foodName,
+													food.flavor,
+													food.type,
+													food.wetOrDry,
+													food.whereToBuy,
+													food.notes
+												);
 											}}
 										>
 											<EditIcon />
@@ -214,7 +350,15 @@ export default function FoodCards(props) {
 											data-for="deleteTip"
 											style={{ color: 'red' }}
 											onClick={() => {
-												// deletePetHandler(pet, currentUser);
+												deleteButtonHandler(
+													i,
+													food.foodName,
+													food.flavor,
+													food.type,
+													food.wetOrDry,
+													food.whereToBuy,
+													food.notes
+												);
 											}}
 										>
 											<DeleteIcon />
@@ -222,6 +366,34 @@ export default function FoodCards(props) {
 									</div>
 								</div>
 							</div>
+							{isEditFood ? (
+								<EditDeleteFoodButtonHandler
+									isEditFood={isEditFood}
+									forceUpdate={props.forceUpdate}
+									currentUser={currentUser}
+									pet={pet}
+									openModal={openModal}
+									SetOpenModalToFalse={SetOpenModalToFalse}
+									rowData={rowData}
+									changeDefaultViewsAndRefresh={
+										props.changeDefaultViewsAndRefresh
+									}
+								/>
+							) : null}
+							{isDeleteFood ? (
+								<EditDeleteFoodButtonHandler
+									isDeleteFood={isDeleteFood}
+									forceUpdate={props.forceUpdate}
+									currentUser={currentUser}
+									pet={pet}
+									openModal={openModal}
+									SetOpenModalToFalse={SetOpenModalToFalse}
+									rowData={rowData}
+									changeDefaultViewsAndRefresh={
+										props.changeDefaultViewsAndRefresh
+									}
+								/>
+							) : null}
 						</Paper>
 					))}
 				</Grid>

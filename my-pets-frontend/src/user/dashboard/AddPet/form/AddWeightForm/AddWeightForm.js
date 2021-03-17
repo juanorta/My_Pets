@@ -340,7 +340,7 @@ export default function AddWeightForm(props) {
 						Cancel
 					</Button>
 					<Button type="submit" className={classes.submitButton}>
-						Submit
+						Save
 					</Button>
 				</div>
 			</form>

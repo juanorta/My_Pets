@@ -383,7 +383,7 @@ export default function AddFoodForm(props) {
 						Cancel
 					</Button>
 					<Button type="submit" className={classes.submitButton}>
-						Submit
+						Save
 					</Button>
 				</div>
 			</form>

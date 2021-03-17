@@ -64,11 +64,11 @@
 	margin: 0 auto;
 	margin-top: -1rem;
 	width: 70vw;
-	height: 280vh;
+	height: 110vh;
 	margin-bottom: 10rem;
 	overflow: auto;
 	border-radius: 10px;
-	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.67);
+	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.67);
 	/* justify-content: center;
 	display: flex; */
 }

@@ -18,6 +18,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Greeting from './views/greeting/Greeting';
 import Overview from './views/overview/Overview';
 import { getAllWeights } from '../../util/APIUtils';
+import Food from './views/food/Food';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -68,6 +69,13 @@ export default function Dashboard(props) {
 			<Weights
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}
+			/>
+			<Food
+				forceUpdate={props.forceUpdate}
+				currentUser={props.currentUser}
+				changeDefaultViewsAndRefresh={
+					props.changeDefaultViewsAndRefresh
+				}
 			/>
 		</div>
 	);

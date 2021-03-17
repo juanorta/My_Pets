@@ -327,7 +327,7 @@ export default function EditPet(props) {
 						Cancel
 					</Button>
 					<Button type="submit" className={classes.submitButton}>
-						Edit
+						Save
 					</Button>
 				</div>
 			</form>

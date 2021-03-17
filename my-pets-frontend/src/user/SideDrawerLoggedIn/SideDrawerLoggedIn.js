@@ -26,6 +26,13 @@ import { TramOutlined } from '@material-ui/icons';
 import { Link } from 'react-scroll';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import {
+	mdiAccount,
+	mdiDog,
+	mdiFoodDrumstick,
+	mdiScaleBathroom,
+} from '@mdi/js';
+import Icon from '@mdi/react';
 
 const drawerWidth = 300;
 
@@ -124,6 +131,7 @@ export default function SideDrawerLoggedIn(props) {
 	const [weightsMenuItem, setWeightsMenuItem] = useState(
 		classes.menuContents
 	);
+	const [foodMenuItem, setFoodMenuItem] = useState(classes.menuContents);
 
 	//hook that gets set to true when the dashboard page gets loaded for the first time
 	//used to trigger a slide-open animation on first load
@@ -295,6 +303,36 @@ export default function SideDrawerLoggedIn(props) {
 								<TrendingUpIcon />
 							</ListItemIcon>
 							<a>Weights</a>
+						</ListItem>
+					</Link>
+					<Link
+						activeClass="active"
+						spy={true}
+						to="food"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setFoodMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setFoodMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={foodMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<Icon
+									// className={iconClass3}
+									path={mdiFoodDrumstick}
+									title="food"
+									size={1}
+									horizontal
+									vertical
+									rotate={180}
+									// color="#1b2737"
+								/>
+							</ListItemIcon>
+							<a>Food</a>
 						</ListItem>
 					</Link>
 
