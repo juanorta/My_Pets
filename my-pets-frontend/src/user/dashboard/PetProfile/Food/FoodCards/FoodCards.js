@@ -220,10 +220,10 @@ export default function FoodCards(props) {
 		setIsDeleteFood(true);
 	}
 
-	console.log('large screen');
-	console.log(largeScreen);
-	console.log('XL screen');
-	console.log(extraLargeScreen);
+	// console.log('large screen');
+	// console.log(largeScreen);
+	// console.log('XL screen');
+	// console.log(extraLargeScreen);
 	// console.log(rowData);
 	//sends data to EditDeleteFoodButtonHandler, which will reorganize data and open a
 	//delete modal or edit modal

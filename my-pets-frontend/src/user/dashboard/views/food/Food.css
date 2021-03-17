@@ -1,9 +1,10 @@
 .food-main-container {
 	background-color: transparent;
-	height: 35rem;
+	height: auto;
 	width: 65%;
 	margin: 0 auto;
 	font-family: 'Poppins';
+	margin-bottom: 5rem;
 }
 /* 
 .food-dash {

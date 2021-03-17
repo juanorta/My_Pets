@@ -19,6 +19,7 @@ import Greeting from './views/greeting/Greeting';
 import Overview from './views/overview/Overview';
 import { getAllWeights } from '../../util/APIUtils';
 import Food from './views/food/Food';
+import DashboardAppointments from './views/appointments/DashboardAppointments';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -62,7 +63,11 @@ export default function Dashboard(props) {
 				currentUser={props.currentUser}
 			/>
 
-			<Appointments
+			{/* <Appointments
+				forceUpdate={props.forceUpdate}
+				currentUser={props.currentUser}
+			/> */}
+			<DashboardAppointments
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}
 			/>
