@@ -34,26 +34,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Appointments(props) {
+export default function ProfileUpcomingAppts(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [upcomingAppointments, setUpcomingAppointments] = useState(
+		props.upcomingAppointments
+	);
 	const [isEditAppt, setIsEditAppt] = useState(false);
 	const [isDeleteAppt, setIsDeleteAppt] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const [editParams, setEditParams] = useState('');
-	const [sortedAppointments, setSortedAppointments] = useState('');
 
-	useEffect(() => {
-		let sortedAppointmentsArray = pet.appointments.slice();
-		sortedAppointmentsArray.sort(function compare(a, b) {
-			var dateA = new Date(a.date);
-			var dateB = new Date(b.date);
-			return dateB - dateA;
-		});
-
-		setSortedAppointments(sortedAppointmentsArray);
-	}, []);
+	useEffect(() => {}, []);
 
 	//defining columns fields
 	//using TextField in order to prevent cell data from extending past cell width
@@ -197,16 +190,16 @@ export default function Appointments(props) {
 
 	//loading each row with a pet appointment object
 	let rows = [];
-	for (let i = 0; i < sortedAppointments.length; i++) {
-		let date = moment(sortedAppointments[i].date).format('MM/DD/YYYY');
+	for (let i = 0; i < upcomingAppointments.length; i++) {
+		let date = moment(upcomingAppointments[i].date).format('MM/DD/YYYY');
 		rows[i] = {
 			id: i,
 			Date: date,
-			Time: sortedAppointments[i].time + sortedAppointments[i].amOrPm,
-			Type: sortedAppointments[i].type,
-			Reason: sortedAppointments[i].reason,
-			Notes: sortedAppointments[i].notes,
-			VetGroomer: sortedAppointments[i].vetOrGroomerName,
+			Time: upcomingAppointments[i].time + upcomingAppointments[i].amOrPm,
+			Type: upcomingAppointments[i].type,
+			Reason: upcomingAppointments[i].reason,
+			Notes: upcomingAppointments[i].notes,
+			VetGroomer: upcomingAppointments[i].vetOrGroomerName,
 		};
 	}
 
@@ -250,9 +243,7 @@ export default function Appointments(props) {
 	// console.log('params : ' editParams);
 	return (
 		<div className="appointments-profile-main-container">
-			<div className="appointments-title">
-				<h1>Appointments</h1>
-			</div>
+			<h2>upcoming</h2>
 			<div
 				style={{
 					height: 400,

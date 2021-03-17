@@ -34,26 +34,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Appointments(props) {
+export default function ProfilePastAppts(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [pastAppointments, setPastAppointments] = useState(
+		props.pastAppointments
+	);
 	const [isEditAppt, setIsEditAppt] = useState(false);
 	const [isDeleteAppt, setIsDeleteAppt] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const [editParams, setEditParams] = useState('');
-	const [sortedAppointments, setSortedAppointments] = useState('');
 
-	useEffect(() => {
-		let sortedAppointmentsArray = pet.appointments.slice();
-		sortedAppointmentsArray.sort(function compare(a, b) {
-			var dateA = new Date(a.date);
-			var dateB = new Date(b.date);
-			return dateB - dateA;
-		});
-
-		setSortedAppointments(sortedAppointmentsArray);
-	}, []);
+	useEffect(() => {}, []);
 
 	//defining columns fields
 	//using TextField in order to prevent cell data from extending past cell width
@@ -197,18 +190,18 @@ export default function Appointments(props) {
 
 	//loading each row with a pet appointment object
 	let rows = [];
-	for (let i = 0; i < sortedAppointments.length; i++) {
-		let date = moment(sortedAppointments[i].date).format('MM/DD/YYYY');
-		rows[i] = {
-			id: i,
-			Date: date,
-			Time: sortedAppointments[i].time + sortedAppointments[i].amOrPm,
-			Type: sortedAppointments[i].type,
-			Reason: sortedAppointments[i].reason,
-			Notes: sortedAppointments[i].notes,
-			VetGroomer: sortedAppointments[i].vetOrGroomerName,
-		};
-	}
+	// for (let i = 0; i < pet.appointments.length; i++) {
+	// 	let date = moment(pet.appointments[i].date).format('MM/DD/YYYY');
+	// 	rows[i] = {
+	// 		id: i,
+	// 		Date: date,
+	// 		Time: pet.appointments[i].time + pet.appointments[i].amOrPm,
+	// 		Type: pet.appointments[i].type,
+	// 		Reason: pet.appointments[i].reason,
+	// 		Notes: pet.appointments[i].notes,
+	// 		VetGroomer: pet.appointments[i].vetOrGroomerName,
+	// 	};
+	// }
 
 	const cellClickHandler = (params) => {
 		if (params.field == 'Edit') {
@@ -250,9 +243,7 @@ export default function Appointments(props) {
 	// console.log('params : ' editParams);
 	return (
 		<div className="appointments-profile-main-container">
-			<div className="appointments-title">
-				<h1>Appointments</h1>
-			</div>
+			<h2>past</h2>
 			<div
 				style={{
 					height: 400,

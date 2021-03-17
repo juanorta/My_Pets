@@ -211,37 +211,6 @@ export default function UpcomingAppointments(props) {
 				/>
 			),
 		},
-		{
-			field: 'Edit',
-			headerName: 'Edit',
-			width: 77,
-			renderCell: (params) => (
-				<Button
-					onClick={() => {
-						//console.log(params);
-					}}
-					className={classes.Button}
-				>
-					<EditIcon className={classes.EditIcon} />
-				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
-			),
-		},
-		{
-			field: 'Delete',
-			headerName: 'Delete',
-			width: 94,
-			renderCell: (params) => (
-				<Button onClick={() => {}} className={classes.Button}>
-					<DeleteIcon className={classes.DeleteIcon} />
-				</Button>
-			),
-		},
 	];
 
 	//loading each row with a pet appointment object
@@ -280,7 +249,7 @@ export default function UpcomingAppointments(props) {
 					rows={rows}
 					columns={columns}
 					pageSize={5}
-					rowHeight={65}
+					rowHeight={75}
 					sortModel={[
 						{
 							field: 'Date',

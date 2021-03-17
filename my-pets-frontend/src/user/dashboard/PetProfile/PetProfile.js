@@ -21,6 +21,7 @@ import AddBtnPetProfile from './AddBtnPetProfile/AddBtnPetProfile';
 import SettingsBtnProfile from './SettingsBtnProfile/SettingsBtnProfile';
 import FoodTable from './Food/FoodTable/FoodTable';
 import Food from './Food/Food';
+import ProfileAppointments from './Appointments/ProfileAppointments';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

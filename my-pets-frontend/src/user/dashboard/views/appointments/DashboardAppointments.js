@@ -48,6 +48,7 @@ export default function DashboardAppointments(props) {
 				// console.log('SAME');
 				// console.log(newDate);
 				upcomingArray[j] = sortedAppointmentsArray[i];
+				j++;
 			} else {
 				// console.log('PAST');
 				// console.log(newDate);
