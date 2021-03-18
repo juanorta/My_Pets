@@ -95,6 +95,42 @@ public class Pet {
         this.food = food;
     }
 
+    //creating relationship with preventative
+    @OneToMany(mappedBy = "pet", orphanRemoval = true)
+    public List<Preventative> preventatives;
+
+    @JsonManagedReference(value = "pet-preventative")
+    public List<Preventative> getPreventatives(){
+        return preventatives;
+    }
+
+    public void setPreventatives(List<Preventative> preventatives){
+        this.preventatives = preventatives;
+    }
+
+    //creating relationship with medication
+    @OneToMany(mappedBy = "pet", orphanRemoval = true)
+    public List<Medication> medications;
+
+    @JsonManagedReference(value = "pet-medication")
+    public List<Medication> getMedications(){
+        return medications;
+    }
+
+    public void setMedications(List<Medication> medications){
+        this.medications = medications;
+    }
+
+    //creating relationship with vet
+    @OneToMany(mappedBy = "pet", orphanRemoval =true)
+    public List<Vet> vets;
+
+    @JsonManagedReference(value = "pet-vet")
+    public List<Vet> getVets(){return vets;}
+
+    public void setVets(List<Vet> vets){
+        this.vets = vets;
+    }
 
 
 

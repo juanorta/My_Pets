@@ -1,4 +1,9 @@
 package com.juan.projects.mypets.repository;
 
-public interface MedicationRepository {
+import com.juan.projects.mypets.model.Medication;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface MedicationRepository extends JpaRepository<Medication, Long> {
 }

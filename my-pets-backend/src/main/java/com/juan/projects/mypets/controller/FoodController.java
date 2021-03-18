@@ -4,11 +4,13 @@ import com.juan.projects.mypets.model.Appointment;
 import com.juan.projects.mypets.model.Food;
 import com.juan.projects.mypets.repository.FoodRepository;
 import com.juan.projects.mypets.repository.PetRepository;
+import com.juan.projects.mypets.repository.PreventativeRepository;
 import com.juan.projects.mypets.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class FoodController {
@@ -22,9 +24,16 @@ public class FoodController {
     @Autowired
     private FoodRepository foodRepository;
 
+    @Autowired
+    private PreventativeRepository preventativeRepository;
+
     //get all food for a pet
     @GetMapping("/users/{userId}/pets/{petId}/food")
     public List<Food> getFoodByPet(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId){
+//        System.out.println(foodRepository.findById((long) 80).orElse(null));
+//
+//        List<Food> foodOptional= foodRepository.findByPetId(petId);
+//        System.out.println(foodOptional);
         return foodRepository.findByPetId(petId);
     }
 

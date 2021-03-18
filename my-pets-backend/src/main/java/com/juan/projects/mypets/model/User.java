@@ -120,6 +120,43 @@ public class User {
         this.food = food;
     }
 
+    //relationship with preventatives
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Preventative> preventatives;
+
+    @JsonManagedReference(value = "user-preventative")
+    public List<Preventative> getPreventatives(){ return preventatives;}
+
+    public void setPreventatives(List<Preventative> preventatives){
+        this.preventatives = preventatives;
+    }
+
+    //relationship with medications
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Medication> medications;
+
+    @JsonManagedReference(value = "user-medication")
+    public List<Medication> getMedications(){
+        return medications;
+    }
+
+    public void setMedications(List<Medication> medications){
+        this.medications = medications;
+    }
+
+    //relationship with vets
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Vet> vets;
+
+    @JsonManagedReference(value = "user-vet")
+    public List<Vet> getVets(){
+        return vets;
+    }
+
+    public void setVets(List<Vet> vets){
+        this.vets = vets;
+    }
+
     public Long getId() {
         return id;
     }
