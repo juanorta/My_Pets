@@ -542,3 +542,260 @@ export async function editFoodImage(id, petId, foodId, imageId, file) {
 
 	console.log(response);
 }
+
+export async function addPreventative(
+	id,
+	petId,
+	name,
+	type,
+	lastGiven,
+	dueNext,
+	notes,
+	petName,
+	petPreventativeId,
+	data
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addPreventative`, {
+		method: 'POST',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			name: name,
+			type: type,
+			lastGiven: lastGiven,
+			dueNext: dueNext,
+			notes: notes,
+			petName: petName,
+			petPreventativeId: petPreventativeId,
+			data: data,
+		}),
+	});
+}
+
+export async function editPreventative(
+	id,
+	petId,
+	prevId,
+	name,
+	type,
+	lastGiven,
+	dueNext,
+	notes,
+	petName,
+	petPreventativeId,
+	data
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+
+	await fetch(
+		API_BASE_URL +
+			`/users/${id}/pets/${petId}/preventatives/${prevId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: name,
+				type: type,
+				lastGiven: lastGiven,
+				dueNext: dueNext,
+				notes: notes,
+				petName: petName,
+				petPreventativeId: petPreventativeId,
+				data: data,
+			}),
+		}
+	);
+}
+
+export async function deletePreventative(id, petId, prevId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	// console.log(token);
+	console.log('delete prev function called');
+	// console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+	await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/preventatives/${prevId}`,
+		{
+			method: 'DELETE',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+}
+
+export async function addMedication(
+	id,
+	petId,
+	medicationName,
+	startDate,
+	endDate,
+	dosageInstructions,
+	petName,
+	petMedId,
+	data
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addMedication`, {
+		method: 'POST',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			medicationName: medicationName,
+			startDate: startDate,
+			endDate: endDate,
+			dosageInstructions: dosageInstructions,
+			petName: petName,
+			petMedId: petMedId,
+			data: data,
+		}),
+	});
+}
+
+export async function editMedication(
+	id,
+	petId,
+	medId,
+	medicationName,
+	startDate,
+	endDate,
+	dosageInstructions,
+	petName,
+	petMedId,
+	data
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+
+	await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/medications/${medId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				medicationName: medicationName,
+				startDate: startDate,
+				endDate: endDate,
+				dosageInstructions: dosageInstructions,
+				petName: petName,
+				petMedId: petMedId,
+				data: data,
+			}),
+		}
+	);
+}
+
+export async function deleteMedication(id, petId, medId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	// console.log(token);
+	console.log('delete medication function called');
+	// console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/meds/${medId}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	});
+}
+
+export async function addVet(
+	id,
+	petId,
+	vetName,
+	phoneNumber,
+	location,
+	notes,
+	petName,
+	petVetId,
+	data
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addVet`, {
+		method: 'POST',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			vetName: vetName,
+			phoneNumber: phoneNumber,
+			location: location,
+			notes: notes,
+			petName: petName,
+			petVetId: petVetId,
+			data: data,
+		}),
+	});
+}
+
+export async function editVet(
+	id,
+	petId,
+	vetId,
+	vetName,
+	phoneNumber,
+	location,
+	notes,
+	petName,
+	petVetId,
+	data
+) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+
+	await fetch(
+		API_BASE_URL + `/users/${id}/pets/${petId}/vets/${vetId}/update`,
+		{
+			method: 'PUT',
+			headers: {
+				Authorization: 'Bearer ' + token,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				vetName: vetName,
+				phoneNumber: phoneNumber,
+				location: location,
+				notes: notes,
+				petName: petName,
+				petVetId: petVetId,
+				data: data,
+			}),
+		}
+	);
+}
+
+export async function deleteVet(id, petId, vetId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	// console.log(token);
+	console.log('delete vet function called');
+	// console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/vets/${vetId}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: 'Bearer ' + token,
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	});
+}

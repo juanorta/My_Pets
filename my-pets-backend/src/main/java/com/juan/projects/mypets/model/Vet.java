@@ -21,6 +21,7 @@ public class Vet {
     private String vetName;
     private String phoneNumber;
     private String location;
+    private String notes;
 
     //used to identify which pet is associated with vet in dashboard
     private String petName;

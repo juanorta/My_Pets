@@ -8,6 +8,9 @@ import TextField from '@material-ui/core/TextField';
 import AddAppointmentForm from '../../../dashboard/AddPet/form/AddAppointmentForm/AddAppointmentForm';
 import AddWeightForm from '../../../dashboard/AddPet/form/AddWeightForm/AddWeightForm';
 import AddFoodForm from '../../../dashboard/AddPet/form/AddFoodForm/AddFoodForm';
+import AddPreventativeForm from '../../../dashboard/AddPet/form/AddPreventativeForm';
+import AddMedicationForm from '../../../dashboard/AddPet/form/AddMedicationForm';
+import AddVetForm from '../../../dashboard/AddPet/form/AddVetForm';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -62,6 +65,9 @@ export default function MaterialModalProfile(props) {
 	const [isAppointment, setIsAppointment] = useState(props.isAppointment);
 	const [isWeight, setIsWeight] = useState(props.isWeight);
 	const [isFood, setIsFood] = useState(props.isFood);
+	const [isPreventative, setIsPreventative] = useState(props.isPreventative);
+	const [isMedication, setIsMedication] = useState(props.isMedication);
+	const [isVet, setIsVet] = useState(props.isVet);
 	const [isEditAppt, setIsEditAppt] = useState(props.isEditAppt);
 	const [user, setUser] = useState('ok');
 
@@ -79,7 +85,7 @@ export default function MaterialModalProfile(props) {
 
 	//used to display appropriate content
 	let style = classes.AddForm;
-	if (isFood) {
+	if (isFood === true || isPreventative === true) {
 		style = classes.AddFoodForm;
 	}
 
@@ -136,6 +142,43 @@ export default function MaterialModalProfile(props) {
 								}
 							/>
 						) : null}
+
+						{isPreventative ? (
+							<AddPreventativeForm
+								handleClose={handleClose}
+								currentUser={currentUser}
+								pet={pet}
+								forceUpdate={props.forceUpdate}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+
+						{isMedication ? (
+							<AddMedicationForm
+								handleClose={handleClose}
+								currentUser={currentUser}
+								pet={pet}
+								forceUpdate={props.forceUpdate}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+
+						{isVet ? (
+							<AddVetForm
+								handleClose={handleClose}
+								currentUser={currentUser}
+								pet={pet}
+								forceUpdate={props.forceUpdate}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+
 						{isEditAppt ? <AddAppointmentForm /> : null}
 					</div>
 				</Fade>

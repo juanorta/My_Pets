@@ -27,8 +27,8 @@ public class Preventative {
     //used to associate with pet in dahsboard
     private String petName;
     private Long petPreventativeId;
-//    @Lob
-//    private byte[] data;
+    @Lob
+    private byte[] data;
 
     //creating relationship with pet
     @ManyToOne(fetch = FetchType.EAGER)

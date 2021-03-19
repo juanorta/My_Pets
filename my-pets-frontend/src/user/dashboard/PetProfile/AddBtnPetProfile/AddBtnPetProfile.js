@@ -46,6 +46,9 @@ export default function AddBtnPetProfile(props) {
 	const [isAppointment, setIsAppointment] = useState(false);
 	const [isWeight, setIsWeight] = useState(false);
 	const [isFood, setIsFood] = useState(false);
+	const [isPreventative, setIsPreventative] = useState(false);
+	const [isMedication, setIsMedication] = useState(false);
+	const [isVet, setIsVet] = useState(false);
 	const [pet, setPet] = useState(props.pet);
 
 	const addButtonHandler = (event) => {
@@ -84,12 +87,45 @@ export default function AddBtnPetProfile(props) {
 		setAnchorEl(null);
 	};
 
+	const newPreventativeHandler = () => {
+		console.log('preventative clicked');
+		setOpenModal(true);
+		setIsPreventative(true);
+		setIsAppointment(false);
+		setIsFood(false);
+		setIsWeight(false);
+		setAnchorEl(null);
+	};
+
+	const newMedicationHandler = () => {
+		console.log('medication clicked');
+		setOpenModal(true);
+		setIsMedication(true);
+		setIsAppointment(false);
+		setIsFood(false);
+		setIsWeight(false);
+		setAnchorEl(null);
+	};
+
+	const newVetHandler = () => {
+		console.log('vet clicked');
+		setOpenModal(true);
+		setIsVet(true);
+		setIsAppointment(false);
+		setIsFood(false);
+		setIsWeight(false);
+		setAnchorEl(null);
+	};
+
 	//sets all flags to false
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
 		setIsAppointment(false);
 		setIsWeight(false);
 		setIsFood(false);
+		setIsPreventative(false);
+		setIsMedication(false);
+		setIsVet(false);
 		// props.forceUpdate();
 	};
 
@@ -136,6 +172,24 @@ export default function AddBtnPetProfile(props) {
 					>
 						New Food/Treat
 					</MenuItem>
+					<MenuItem
+						className={classes.MenuItem}
+						onClick={newPreventativeHandler}
+					>
+						New Preventative
+					</MenuItem>
+					<MenuItem
+						className={classes.MenuItem}
+						onClick={newMedicationHandler}
+					>
+						New Medication
+					</MenuItem>
+					<MenuItem
+						className={classes.MenuItem}
+						onClick={newVetHandler}
+					>
+						New Veterinarian
+					</MenuItem>
 				</Menu>
 
 				{/* depending on which option the user clicked, it will trigger which type of
@@ -175,6 +229,48 @@ export default function AddBtnPetProfile(props) {
 						openModal={openModal}
 						SetOpenModalToFalse={SetOpenModalToFalse}
 						isFood={isFood}
+						pet={pet}
+						forceUpdate={props.forceUpdate}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
+					/>
+				) : null}
+
+				{openModal && isPreventative ? (
+					<MaterialModalProfile
+						currentUser={props.currentUser}
+						openModal={openModal}
+						SetOpenModalToFalse={SetOpenModalToFalse}
+						isPreventative={isPreventative}
+						pet={pet}
+						forceUpdate={props.forceUpdate}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
+					/>
+				) : null}
+
+				{openModal && isMedication ? (
+					<MaterialModalProfile
+						currentUser={props.currentUser}
+						openModal={openModal}
+						SetOpenModalToFalse={SetOpenModalToFalse}
+						isMedication={isMedication}
+						pet={pet}
+						forceUpdate={props.forceUpdate}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
+					/>
+				) : null}
+
+				{openModal && isVet ? (
+					<MaterialModalProfile
+						currentUser={props.currentUser}
+						openModal={openModal}
+						SetOpenModalToFalse={SetOpenModalToFalse}
+						isVet={isVet}
 						pet={pet}
 						forceUpdate={props.forceUpdate}
 						changeDefaultViewsAndRefresh={

@@ -11,6 +11,9 @@ import {
 	mdiDog,
 	mdiFoodDrumstick,
 	mdiScaleBathroom,
+	mdiNeedle,
+	mdiPill,
+	mdiDoctor,
 } from '@mdi/js';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import Appointments from './Appointments/Appointments';
@@ -22,6 +25,10 @@ import SettingsBtnProfile from './SettingsBtnProfile/SettingsBtnProfile';
 import FoodTable from './Food/FoodTable/FoodTable';
 import Food from './Food/Food';
 import ProfileAppointments from './Appointments/ProfileAppointments';
+import EventIcon from '@material-ui/icons/Event';
+import Preventatives from './Preventatives/Preventatives';
+import Medications from './Medications/Medications';
+import Vets from './Vets/Vets';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -81,16 +88,25 @@ export default function PetProfile(props) {
 	const [iconClass1, setIconClass1] = useState(classes.TabIcon);
 	const [iconClass2, setIconClass2] = useState(classes.TabIcon);
 	const [iconClass3, setIconClass3] = useState(classes.TabIcon);
+	const [iconClass4, setIconClass4] = useState(classes.TabIcon);
+	const [iconClass5, setIconClass5] = useState(classes.TabIcon);
+	const [iconClass6, setIconClass6] = useState(classes.TabIcon);
 
 	//used to detect when a button is clicked
 	const [apptClicked, setApptClicked] = useState(false);
 	const [weightClicked, setWeightClicked] = useState(false);
 	const [foodClicked, setFoodClicked] = useState(false);
+	const [preventativeClicked, setPreventativeClicked] = useState(false);
+	const [medicationClicked, setMedicationClicked] = useState(false);
+	const [vetClicked, setVetClicked] = useState(false);
 
 	//different styles for each button
 	const [buttonClass1, setButtonClass1] = useState(classes.TabButton);
 	const [buttonClass2, setButtonClass2] = useState(classes.TabButton);
 	const [buttonClass3, setButtonClass3] = useState(classes.TabButton);
+	const [buttonClass4, setButtonClass4] = useState(classes.TabButton);
+	const [buttonClass5, setButtonClass5] = useState(classes.TabButton);
+	const [buttonClass6, setButtonClass6] = useState(classes.TabButton);
 
 	const [defaultView, setDefaultView] = useState(props.defaultView);
 
@@ -137,6 +153,16 @@ export default function PetProfile(props) {
 	const iconHoverHandler3 = () => {
 		setIconClass3(classes.TabIconMouseHover);
 	};
+	const iconHoverHandler4 = () => {
+		console.log('hover');
+		setIconClass4(classes.TabIconMouseHover);
+	};
+	const iconHoverHandler5 = () => {
+		setIconClass5(classes.TabIconMouseHover);
+	};
+	const iconHoverHandler6 = () => {
+		setIconClass6(classes.TabIconMouseHover);
+	};
 
 	//changes icon to normal
 	//will only change to normal when not clicked
@@ -173,6 +199,18 @@ export default function PetProfile(props) {
 		setFoodClicked(false);
 		setButtonClass3(classes.TabButton);
 		setIconClass3(classes.TabIcon);
+
+		setPreventativeClicked(false);
+		setButtonClass4(classes.TabButton);
+		setIconClass4(classes.TabIcon);
+
+		setMedicationClicked(false);
+		setButtonClass5(classes.TabButton);
+		setIconClass5(classes.TabIcon);
+
+		setVetClicked(false);
+		setButtonClass6(classes.TabButton);
+		setIconClass6(classes.TabIcon);
 	};
 
 	const handleWeightClick = () => {
@@ -189,6 +227,18 @@ export default function PetProfile(props) {
 		setFoodClicked(false);
 		setButtonClass3(classes.TabButton);
 		setIconClass3(classes.TabIcon);
+
+		setPreventativeClicked(false);
+		setButtonClass4(classes.TabButton);
+		setIconClass4(classes.TabIcon);
+
+		setMedicationClicked(false);
+		setButtonClass5(classes.TabButton);
+		setIconClass5(classes.TabIcon);
+
+		setVetClicked(false);
+		setButtonClass6(classes.TabButton);
+		setIconClass6(classes.TabIcon);
 	};
 
 	const handleFoodClick = () => {
@@ -204,6 +254,96 @@ export default function PetProfile(props) {
 		setWeightClicked(false);
 		setButtonClass2(classes.TabButton);
 		setIconClass2(classes.TabIcon);
+
+		setPreventativeClicked(false);
+		setButtonClass4(classes.TabButton);
+		setIconClass4(classes.TabIcon);
+
+		setMedicationClicked(false);
+		setButtonClass5(classes.TabButton);
+		setIconClass5(classes.TabIcon);
+
+		setVetClicked(false);
+		setButtonClass6(classes.TabButton);
+		setIconClass6(classes.TabIcon);
+	};
+
+	const handlePrevClicked = () => {
+		setPreventativeClicked(true);
+		setButtonClass4(classes.TabButtonClicked);
+		iconHoverHandler4();
+
+		setApptClicked(false);
+		setButtonClass1(classes.TabButton);
+		setIconClass1(classes.TabIcon);
+
+		setFoodClicked(false);
+		setButtonClass2(classes.TabButton);
+		setIconClass2(classes.TabIcon);
+
+		setWeightClicked(false);
+		setButtonClass3(classes.TabButton);
+		setIconClass3(classes.TabIcon);
+
+		setMedicationClicked(false);
+		setButtonClass5(classes.TabButton);
+		setIconClass5(classes.TabIcon);
+
+		setVetClicked(false);
+		setButtonClass6(classes.TabButton);
+		setIconClass6(classes.TabIcon);
+	};
+
+	const handleMedClicked = () => {
+		setMedicationClicked(true);
+		setButtonClass5(classes.TabButtonClicked);
+		iconHoverHandler5();
+
+		setApptClicked(false);
+		setButtonClass1(classes.TabButton);
+		setIconClass1(classes.TabIcon);
+
+		setFoodClicked(false);
+		setButtonClass2(classes.TabButton);
+		setIconClass2(classes.TabIcon);
+
+		setWeightClicked(false);
+		setButtonClass3(classes.TabButton);
+		setIconClass3(classes.TabIcon);
+
+		setPreventativeClicked(false);
+		setButtonClass4(classes.TabButton);
+		setIconClass4(classes.TabIcon);
+
+		setVetClicked(false);
+		setButtonClass6(classes.TabButton);
+		setIconClass6(classes.TabIcon);
+	};
+
+	const handleVetClicked = () => {
+		setVetClicked(true);
+		setButtonClass6(classes.TabButtonClicked);
+		iconHoverHandler6();
+
+		setApptClicked(false);
+		setButtonClass1(classes.TabButton);
+		setIconClass1(classes.TabIcon);
+
+		setFoodClicked(false);
+		setButtonClass2(classes.TabButton);
+		setIconClass2(classes.TabIcon);
+
+		setWeightClicked(false);
+		setButtonClass3(classes.TabButton);
+		setIconClass3(classes.TabIcon);
+
+		setPreventativeClicked(false);
+		setButtonClass4(classes.TabButton);
+		setIconClass4(classes.TabIcon);
+
+		setMedicationClicked(false);
+		setButtonClass5(classes.TabButton);
+		setIconClass5(classes.TabIcon);
 	};
 
 	//	console.log('appt = ' + apptClicked);
@@ -301,21 +441,42 @@ export default function PetProfile(props) {
 									place="top"
 									effect="solid"
 								>
-									View 'Appointments' section
+									View Appointments
 								</ReactTooltip>
 								<ReactTooltip
 									id="weights"
 									place="top"
 									effect="solid"
 								>
-									View 'Weights' section
+									View Weights
 								</ReactTooltip>
 								<ReactTooltip
 									id="food"
 									place="top"
 									effect="solid"
 								>
-									View 'Food' section
+									View Food
+								</ReactTooltip>
+								<ReactTooltip
+									id="prev"
+									place="top"
+									effect="solid"
+								>
+									View Preventatives
+								</ReactTooltip>
+								<ReactTooltip
+									id="meds"
+									place="top"
+									effect="solid"
+								>
+									View Medications
+								</ReactTooltip>
+								<ReactTooltip
+									id="vets"
+									place="top"
+									effect="solid"
+								>
+									View Veterinarians
 								</ReactTooltip>
 								<ul className="tabs-list">
 									<li>
@@ -327,9 +488,7 @@ export default function PetProfile(props) {
 											// onMouseLeave={iconHoverLeaveHandler}
 											onClick={handleApptClick}
 										>
-											<LocalHospitalIcon
-												className={iconClass1}
-											/>
+											<EventIcon className={iconClass1} />
 										</IconButton>
 									</li>
 									<li>
@@ -378,6 +537,75 @@ export default function PetProfile(props) {
 											/>
 										</IconButton>
 									</li>
+									<li>
+										<IconButton
+											data-tip
+											data-for="prev"
+											className={buttonClass4}
+											// onMouseOver={iconHoverHandler3}
+											// onMouseLeave={
+											// 	iconHoverLeaveHandler3
+											// }
+											onClick={handlePrevClicked}
+										>
+											<Icon
+												className={iconClass4}
+												path={mdiNeedle}
+												title="food"
+												size={2}
+												horizontal
+												vertical
+												rotate={180}
+												// color="#1b2737"
+											/>
+										</IconButton>
+									</li>
+									<li>
+										<IconButton
+											data-tip
+											data-for="meds"
+											className={buttonClass5}
+											// onMouseOver={iconHoverHandler3}
+											// onMouseLeave={
+											// 	iconHoverLeaveHandler3
+											// }
+											onClick={handleMedClicked}
+										>
+											<Icon
+												className={iconClass5}
+												path={mdiPill}
+												title="food"
+												size={2}
+												horizontal
+												vertical
+												rotate={180}
+												// color="#1b2737"
+											/>
+										</IconButton>
+									</li>
+									<li>
+										<IconButton
+											data-tip
+											data-for="vets"
+											className={buttonClass6}
+											// onMouseOver={iconHoverHandler3}
+											// onMouseLeave={
+											// 	iconHoverLeaveHandler3
+											// }
+											onClick={handleVetClicked}
+										>
+											<Icon
+												className={iconClass6}
+												path={mdiDoctor}
+												title="food"
+												size={2}
+												horizontal
+												vertical
+												rotate={180}
+												// color="#1b2737"
+											/>
+										</IconButton>
+									</li>
 								</ul>
 								{/* shows appopriate component when selected */}
 								{apptClicked &&
@@ -412,6 +640,42 @@ export default function PetProfile(props) {
 								weightClicked === false &&
 								apptClicked === false ? (
 									<Food
+										forceUpdate={props.forceUpdate}
+										currentUser={user}
+										pet={pet}
+										defaultViewHandler={defaultViewHandler}
+										changeDefaultViewsAndRefresh={
+											props.changeDefaultViewsAndRefresh
+										}
+									/>
+								) : null}
+
+								{preventativeClicked ? (
+									<Preventatives
+										forceUpdate={props.forceUpdate}
+										currentUser={user}
+										pet={pet}
+										defaultViewHandler={defaultViewHandler}
+										changeDefaultViewsAndRefresh={
+											props.changeDefaultViewsAndRefresh
+										}
+									/>
+								) : null}
+
+								{medicationClicked ? (
+									<Medications
+										forceUpdate={props.forceUpdate}
+										currentUser={user}
+										pet={pet}
+										defaultViewHandler={defaultViewHandler}
+										changeDefaultViewsAndRefresh={
+											props.changeDefaultViewsAndRefresh
+										}
+									/>
+								) : null}
+
+								{vetClicked ? (
+									<Vets
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}

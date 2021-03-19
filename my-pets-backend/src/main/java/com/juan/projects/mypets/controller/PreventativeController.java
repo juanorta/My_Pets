@@ -61,6 +61,7 @@ public class PreventativeController {
         existingPreventative.setNotes(preventative.getNotes());
         existingPreventative.setPetName(preventative.getPetName());
         existingPreventative.setPetPreventativeId(preventative.getPetPreventativeId());
+        existingPreventative.setData(preventative.getData());
 
         return preventativeRepository.save(existingPreventative);
     }
