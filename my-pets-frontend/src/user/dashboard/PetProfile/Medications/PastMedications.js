@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import { TextField } from '@material-ui/core';
@@ -30,16 +30,50 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function Vets(props) {
+export default function PastMedications(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [vets, setVets] = useState(props.pet.vets);
-	console.log(vets);
+	const [pastMedications, setPastMedications] = useState(
+		props.pastMedications
+	);
+	const [loading, setLoading] = useState(true);
 
 	const columns = [
 		{
-			field: 'vetName',
+			field: 'endDate',
+			headerName: 'End Date',
+			width: 150,
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+		{
+			field: 'startDate',
+			headerName: 'Start Date',
+			width: 150,
+
+			renderCell: (params) => (
+				<TextField
+					className={classes.TextField}
+					// style={{ color: 'black' }}
+					InputProps={{ disableUnderline: true }}
+					multiline
+					disabled={true}
+					value={params.value}
+				/>
+			),
+		},
+
+		{
+			field: 'name',
 			headerName: 'Name',
 			width: 130,
 			renderCell: (params) => (
@@ -54,41 +88,9 @@ export default function Vets(props) {
 			),
 		},
 		{
-			field: 'phoneNumber',
-			headerName: 'Phone Number',
-			width: 150,
-			renderCell: (params) => (
-				<TextField
-					className={classes.TextField}
-					// style={{ color: 'black' }}
-					InputProps={{ disableUnderline: true }}
-					multiline
-					disabled={true}
-					value={params.value}
-				/>
-			),
-		},
-
-		{
-			field: 'location',
-			headerName: 'Location',
-			width: 130,
-			renderCell: (params) => (
-				<TextField
-					className={classes.TextField}
-					// style={{ color: 'black' }}
-					InputProps={{ disableUnderline: true }}
-					multiline
-					disabled={true}
-					value={params.value}
-				/>
-			),
-		},
-		{
-			field: 'notes',
-			headerName: 'Notes',
-			width: 150,
-
+			field: 'dosageInstructions',
+			headerName: 'Dosage Instructions',
+			width: 180,
 			renderCell: (params) => (
 				<TextField
 					className={classes.TextField}
@@ -147,36 +149,82 @@ export default function Vets(props) {
 
 	let rows = [];
 
-	for (let i = 0; i < vets.length; i++) {
+	for (let i = 0; i < pastMedications.length; i++) {
+		let date1 = moment(pastMedications[i].endDate).format('MM/DD/YYYY');
+		let date2 = moment(pastMedications[i].startDate).format('MM/DD/YYYY');
+
 		rows[i] = {
 			id: i,
 
-			vetName: vets[i].vetName,
-			phoneNumber: vets[i].phoneNumber,
-			location: vets[i].location,
-			notes: vets[i].notes,
+			endDate: date1,
+			startDate: date2,
+			name: pastMedications[i].medicationName,
+			type: pastMedications[i].dosageInstructions,
 		};
 	}
+
+	const SetOpenModalToFalse = () => {
+		// setOpenModal(false);
+		// setOpenModal(false);
+		// setIsEditWeight(false);
+		// setIsDeleteWeight(false);
+		// props.forceUpdate();
+	};
+	// console.log(sortedWeights);
 	return (
-		<div className="appointments-profile-main-container">
-			<div className="appointments-title">
-				<h1>Veterinarians</h1>
-			</div>
-			<div
-				style={{
-					height: 400,
-					width: '70%',
-					margin: '0 auto',
-					// backgroundColor: 'red',
-				}}
-			>
-				<DataGrid
-					rows={rows}
-					columns={columns}
-					pageSize={5}
-					rowHeight={72}
+		<div
+			style={{
+				height: 400,
+				width: '70%',
+				margin: '0 auto',
+				// backgroundColor: 'red',
+			}}
+		>
+			<DataGrid
+				rows={rows}
+				columns={columns}
+				pageSize={5}
+				rowHeight={72}
+
+				// sortModel={[
+				// 	{
+				// 		field: 'commodity',
+				// 		sort: 'asc',
+				// 	},
+				// ]}
+				// onCellClick={(CellParams) => {}}
+			/>
+			{/* {isEditWeight ? (
+				<EditDeleteFoodButtonHandler
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					isEditWeight={isEditWeight}
+					openModal={openModal}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					rowData={rowData}
+					sortedWeights={sortedWeights}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
 				/>
-			</div>
+			) : null}
+			{isDeleteWeight ? (
+				<EditDeleteFoodButtonHandler
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					isDeleteWeight={isDeleteWeight}
+					openModal={openModal}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					rowData={rowData}
+					sortedWeights={sortedWeights}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
+				/>
+			) : null} */}
 		</div>
 	);
 }
