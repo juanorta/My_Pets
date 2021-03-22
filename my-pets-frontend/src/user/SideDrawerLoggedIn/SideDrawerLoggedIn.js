@@ -33,6 +33,7 @@ import {
 	mdiScaleBathroom,
 } from '@mdi/js';
 import Icon from '@mdi/react';
+import EventIcon from '@material-ui/icons/Event';
 
 const drawerWidth = 300;
 
@@ -278,7 +279,7 @@ export default function SideDrawerLoggedIn(props) {
 					>
 						<ListItem button className={apptMenuItem}>
 							<ListItemIcon style={{ color: 'white' }}>
-								<LocalHospitalIcon />
+								<EventIcon />
 							</ListItemIcon>
 							Appointments
 						</ListItem>
@@ -300,7 +301,16 @@ export default function SideDrawerLoggedIn(props) {
 					>
 						<ListItem button className={weightsMenuItem}>
 							<ListItemIcon style={{ color: 'white' }}>
-								<TrendingUpIcon />
+								<Icon
+									// className={iconClass2}
+									path={mdiScaleBathroom}
+									title="Scale"
+									size={1}
+									horizontal
+									vertical
+									rotate={180}
+									// color="#1b2737"
+								/>
 							</ListItemIcon>
 							<a>Weights</a>
 						</ListItem>
