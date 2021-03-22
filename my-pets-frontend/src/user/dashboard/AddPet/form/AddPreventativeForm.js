@@ -204,7 +204,7 @@ export default function AddPreventative(props) {
 		Alert.success('Preventative Added');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
+			props.changeDefaultViewsAndRefresh('PREVENTATIVES');
 			props.forceUpdate();
 		}, 500);
 	};
@@ -231,7 +231,6 @@ export default function AddPreventative(props) {
 				<TextField
 					onChange={onTypeChange}
 					className={classes.TextField1}
-					required
 					variant="standard"
 					type="text"
 					// inputProps={{
@@ -247,7 +246,6 @@ export default function AddPreventative(props) {
 						<KeyboardDatePicker
 							className={classes.TextField1}
 							clearable
-							required
 							value={dueNext}
 							placeholder="10/10/2018"
 							// onChange={(date) => handleDateChange(date)}
@@ -264,7 +262,6 @@ export default function AddPreventative(props) {
 						<KeyboardDatePicker
 							className={classes.TextField1}
 							clearable
-							required
 							value={lastGiven}
 							placeholder="10/10/2018"
 							// onChange={(date) => handleDateChange(date)}

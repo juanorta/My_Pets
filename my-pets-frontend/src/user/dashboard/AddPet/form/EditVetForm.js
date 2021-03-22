@@ -186,7 +186,7 @@ export default function EditVetForm(props) {
 		Alert.success('Vet Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
+			props.changeDefaultViewsAndRefresh('VETS');
 			props.forceUpdate();
 		}, 500);
 	};

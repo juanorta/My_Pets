@@ -11,6 +11,9 @@ import EditPet from '../views/pets/EditPet/EditPet';
 import DeleteApptConfirmation from '../views/pets/deleteConfirmation/DeleteApptConfirmation';
 import DeleteFoodConfirmation from '../views/pets/deleteConfirmation/DeleteFoodConfirmation';
 import DeleteWeightConfirmation from '../views/pets/deleteConfirmation/DeleteWeightConfirmation';
+import DeletePrevConfirmation from '../views/pets/deleteConfirmation/DeletePrevConfirmation';
+import DeleteMedicationConfirmation from '../views/pets/deleteConfirmation/DeleteMedicationConfirmation';
+import DeleteVetConfirmation from '../views/pets/deleteConfirmation/DeleteVetConfirmation';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -182,6 +185,45 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteWeight ? (
 							<DeleteWeightConfirmation
+								forceUpdate={props.forceUpdate}
+								handleClose={handleClose}
+								currentUser={props.currentUser}
+								pet={props.pet}
+								rowData={props.rowData}
+								sortedWeights={sortedWeights}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isDeletePrev ? (
+							<DeletePrevConfirmation
+								forceUpdate={props.forceUpdate}
+								handleClose={handleClose}
+								currentUser={props.currentUser}
+								pet={props.pet}
+								rowData={props.rowData}
+								sortedWeights={sortedWeights}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isDeleteMedication ? (
+							<DeleteMedicationConfirmation
+								forceUpdate={props.forceUpdate}
+								handleClose={handleClose}
+								currentUser={props.currentUser}
+								pet={props.pet}
+								rowData={props.rowData}
+								sortedWeights={sortedWeights}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isDeleteVet ? (
+							<DeleteVetConfirmation
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}

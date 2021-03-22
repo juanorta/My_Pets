@@ -185,7 +185,7 @@ export default function AddMedicationForm(props) {
 		Alert.success('Vet Added');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
+			props.changeDefaultViewsAndRefresh('VETS');
 			props.forceUpdate();
 		}, 500);
 	};
@@ -201,7 +201,6 @@ export default function AddMedicationForm(props) {
 				<TextField
 					onChange={onNameChange}
 					className={classes.TextField1}
-					required
 					variant="standard"
 					type="text"
 					inputProps={{
@@ -209,11 +208,11 @@ export default function AddMedicationForm(props) {
 					}}
 					id="standard-basic"
 					label="Name"
+					required
 				/>
 				<TextField
 					onChange={onNumberChange}
 					className={classes.TextField1}
-					required
 					variant="standard"
 					type="text"
 					inputProps={{
@@ -225,7 +224,6 @@ export default function AddMedicationForm(props) {
 				<TextField
 					onChange={onLocationChange}
 					className={classes.TextField1}
-					required
 					variant="standard"
 					type="text"
 					inputProps={{

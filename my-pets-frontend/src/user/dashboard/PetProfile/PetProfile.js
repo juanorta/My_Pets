@@ -136,6 +136,12 @@ export default function PetProfile(props) {
 			handleWeightClick();
 		} else if (defaultView == 'FOOD') {
 			handleFoodClick();
+		} else if (defaultView == 'PREVENTATIVES') {
+			handlePrevClicked();
+		} else if (defaultView == 'MEDICATIONS') {
+			handleMedClicked();
+		} else if (defaultView == 'VETS') {
+			handleVetClicked();
 		}
 		console.log(viewName);
 	};

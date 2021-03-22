@@ -189,7 +189,7 @@ export default function EditMedicationForm(props) {
 		Alert.success('Medication Added');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
+			props.changeDefaultViewsAndRefresh('MEDICATIONS');
 			props.forceUpdate();
 		}, 500);
 	};
@@ -222,7 +222,6 @@ export default function EditMedicationForm(props) {
 						<KeyboardDatePicker
 							className={classes.TextField1}
 							clearable
-							required
 							label="Start Date"
 							value={startDate}
 							placeholder="10/10/2018"
@@ -240,7 +239,6 @@ export default function EditMedicationForm(props) {
 						<KeyboardDatePicker
 							className={classes.TextField1}
 							clearable
-							required
 							label="End Date"
 							value={endDate}
 							placeholder="10/10/2018"

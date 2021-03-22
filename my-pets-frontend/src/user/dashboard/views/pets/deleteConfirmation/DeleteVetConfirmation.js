@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './DeleteConfirmation.css';
 import Button from '@material-ui/core/Button';
 import Alert from 'react-s-alert';
-import { deleteFood } from '../../../../../util/APIUtils';
+import { deleteMedication, deleteVet } from '../../../../../util/APIUtils';
 
 //a confirmation display
 //will delete selected appointment if user clicks 'Yes'
-export default function DeleteFoodConfirmation(props) {
+export default function DeleteVetConfirmation(props) {
 	// console.log('delete confirmation');
 	// console.log(props);
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
@@ -17,14 +17,14 @@ export default function DeleteFoodConfirmation(props) {
 		props.handleClose();
 	};
 
-	function agreeClickHandler(id, petId, foodId) {
-		deleteFood(id, petId, foodId);
+	function agreeClickHandler(id, petId, vetId) {
+		deleteVet(id, petId, vetId);
 		props.handleClose();
-		Alert.success('FOOD DELETED');
+		Alert.success('Vet DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
 
-			props.changeDefaultViewsAndRefresh('FOOD');
+			props.changeDefaultViewsAndRefresh('VETS');
 
 			props.forceUpdate();
 		}, 500);
@@ -41,8 +41,8 @@ export default function DeleteFoodConfirmation(props) {
 	return (
 		<div className="delete-confirmation-main-container">
 			<h1 className="delete-modal-title">
-				Are you sure you want to delete {rowData.Food} from your pet's
-				food list?
+				Are you sure you want to delete {rowData.vetName} from your
+				pet's food list?
 			</h1>
 			<div className="delete-button-group">
 				<Button
@@ -54,11 +54,7 @@ export default function DeleteFoodConfirmation(props) {
 				<Button
 					style={{ backgroundColor: '#1B2737' }}
 					onClick={() => {
-						agreeClickHandler(
-							currentUser.id,
-							pet.id,
-							pet.food[rowData.id].id
-						);
+						agreeClickHandler(currentUser.id, pet.id, rowData.id);
 					}}
 				>
 					Yes

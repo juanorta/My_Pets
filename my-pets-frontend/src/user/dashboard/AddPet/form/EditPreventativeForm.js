@@ -206,7 +206,7 @@ export default function EditPreventativeForm(props) {
 		Alert.success('Preventative Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
+			props.changeDefaultViewsAndRefresh('PREVENTATIVES');
 			props.forceUpdate();
 		}, 500);
 	};
@@ -238,7 +238,6 @@ export default function EditPreventativeForm(props) {
 				<TextField
 					onChange={onTypeChange}
 					className={classes.TextField1}
-					required
 					variant="standard"
 					type="text"
 					// inputProps={{
@@ -255,7 +254,6 @@ export default function EditPreventativeForm(props) {
 						<KeyboardDatePicker
 							className={classes.TextField1}
 							clearable
-							required
 							value={dueNext}
 							placeholder="10/10/2018"
 							// onChange={(date) => handleDateChange(date)}
@@ -272,7 +270,6 @@ export default function EditPreventativeForm(props) {
 						<KeyboardDatePicker
 							className={classes.TextField1}
 							clearable
-							required
 							value={lastGiven}
 							placeholder="10/10/2018"
 							// onChange={(date) => handleDateChange(date)}
