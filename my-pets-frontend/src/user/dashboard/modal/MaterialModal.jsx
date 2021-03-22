@@ -70,6 +70,11 @@ export default function MaterialModal(props) {
 	const [isDeleteFood, setIsDeleteFood] = useState(props.isDeleteFood);
 	const [isDeleteWeight, setIsDeleteWeight] = useState(props.isDeleteWeight);
 	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
+	const [isDeletePrev, setIsDeletePrev] = useState(props.isDeletePrev);
+	const [isDeleteMedication, setIsDeleteMedication] = useState(
+		props.isDeleteMedication
+	);
+	const [isDeleteVet, setIsDeleteVet] = useState(props.isDeleteVet);
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
 	const handleOpen = () => {
@@ -94,7 +99,10 @@ export default function MaterialModal(props) {
 		isDeletePetConfirmation === true ||
 		isDeleteAppt === true ||
 		isDeleteFood === true ||
-		isDeleteWeight === true
+		isDeleteWeight === true ||
+		isDeletePrev ||
+		isDeleteMedication ||
+		isDeleteVet
 	) {
 		style = classes.DeleteConfirmation;
 	}

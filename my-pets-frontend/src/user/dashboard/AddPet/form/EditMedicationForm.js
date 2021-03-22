@@ -17,7 +17,7 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { addVet } from '../../../../util/APIUtils';
+import { editMedication } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -133,56 +133,60 @@ const useStyles = makeStyles((theme) => ({
 
 //form used to add a pet
 
-export default function AddMedicationForm(props) {
+export default function EditMedicationForm(props) {
 	const classes = useStyles();
 
 	//stores information as user is typing
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [name, setName] = useState('');
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [location, setLocation] = useState('');
-	const [notes, setNotes] = useState('');
+	const [rowData, setRowData] = useState(props.rowData);
+	const [name, setName] = useState(rowData.name);
+	const [startDate, setStartDate] = useState(rowData.startDate);
+	const [endDate, setEndDate] = useState(rowData.endDate);
+	const [dosageInstructions, setDosageInstructions] = useState(
+		rowData.dosageInstructions
+	);
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
 		setName(event.target.value);
 	};
 
-	const onNumberChange = (event) => {
-		console.log('number: ' + event.target.value);
-		setPhoneNumber(event.target.value);
-		// setUnit(event.target.value);
-		// // setAmOrPm(event.target.value);
+	//handles input changes from all fields
+	const onStartDate = (date) => {
+		console.log('start date change called');
+		const formattedDate = moment(date).format('MM/DD/YYYY');
+		setStartDate(formattedDate);
 	};
 
-	const onLocationChange = (event) => {
-		console.log('location: ' + event.target.value);
-		setLocation(event.target.value);
+	const onEndDate = (date) => {
+		console.log('end date called');
+		const formattedDate = moment(date).format('MM/DD/YYYY');
+		setEndDate(formattedDate);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('notes: ' + event.target.value);
-		setNotes(event.target.value);
+		console.log('dosage instructions: ' + event.target.value);
+		setDosageInstructions(event.target.value);
 	};
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
-
-		addVet(
+		editMedication(
 			currentUser.id,
 			pet.id,
+			rowData.id,
 			name,
-			phoneNumber,
-			location,
-			notes,
+			startDate,
+			endDate,
+			dosageInstructions,
 			pet.petName,
 			pet.id,
 			pet.petImage.data
 		);
 		props.handleClose();
-		Alert.success('Vet Added');
+		Alert.success('Medication Added');
 		setTimeout(() => {
 			Alert.closeAll();
 			props.changeDefaultViewsAndRefresh('WEIGHTS');
@@ -196,7 +200,7 @@ export default function AddMedicationForm(props) {
 
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Add New Veterinarian</h1>
+			<h1 className="modal-title">Edit Medication</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onNameChange}
@@ -204,44 +208,59 @@ export default function AddMedicationForm(props) {
 					required
 					variant="standard"
 					type="text"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
+					// inputProps={{
+					// 	style: { textAlign: 'center' },
+					// 	pattern: '\\d+(\\.\\d+)?',
+					// }}
 					id="standard-basic"
 					label="Name"
+					value={name}
 				/>
-				<TextField
-					onChange={onNumberChange}
-					className={classes.TextField1}
-					required
-					variant="standard"
-					type="text"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Phone Number"
-				/>
-				<TextField
-					onChange={onLocationChange}
-					className={classes.TextField1}
-					required
-					variant="standard"
-					type="text"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Location"
-				/>
+
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<Fragment>
+						<KeyboardDatePicker
+							className={classes.TextField1}
+							clearable
+							required
+							label="Start Date"
+							value={startDate}
+							placeholder="10/10/2018"
+							// onChange={(date) => handleDateChange(date)}
+							onChange={(date) => {
+								onStartDate(date);
+							}}
+							format="MM/dd/yyyy"
+						/>
+					</Fragment>
+				</MuiPickersUtilsProvider>
+
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<Fragment>
+						<KeyboardDatePicker
+							className={classes.TextField1}
+							clearable
+							required
+							label="End Date"
+							value={endDate}
+							placeholder="10/10/2018"
+							// onChange={(date) => handleDateChange(date)}
+							onChange={(date) => {
+								onEndDate(date);
+							}}
+							format="MM/dd/yyyy"
+						/>
+					</Fragment>
+				</MuiPickersUtilsProvider>
 
 				<TextField
 					onChange={onNotesChange}
 					className={classes.TextField1}
 					id="standard-multiline-flexible"
-					label="Notes"
+					label="Dosage Instructions"
 					multiline
 					rowsMax={2}
+					value={dosageInstructions}
 					// value={value}
 					// onChange={handleChange}
 				/>

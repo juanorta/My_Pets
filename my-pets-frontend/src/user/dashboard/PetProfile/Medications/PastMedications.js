@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import EditDeleteMedicationHandler from './EditDeleteMedicationHandler';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -38,6 +39,10 @@ export default function PastMedications(props) {
 		props.pastMedications
 	);
 	const [loading, setLoading] = useState(true);
+	const [openModal, setOpenModal] = useState(false);
+	const [isEditMedication, setIsEditMedication] = useState(false);
+	const [isDeleteMedication, setIsDeleteMedication] = useState(false);
+	const [rowData, setRowData] = useState('');
 
 	const columns = [
 		{
@@ -110,10 +115,10 @@ export default function PastMedications(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						console.log(params.row);
-						// setOpenModal(true);
-						// setIsEditWeight(true);
-						// setRowData(params.row);
+						// console.log(params.row);
+						setOpenModal(true);
+						setIsEditMedication(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -135,9 +140,9 @@ export default function PastMedications(props) {
 				<Button
 					onClick={() => {
 						// console.log(params.row);
-						// setOpenModal(true);
-						// setIsDeleteWeight(true);
-						// setRowData(params.row);
+						setOpenModal(true);
+						setIsDeleteMedication(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -154,21 +159,20 @@ export default function PastMedications(props) {
 		let date2 = moment(pastMedications[i].startDate).format('MM/DD/YYYY');
 
 		rows[i] = {
-			id: i,
+			id: pastMedications[i].id,
 
 			endDate: date1,
 			startDate: date2,
 			name: pastMedications[i].medicationName,
-			type: pastMedications[i].dosageInstructions,
+			dosageInstructions: pastMedications[i].dosageInstructions,
 		};
 	}
 
 	const SetOpenModalToFalse = () => {
 		// setOpenModal(false);
-		// setOpenModal(false);
-		// setIsEditWeight(false);
-		// setIsDeleteWeight(false);
-		// props.forceUpdate();
+		setOpenModal(false);
+		setIsEditMedication(false);
+		setIsDeleteMedication(false);
 	};
 	// console.log(sortedWeights);
 	return (
@@ -194,37 +198,35 @@ export default function PastMedications(props) {
 				// ]}
 				// onCellClick={(CellParams) => {}}
 			/>
-			{/* {isEditWeight ? (
-				<EditDeleteFoodButtonHandler
+			{isEditMedication ? (
+				<EditDeleteMedicationHandler
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
-					isEditWeight={isEditWeight}
+					isEditMedication={isEditMedication}
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
-					sortedWeights={sortedWeights}
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
 				/>
 			) : null}
-			{isDeleteWeight ? (
-				<EditDeleteFoodButtonHandler
+			{isDeleteMedication ? (
+				<EditDeleteMedicationHandler
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
-					isDeleteWeight={isDeleteWeight}
+					isDeleteMedication={isDeleteMedication}
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
-					sortedWeights={sortedWeights}
 					defaultViewHandler={props.defaultViewHandler}
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }

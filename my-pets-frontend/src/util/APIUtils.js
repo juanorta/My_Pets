@@ -603,6 +603,7 @@ export async function editPreventative(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				id: prevId,
 				name: name,
 				type: type,
 				lastGiven: lastGiven,
@@ -690,6 +691,7 @@ export async function editMedication(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				id: medId,
 				medicationName: medicationName,
 				startDate: startDate,
 				endDate: endDate,
@@ -773,6 +775,7 @@ export async function editVet(
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				id: vetId,
 				vetName: vetName,
 				phoneNumber: phoneNumber,
 				location: location,

@@ -102,6 +102,8 @@ export default function Preventatives(props) {
 	// console.log(upcomingPreventatives);
 	// console.log(pastPreventatives);
 	// console.log(preventatives);
+	// console.log('non sorted preventatives');
+	// console.log(preventatives);
 
 	return (
 		<div className="appointments-profile-main-container">
@@ -120,6 +122,7 @@ export default function Preventatives(props) {
 				<UpcomingPreventatives
 					pet={pet}
 					currentUser={currentUser}
+					preventatives={preventatives}
 					upcomingPreventatives={upcomingPreventatives}
 					forceUpdate={props.forceUpdate}
 					changeDefaultViewsAndRefresh={
@@ -132,6 +135,7 @@ export default function Preventatives(props) {
 				<PastPreventatives
 					pet={pet}
 					currentUser={currentUser}
+					preventatives={preventatives}
 					pastPreventatives={pastPreventatives}
 					forceUpdate={props.forceUpdate}
 					changeDefaultViewsAndRefresh={

@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import EditDeletePrevBtnHandler from './EditDeletePrevBtnHandler';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -34,10 +35,15 @@ export default function UpcomingPreventatives(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
+	const [preventatives, setPreventatives] = useState(props.preventatives);
 	const [upcomingPreventatives, setUpcomingPreventatives] = useState(
 		props.upcomingPreventatives
 	);
 	const [loading, setLoading] = useState(true);
+	const [openModal, setOpenModal] = useState(false);
+	const [isEditPrev, setIsEditPrev] = useState(false);
+	const [isDeletePrev, setIsDeletePrev] = useState(false);
+	const [rowData, setRowData] = useState('');
 
 	const columns = [
 		{
@@ -126,10 +132,10 @@ export default function UpcomingPreventatives(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						console.log(params.row);
-						// setOpenModal(true);
-						// setIsEditWeight(true);
-						// setRowData(params.row);
+						// console.log(params.row);
+						setOpenModal(true);
+						setIsEditPrev(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -151,9 +157,9 @@ export default function UpcomingPreventatives(props) {
 				<Button
 					onClick={() => {
 						// console.log(params.row);
-						// setOpenModal(true);
-						// setIsDeleteWeight(true);
-						// setRowData(params.row);
+						setOpenModal(true);
+						setIsDeletePrev(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -173,7 +179,7 @@ export default function UpcomingPreventatives(props) {
 			'MM/DD/YYYY'
 		);
 		rows[i] = {
-			id: i,
+			id: upcomingPreventatives[i].id,
 			dueNext: date1,
 			lastGiven: date2,
 			name: upcomingPreventatives[i].name,
@@ -183,13 +189,13 @@ export default function UpcomingPreventatives(props) {
 	}
 
 	const SetOpenModalToFalse = () => {
-		// setOpenModal(false);
-		// setOpenModal(false);
-		// setIsEditWeight(false);
-		// setIsDeleteWeight(false);
-		// props.forceUpdate();
+		setOpenModal(false);
+		setIsEditPrev(false);
+		setIsDeletePrev(false);
 	};
 	// console.log(sortedWeights);
+	console.log('unsorted preventatives');
+	console.log(preventatives);
 	return (
 		<div
 			style={{
@@ -218,37 +224,37 @@ export default function UpcomingPreventatives(props) {
 				// ]}
 				// onCellClick={(CellParams) => {}}
 			/>
-			{/* {isEditWeight ? (
-				<EditDeleteFoodButtonHandler
+			{isEditPrev ? (
+				<EditDeletePrevBtnHandler
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
-					isEditWeight={isEditWeight}
+					isEditPrev={isEditPrev}
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
-					sortedWeights={sortedWeights}
+					// sortedWeights={sortedWeights}
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
 				/>
 			) : null}
-			{isDeleteWeight ? (
-				<EditDeleteFoodButtonHandler
+
+			{isDeletePrev ? (
+				<EditDeletePrevBtnHandler
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
-					isDeleteWeight={isDeleteWeight}
+					isDeletePrev={isDeletePrev}
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
-					sortedWeights={sortedWeights}
 					defaultViewHandler={props.defaultViewHandler}
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }

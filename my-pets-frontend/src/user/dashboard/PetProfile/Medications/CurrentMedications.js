@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import EditDeleteMedicationHandler from './EditDeleteMedicationHandler';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -38,6 +39,10 @@ export default function CurrentMedications(props) {
 		props.currentMedications
 	);
 	const [loading, setLoading] = useState(true);
+	const [openModal, setOpenModal] = useState(false);
+	const [isEditMedication, setIsEditMedication] = useState(false);
+	const [isDeleteMedication, setIsDeleteMedication] = useState(false);
+	const [rowData, setRowData] = useState('');
 
 	const columns = [
 		{
@@ -110,10 +115,10 @@ export default function CurrentMedications(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						console.log(params.row);
-						// setOpenModal(true);
-						// setIsEditWeight(true);
-						// setRowData(params.row);
+						// console.log(params.row);
+						setOpenModal(true);
+						setIsEditMedication(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -135,9 +140,9 @@ export default function CurrentMedications(props) {
 				<Button
 					onClick={() => {
 						// console.log(params.row);
-						// setOpenModal(true);
-						// setIsDeleteWeight(true);
-						// setRowData(params.row);
+						setOpenModal(true);
+						setIsDeleteMedication(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -156,20 +161,20 @@ export default function CurrentMedications(props) {
 		);
 
 		rows[i] = {
-			id: i,
+			id: currentMedications[i].id,
 
 			endDate: date1,
 			startDate: date2,
 			name: currentMedications[i].medicationName,
-			type: currentMedications[i].dosageInstructions,
+			dosageInstructions: currentMedications[i].dosageInstructions,
 		};
 	}
 
 	const SetOpenModalToFalse = () => {
 		// setOpenModal(false);
-		// setOpenModal(false);
-		// setIsEditWeight(false);
-		// setIsDeleteWeight(false);
+		setOpenModal(false);
+		setIsEditMedication(false);
+		setIsDeleteMedication(false);
 		// props.forceUpdate();
 	};
 	// console.log(sortedWeights);
@@ -201,37 +206,35 @@ export default function CurrentMedications(props) {
 				// ]}
 				// onCellClick={(CellParams) => {}}
 			/>
-			{/* {isEditWeight ? (
-				<EditDeleteFoodButtonHandler
+			{isEditMedication ? (
+				<EditDeleteMedicationHandler
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
-					isEditWeight={isEditWeight}
+					isEditMedication={isEditMedication}
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
-					sortedWeights={sortedWeights}
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
 				/>
 			) : null}
-			{isDeleteWeight ? (
-				<EditDeleteFoodButtonHandler
+			{isDeleteMedication ? (
+				<EditDeleteMedicationHandler
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
-					isDeleteWeight={isDeleteWeight}
+					isDeleteMedication={isDeleteMedication}
 					openModal={openModal}
 					SetOpenModalToFalse={SetOpenModalToFalse}
 					rowData={rowData}
-					sortedWeights={sortedWeights}
 					defaultViewHandler={props.defaultViewHandler}
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }

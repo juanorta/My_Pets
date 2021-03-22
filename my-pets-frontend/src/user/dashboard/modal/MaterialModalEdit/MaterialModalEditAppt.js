@@ -9,6 +9,9 @@ import AddAppointmentForm from '../../../dashboard/AddPet/form/AddAppointmentFor
 import EditAppointmentForm from '../../AddPet/form/EditAppointmentForm';
 import EditFoodForm from '../../AddPet/form/EditFoodForm';
 import EditWeightForm from '../../AddPet/form/EditWeightForm';
+import EditPreventativeForm from '../../AddPet/form/EditPreventativeForm';
+import EditMedicationForm from '../../AddPet/form/EditMedicationForm';
+import EditVetForm from '../../AddPet/form/EditVetForm';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -49,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+//will open different forms depending on props received
 export default function MaterialModalProfile(props) {
 	const classes = useStyles();
 
@@ -60,11 +64,15 @@ export default function MaterialModalProfile(props) {
 	//used to display appropriate content
 	const [open, setOpen] = useState(props.openModal);
 
-	//received from AddBtnProfile
 	//will display certain content whether a hook is true or false
 	const [isEditAppt, setIsEditAppt] = useState(props.isEditAppt);
 	const [isEditFood, setIsEditFood] = useState(props.isEditFood);
 	const [isEditWeight, setIsEditWeight] = useState(props.isEditWeight);
+	const [isEditPrev, setIsEditPrev] = useState(props.isEditPrev);
+	const [isEditMedication, setIsEditMedication] = useState(
+		props.isEditMedication
+	);
+	const [isEditVet, setIsEditVet] = useState(props.isEditVet);
 	const [user, setUser] = useState('ok');
 
 	// const [paperStyle, setPaperStyle] = useState(props.style);
@@ -83,6 +91,8 @@ export default function MaterialModalProfile(props) {
 	if (isEditFood) {
 		style = classes.EditFood;
 	}
+
+	console.log('edit vet' + isEditVet);
 
 	// console.log(props.changeDefaultViewsAndRefresh);
 	// console.log('open => ' + open);
@@ -137,6 +147,42 @@ export default function MaterialModalProfile(props) {
 								rowData={rowData}
 								handleClose={handleClose}
 								sortedWeights={sortedWeights}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isEditPrev ? (
+							<EditPreventativeForm
+								forceUpdate={props.forceUpdate}
+								currentUser={currentUser}
+								pet={pet}
+								rowData={rowData}
+								handleClose={handleClose}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isEditMedication ? (
+							<EditMedicationForm
+								forceUpdate={props.forceUpdate}
+								currentUser={currentUser}
+								pet={pet}
+								rowData={rowData}
+								handleClose={handleClose}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						) : null}
+						{isEditVet ? (
+							<EditVetForm
+								forceUpdate={props.forceUpdate}
+								currentUser={currentUser}
+								pet={pet}
+								rowData={rowData}
+								handleClose={handleClose}
 								changeDefaultViewsAndRefresh={
 									props.changeDefaultViewsAndRefresh
 								}

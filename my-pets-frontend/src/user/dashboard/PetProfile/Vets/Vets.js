@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import EditDeleteVetHandler from './EditDeleteVetHandler';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -35,7 +36,17 @@ export default function Vets(props) {
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
 	const [vets, setVets] = useState(props.pet.vets);
-	console.log(vets);
+	const [isEditVet, setIsEditVet] = useState(false);
+	const [isDeleteVet, setIsDeleteVet] = useState(false);
+	const [rowData, setRowData] = useState('');
+	const [openModal, setOpenModal] = useState(false);
+	// console.log(vets);
+
+	const SetOpenModalToFalse = () => {
+		setOpenModal(false);
+		setIsEditVet(false);
+		setIsDeleteVet(false);
+	};
 
 	const columns = [
 		{
@@ -108,10 +119,10 @@ export default function Vets(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						console.log(params.row);
-						// setOpenModal(true);
-						// setIsEditWeight(true);
-						// setRowData(params.row);
+						// console.log(params.row);
+						setOpenModal(true);
+						setIsEditVet(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -132,10 +143,9 @@ export default function Vets(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
-						// setOpenModal(true);
-						// setIsDeleteWeight(true);
-						// setRowData(params.row);
+						setOpenModal(true);
+						setIsDeleteVet(true);
+						setRowData(params.row);
 					}}
 					className={classes.Button}
 				>
@@ -149,7 +159,7 @@ export default function Vets(props) {
 
 	for (let i = 0; i < vets.length; i++) {
 		rows[i] = {
-			id: i,
+			id: vets[i].id,
 
 			vetName: vets[i].vetName,
 			phoneNumber: vets[i].phoneNumber,
@@ -177,6 +187,35 @@ export default function Vets(props) {
 					rowHeight={72}
 				/>
 			</div>
+			{isEditVet ? (
+				<EditDeleteVetHandler
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					isEditVet={isEditVet}
+					openModal={openModal}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					rowData={rowData}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
+				/>
+			) : null}
+			{isDeleteVet ? (
+				<EditDeleteVetHandler
+					forceUpdate={props.forceUpdate}
+					currentUser={currentUser}
+					pet={pet}
+					isDeleteVet={isDeleteVet}
+					openModal={openModal}
+					SetOpenModalToFalse={SetOpenModalToFalse}
+					rowData={rowData}
+					defaultViewHandler={props.defaultViewHandler}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
+				/>
+			) : null}
 		</div>
 	);
 }

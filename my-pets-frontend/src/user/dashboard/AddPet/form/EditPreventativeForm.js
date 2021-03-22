@@ -17,7 +17,7 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { addVet } from '../../../../util/APIUtils';
+import { editPreventative } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	TextField1: {
 		marginLeft: '15%',
-		marginBottom: '2rem',
+		marginBottom: '1.5rem',
 		// marginTop: '1rem',
 		width: '19rem',
 		'& label.Mui-focused': {
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '2rem',
 		marginTop: '2rem',
 		// marginTop: '1rem',
-		width: '6rem',
+		width: '7.5rem',
 		'& label.Mui-focused': {
 			color: '#1B2737',
 		},
@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	cancelButton: {
+		marginTop: '-4rem',
 		backgroundColor: '#1B2737',
 		color: 'white',
 		marginLeft: '3rem',
@@ -119,6 +120,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	submitButton: {
+		marginTop: '-4rem',
 		backgroundColor: '#FF4F00',
 		color: 'white',
 		marginLeft: '3rem',
@@ -133,32 +135,45 @@ const useStyles = makeStyles((theme) => ({
 
 //form used to add a pet
 
-export default function AddMedicationForm(props) {
+export default function EditPreventativeForm(props) {
 	const classes = useStyles();
 
 	//stores information as user is typing
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [name, setName] = useState('');
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [location, setLocation] = useState('');
-	const [notes, setNotes] = useState('');
+	const [rowData, setRowData] = useState(props.rowData);
+	const [name, setName] = useState(rowData.name);
+	const [type, setType] = useState(rowData.type);
+	const [dueNext, setDueNext] = useState(rowData.dueNext);
+	const [lastGiven, setLastGiven] = useState(rowData.lastGiven);
+	const [notes, setNotes] = useState(rowData.notes);
+
+	//handles input changes from all fields
+	const onDueNext = (date) => {
+		console.log('on due next change called');
+		console.log(date);
+		const formattedDate = moment(date).format('MM/DD/YYYY');
+		setDueNext(formattedDate);
+	};
+
+	const onLastGiven = (date) => {
+		console.log('on last given change called');
+		const formattedDate = moment(date).format('MM/DD/YYYY');
+		setLastGiven(formattedDate);
+	};
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
 		setName(event.target.value);
+		// setWeightValue(event.target.value);
+		// setTime(event.target.value);
 	};
 
-	const onNumberChange = (event) => {
-		console.log('number: ' + event.target.value);
-		setPhoneNumber(event.target.value);
+	const onTypeChange = (event) => {
+		console.log('type: ' + event.target.value);
+		setType(event.target.value);
 		// setUnit(event.target.value);
 		// // setAmOrPm(event.target.value);
-	};
-
-	const onLocationChange = (event) => {
-		console.log('location: ' + event.target.value);
-		setLocation(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
@@ -169,20 +184,26 @@ export default function AddMedicationForm(props) {
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
-
-		addVet(
+		console.log('name: ' + name);
+		console.log('type: ' + type);
+		console.log('due next: ' + dueNext);
+		console.log('last given: ' + lastGiven);
+		console.log('notes: ' + notes);
+		editPreventative(
 			currentUser.id,
 			pet.id,
+			rowData.id,
 			name,
-			phoneNumber,
-			location,
+			type,
+			lastGiven,
+			dueNext,
 			notes,
 			pet.petName,
 			pet.id,
 			pet.petImage.data
 		);
 		props.handleClose();
-		Alert.success('Vet Added');
+		Alert.success('Preventative Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
 			props.changeDefaultViewsAndRefresh('WEIGHTS');
@@ -190,50 +211,79 @@ export default function AddMedicationForm(props) {
 		}, 500);
 	};
 
-	// console.log('weight props');
-	// console.log(props);
-	// console.log('date: ' + selectedDate);
-
+	console.log('ids');
+	console.log(currentUser.id);
+	console.log(pet.id);
+	console.log(rowData.id);
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Add New Veterinarian</h1>
-			<form className="pet-form" onSubmit={submitHandler}>
+			<h1 className="modal-title">Edit Preventative</h1>
+			<form
+				className="pet-form"
+				onSubmit={submitHandler}
+				style={{
+					marginTop: '1rem',
+				}}
+			>
 				<TextField
 					onChange={onNameChange}
 					className={classes.TextField1}
 					required
 					variant="standard"
 					type="text"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
 					id="standard-basic"
 					label="Name"
+					value={name}
 				/>
 				<TextField
-					onChange={onNumberChange}
+					onChange={onTypeChange}
 					className={classes.TextField1}
 					required
 					variant="standard"
 					type="text"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
+					// inputProps={{
+					// 	style: { textAlign: 'center' },
+					// 	pattern: '\\d+(\\.\\d+)?',
+					// }}
 					id="standard-basic"
-					label="Phone Number"
+					label="Type"
+					value={type}
 				/>
-				<TextField
-					onChange={onLocationChange}
-					className={classes.TextField1}
-					required
-					variant="standard"
-					type="text"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Location"
-				/>
+
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<Fragment>
+						<KeyboardDatePicker
+							className={classes.TextField1}
+							clearable
+							required
+							value={dueNext}
+							placeholder="10/10/2018"
+							// onChange={(date) => handleDateChange(date)}
+							onChange={(date) => {
+								onDueNext(date);
+							}}
+							label="Due Next"
+							format="MM/dd/yyyy"
+						/>
+					</Fragment>
+				</MuiPickersUtilsProvider>
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<Fragment>
+						<KeyboardDatePicker
+							className={classes.TextField1}
+							clearable
+							required
+							value={lastGiven}
+							placeholder="10/10/2018"
+							// onChange={(date) => handleDateChange(date)}
+							onChange={(date) => {
+								onLastGiven(date);
+							}}
+							label="Last Given"
+							format="MM/dd/yyyy"
+						/>
+					</Fragment>
+				</MuiPickersUtilsProvider>
 
 				<TextField
 					onChange={onNotesChange}
@@ -242,7 +292,7 @@ export default function AddMedicationForm(props) {
 					label="Notes"
 					multiline
 					rowsMax={2}
-					// value={value}
+					value={notes}
 					// onChange={handleChange}
 				/>
 

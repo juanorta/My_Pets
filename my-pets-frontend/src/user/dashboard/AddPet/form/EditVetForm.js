@@ -17,7 +17,7 @@ import DatePicker from '@material-ui/pickers/DatePicker';
 import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
-import { addVet } from '../../../../util/APIUtils';
+import { editVet } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -133,16 +133,17 @@ const useStyles = makeStyles((theme) => ({
 
 //form used to add a pet
 
-export default function AddMedicationForm(props) {
+export default function EditVetForm(props) {
 	const classes = useStyles();
 
 	//stores information as user is typing
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [name, setName] = useState('');
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [location, setLocation] = useState('');
-	const [notes, setNotes] = useState('');
+	const [rowData, setRowData] = useState(props.rowData);
+	const [name, setName] = useState(rowData.vetName);
+	const [phoneNumber, setPhoneNumber] = useState(rowData.phoneNumber);
+	const [location, setLocation] = useState(rowData.location);
+	const [notes, setNotes] = useState(rowData.notes);
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
@@ -169,10 +170,10 @@ export default function AddMedicationForm(props) {
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
-
-		addVet(
+		editVet(
 			currentUser.id,
 			pet.id,
+			rowData.id,
 			name,
 			phoneNumber,
 			location,
@@ -182,7 +183,7 @@ export default function AddMedicationForm(props) {
 			pet.petImage.data
 		);
 		props.handleClose();
-		Alert.success('Vet Added');
+		Alert.success('Vet Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
 			props.changeDefaultViewsAndRefresh('WEIGHTS');
@@ -193,10 +194,10 @@ export default function AddMedicationForm(props) {
 	// console.log('weight props');
 	// console.log(props);
 	// console.log('date: ' + selectedDate);
-
+	console.log(rowData);
 	return (
 		<div className="pet-form-main-container">
-			<h1 className="modal-title">Add New Veterinarian</h1>
+			<h1 className="modal-title">Edit Veterinarian</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onNameChange}
@@ -209,11 +210,11 @@ export default function AddMedicationForm(props) {
 					}}
 					id="standard-basic"
 					label="Name"
+					value={name}
 				/>
 				<TextField
 					onChange={onNumberChange}
 					className={classes.TextField1}
-					required
 					variant="standard"
 					type="text"
 					inputProps={{
@@ -221,11 +222,11 @@ export default function AddMedicationForm(props) {
 					}}
 					id="standard-basic"
 					label="Phone Number"
+					value={phoneNumber}
 				/>
 				<TextField
 					onChange={onLocationChange}
 					className={classes.TextField1}
-					required
 					variant="standard"
 					type="text"
 					inputProps={{
@@ -233,6 +234,7 @@ export default function AddMedicationForm(props) {
 					}}
 					id="standard-basic"
 					label="Location"
+					value={location}
 				/>
 
 				<TextField
@@ -242,7 +244,7 @@ export default function AddMedicationForm(props) {
 					label="Notes"
 					multiline
 					rowsMax={2}
-					// value={value}
+					value={notes}
 					// onChange={handleChange}
 				/>
 
