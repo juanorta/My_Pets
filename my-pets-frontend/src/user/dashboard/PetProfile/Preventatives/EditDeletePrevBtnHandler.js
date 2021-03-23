@@ -9,6 +9,7 @@ export default function EditDeletePrevBtnHandler(props) {
 	const [isEditPrev, setIsEditPrev] = useState(props.isEditPrev);
 	const [isDeletePrev, setIsDeletePrev] = useState(props.isDeletePrev);
 	const [rowData, setRowData] = useState(props.rowData);
+	const [fromDash, setFromDash] = useState(props.fromDash);
 	console.log(props);
 	return (
 		<div>
@@ -25,6 +26,7 @@ export default function EditDeletePrevBtnHandler(props) {
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
+					fromDash={fromDash}
 				/>
 			) : null}
 
@@ -41,6 +43,7 @@ export default function EditDeletePrevBtnHandler(props) {
 					changeDefaultViewsAndRefresh={
 						props.changeDefaultViewsAndRefresh
 					}
+					fromDash={fromDash}
 				/>
 			) : null}
 		</div>

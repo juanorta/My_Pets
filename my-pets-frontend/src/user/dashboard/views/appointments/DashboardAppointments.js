@@ -74,12 +74,12 @@ export default function DashboardAppointments(props) {
 		setPastClicked(true);
 		setUpcomingClicked(false);
 	};
-	console.log(sortedAppointments);
+	// console.log(sortedAppointments);
 
-	console.log(upcomingAppointments);
+	// console.log(upcomingAppointments);
 
-	console.log(pastAppointments);
-	console.log(new Date());
+	// console.log(pastAppointments);
+	// console.log(new Date());
 	return (
 		<div className="food-main-container" id="appointments">
 			<div className="title">

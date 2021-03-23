@@ -74,6 +74,7 @@ export default function MaterialModalProfile(props) {
 	);
 	const [isEditVet, setIsEditVet] = useState(props.isEditVet);
 	const [user, setUser] = useState('ok');
+	const [fromDash, setFromDash] = useState(props.fromDash);
 
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
@@ -162,6 +163,7 @@ export default function MaterialModalProfile(props) {
 								changeDefaultViewsAndRefresh={
 									props.changeDefaultViewsAndRefresh
 								}
+								fromDash={fromDash}
 							/>
 						) : null}
 						{isEditMedication ? (

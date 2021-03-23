@@ -18,6 +18,9 @@ import {
 	mdiScaleBathroom,
 } from '@mdi/js';
 import Icon from '@mdi/react';
+import UpcomingPreventatives from '../../PetProfile/Preventatives/UpcomingPreventatives';
+import DashUpcomingPrev from './DashUpcomingPrev';
+import DashPastPrev from './DashPastPrev';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -66,217 +69,118 @@ export default function Preventatives(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pets, setPets] = useState(props.currentUser.pets);
-	// const [appointments, setAppointments] = useState(currentUser.appointments);
-	// const [sortedAppointments, setSortedAppointments] = useState('');
-	// const [loading, setLoading] = useState(true);
+	const [preventatives, setPreventatives] = useState(
+		currentUser.preventatives
+	);
+	const [upcomingClicked, setUpcomingClicked] = useState(true);
+	const [pastClicked, setPastClicked] = useState(false);
+	const [upcomingPreventatives, setUpcomingPreventatives] = useState('');
+	const [pastPreventatives, setPastPreventatives] = useState('');
+	const [loading, setLoading] = useState(true);
+	const [fromDash, setFromDash] = useState(true);
 
-	// useEffect(() => {
-	// 	// console.log(pets);
-	// 	let sortedAppointmentsArray = appointments.slice();
-	// 	sortedAppointmentsArray.sort(function compare(a, b) {
-	// 		var dateA = new Date(a.date);
-	// 		var dateB = new Date(b.date);
-	// 		return dateB - dateA;
-	// 	});
-	// 	// console.log(sortedAppointmentsArray);
-	// 	setSortedAppointments(sortedAppointmentsArray);
-	// 	setLoading(false);
-	// }, []);
+	useEffect(() => {
+		console.log('preventatives');
+		// console.log(preventatives);
+		let sortedPreventatives = preventatives.slice();
+		sortedPreventatives.sort(function compare(a, b) {
+			var dateA = new Date(a.dueNext);
+			var dateB = new Date(b.dueNext);
+			return dateB - dateA;
+		});
 
-	// const columns = [
-	// 	{
-	// 		field: 'Date',
-	// 		headerName: 'Date',
-	// 		width: 130,
+		var now = new Date();
+		let upcomingArray = [];
+		let pastArray = [];
+		let j = 0;
+		let k = 0;
 
-	// 		renderCell: (params) => (
-	// 			<TextField
-	// 				className={classes.TextField}
-	// 				// style={{ color: 'black' }}
-	// 				InputProps={{ disableUnderline: true }}
-	// 				multiline
-	// 				disabled={true}
-	// 				value={params.value}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'Pet',
-	// 		headerName: 'Pet',
-	// 		width: 160,
-	// 		renderCell: (params) => (
-	// 			<div style={{ backgroundColor: 'transparent' }}>
-	// 				{params.row.Picture == '' ? (
-	// 					<IconButton className="icon-button-appt">
-	// 						<Icon
-	// 							path={mdiDog}
-	// 							title="Dog Profile"
-	// 							size={1.4}
-	// 							horizontal
-	// 							vertical
-	// 							rotate={180}
-	// 							color="#1b2737"
-	// 							// color="#ff4f00"
-	// 						/>
-	// 					</IconButton>
-	// 				) : (
-	// 					<IconButton className="icon-button-appt">
-	// 						<img
-	// 							className="appt-image"
-	// 							src={`data:image/jpeg;base64,${params.row.Picture}`}
-	// 						/>
-	// 					</IconButton>
-	// 				)}
+		for (var i = 0; i < sortedPreventatives.length; i++) {
+			var newDate = moment(sortedPreventatives[i].dueNext).toDate();
+			var sameDate = moment(sortedPreventatives[i].dueNext).format(
+				'MM/DD/YYYY'
+			);
 
-	// 				<TextField
-	// 					style={{ cursor: 'pointer' }}
-	// 					onClick={() => {
-	// 						console.log(params);
-	// 					}}
-	// 					className={classes.TextFieldPet}
-	// 					// style={{ color: 'red' }}
-	// 					InputProps={{ disableUnderline: true }}
-	// 					multiline
-	// 					disabled={true}
-	// 					value={params.value}
-	// 				/>
-	// 			</div>
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'Time',
-	// 		headerName: 'Time',
-	// 		width: 90,
-	// 		renderCell: (params) => (
-	// 			<TextField
-	// 				className={classes.TextField}
-	// 				// style={{ color: 'black' }}
-	// 				InputProps={{ disableUnderline: true }}
-	// 				multiline
-	// 				disabled={true}
-	// 				value={params.value}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'Type',
-	// 		headerName: 'Type',
-	// 		width: 130,
-	// 		renderCell: (params) => (
-	// 			<TextField
-	// 				className={classes.TextField}
-	// 				// style={{ color: 'black' }}
-	// 				InputProps={{ disableUnderline: true }}
-	// 				multiline
-	// 				disabled={true}
-	// 				value={params.value}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'Reason',
-	// 		headerName: 'Reason',
-	// 		width: 130,
-	// 		renderCell: (params) => (
-	// 			<TextField
-	// 				className={classes.TextField}
-	// 				// style={{ color: 'black' }}
-	// 				InputProps={{ disableUnderline: true }}
-	// 				multiline
-	// 				disabled={true}
-	// 				value={params.value}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'Notes',
-	// 		headerName: 'Notes',
-	// 		width: 130,
-	// 		renderCell: (params) => (
-	// 			<TextField
-	// 				className={classes.TextField}
-	// 				// style={{ color: 'black' }}
-	// 				InputProps={{ disableUnderline: true }}
-	// 				multiline
-	// 				disabled={true}
-	// 				value={params.value}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'VetGroomer',
-	// 		headerName: 'Vet/Groomer',
-	// 		width: 130,
-	// 		renderCell: (params) => (
-	// 			<TextField
-	// 				className={classes.TextField}
-	// 				// style={{ color: 'black' }}
-	// 				InputProps={{ disableUnderline: true }}
-	// 				multiline
-	// 				disabled={true}
-	// 				value={params.value}
-	// 			/>
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'Edit',
-	// 		headerName: 'Edit',
-	// 		width: 77,
-	// 		renderCell: (params) => (
-	// 			<Button
-	// 				onClick={() => {
-	// 					//console.log(params);
-	// 				}}
-	// 				className={classes.Button}
-	// 			>
-	// 				<EditIcon className={classes.EditIcon} />
-	// 			</Button>
+			var todayFormatted = moment(now).format('MM/DD/YYYY');
+			// console.log(newDate);
+			if (newDate > now) {
+				// console.log('UPCOMING');
+				// console.log(newDate);
+				upcomingArray[j] = sortedPreventatives[i];
+				j++;
+			} else if (sameDate == todayFormatted) {
+				// console.log('SAME');
+				// console.log(newDate);
+				upcomingArray[j] = sortedPreventatives[i];
+				j++;
+			} else {
+				// console.log('PAST');
+				// console.log(newDate);
+				pastArray[k] = sortedPreventatives[i];
+				k++;
+			}
+		}
 
-	// 			// <EditButton
-	// 			// 	onClick={(params) => {
-	// 			// 		console.log(params);
-	// 			// 	}}
-	// 			// />
-	// 		),
-	// 	},
-	// 	{
-	// 		field: 'Delete',
-	// 		headerName: 'Delete',
-	// 		width: 94,
-	// 		renderCell: (params) => (
-	// 			<Button onClick={() => {}} className={classes.Button}>
-	// 				<DeleteIcon className={classes.DeleteIcon} />
-	// 			</Button>
-	// 		),
-	// 	},
-	// ];
+		console.log(sortedPreventatives);
+		console.log(upcomingArray);
+		console.log(pastArray);
 
-	//loading each row with a pet appointment object
+		setUpcomingPreventatives(upcomingArray);
+		setPastPreventatives(pastArray);
+		setLoading(false);
+	}, []);
 
-	//only complete when the component finishes loading
-	// let rows = [];
-	// if (loading === false) {
-	// 	for (let i = 0; i < sortedAppointments.length; i++) {
-	// 		let date = moment(sortedAppointments[i].date).format('MM/DD/YYYY');
-	// 		rows[i] = {
-	// 			id: i,
-	// 			Date: date,
-	// 			Picture: sortedAppointments[i].data,
-	// 			Pet: sortedAppointments[i].petName,
-	// 			Time: sortedAppointments[i].time + sortedAppointments[i].amOrPm,
-	// 			Type: sortedAppointments[i].type,
-	// 			Reason: sortedAppointments[i].reason,
-	// 			Notes: sortedAppointments[i].notes,
-	// 			VetGroomer: sortedAppointments[i].vetOrGroomerName,
-	// 		};
-	// 	}
-	// }
-	// console.log(sortedAppointments);
+	const upcomingClickedHandler = () => {
+		setUpcomingClicked(true);
+		setPastClicked(false);
+	};
+
+	const pastClickedHandler = () => {
+		setPastClicked(true);
+		setUpcomingClicked(false);
+	};
+
 	return (
-		<div className="appointments-main-container" id="preventatives">
+		<div className="food-main-container" id="preventatives">
 			<div className="title">
 				<h1>Preventatives</h1>
 			</div>
+			<ul>
+				<li
+					onClick={upcomingClickedHandler}
+					style={{
+						borderBottom:
+							upcomingClicked === true
+								? '3px solid #ff4f00'
+								: null,
+					}}
+				>
+					<h2>Upcoming</h2>
+				</li>
+				<li
+					onClick={pastClickedHandler}
+					style={{
+						borderBottom:
+							pastClicked === true ? '3px solid #ff4f00' : null,
+					}}
+				>
+					<h2>Past</h2>
+				</li>
+			</ul>
+
+			{upcomingClicked && loading === false ? (
+				<DashUpcomingPrev
+					currentUser={currentUser}
+					upcomingPreventatives={upcomingPreventatives}
+				/>
+			) : null}
+			{pastClicked && loading === false ? (
+				<DashPastPrev
+					currentUser={currentUser}
+					pastPreventatives={pastPreventatives}
+				/>
+			) : null}
+
 			{/* <div
 				className="appointments-table"
 				style={{ height: 450, width: '100%' }}

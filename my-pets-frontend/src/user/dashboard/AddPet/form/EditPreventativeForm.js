@@ -148,6 +148,8 @@ export default function EditPreventativeForm(props) {
 	const [lastGiven, setLastGiven] = useState(rowData.lastGiven);
 	const [notes, setNotes] = useState(rowData.notes);
 
+	useEffect(() => {}, []);
+
 	//handles input changes from all fields
 	const onDueNext = (date) => {
 		console.log('on due next change called');

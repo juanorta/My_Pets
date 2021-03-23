@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
-import { TextField } from '@material-ui/core';
+import { IconButton, TextField } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
-import EditDeletePrevBtnHandler from './EditDeletePrevBtnHandler';
+import Icon from '@mdi/react';
+import {
+	mdiAccount,
+	mdiDog,
+	mdiFoodDrumstick,
+	mdiScaleBathroom,
+} from '@mdi/js';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -29,24 +35,66 @@ const useStyles = makeStyles((theme) => ({
 			fontSize: '0.85rem',
 		},
 	},
+	TextFieldPet: {
+		color: 'black',
+
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+			fontSize: '0.85rem',
+			fontWeight: 700,
+		},
+
+		marginTop: '1.25rem',
+	},
 }));
 
-export default function UpcomingPreventatives(props) {
+export default function DashUpcomingPrev(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
-	const [pet, setPet] = useState(props.pet);
 	const [preventatives, setPreventatives] = useState(props.preventatives);
 	const [upcomingPreventatives, setUpcomingPreventatives] = useState(
 		props.upcomingPreventatives
 	);
-	const [loading, setLoading] = useState(true);
-	const [openModal, setOpenModal] = useState(false);
-	const [isEditPrev, setIsEditPrev] = useState(false);
-	const [isDeletePrev, setIsDeletePrev] = useState(false);
-	const [rowData, setRowData] = useState('');
-	const [fromDash, setFromDash] = useState(props.fromDash);
 
 	const columns = [
+		{
+			field: 'petName',
+			headerName: 'Pet',
+			width: 160,
+			renderCell: (params) => (
+				<div style={{ backgroundColor: 'transparent' }}>
+					{params.row.data == '' ? (
+						<IconButton className="icon-button-appt">
+							<Icon
+								path={mdiDog}
+								title="Dog Profile"
+								size={1.4}
+								horizontal
+								vertical
+								rotate={180}
+								color="#1b2737"
+								// color="#ff4f00"
+							/>
+						</IconButton>
+					) : (
+						<IconButton className="icon-button-appt">
+							<img
+								className="appt-image"
+								src={`data:image/jpeg;base64,${params.row.data}`}
+							/>
+						</IconButton>
+					)}
+					<TextField
+						className={classes.TextFieldPet}
+						// style={{ color: 'black' }}
+						InputProps={{ disableUnderline: true }}
+						multiline
+						disabled={true}
+						value={params.value}
+					/>
+				</div>
+			),
+		},
 		{
 			field: 'dueNext',
 			headerName: 'Due Next',
@@ -125,49 +173,6 @@ export default function UpcomingPreventatives(props) {
 				/>
 			),
 		},
-
-		{
-			field: 'Edit',
-			headerName: 'Edit',
-			width: 77,
-			renderCell: (params) => (
-				<Button
-					onClick={() => {
-						// console.log(params.row);
-						setOpenModal(true);
-						setIsEditPrev(true);
-						setRowData(params.row);
-					}}
-					className={classes.Button}
-				>
-					<EditIcon className={classes.EditIcon} />
-				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
-			),
-		},
-		{
-			field: 'Delete',
-			headerName: 'Delete',
-			width: 94,
-			renderCell: (params) => (
-				<Button
-					onClick={() => {
-						// console.log(params.row);
-						setOpenModal(true);
-						setIsDeletePrev(true);
-						setRowData(params.row);
-					}}
-					className={classes.Button}
-				>
-					<DeleteIcon className={classes.DeleteIcon} />
-				</Button>
-			),
-		},
 	];
 
 	let rows = [];
@@ -186,26 +191,28 @@ export default function UpcomingPreventatives(props) {
 			name: upcomingPreventatives[i].name,
 			type: upcomingPreventatives[i].type,
 			notes: upcomingPreventatives[i].notes,
-			petId: upcomingPreventatives[i].petPreventativeId,
+			petName: upcomingPreventatives[i].petName,
+			data: upcomingPreventatives[i].data,
 		};
 	}
 
 	const SetOpenModalToFalse = () => {
-		setOpenModal(false);
-		setIsEditPrev(false);
-		setIsDeletePrev(false);
+		// setOpenModal(false);
+		// setIsEditPrev(false);
+		// setIsDeletePrev(false);
 	};
 
 	// console.log(upcomingPreventatives);
 	// console.log(sortedWeights);
-	console.log('unsorted preventatives');
-	console.log(preventatives);
+	console.log('upcoming');
+	console.log(upcomingPreventatives);
 	return (
 		<div
 			style={{
 				height: 400,
-				width: '70%',
-				margin: '0 auto',
+				width: '90%',
+				marginLeft: '1rem',
+				// margin: '0 auto',
 				// backgroundColor: 'red',
 			}}
 		>
@@ -228,7 +235,7 @@ export default function UpcomingPreventatives(props) {
 				// ]}
 				// onCellClick={(CellParams) => {}}
 			/>
-			{isEditPrev ? (
+			{/* {isEditPrev ? (
 				<EditDeletePrevBtnHandler
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -260,7 +267,7 @@ export default function UpcomingPreventatives(props) {
 					}
 					fromDash={fromDash}
 				/>
-			) : null}
+			) : null} */}
 		</div>
 	);
 }
