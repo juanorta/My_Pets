@@ -20,6 +20,9 @@ import Overview from './views/overview/Overview';
 import { getAllWeights } from '../../util/APIUtils';
 import Food from './views/food/Food';
 import DashboardAppointments from './views/appointments/DashboardAppointments';
+import Preventatives from './views/preventatives/Preventatives';
+import Medications from './views/medications/Medications';
+import Vets from './views/Vets/Vets';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -76,6 +79,27 @@ export default function Dashboard(props) {
 				currentUser={props.currentUser}
 			/>
 			<Food
+				forceUpdate={props.forceUpdate}
+				currentUser={props.currentUser}
+				changeDefaultViewsAndRefresh={
+					props.changeDefaultViewsAndRefresh
+				}
+			/>
+			<Preventatives
+				forceUpdate={props.forceUpdate}
+				currentUser={props.currentUser}
+				changeDefaultViewsAndRefresh={
+					props.changeDefaultViewsAndRefresh
+				}
+			/>
+			<Medications
+				forceUpdate={props.forceUpdate}
+				currentUser={props.currentUser}
+				changeDefaultViewsAndRefresh={
+					props.changeDefaultViewsAndRefresh
+				}
+			/>
+			<Vets
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}
 				changeDefaultViewsAndRefresh={

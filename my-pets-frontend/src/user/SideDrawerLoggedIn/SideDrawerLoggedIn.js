@@ -31,6 +31,9 @@ import {
 	mdiDog,
 	mdiFoodDrumstick,
 	mdiScaleBathroom,
+	mdiNeedle,
+	mdiPill,
+	mdiDoctor,
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import EventIcon from '@material-ui/icons/Event';
@@ -133,6 +136,13 @@ export default function SideDrawerLoggedIn(props) {
 		classes.menuContents
 	);
 	const [foodMenuItem, setFoodMenuItem] = useState(classes.menuContents);
+	const [preventativesMenuItem, setPreventativesMenuItem] = useState(
+		classes.menuContents
+	);
+	const [medicationsMenuItem, setMedicationsMenuItem] = useState(
+		classes.menuContents
+	);
+	const [vetsMenuItem, setVetsMenuItem] = useState(classes.menuContents);
 
 	//hook that gets set to true when the dashboard page gets loaded for the first time
 	//used to trigger a slide-open animation on first load
@@ -343,6 +353,97 @@ export default function SideDrawerLoggedIn(props) {
 								/>
 							</ListItemIcon>
 							<a>Food</a>
+						</ListItem>
+					</Link>
+
+					<Link
+						activeClass="active"
+						spy={true}
+						to="preventatives"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setPreventativesMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setPreventativesMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={preventativesMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<Icon
+									// className={iconClass4}
+									path={mdiNeedle}
+									title="food"
+									size={1}
+									horizontal
+									vertical
+									rotate={180}
+									// color="#1b2737"
+								/>
+							</ListItemIcon>
+							<a>Preventatives</a>
+						</ListItem>
+					</Link>
+					<Link
+						activeClass="active"
+						spy={true}
+						to="medications"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setMedicationsMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setMedicationsMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={medicationsMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<Icon
+									// className={iconClass4}
+									path={mdiPill}
+									title="food"
+									size={1}
+									horizontal
+									vertical
+									rotate={180}
+									// color="#1b2737"
+								/>
+							</ListItemIcon>
+							<a>Medications</a>
+						</ListItem>
+					</Link>
+					<Link
+						activeClass="active"
+						spy={true}
+						to="vets"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setVetsMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setVetsMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={vetsMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<Icon
+									// className={iconClass4}
+									path={mdiDoctor}
+									title="food"
+									size={1}
+									horizontal
+									vertical
+									rotate={180}
+									// color="#1b2737"
+								/>
+							</ListItemIcon>
+							<a>Vets</a>
 						</ListItem>
 					</Link>
 
