@@ -58,34 +58,38 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: '#FF4F00',
 		},
 	},
+
 	menuContents: {
+		height: '4rem',
 		color: 'white',
 		'&:hover': {
-			backgroundColor: '#FF4F00',
+			backgroundColor: '#3C4450',
+			// backgroundColor: '#FF4F00',
 		},
 	},
 
 	petMenuItem: {
 		color: 'white',
 		'&:hover': {
-			backgroundColor: '#FF4F00',
+			// backgroundColor: '#FF4F00',
 		},
 	},
 	apptMenuItem: {
 		color: 'white',
 		'&:hover': {
-			backgroundColor: '#FF4F00',
+			// backgroundColor: '#FF4F00',
 		},
 	},
 	weightsMenuItem: {
 		color: 'white',
 		'&:hover': {
-			backgroundColor: '#FF4F00',
+			// backgroundColor: '#FF4F00',
 		},
 	},
 
 	//class that sets background color to orange
 	contentsActive: {
+		height: '4rem',
 		color: 'white',
 		backgroundColor: '#FF4F00',
 	},
