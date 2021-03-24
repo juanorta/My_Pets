@@ -262,12 +262,17 @@ export default function AddMedicationForm(props) {
 				<div className="button-group">
 					<Button
 						// onClick={setLastAndWeightChange}
+						variant="contained"
 						onClick={props.handleClose}
 						className={classes.cancelButton}
 					>
 						Cancel
 					</Button>
-					<Button type="submit" className={classes.submitButton}>
+					<Button
+						variant="contained"
+						type="submit"
+						className={classes.submitButton}
+					>
 						Save
 					</Button>
 				</div>

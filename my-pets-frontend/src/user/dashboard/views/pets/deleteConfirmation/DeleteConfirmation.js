@@ -43,6 +43,7 @@ export default function DeleteConfirmation(props) {
 			</h1>
 			<div className="delete-button-group">
 				<Button
+					variant="contained"
 					style={{ backgroundColor: '#FF4F00' }}
 					onClick={deleteHandleClose}
 				>
@@ -51,6 +52,7 @@ export default function DeleteConfirmation(props) {
 
 				<NavLink to="/" className="navlink">
 					<Button
+						variant="contained"
 						style={{ backgroundColor: '#1B2737' }}
 						onClick={() => {
 							agreeClickHandler(

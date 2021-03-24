@@ -48,12 +48,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function DashPastPrev(props) {
+export default function DashCurrentMeds(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
-	const [preventatives, setPreventatives] = useState(props.preventatives);
-	const [pastPreventatives, setPastPreventatives] = useState(
-		props.pastPreventatives
+	const [medications, setMedications] = useState(props.medications);
+	const [currentMedications, setCurrentMedications] = useState(
+		props.currentMedications
 	);
 
 	const columns = [
@@ -96,8 +96,8 @@ export default function DashPastPrev(props) {
 			),
 		},
 		{
-			field: 'dueNext',
-			headerName: 'Due Next',
+			field: 'endDate',
+			headerName: 'End Date',
 			width: 150,
 
 			renderCell: (params) => (
@@ -112,9 +112,9 @@ export default function DashPastPrev(props) {
 			),
 		},
 		{
-			field: 'lastGiven',
-			headerName: 'Last Given',
-			width: 130,
+			field: 'startDate',
+			headerName: 'Start Date',
+			width: 150,
 			renderCell: (params) => (
 				<TextField
 					className={classes.TextField}
@@ -142,26 +142,11 @@ export default function DashPastPrev(props) {
 				/>
 			),
 		},
-		{
-			field: 'type',
-			headerName: 'Type',
-			width: 130,
-			renderCell: (params) => (
-				<TextField
-					className={classes.TextField}
-					// style={{ color: 'black' }}
-					InputProps={{ disableUnderline: true }}
-					multiline
-					disabled={true}
-					value={params.value}
-				/>
-			),
-		},
 
 		{
-			field: 'notes',
-			headerName: 'Notes',
-			width: 130,
+			field: 'dosageInstructions',
+			headerName: 'Dosage Instructions',
+			width: 180,
 			renderCell: (params) => (
 				<TextField
 					className={classes.TextField}
@@ -177,18 +162,19 @@ export default function DashPastPrev(props) {
 
 	let rows = [];
 
-	for (let i = 0; i < pastPreventatives.length; i++) {
-		let date1 = moment(pastPreventatives[i].dueNext).format('MM/DD/YYYY');
-		let date2 = moment(pastPreventatives[i].lastGiven).format('MM/DD/YYYY');
+	for (let i = 0; i < currentMedications.length; i++) {
+		let date1 = moment(currentMedications[i].endDate).format('MM/DD/YYYY');
+		let date2 = moment(currentMedications[i].startDate).format(
+			'MM/DD/YYYY'
+		);
 		rows[i] = {
-			id: pastPreventatives[i].id,
-			dueNext: date1,
-			lastGiven: date2,
-			name: pastPreventatives[i].name,
-			type: pastPreventatives[i].type,
-			notes: pastPreventatives[i].notes,
-			petName: pastPreventatives[i].petName,
-			data: pastPreventatives[i].data,
+			id: currentMedications[i].id,
+			endDate: date1,
+			startDate: date2,
+			name: currentMedications[i].medicationName,
+			dosageInstructions: currentMedications[i].dosageInstructions,
+			petName: currentMedications[i].petName,
+			data: currentMedications[i].data,
 		};
 	}
 
@@ -220,7 +206,7 @@ export default function DashPastPrev(props) {
 				rowHeight={72}
 				sortModel={[
 					{
-						field: 'dueNext',
+						field: 'endDate',
 						sort: 'asc',
 					},
 				]}

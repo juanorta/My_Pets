@@ -18,6 +18,8 @@ import {
 	mdiScaleBathroom,
 } from '@mdi/js';
 import Icon from '@mdi/react';
+import DashCurrentMeds from './DashCurrentMeds';
+import DashPastMeds from './DashPastMeds';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -68,6 +70,58 @@ export default function Medications(props) {
 	const [pets, setPets] = useState(props.currentUser.pets);
 	const [currentClicked, setCurrentClicked] = useState(true);
 	const [pastClicked, setPastClicked] = useState(false);
+	const [medications, setMedications] = useState(currentUser.medications);
+	const [currentMedications, setCurrentMedications] = useState('');
+	const [pastMedications, setPastMedications] = useState('');
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		let sortedMedications = medications.slice();
+		sortedMedications.sort(function compare(a, b) {
+			var dateA = new Date(a.endDate);
+			var dateB = new Date(b.endDate);
+			return dateB - dateA;
+		});
+
+		var now = new Date();
+		let currentArray = [];
+		let pastArray = [];
+		let j = 0;
+		let k = 0;
+
+		for (var i = 0; i < sortedMedications.length; i++) {
+			var newDate = moment(sortedMedications[i].endDate).toDate();
+			var sameDate = moment(sortedMedications[i].endDate).format(
+				'MM/DD/YYYY'
+			);
+
+			var todayFormatted = moment(now).format('MM/DD/YYYY');
+			// console.log(newDate);
+			if (newDate > now) {
+				// console.log('UPCOMING');
+				// console.log(newDate);
+				currentArray[j] = sortedMedications[i];
+				j++;
+			} else if (sameDate == todayFormatted) {
+				// console.log('SAME');
+				// console.log(newDate);
+				currentArray[j] = sortedMedications[i];
+				j++;
+			} else {
+				// console.log('PAST');
+				// console.log(newDate);
+				pastArray[k] = sortedMedications[i];
+				k++;
+			}
+		}
+		// console.log(medications);
+		// console.log(sortedMedications);
+		// console.log(currentArray);
+		// console.log(pastArray);
+		setCurrentMedications(currentArray);
+		setPastMedications(pastArray);
+		setLoading(false);
+	}, []);
 
 	const currentClickedHandler = () => {
 		setCurrentClicked(true);
@@ -106,6 +160,21 @@ export default function Medications(props) {
 					<h2>Past</h2>
 				</li>
 			</ul>
+			{currentClicked && loading === false ? (
+				<DashCurrentMeds
+					currentUser={currentUser}
+					medications={medications}
+					currentMedications={currentMedications}
+				/>
+			) : null}
+
+			{pastClicked && loading === false ? (
+				<DashPastMeds
+					currentUser={currentUser}
+					medications={medications}
+					pastMedications={pastMedications}
+				/>
+			) : null}
 		</div>
 	);
 }

@@ -208,6 +208,7 @@ export default function DashUpcomingPrev(props) {
 	console.log(upcomingPreventatives);
 	return (
 		<div
+			className="appointments-table"
 			style={{
 				height: 400,
 				width: '90%',

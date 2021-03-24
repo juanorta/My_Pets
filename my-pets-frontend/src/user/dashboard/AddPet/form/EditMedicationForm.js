@@ -116,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
 			backgroundColor: '#1B2737',
 		},
 		width: '5rem',
+		marginTop: '-3rem',
 	},
 
 	submitButton: {
@@ -128,6 +129,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 
 		width: '5rem',
+		marginTop: '-3rem',
 	},
 }));
 
@@ -265,13 +267,18 @@ export default function EditMedicationForm(props) {
 
 				<div className="button-group">
 					<Button
+						variant="contained"
 						// onClick={setLastAndWeightChange}
 						onClick={props.handleClose}
 						className={classes.cancelButton}
 					>
 						Cancel
 					</Button>
-					<Button type="submit" className={classes.submitButton}>
+					<Button
+						variant="contained"
+						type="submit"
+						className={classes.submitButton}
+					>
 						Save
 					</Button>
 				</div>

@@ -48,12 +48,14 @@ export default function DeleteApptConfirmation(props) {
 			</h1>
 			<div className="delete-button-group">
 				<Button
+					variant="contained"
 					style={{ backgroundColor: '#FF4F00' }}
 					onClick={deleteHandleClose}
 				>
 					No
 				</Button>
 				<Button
+					variant="contained"
 					style={{ backgroundColor: '#1B2737' }}
 					onClick={() => {
 						agreeClickHandler(

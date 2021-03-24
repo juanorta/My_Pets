@@ -347,12 +347,17 @@ export default function AddPetForm(props) {
 				/>
 				<div className="button-group">
 					<Button
+						variant="contained"
 						onClick={props.handleClose}
 						className={classes.cancelButton}
 					>
 						Cancel
 					</Button>
-					<Button type="submit" className={classes.submitButton}>
+					<Button
+						variant="contained"
+						type="submit"
+						className={classes.submitButton}
+					>
 						Save
 					</Button>
 				</div>
