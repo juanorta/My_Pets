@@ -37,6 +37,7 @@ import {
 } from '@mdi/js';
 import Icon from '@mdi/react';
 import EventIcon from '@material-ui/icons/Event';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 const drawerWidth = 300;
 
@@ -148,6 +149,10 @@ export default function SideDrawerLoggedIn(props) {
 	);
 	const [vetsMenuItem, setVetsMenuItem] = useState(classes.menuContents);
 
+	const [overviewMenuItem, setOverviewMenuItem] = useState(
+		classes.menuContents
+	);
+
 	//hook that gets set to true when the dashboard page gets loaded for the first time
 	//used to trigger a slide-open animation on first load
 	const [
@@ -254,6 +259,28 @@ export default function SideDrawerLoggedIn(props) {
 							Home
 						</ListItem>
 					</NavLink>
+
+					<Link
+						activeClass="active"
+						spy={true}
+						to="overview"
+						smooth={true}
+						duration={500}
+						offset={-60}
+						onSetActive={() => {
+							setOverviewMenuItem(classes.contentsActive);
+						}}
+						onSetInactive={() => {
+							setOverviewMenuItem(classes.menuContents);
+						}}
+					>
+						<ListItem button className={overviewMenuItem}>
+							<ListItemIcon style={{ color: 'white' }}>
+								<AssessmentIcon />
+							</ListItemIcon>
+							Overview
+						</ListItem>
+					</Link>
 
 					<Link
 						activeClass="active"

@@ -204,8 +204,8 @@ export default function DashUpcomingPrev(props) {
 
 	// console.log(upcomingPreventatives);
 	// console.log(sortedWeights);
-	console.log('upcoming');
-	console.log(upcomingPreventatives);
+	// console.log('upcoming');
+	// console.log(upcomingPreventatives);
 	return (
 		<div
 			className="appointments-table"

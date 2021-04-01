@@ -74,59 +74,16 @@ export default function Preventatives(props) {
 	);
 	const [upcomingClicked, setUpcomingClicked] = useState(true);
 	const [pastClicked, setPastClicked] = useState(false);
-	const [upcomingPreventatives, setUpcomingPreventatives] = useState('');
-	const [pastPreventatives, setPastPreventatives] = useState('');
+	const [upcomingPreventatives, setUpcomingPreventatives] = useState(
+		props.upcomingPreventatives
+	);
+	const [pastPreventatives, setPastPreventatives] = useState(
+		props.pastPreventatives
+	);
 	const [loading, setLoading] = useState(true);
 	const [fromDash, setFromDash] = useState(true);
 
 	useEffect(() => {
-		console.log('preventatives');
-		// console.log(preventatives);
-		let sortedPreventatives = preventatives.slice();
-		sortedPreventatives.sort(function compare(a, b) {
-			var dateA = new Date(a.dueNext);
-			var dateB = new Date(b.dueNext);
-			return dateB - dateA;
-		});
-
-		var now = new Date();
-		let upcomingArray = [];
-		let pastArray = [];
-		let j = 0;
-		let k = 0;
-
-		for (var i = 0; i < sortedPreventatives.length; i++) {
-			var newDate = moment(sortedPreventatives[i].dueNext).toDate();
-			var sameDate = moment(sortedPreventatives[i].dueNext).format(
-				'MM/DD/YYYY'
-			);
-
-			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
-			if (newDate > now) {
-				// console.log('UPCOMING');
-				// console.log(newDate);
-				upcomingArray[j] = sortedPreventatives[i];
-				j++;
-			} else if (sameDate == todayFormatted) {
-				// console.log('SAME');
-				// console.log(newDate);
-				upcomingArray[j] = sortedPreventatives[i];
-				j++;
-			} else {
-				// console.log('PAST');
-				// console.log(newDate);
-				pastArray[k] = sortedPreventatives[i];
-				k++;
-			}
-		}
-
-		console.log(sortedPreventatives);
-		console.log(upcomingArray);
-		console.log(pastArray);
-
-		setUpcomingPreventatives(upcomingArray);
-		setPastPreventatives(pastArray);
 		setLoading(false);
 	}, []);
 

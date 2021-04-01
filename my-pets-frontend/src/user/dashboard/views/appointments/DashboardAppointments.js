@@ -13,54 +13,57 @@ export default function DashboardAppointments(props) {
 	const [pets, setPets] = useState(props.currentUser.pets);
 	const [appointments, setAppointments] = useState(currentUser.appointments);
 	const [sortedAppointments, setSortedAppointments] = useState('');
-	const [upcomingAppointments, setUpcomingAppointments] = useState('');
-	const [pastAppointments, setPastAppointments] = useState('');
+	const [upcomingAppointments, setUpcomingAppointments] = useState(
+		props.upcomingAppointments
+	);
+	const [pastAppointments, setPastAppointments] = useState(
+		props.pastAppointments
+	);
 
 	useEffect(() => {
 		//sorting appts from future to past
-		let sortedAppointmentsArray = appointments.slice();
-		sortedAppointmentsArray.sort(function compare(a, b) {
-			var dateA = new Date(a.date);
-			var dateB = new Date(b.date);
-			return dateB - dateA;
-		});
-		// console.log(sortedAppointmentsArray);
-
-		//putting appointments in 'upcoming' or 'past' arrays
-		var now = new Date();
-		let upcomingArray = [];
-		let pastArray = [];
-		let j = 0;
-		let k = 0;
-		for (var i = 0; i < sortedAppointmentsArray.length; i++) {
-			var newDate = moment(sortedAppointmentsArray[i].date).toDate();
-			var sameDate = moment(sortedAppointmentsArray[i].date).format(
-				'MM/DD/YYYY'
-			);
-			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
-			if (newDate > now) {
-				// console.log('UPCOMING');
-				// console.log(newDate);
-				upcomingArray[j] = sortedAppointmentsArray[i];
-				j++;
-			} else if (sameDate == todayFormatted) {
-				// console.log('SAME');
-				// console.log(newDate);
-				upcomingArray[j] = sortedAppointmentsArray[i];
-				j++;
-			} else {
-				// console.log('PAST');
-				// console.log(newDate);
-				pastArray[k] = sortedAppointmentsArray[i];
-				k++;
-			}
-		}
-		// console.log(upcomingArray);
-		// console.log(pastArray);
-		setUpcomingAppointments(upcomingArray);
-		setPastAppointments(pastArray);
-		setSortedAppointments(sortedAppointmentsArray);
+		// let sortedAppointmentsArray = appointments.slice();
+		// sortedAppointmentsArray.sort(function compare(a, b) {
+		// 	var dateA = new Date(a.date);
+		// 	var dateB = new Date(b.date);
+		// 	return dateB - dateA;
+		// });
+		// // console.log(sortedAppointmentsArray);
+		// //putting appointments in 'upcoming' or 'past' arrays
+		// var now = new Date();
+		// let upcomingArray = [];
+		// let pastArray = [];
+		// let j = 0;
+		// let k = 0;
+		// for (var i = 0; i < sortedAppointmentsArray.length; i++) {
+		// 	var newDate = moment(sortedAppointmentsArray[i].date).toDate();
+		// 	var sameDate = moment(sortedAppointmentsArray[i].date).format(
+		// 		'MM/DD/YYYY'
+		// 	);
+		// 	var todayFormatted = moment(now).format('MM/DD/YYYY');
+		// 	// console.log(newDate);
+		// 	if (newDate > now) {
+		// 		// console.log('UPCOMING');
+		// 		// console.log(newDate);
+		// 		upcomingArray[j] = sortedAppointmentsArray[i];
+		// 		j++;
+		// 	} else if (sameDate == todayFormatted) {
+		// 		// console.log('SAME');
+		// 		// console.log(newDate);
+		// 		upcomingArray[j] = sortedAppointmentsArray[i];
+		// 		j++;
+		// 	} else {
+		// 		// console.log('PAST');
+		// 		// console.log(newDate);
+		// 		pastArray[k] = sortedAppointmentsArray[i];
+		// 		k++;
+		// 	}
+		// }
+		// // console.log(upcomingArray);
+		// // console.log(pastArray);
+		// setUpcomingAppointments(upcomingArray);
+		// setPastAppointments(pastArray);
+		// setSortedAppointments(sortedAppointmentsArray);
 		setLoading(false);
 	}, []);
 

@@ -174,7 +174,7 @@ export default function PetList(props) {
 								<Button
 									data-tip
 									data-for="editTip"
-									style={{ color: 'teal' }}
+									style={{ color: '#1b2737' }}
 									onClick={() => {
 										editPetHandler(pet, currentUser);
 									}}
