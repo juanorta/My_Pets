@@ -226,13 +226,13 @@ export default function Dashboard(props) {
 			/> */}
 			{loading === false ? (
 				<div>
-					<Overview
+					{/* <Overview
 						forceUpdate={props.forceUpdate}
 						currentUser={props.currentUser}
 						upcomingAppointments={upcomingAppointments}
 						upcomingPreventatives={upcomingPreventatives}
 						currentMedications={currentMedications}
-					/>
+					/> */}
 
 					<Pets
 						forceUpdate={props.forceUpdate}

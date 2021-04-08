@@ -119,10 +119,10 @@ function Home() {
 										{' '}
 										|{' '}
 									</h2>{' '}
-									What is My Pets?
+									What is My Pet Family?
 								</h2>
 								<h3>
-									My Pets is an all in one pet manager
+									My Pet Family is an all in one pet manager
 									dedicated
 								</h3>
 								<h3>

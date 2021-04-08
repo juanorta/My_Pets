@@ -147,7 +147,7 @@ export default function AppHeader(props) {
 													minWidth: '40px',
 												}}
 											/>
-											My Pets
+											My Pet Family
 										</Button>
 									</NavLink>
 								</li>

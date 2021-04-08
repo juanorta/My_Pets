@@ -31,7 +31,9 @@ class Signup extends Component {
 		return (
 			<div className="login-container">
 				<div className="login-content">
-					<h1 className="login-title">Create your My Pets account</h1>
+					<h1 className="login-title">
+						Create your My Pet Family account
+					</h1>
 					<SocialSignup />
 					<div className="or-separator">
 						<h3 className="or-text">OR</h3>
