@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "name": "app",
+      "type": "com.juan.projects.mypets.config.AppProperties",
+      "sourceType": "com.juan.projects.mypets.config.AppProperties"
+    },
+    {
+      "name": "app.auth",
+      "type": "com.juan.projects.mypets.config.AppProperties$Auth",
+      "sourceType": "com.juan.projects.mypets.config.AppProperties",
+      "sourceMethod": "getAuth()"
+    },
+    {
+      "name": "app.oauth2",
+      "type": "com.juan.projects.mypets.config.AppProperties$OAuth2",
+      "sourceType": "com.juan.projects.mypets.config.AppProperties",
+      "sourceMethod": "getOauth2()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
