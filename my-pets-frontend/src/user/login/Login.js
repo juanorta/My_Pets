@@ -52,7 +52,7 @@ class Login extends Component {
 					<div className="or-separator">
 						<h3 className="or-text">OR</h3>
 					</div>
-					<LoginForm {...this.props} />
+					{/* <LoginForm {...this.props} /> */}
 					<h3 className="signup-link">
 						New user? <Link to="/signup">Sign up!</Link>
 					</h3>
@@ -112,48 +112,48 @@ class SocialLogin extends Component {
 	}
 }
 
-class LoginForm extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			email: '',
-			password: '',
-		};
-		this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+// class LoginForm extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {
+// 			email: '',
+// 			password: '',
+// 		};
+// 		this.handleInputChange = this.handleInputChange.bind(this);
+// 		this.handleSubmit = this.handleSubmit.bind(this);
+// 	}
 
-	handleInputChange(event) {
-		const target = event.target;
-		const inputName = target.name;
-		const inputValue = target.value;
+// 	handleInputChange(event) {
+// 		const target = event.target;
+// 		const inputName = target.name;
+// 		const inputValue = target.value;
 
-		this.setState({
-			[inputName]: inputValue,
-		});
-	}
+// 		this.setState({
+// 			[inputName]: inputValue,
+// 		});
+// 	}
 
-	handleSubmit(event) {
-		event.preventDefault();
+// 	handleSubmit(event) {
+// 		event.preventDefault();
 
-		const loginRequest = Object.assign({}, this.state);
-		login(loginRequest)
-			.then((response) => {
-				localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-				Alert.success("You're successfully logged in!");
-				this.props.history.push('/');
-			})
-			.catch((error) => {
-				Alert.error(
-					(error && error.message) ||
-						'Oops! Something went wrong. Please try again!'
-				);
-			});
-	}
+// 		const loginRequest = Object.assign({}, this.state);
+// 		login(loginRequest)
+// 			.then((response) => {
+// 				localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+// 				Alert.success("You're successfully logged in!");
+// 				this.props.history.push('/');
+// 			})
+// 			.catch((error) => {
+// 				Alert.error(
+// 					(error && error.message) ||
+// 						'Oops! Something went wrong. Please try again!'
+// 				);
+// 			});
+// 	}
 
-	render() {
-		return <div></div>;
-	}
-}
+// 	render() {
+// 		return <div></div>;
+// 	}
+// }
 
 export default Login;

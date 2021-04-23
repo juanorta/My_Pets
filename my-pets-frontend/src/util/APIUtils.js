@@ -22,12 +22,13 @@ const request = (options) => {
 
 	const defaults = { headers: headers };
 	options = Object.assign({}, defaults, options);
-
+	console.log(options);
 	return fetch(options.url, options).then((response) =>
 		response.json().then((json) => {
 			if (!response.ok) {
 				return Promise.reject(json);
 			}
+			console.log(json);
 			return json;
 		})
 	);
@@ -35,6 +36,7 @@ const request = (options) => {
 
 export function getCurrentUser() {
 	if (!localStorage.getItem(ACCESS_TOKEN)) {
+		console.log('no access token set');
 		return Promise.reject('No access token set.');
 	}
 
@@ -44,23 +46,23 @@ export function getCurrentUser() {
 	});
 }
 
-export function login(loginRequest) {
-	return request({
-		url: API_BASE_URL + '/auth/login',
-		method: 'POST',
-		body: JSON.stringify(loginRequest),
-	});
-}
+// export function login(loginRequest) {
+// 	return request({
+// 		url: API_BASE_URL + '/auth/login',
+// 		method: 'POST',
+// 		body: JSON.stringify(loginRequest),
+// 	});
+// }
 
-export function signup(signupRequest) {
-	console.log('sign up');
-	console.log(signupRequest);
-	return request({
-		url: API_BASE_URL + '/auth/signup',
-		method: 'POST',
-		body: JSON.stringify(signupRequest),
-	});
-}
+// export function signup(signupRequest) {
+// 	console.log('sign up');
+// 	console.log(signupRequest);
+// 	return request({
+// 		url: API_BASE_URL + '/auth/signup',
+// 		method: 'POST',
+// 		body: JSON.stringify(signupRequest),
+// 	});
+// }
 
 export async function addPet(id, age, breed, name, type, sex) {
 	let token = localStorage.getItem(ACCESS_TOKEN);

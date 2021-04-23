@@ -39,17 +39,27 @@ class App extends Component {
 	}
 
 	loadCurrentlyLoggedInUser() {
+		console.log('loadcurrentlyloggedinuser');
 		this.setState({
 			loading: true,
 		});
 
 		getCurrentUser()
 			.then((response) => {
-				this.setState({
-					currentUser: response,
-					authenticated: true,
-					loading: false,
-				});
+				console.log('response');
+				console.log(response);
+				this.setState(
+					{
+						currentUser: response,
+						authenticated: true,
+						loading: false,
+					},
+					() => {
+						console.log(
+							'authenticated : ' + this.state.authenticated
+						);
+					}
+				);
 			})
 			.catch((error) => {
 				this.setState({
@@ -96,6 +106,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		console.log('DID MOUTN');
 		this.loadCurrentlyLoggedInUser();
 		// this.changeDefaultViewsAndRefresh();
 	}
@@ -107,6 +118,7 @@ class App extends Component {
 	}
 
 	render() {
+		console.log(localStorage);
 		if (this.state.loading) {
 			return <LoadingIndicator />;
 		}

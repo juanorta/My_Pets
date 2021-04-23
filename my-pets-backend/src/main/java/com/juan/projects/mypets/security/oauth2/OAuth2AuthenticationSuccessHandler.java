@@ -2,10 +2,12 @@ package com.juan.projects.mypets.security.oauth2;
 
 import com.juan.projects.mypets.config.AppProperties;
 import com.juan.projects.mypets.exception.BadRequestException;
+import com.juan.projects.mypets.security.UserPrincipal;
 import com.juan.projects.mypets.util.CookieUtils;
 import com.juan.projects.mypets.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -54,8 +56,22 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
        }
 
        String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
+
+       System.out.println("AUTHENTICATION");
+       System.out.println(authentication.getCredentials().toString());
+//    authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String name = authentication.getName();
+//       System.out.println(authentication.get);
+//       UserPrincipal user = (UserPrincipal) authentication.getPrincipal();
+//       System.out.println(user.getEmail());
+
        String token = tokenProvider.createToken(authentication);
 
+
+
+
+       System.out.println(appProperties.toString());
+       System.out.println(UriComponentsBuilder.fromUriString(targetUrl).queryParam("token", token).build().toUriString());
        return UriComponentsBuilder.fromUriString(targetUrl)
                .queryParam("token", token)
                .build().toUriString();

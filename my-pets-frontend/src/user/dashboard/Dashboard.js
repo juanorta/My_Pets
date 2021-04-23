@@ -210,6 +210,8 @@ export default function Dashboard(props) {
 		setPastMedications(pastArray);
 	};
 
+	console.log(props.location);
+
 	// console.log(props);
 	// console.log('weight object dash');
 	// console.log(weightObjects);

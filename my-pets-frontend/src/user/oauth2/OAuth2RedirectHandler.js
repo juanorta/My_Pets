@@ -9,12 +9,17 @@ class OAuth2RedirectHandler extends Component {
 		var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
 
 		var results = regex.exec(this.props.location.search);
+		console.log(regex);
+		console.log(this.props.location);
+		console.log('results: ' + results);
 		return results === null
 			? ''
 			: decodeURIComponent(results[1].replace(/\+/g, ' '));
+		console.log('results2: ' + results);
 	}
 
 	render() {
+		console.log('oauth2redirecthandler');
 		const token = this.getUrlParameter('token');
 		const error = this.getUrlParameter('error');
 		console.log(token);

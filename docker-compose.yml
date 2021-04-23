@@ -1,0 +1,23 @@
+version: "3"
+services:
+  frontend:
+    container_name: my-pets-frontend
+    build:
+      context: ./my-pets-frontend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/letsencrypt/archive/mypetfamily.io/:/etc/letsencrypt/archive/mypetfamily.io/
+      - /etc/letsencrypt/live/mypetfamily.io/:/etc/letsencrypt/live/mypetfamily.io/
+
+  backend:
+    restart: always
+    container_name: my-pets-backend
+    build: ./my-pets-backend
+    expose:
+      - 8080
+    volumes:
+      - ./backend:/usr/src/app
+  
