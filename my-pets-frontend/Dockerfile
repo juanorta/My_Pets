@@ -1,25 +1,19 @@
-# FROM node:alpine
-# WORKDIR '/app'
-# COPY package.json .
-# RUN npm install -g npm@7.8.0
-# COPY . .
-# CMD ["npm", "start"]
-
 FROM node:latest as build
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-# COPY package.json /app/
-COPY . /usr/src/app
-# COPY package*.json /app/
 
-# RUN npm install react
-# RUN npm install -g agentkeepalive --save
-RUN npm install react-router-dom --save
 RUN npm install -g npm@7.9.0
-RUN npm install react-scripts -g
+RUN npm install react -g
+COPY package.json /usr/src/app
+COPY package-lock.json ./
+RUN npm install react-scripts@3.4.0 -g
+COPY . /usr/src/app
+
+
 RUN npm run build
 
 #prepare nginx
-FROM nginx:1.16.0-alpine
+FROM nginx:alpine
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 # RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
