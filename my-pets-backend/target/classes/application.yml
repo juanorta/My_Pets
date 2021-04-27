@@ -19,7 +19,7 @@ spring:
           google:
             clientId: 1038845244370-hf3bmouqdql06skkri41ojguv14f290o.apps.googleusercontent.com
             clientSecret: leb7NgLMjhT65nM_tiV2eA0b
-            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            redirectUri: "{baseUrl}/api/oauth2/callback/{registrationId}"
             scope:
               - email
               - profile
@@ -48,6 +48,10 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
+#server:
+#  servlet:
+#    contextPath: /api/*
+
 app:
   auth:
     tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
@@ -58,7 +62,7 @@ app:
     # redirectUri mentioned by the frontend client in the /oauth2/authorize request.
     # We're not using cookies because they won't work well in mobile clients.
     authorizedRedirectUris:
-#      - http://0.0.0.0
+      - http://mypetfamily.io/oauth2/redirect
       - http://localhost:3000/oauth2/redirect
       - myandroidapp://oauth2/redirect
       - myiosapp://oauth2/redirect
