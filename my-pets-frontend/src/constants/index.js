@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://mypetfamily.io:8080/api';
+export const API_BASE_URL = 'https://mypetfamily.io:8080/api';
 export const ACCESS_TOKEN = 'accessToken';
 
 export const OAUTH2_REDIRECT_URI = 'http://mypetfamily.io:3000/oauth2/redirect';
