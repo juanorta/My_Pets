@@ -71,7 +71,8 @@ export default function WeightsGraph(props) {
 	};
 
 	const options = {
-		// maintainAspectRatio: false,
+		// responsive: false,
+		maintainAspectRatio: false,
 		scales: {
 			yAxes: [
 				{
@@ -104,7 +105,7 @@ export default function WeightsGraph(props) {
 					// },
 					display: true,
 					afterFit: function (scale) {
-						scale.height = 80; //<-- set value as you wish
+						scale.height = 100; //<-- set value as you wish
 					},
 					scaleLabel: {
 						display: true,

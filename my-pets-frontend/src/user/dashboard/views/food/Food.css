@@ -54,4 +54,8 @@
 		/* background-color: green; */
 		text-align: center;
 	}
+
+	.food-main-container h2 {
+		font-size: 1.15rem;
+	}
 }

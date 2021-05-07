@@ -8,7 +8,7 @@
 }
 
 .title {
-	background-color: transparent;
+	background-color: teal;
 	/* display: inline-block; */
 	/* height: 5rem; */
 	/* margin-top: 6rem; */
@@ -19,7 +19,7 @@
 	color: #1b2737;
 	font-weight: 700;
 	/* float: left; */
-	margin-left: 2rem;
+	margin-left: 2.25rem;
 	/* margin-top: 2rem; */
 	padding-top: 5rem;
 }
@@ -39,5 +39,9 @@
 @media only screen and (max-width: 600px) {
 	.pets-main-container {
 		width: 100%;
+	}
+
+	.title h1 {
+		font-size: 2.2rem;
 	}
 }

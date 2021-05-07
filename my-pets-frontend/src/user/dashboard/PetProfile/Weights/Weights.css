@@ -29,3 +29,25 @@
 .view-selector-group li:hover {
 	cursor: pointer;
 }
+
+@media only screen and (max-width: 600px) {
+	.weights-title {
+		background-color: transparent !important;
+		margin-left: -2rem !important;
+		font-size: 2.2rem;
+	}
+
+	.weights-main-container ul {
+		background-color: transparent !important;
+		margin-left: -3.5rem;
+	}
+
+	.pet-with-weight {
+		background-color: transparent;
+		margin-left: -2.5rem !important;
+	}
+
+	.weights-main-container h2 {
+		font-size: 1.15rem;
+	}
+}

@@ -61,13 +61,13 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: '1rem',
 	},
 	paperSmall: {
-		height: 280,
-		width: 450,
+		height: 250,
+		width: 420,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
 		'&:hover': {
-			transform: 'scale(1.05)',
+			transform: 'scale(1.0)',
 		},
 		borderRadius: 2,
 		// justifyContent: 'center',
@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
 export default function FoodCards(props) {
 	const theme = useTheme();
 	const classes = useStyles();
-	const matches = useMediaQuery(theme.breakpoints.down('xs'));
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 	const mediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 	const largeScreen = useMediaQuery(theme.breakpoints.down('lg'));
 	const extraLargeScreen = useMediaQuery(theme.breakpoints.down('xl'));
@@ -134,6 +134,14 @@ export default function FoodCards(props) {
 	const [isEditFood, setIsEditFood] = useState(false);
 	const [isDeleteFood, setIsDeleteFood] = useState(false);
 	const [rowData, setRowData] = useState('');
+
+	let size = classes.paperLarge;
+
+	if (small) {
+		size = classes.paperSmall;
+	} else if (extraLargeScreen) {
+		size = classes.paperXL;
+	}
 
 	useEffect(() => {
 		if (isDashboard === false) {
@@ -237,14 +245,7 @@ export default function FoodCards(props) {
 			>
 				<Grid item lg={12} xs={12}>
 					{food.map((food, i) => (
-						<Paper
-							className={
-								largeScreen
-									? classes.paperLarge
-									: classes.paperXL
-							}
-							elevation={10}
-						>
+						<Paper className={size} elevation={10}>
 							<div className="image-info">
 								<div className="image-section">
 									{food.foodImage == null ? (

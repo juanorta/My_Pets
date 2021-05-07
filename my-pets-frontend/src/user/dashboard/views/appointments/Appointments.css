@@ -36,4 +36,8 @@
 	.appointments-main-container {
 		width: 95%;
 	}
+
+	.title h1 {
+		font-size: 2.2rem;
+	}
 }

@@ -11,9 +11,10 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		color: 'white',
 		marginTop: '0rem',
-		borderRadius: 38,
+		borderRadius: 50,
 		height: '4rem',
 		width: '4rem',
+		boxShadow: theme.shadows[3],
 	},
 
 	AddIcon: {
@@ -51,6 +52,7 @@ export default function AddButton(props) {
 					Add Pet
 				</ReactTooltip>
 				<Button
+					// variant="contained"
 					data-tip
 					data-for="addPet"
 					className={classes.root}

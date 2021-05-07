@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
+import './DashboardAppointments.css';
 import UpcomingAppointments from './UpcomingAppointments';
 import PastAppointments from './PastAppointments';
 import moment from 'moment';

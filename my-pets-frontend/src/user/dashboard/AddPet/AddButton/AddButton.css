@@ -21,6 +21,8 @@
 
 @media only screen and (max-width: 600px) {
 	.add-button-main-container {
+		background-color: black;
 		right: 3%;
+		bottom: 15%;
 	}
 }

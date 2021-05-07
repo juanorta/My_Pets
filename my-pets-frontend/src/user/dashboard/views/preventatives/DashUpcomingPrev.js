@@ -210,7 +210,7 @@ export default function DashUpcomingPrev(props) {
 		<div
 			className="appointments-table"
 			style={{
-				height: 400,
+				height: 450,
 				width: '90%',
 				marginLeft: '1rem',
 				// margin: '0 auto',

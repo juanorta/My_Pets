@@ -41,15 +41,16 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: 6,
 	},
 	paperSmall: {
-		height: 280,
-		width: 450,
+		height: 400,
+		width: 380,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
 		'&:hover': {
-			transform: 'scale(1.05)',
+			transform: 'scale(1.0)',
 		},
-		borderRadius: 2,
+		borderRadius: '1%',
+		// backgroundColor: 'red',
 		// justifyContent: 'center',
 	},
 	control: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PetList(props) {
 	const theme = useTheme();
 	const classes = useStyles();
-	const matches = useMediaQuery(theme.breakpoints.down('xs'));
+	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
 	//getting the current user and list of pets from Pets component
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
@@ -143,7 +144,7 @@ export default function PetList(props) {
 				<ReactTooltip id="deleteTip" place="top" effect="solid">
 					Delete pet
 				</ReactTooltip>
-				<Grid item lg={12} xs={12}>
+				<Grid item lg={12} xs={12} sm={12}>
 					{pets.map((pet) => (
 						<Paper
 							className={
