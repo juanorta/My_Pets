@@ -1,4 +1,6 @@
 .pets-main-container {
+	overflow-x: hidden !important;
+	overflow-y: hidden !important;
 	background-color: transparent;
 	height: auto;
 	width: 65%;
@@ -38,6 +40,7 @@
 
 @media only screen and (max-width: 600px) {
 	.pets-main-container {
+		overflow-x: hidden;
 		width: 100%;
 	}
 

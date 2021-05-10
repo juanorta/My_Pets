@@ -216,7 +216,10 @@ export default function Dashboard(props) {
 	// console.log('weight object dash');
 	// console.log(weightObjects);
 	return (
-		<div className="dashboard-main-container">
+		<div
+			className="dashboard-main-container"
+			style={{ overflowX: 'hidden !important' }}
+		>
 			<AddButton
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}

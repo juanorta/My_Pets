@@ -1,7 +1,9 @@
 .dashboard-main-container {
+	overflow-x: hidden !important;
+	overflow-y: hidden !important;
 	font-family: 'Poppins';
-	background-color: white;
-	height: 580vh;
+	background-color: transparent;
+	height: auto;
 	margin-top: -6rem;
 }
 
