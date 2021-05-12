@@ -18,6 +18,7 @@ import {
 import { addPet, addPetImage, getCurrentUser } from '../../../../util/APIUtils';
 import Alert from 'react-s-alert';
 import PublishIcon from '@material-ui/icons/Publish';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -45,6 +46,17 @@ const useStyles = makeStyles((theme) => ({
 			borderBottomColor: '#1B2737',
 		},
 	},
+	TextField1Small: {
+		marginLeft: '-25%',
+		// marginTop: '1rem',
+		width: '150%',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
 
 	TextField2: {
 		marginLeft: '15%',
@@ -58,15 +70,39 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 
+	TextField2Small: {
+		marginLeft: '-25%',
+		marginTop: '1rem',
+		width: '150%',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+
 	inputLabel: {
 		marginTop: '0rem',
 		marginLeft: '38%',
+	},
+
+	inputLabelSmall: {
+		marginTop: '2rem',
+		marginLeft: '-25%',
 	},
 
 	selectDropdown: {
 		marginLeft: '38%',
 		marginTop: '0rem',
 		width: '5rem',
+	},
+
+	selectDropdownSmall: {
+		marginTop: '0rem',
+		width: '150%',
+		marginLeft: '-25%',
+		// marginLeft: '-30%',
 	},
 
 	birthday: {
@@ -79,6 +115,17 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: '#1B2737',
 		color: 'white',
 		marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#1B2737',
+		},
+		width: '5rem',
+	},
+	cancelButtonSmall: {
+		backgroundColor: '#1B2737',
+		color: 'white',
+		marginRight: '1.5rem',
+		// marginLeft: '3rem',
 		fontFamily: 'Poppins',
 		'&:hover': {
 			backgroundColor: '#1B2737',
@@ -101,12 +148,56 @@ const useStyles = makeStyles((theme) => ({
 		'& .MuiInputBase-root.Mui-disabled': {
 			color: 'black', // (default alpha is 0.38)
 		},
+		marginTop: '1.25rem',
+		marginLeft: '1rem',
+		width: '10rem',
+	},
+
+	imageNameSmall: {
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+		},
+		marginTop: '2.25rem',
+		marginLeft: '1rem',
+		width: '5rem',
+	},
+
+	uploadLabel: {
+		marginLeft: '3.7rem',
+	},
+	uploadLabelSmall: {
+		marginLeft: '-2.5rem',
+		width: '150%',
+	},
+
+	uploadButton: {
+		marginTop: '1rem',
+		backgroundColor: 'white',
+		color: 'teal',
+		width: '7rem',
+		border: 'solid 1px teal',
+	},
+
+	uploadButtonSmall: {
+		marginTop: '2rem',
+		backgroundColor: 'white',
+		color: 'teal',
+		width: '5rem',
+		border: 'solid 1px teal',
+		fontSize: '10px',
+	},
+
+	publishIcon: {},
+
+	publishIconSmall: {
+		fontSize: '1.25rem',
 	},
 }));
 
 //form used to add a pet
 
 export default function AddPetForm(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 
 	//stores information as user is typing
@@ -117,6 +208,31 @@ export default function AddPetForm(props) {
 	const [sex, setSex] = useState('');
 	const [age, setAge] = useState(0);
 	const [image, setImage] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	//default style classes
+	let Textfield1 = classes.TextField1;
+	let Textfield2 = classes.TextField2;
+	let inputLabel = classes.inputLabel;
+	let selectDropdown = classes.selectDropdown;
+	let cancelButton = classes.cancelButton;
+	let uploadLabel = classes.uploadLabel;
+	let uploadButton = classes.uploadButton;
+	let publishIcon = classes.publishIcon;
+	let imageName = classes.imageName;
+
+	//style classes change when screen size is small
+	if (small) {
+		Textfield1 = classes.TextField1Small;
+		Textfield2 = classes.TextField2Small;
+		inputLabel = classes.inputLabelSmall;
+		selectDropdown = classes.selectDropdownSmall;
+		cancelButton = classes.cancelButtonSmall;
+		uploadLabel = classes.uploadLabelSmall;
+		uploadButton = classes.uploadButtonSmall;
+		publishIcon = classes.publishIconSmall;
+		imageName = classes.imageNameSmall;
+	}
 
 	const handleFileChange = (event) => {
 		console.log(event.target.files[0]);
@@ -200,7 +316,7 @@ export default function AddPetForm(props) {
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onNameChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					required
 					id="standard-required"
@@ -212,7 +328,7 @@ export default function AddPetForm(props) {
 				/>
 				<TextField
 					onChange={onPetTypeChange}
-					className={classes.TextField2}
+					className={Textfield2}
 					variant="standard"
 					required
 					id="standard-required"
@@ -224,7 +340,7 @@ export default function AddPetForm(props) {
 				/>
 				<TextField
 					onChange={onBreedChange}
-					className={classes.TextField2}
+					className={Textfield2}
 					variant="standard"
 					inputProps={{
 						style: { textAlign: 'center' },
@@ -233,51 +349,97 @@ export default function AddPetForm(props) {
 					label="Breed"
 				/>
 
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						Sex
-					</InputLabel>
-					<Select
-						className={classes.selectDropdown}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onSexChange}
-					>
-						<MenuItem value={'Male'}>Male</MenuItem>
-						<MenuItem value={'Female'}>Female</MenuItem>
-					</Select>
-				</FormControl>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						Age
-					</InputLabel>
-					<Select
-						className={classes.selectDropdown}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onAgeChange}
-					>
-						<MenuItem value={1}>1</MenuItem>
-						<MenuItem value={2}>2</MenuItem>
-						<MenuItem value={3}>3</MenuItem>
-						<MenuItem value={4}>4</MenuItem>
-						<MenuItem value={5}>5</MenuItem>
-						<MenuItem value={6}>6</MenuItem>
-						<MenuItem value={7}>7</MenuItem>
-						<MenuItem value={8}>8</MenuItem>
-						<MenuItem value={9}>9</MenuItem>
-						<MenuItem value={10}>10</MenuItem>
-					</Select>
-				</FormControl>
+				{small ? (
+					<div>
+						<InputLabel
+							className={inputLabel}
+							id="demo-controlled-open-select-label"
+						>
+							Sex
+						</InputLabel>
+						<Select
+							className={selectDropdown}
+							labelId="demo-controlled-open-select-label"
+							id="demo-controlled-open-select"
+							onChange={onSexChange}
+						>
+							<MenuItem value={'Male'}>Male</MenuItem>
+							<MenuItem value={'Female'}>Female</MenuItem>
+						</Select>
+
+						<InputLabel
+							className={inputLabel}
+							id="demo-controlled-open-select-label"
+						>
+							Age
+						</InputLabel>
+						<Select
+							className={selectDropdown}
+							labelId="demo-controlled-open-select-label"
+							id="demo-controlled-open-select"
+							onChange={onAgeChange}
+						>
+							<MenuItem value={1}>1</MenuItem>
+							<MenuItem value={2}>2</MenuItem>
+							<MenuItem value={3}>3</MenuItem>
+							<MenuItem value={4}>4</MenuItem>
+							<MenuItem value={5}>5</MenuItem>
+							<MenuItem value={6}>6</MenuItem>
+							<MenuItem value={7}>7</MenuItem>
+							<MenuItem value={8}>8</MenuItem>
+							<MenuItem value={9}>9</MenuItem>
+							<MenuItem value={10}>10</MenuItem>
+						</Select>
+					</div>
+				) : (
+					<div>
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								className={inputLabel}
+								id="demo-controlled-open-select-label"
+							>
+								Sex
+							</InputLabel>
+							<Select
+								className={selectDropdown}
+								labelId="demo-controlled-open-select-label"
+								id="demo-controlled-open-select"
+								onChange={onSexChange}
+							>
+								<MenuItem value={'Male'}>Male</MenuItem>
+								<MenuItem value={'Female'}>Female</MenuItem>
+							</Select>
+						</FormControl>
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								className={inputLabel}
+								id="demo-controlled-open-select-label"
+							>
+								Age
+							</InputLabel>
+							<Select
+								className={selectDropdown}
+								labelId="demo-controlled-open-select-label"
+								id="demo-controlled-open-select"
+								onChange={onAgeChange}
+							>
+								<MenuItem value={1}>1</MenuItem>
+								<MenuItem value={2}>2</MenuItem>
+								<MenuItem value={3}>3</MenuItem>
+								<MenuItem value={4}>4</MenuItem>
+								<MenuItem value={5}>5</MenuItem>
+								<MenuItem value={6}>6</MenuItem>
+								<MenuItem value={7}>7</MenuItem>
+								<MenuItem value={8}>8</MenuItem>
+								<MenuItem value={9}>9</MenuItem>
+								<MenuItem value={10}>10</MenuItem>
+							</Select>
+						</FormControl>
+					</div>
+				)}
 
 				{/* picture upload */}
-				<label htmlFor="upload-photo" style={{ marginLeft: '3.7rem' }}>
+				<label htmlFor="upload-photo" className={uploadLabel}>
 					<input
 						style={{ display: 'none' }}
 						id="upload-photo"
@@ -289,55 +451,25 @@ export default function AddPetForm(props) {
 						// color="secondary"
 						variant="contained"
 						component="span"
-						style={{
-							marginTop: '1rem',
-							backgroundColor: 'white',
-							color: 'teal',
-							width: '7rem',
-							border: 'solid 1px teal',
-							// fontSize: '12px',
-						}}
+						className={uploadButton}
 					>
-						<PublishIcon />{' '}
+						<PublishIcon className={publishIcon} />{' '}
 						<span style={{ marginLeft: '0.25rem' }}>Picture</span>
 					</Button>{' '}
 					{image.name == '' ? null : (
 						<TextField
 							disabled={true}
-							style={{
-								marginTop: '1.25rem',
-								marginLeft: '1rem',
-								width: '10rem',
-							}}
-							className={classes.imageName}
+							className={imageName}
 							value={image.name}
 						></TextField>
 					)}
 				</label>
 
-				{/* <Button
-					style={{
-						backgroundColor: 'teal',
-						marginLeft: '3.7rem',
-						marginTop: '1rem',
-						color: 'white',
-						width: '18rem',
-					}}
-				>
-					<input
-						type="file"
-						className="custom-file-input"
-						id="customFile"
-						onChange={handleFileChange}
-						style={{ display: 'none' }}
-					/>{' '}
-					Upload Picture
-				</Button> */}
 				<div className="button-group">
 					<Button
 						variant="contained"
 						onClick={props.handleClose}
-						className={classes.cancelButton}
+						className={cancelButton}
 					>
 						Cancel
 					</Button>

@@ -16,6 +16,14 @@
 	margin: 3rem auto;
 }
 
+@media screen and (max-width: 768px) {
+	.button-group {
+		width: 150%;
+		margin-left: -2.5rem;
+		background-color: transparent;
+	}
+}
+
 /* .select-fields {
 	display: inline;
 	background-color: red;

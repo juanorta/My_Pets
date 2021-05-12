@@ -61,8 +61,8 @@ const useStyles = makeStyles((theme) => ({
 		marginRight: '1rem',
 	},
 	paperSmall: {
-		height: 250,
-		width: 420,
+		height: 200,
+		width: 380,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
@@ -106,6 +106,15 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 600,
 		borderRadius: 6,
 	},
+	tagStyleSmall: {
+		backgroundColor: '#1b2737',
+		marginBottom: '0rem',
+		color: 'white',
+		fontWeight: 600,
+		fontSize: '10px',
+		borderRadius: 6,
+		marginTop: '-0.5rem',
+	},
 	noPicture: {
 		position: 'absolute',
 		backgroundColor: 'transparent',
@@ -136,9 +145,11 @@ export default function FoodCards(props) {
 	const [rowData, setRowData] = useState('');
 
 	let size = classes.paperLarge;
+	let tagStyle = classes.tagStyle;
 
 	if (small) {
 		size = classes.paperSmall;
+		tagStyle = classes.tagStyleSmall;
 	} else if (extraLargeScreen) {
 		size = classes.paperXL;
 	}
@@ -271,13 +282,13 @@ export default function FoodCards(props) {
 								<div className={classes.tags}>
 									<Chip
 										// style={{ backgroundColor: '#ff4f00' }}
-										className={classes.tagStyle}
+										className={tagStyle}
 										label={food.foodName}
 									/>
 
 									<Chip
 										// style={{ backgroundColor: 'teal' }}
-										className={classes.tagStyle}
+										className={tagStyle}
 										label={food.type}
 									/>
 									{/* <Chip
@@ -290,7 +301,7 @@ export default function FoodCards(props) {
 											// style={{
 											// 	backgroundColor: '#1b2737',
 											// }}
-											className={classes.tagStyle}
+											className={tagStyle}
 											label={food.wetOrDry}
 										/>
 									)}
@@ -300,7 +311,7 @@ export default function FoodCards(props) {
 											// style={{
 											// 	backgroundColor: '#336699',
 											// }}
-											className={classes.tagStyle}
+											className={tagStyle}
 											label={food.flavor}
 										/>
 									)}
@@ -309,7 +320,7 @@ export default function FoodCards(props) {
 										<Chip
 											// style={{ backgroundColor: 'coral' }}
 											// color="secondary"
-											className={classes.tagStyle}
+											className={tagStyle}
 											label={food.whereToBuy}
 										/>
 									)}
@@ -319,7 +330,7 @@ export default function FoodCards(props) {
 											// style={{
 											// 	backgroundColor: 'maroon',
 											// }}
-											className={classes.tagStyle}
+											className={tagStyle}
 											label={food.notes}
 										/>
 									)}

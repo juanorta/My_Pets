@@ -1,6 +1,4 @@
 .dashboard-main-container {
-	overflow-x: hidden !important;
-	overflow-y: hidden !important;
 	font-family: 'Poppins';
 	background-color: transparent;
 	height: auto;
@@ -12,4 +10,11 @@
 	margin-top: 10rem;
 	margin-left: 40rem;
 	font-size: 50px;
+}
+
+@media screen and (max-width: 600px) {
+	.dashboard-main-container {
+		overflow-x: hidden !important;
+		overflow-y: hidden !important;
+	}
 }

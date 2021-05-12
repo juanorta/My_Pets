@@ -14,12 +14,14 @@ import DeleteWeightConfirmation from '../views/pets/deleteConfirmation/DeleteWei
 import DeletePrevConfirmation from '../views/pets/deleteConfirmation/DeletePrevConfirmation';
 import DeleteMedicationConfirmation from '../views/pets/deleteConfirmation/DeleteMedicationConfirmation';
 import DeleteVetConfirmation from '../views/pets/deleteConfirmation/DeleteVetConfirmation';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
+
 		// border: 'none',
 	},
 	backDrop: {
@@ -34,6 +36,15 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2, 4, 3),
 		height: '35rem',
 		width: '55rem',
+	},
+	AddPetFormSmall: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid none',
+		outline: 'none',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
+		height: '100%',
+		width: '100%',
 	},
 	DeleteConfirmation: {
 		backgroundColor: theme.palette.background.paper,
@@ -59,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 //will display appropriate form/view depending on option clicked
 export default function MaterialModal(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 
 	//hooks that are passed from parent components
@@ -78,6 +90,7 @@ export default function MaterialModal(props) {
 		props.isDeleteMedication
 	);
 	const [isDeleteVet, setIsDeleteVet] = useState(props.isDeleteVet);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
 	const handleOpen = () => {
@@ -98,6 +111,9 @@ export default function MaterialModal(props) {
 
 	if (isAddPet || isEditPet === true) {
 		style = classes.AddPetForm;
+		if (small) {
+			style = classes.AddPetFormSmall;
+		}
 	} else if (
 		isDeletePetConfirmation === true ||
 		isDeleteAppt === true ||
