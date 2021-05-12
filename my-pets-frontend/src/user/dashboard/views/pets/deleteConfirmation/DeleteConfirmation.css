@@ -8,6 +8,9 @@
 	margin-right: 1rem; */
 }
 
+.delete-confirmation-main-container {
+}
+
 .pet-name {
 	background-color: palegreen;
 	height: 70%;
@@ -33,4 +36,10 @@
 .delete-button-group Button {
 	color: white;
 	margin: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+	.delete-modal-title {
+		font-size: 1.25rem;
+	}
 }

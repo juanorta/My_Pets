@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paperSmall: {
 		height: 200,
-		width: 380,
+		width: 340,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
@@ -325,7 +325,7 @@ export default function FoodCards(props) {
 										/>
 									)}
 
-									{food.notes == '' ? null : (
+									{/* {food.notes == '' ? null : (
 										<Chip
 											// style={{
 											// 	backgroundColor: 'maroon',
@@ -333,7 +333,7 @@ export default function FoodCards(props) {
 											className={tagStyle}
 											label={food.notes}
 										/>
-									)}
+									)} */}
 
 									<div className="food-image-btn-group">
 										<Button

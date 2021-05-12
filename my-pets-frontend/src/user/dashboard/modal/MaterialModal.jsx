@@ -56,6 +56,16 @@ const useStyles = makeStyles((theme) => ({
 		height: '15rem',
 		width: '35rem',
 	},
+	DeleteConfirmationSmall: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid none',
+		outline: 'none',
+		borderRadius: '20px',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
+		height: '14rem',
+		width: '19rem',
+	},
 }));
 
 //reusable modal used to display AddPetForm, DeleteConfirmation, and EditPetForm
@@ -124,6 +134,10 @@ export default function MaterialModal(props) {
 		isDeleteVet
 	) {
 		style = classes.DeleteConfirmation;
+
+		if (small) {
+			style = classes.DeleteConfirmationSmall;
+		}
 	}
 
 	// console.log(props);

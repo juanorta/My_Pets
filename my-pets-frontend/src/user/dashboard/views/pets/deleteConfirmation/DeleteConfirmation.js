@@ -4,13 +4,18 @@ import Button from '@material-ui/core/Button';
 import { deletePet } from '../../../../../util/APIUtils';
 import Alert from 'react-s-alert';
 import { withRouter, Redirect, NavLink } from 'react-router-dom';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 //a confirmation display
 //will delete selected pet if user clicks 'Yes'
 export default function DeleteConfirmation(props) {
 	// console.log('delete confirmation');
 	// console.log(props);
+	const theme = useTheme();
+
 	const [deleted, setDeleted] = useState(false);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const deleteHandleClose = () => {
 		props.handleClose();
