@@ -172,43 +172,45 @@ export default function PetList(props) {
 
 							<div className="card-options">
 								<h4>{pet.petName}</h4>
-								<Button
-									data-tip
-									data-for="editTip"
-									style={{ color: '#1b2737' }}
-									onClick={() => {
-										editPetHandler(pet, currentUser);
-									}}
-								>
-									<EditIcon />
-								</Button>
-
-								<NavLink
-									to={`/petprofile/${pet.id}/${pet.petName}`}
-									// to={{
-									// 	pathname: `/petprofile/${pet.id}/${pet.petName}`,
-									// 	currentUser: currentUser,
-									// }}
-								>
+								<div className="buttons">
 									<Button
 										data-tip
-										data-for="viewTip"
-										style={{ color: '#FF4F00' }}
+										data-for="editTip"
+										style={{ color: '#1b2737' }}
+										onClick={() => {
+											editPetHandler(pet, currentUser);
+										}}
 									>
-										<VisibilityIcon />
+										<EditIcon />
 									</Button>
-								</NavLink>
 
-								<Button
-									data-tip
-									data-for="deleteTip"
-									style={{ color: 'red' }}
-									onClick={() => {
-										deletePetHandler(pet, currentUser);
-									}}
-								>
-									<DeleteIcon />
-								</Button>
+									<NavLink
+										to={`/petprofile/${pet.id}/${pet.petName}`}
+										// to={{
+										// 	pathname: `/petprofile/${pet.id}/${pet.petName}`,
+										// 	currentUser: currentUser,
+										// }}
+									>
+										<Button
+											data-tip
+											data-for="viewTip"
+											style={{ color: '#FF4F00' }}
+										>
+											<VisibilityIcon />
+										</Button>
+									</NavLink>
+
+									<Button
+										data-tip
+										data-for="deleteTip"
+										style={{ color: 'red' }}
+										onClick={() => {
+											deletePetHandler(pet, currentUser);
+										}}
+									>
+										<DeleteIcon />
+									</Button>
+								</div>
 							</div>
 						</Paper>
 					))}
