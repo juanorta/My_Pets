@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import './SideDrawerLoggedIn.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -38,6 +38,8 @@ import {
 import Icon from '@mdi/react';
 import EventIcon from '@material-ui/icons/Event';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const drawerWidth = 300;
 
@@ -54,10 +56,21 @@ const useStyles = makeStyles((theme) => ({
 		},
 		color: '#1B2737',
 	},
+
 	closeMenuButton: {
 		'&:hover': {
 			backgroundColor: '#FF4F00',
 		},
+	},
+
+	backButton: {
+		marginRight: theme.spacing(2),
+		'&:hover': {
+			backgroundColor: '#FF4F00',
+			color: 'white',
+		},
+		color: '#1B2737',
+		marginLeft: '-2rem',
 	},
 
 	menuContents: {
@@ -152,13 +165,15 @@ export default function SideDrawerLoggedIn(props) {
 	const [overviewMenuItem, setOverviewMenuItem] = useState(
 		classes.menuContents
 	);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let location = useLocation().pathname;
+	console.log(location);
 
 	//hook that gets set to true when the dashboard page gets loaded for the first time
 	//used to trigger a slide-open animation on first load
-	const [
-		dashboardLoadedForFirstTime,
-		setDashboardLoadedForFirstTime,
-	] = useState(false);
+	const [dashboardLoadedForFirstTime, setDashboardLoadedForFirstTime] =
+		useState(false);
 
 	//waiting 250ms to open the side drawer if the page hasn't been loaded yet
 	// setTimeout(function () {
@@ -186,25 +201,44 @@ export default function SideDrawerLoggedIn(props) {
 		setOpen(false);
 	};
 
-	// console.log('props below');
-	// console.log(props.name);
-	// console.log(props.imageUrl);
-	// console.log(props.authenticated);
-	// displayed only when user is logged in
-	// let menuClass = classes.menuContents;
-	// console.log(menuClass);
 	return (
 		<div>
-			<IconButton
-				// style={{ color: '#1B2737' }}
-				aria-label="open drawer"
-				onClick={handleLoggedInDrawerOpen}
-				edge="start"
-				className={clsx(classes.menuButton, open && classes.hide)}
-				// className={clsx(classes.menuButton, open && classes.hide)}
-			>
-				<MenuIcon />
-			</IconButton>
+			{small ? (
+				<div>
+					<NavLink to="/">
+						<IconButton
+							// style={{ color: '#1B2737' }}
+							aria-label="open drawer"
+							edge="start"
+							className={clsx(
+								classes.backButton,
+								open && classes.hide
+							)}
+							// className={clsx(classes.menuButton, open && classes.hide)}
+						>
+							<ArrowBackIosIcon
+								style={{ marginLeft: '0.5rem' }}
+							/>
+						</IconButton>
+					</NavLink>
+				</div>
+			) : (
+				<div>
+					<IconButton
+						// style={{ color: '#1B2737' }}
+						aria-label="open drawer"
+						onClick={handleLoggedInDrawerOpen}
+						edge="start"
+						className={clsx(
+							classes.menuButton,
+							open && classes.hide
+						)}
+						// className={clsx(classes.menuButton, open && classes.hide)}
+					>
+						<MenuIcon />
+					</IconButton>
+				</div>
+			)}
 
 			{/* side drawer */}
 			{/* displays Home and Log Out */}

@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ReactTooltip from 'react-tooltip';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -20,8 +21,24 @@ const useStyles = makeStyles((theme) => ({
 		width: '4rem',
 	},
 
+	rootSmall: {
+		color: 'white',
+		marginTop: '0rem',
+		borderRadius: 38,
+		height: '2rem',
+		width: '2rem',
+	},
+
 	AddIcon: {
 		fontSize: '40px',
+
+		// marginLeft: '-1rem',
+	},
+
+	AddIconSmall: {
+		fontSize: '30px',
+		marginLeft: '-2rem',
+		color: '#1b2737',
 	},
 
 	MenuItem: {
@@ -51,6 +68,16 @@ export default function SettingsBtnProfile(props) {
 	const [editButtonPressed, setEditButtonPressed] = useState(false);
 	const [deleteButtonPressed, setDeleteButtonPressed] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const extraSmall = useMediaQuery(theme.breakpoints.down('xs'));
+
+	let root = classes.root;
+	let AddIcon = classes.AddIcon;
+
+	if (small) {
+		root = classes.rootSmall;
+		AddIcon = classes.AddIconSmall;
+	}
 
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
@@ -81,16 +108,19 @@ export default function SettingsBtnProfile(props) {
 
 	return (
 		<div className="settings-main-container">
-			<ReactTooltip id="settingsButton" place="top" effect="solid">
-				Settings
-			</ReactTooltip>
+			{small ? null : (
+				<ReactTooltip id="settingsButton" place="top" effect="solid">
+					Settings
+				</ReactTooltip>
+			)}
+
 			<Button
 				data-tip
 				data-for="settingsButton"
-				className={classes.root}
+				className={root}
 				onClick={settingsButtonHandler}
 			>
-				<SettingsIcon className={classes.AddIcon} />
+				<SettingsIcon className={AddIcon} />
 			</Button>
 			<Menu
 				id="simple-menu"

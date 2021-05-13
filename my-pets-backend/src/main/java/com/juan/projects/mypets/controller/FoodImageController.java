@@ -19,6 +19,7 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class FoodImageController {
 
     @Autowired

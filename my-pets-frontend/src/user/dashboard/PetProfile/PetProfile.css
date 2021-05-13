@@ -26,6 +26,10 @@
 	font-family: 'Poppins';
 } */
 
+h3 {
+	color: #1b2737;
+}
+
 .picture {
 	position: absolute;
 	background-color: white;
@@ -160,4 +164,90 @@
 	/* border-style: solid 1px;
 	border-color: #ff4f00; */
 	/* margin: 0 auto; */
+}
+
+.info-list-small {
+	display: flex;
+	list-style-type: none;
+	margin-left: 1rem;
+}
+
+.info-list-small li {
+	/* margin-top: -0.25rem; */
+}
+
+.info-list-small p {
+	margin-top: -0.5rem;
+}
+
+.first-set {
+	margin-right: 40%;
+	margin-left: 1rem;
+}
+/* 
+.selector-div {
+	background-color: red;
+	width: 9;
+	height: 2rem;
+} */
+
+@media screen and (max-width: 960px) {
+	.general-info {
+		width: 100vw;
+		height: 150vh;
+		box-shadow: 0 0px 0px rgba(0, 0, 0, 0.67);
+	}
+
+	.settings-button {
+		height: 2rem;
+		width: 2rem;
+		overflow-x: hidden;
+		position: fixed;
+		float: right;
+		z-index: 2000;
+		right: 5%;
+		top: 7rem;
+		background-color: transparent;
+	}
+
+	.age-type-sex-breed {
+		background-color: transparent;
+		width: 90%;
+		margin: 0 auto;
+		border-radius: 7px;
+		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.67);
+	}
+
+	.info-list {
+		display: inline-flex;
+	}
+
+	.picture {
+		position: relative;
+		margin-top: -2rem;
+	}
+	.name {
+		margin-top: 5rem;
+	}
+
+	.add-button-profile {
+		position: fixed;
+		float: right;
+		right: -1rem;
+		bottom: 40vw;
+		z-index: 1000;
+	}
+
+	.view-selector {
+		background-color: transparent;
+		width: 50%;
+		margin: 0 auto;
+		margin-top: 3rem;
+		display: flex;
+		justify-content: center;
+		margin-bottom: 3rem;
+	}
+	/* .info-list li h3 {
+		font-size: 15px;
+	} */
 }

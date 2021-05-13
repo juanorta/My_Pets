@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import './AppHeader.css';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,6 +17,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import clsx from 'clsx';
 import SideDrawerNotLoggedIn from './SideDrawerNotLoggedIn';
 import SideDrawerLoggedIn from '../user/SideDrawerLoggedIn/SideDrawerLoggedIn';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const drawerWidth = 300;
 
@@ -74,6 +75,9 @@ export default function AppHeader(props) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [logoutClicked, setLogoutClicked] = useState(false);
 	const [open, setOpen] = React.useState(false);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let location = useLocation().pathname;
 
 	let menuIconClass = 'menu-icon';
 
@@ -128,29 +132,31 @@ export default function AppHeader(props) {
 						{/* goes to home when logo is clicked */}
 						<div className="app-header">
 							<ul className="app-branding">
-								<li>
-									<NavLink
-										to="/"
-										onClick={() => {
-											setOpen(false);
-										}}
-									>
-										<Button
-											classes={{
-												root: classes.root,
-												label: classes.label,
+								{small && location != '/' ? null : (
+									<li>
+										<NavLink
+											to="/"
+											onClick={() => {
+												setOpen(false);
 											}}
-											style={{ fontSize: '20px' }}
 										>
-											<PetsIcon
-												style={{
-													minWidth: '40px',
+											<Button
+												classes={{
+													root: classes.root,
+													label: classes.label,
 												}}
-											/>
-											My Pet Family
-										</Button>
-									</NavLink>
-								</li>
+												style={{ fontSize: '20px' }}
+											>
+												<PetsIcon
+													style={{
+														minWidth: '40px',
+													}}
+												/>
+												My Pet Family
+											</Button>
+										</NavLink>
+									</li>
+								)}
 							</ul>
 
 							<div className="app-options">
@@ -163,10 +169,8 @@ export default function AppHeader(props) {
 													<Button
 														onClick={handleClick}
 														classes={{
-															root:
-																classes.avatarButton,
-															label:
-																classes.label,
+															root: classes.avatarButton,
+															label: classes.label,
 														}}
 														style={{
 															fontSize: '17px',
@@ -214,8 +218,7 @@ export default function AppHeader(props) {
 													<Button
 														classes={{
 															root: classes.root,
-															label:
-																classes.label,
+															label: classes.label,
 														}}
 														style={{
 															fontSize: '17px',
@@ -236,14 +239,12 @@ export default function AppHeader(props) {
 													<Button
 														classes={{
 															root: classes.root,
-															label:
-																classes.label,
+															label: classes.label,
 														}}
 														style={{
 															fontSize: '17px',
 
-															border:
-																'2px solid #FF4F00',
+															border: '2px solid #FF4F00',
 														}}
 													>
 														Sign Up

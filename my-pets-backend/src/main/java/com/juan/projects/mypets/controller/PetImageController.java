@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class PetImageController {
 
     @Autowired

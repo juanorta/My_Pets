@@ -29,6 +29,12 @@ import EventIcon from '@material-ui/icons/Event';
 import Preventatives from './Preventatives/Preventatives';
 import Medications from './Medications/Medications';
 import Vets from './Vets/Vets';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -72,6 +78,15 @@ const useStyles = makeStyles((theme) => ({
 	label: {
 		textTransform: 'capitalize',
 	},
+
+	componentSelectorButton: {
+		height: '2rem',
+		width: '8rem',
+		marginTop: '0.75rem',
+		marginLeft: '1rem',
+		backgroundColor: '#1b2737',
+		color: '#1b2737',
+	},
 }));
 
 export default function PetProfile(props) {
@@ -107,9 +122,11 @@ export default function PetProfile(props) {
 	const [buttonClass4, setButtonClass4] = useState(classes.TabButton);
 	const [buttonClass5, setButtonClass5] = useState(classes.TabButton);
 	const [buttonClass6, setButtonClass6] = useState(classes.TabButton);
-
 	const [defaultView, setDefaultView] = useState(props.defaultView);
-
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const extraSmall = useMediaQuery(theme.breakpoints.down('xs'));
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [viewClicked, setViewClicked] = useState(defaultView);
 	//gets pet data on component load
 	useEffect(() => {
 		getPet(user.id, petId)
@@ -188,12 +205,21 @@ export default function PetProfile(props) {
 		}
 	};
 
+	const selectViewHandler = (event) => {
+		setAnchorEl(event.currentTarget);
+		console.log('view selector clicked');
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
 	//changes button color to orange
 	//changes icon color to white
 	//sets other 2 buttons back to normal colors
 	const handleApptClick = () => {
 		//console.log('appt clicked');
 		setApptClicked(true);
+		setViewClicked('Appointments');
 		setButtonClass1(classes.TabButtonClicked);
 		iconHoverHandler();
 
@@ -217,11 +243,14 @@ export default function PetProfile(props) {
 		setVetClicked(false);
 		setButtonClass6(classes.TabButton);
 		setIconClass6(classes.TabIcon);
+
+		handleClose();
 	};
 
 	const handleWeightClick = () => {
 		//		console.log('weight clicked');
 		setWeightClicked(true);
+		setViewClicked('Weights');
 		setButtonClass2(classes.TabButtonClicked);
 		iconHoverHandler2();
 
@@ -245,11 +274,14 @@ export default function PetProfile(props) {
 		setVetClicked(false);
 		setButtonClass6(classes.TabButton);
 		setIconClass6(classes.TabIcon);
+
+		handleClose();
 	};
 
 	const handleFoodClick = () => {
 		//console.log('food clicked');
 		setFoodClicked(true);
+		setViewClicked('Food/Treats');
 		setButtonClass3(classes.TabButtonClicked);
 		iconHoverHandler3();
 
@@ -272,10 +304,13 @@ export default function PetProfile(props) {
 		setVetClicked(false);
 		setButtonClass6(classes.TabButton);
 		setIconClass6(classes.TabIcon);
+
+		handleClose();
 	};
 
 	const handlePrevClicked = () => {
 		setPreventativeClicked(true);
+		setViewClicked('Preventatives');
 		setButtonClass4(classes.TabButtonClicked);
 		iconHoverHandler4();
 
@@ -298,10 +333,13 @@ export default function PetProfile(props) {
 		setVetClicked(false);
 		setButtonClass6(classes.TabButton);
 		setIconClass6(classes.TabIcon);
+
+		handleClose();
 	};
 
 	const handleMedClicked = () => {
 		setMedicationClicked(true);
+		setViewClicked('Medications');
 		setButtonClass5(classes.TabButtonClicked);
 		iconHoverHandler5();
 
@@ -324,10 +362,13 @@ export default function PetProfile(props) {
 		setVetClicked(false);
 		setButtonClass6(classes.TabButton);
 		setIconClass6(classes.TabIcon);
+
+		handleClose();
 	};
 
 	const handleVetClicked = () => {
 		setVetClicked(true);
+		setViewClicked('Veterinarians');
 		setButtonClass6(classes.TabButtonClicked);
 		iconHoverHandler6();
 
@@ -350,6 +391,8 @@ export default function PetProfile(props) {
 		setMedicationClicked(false);
 		setButtonClass5(classes.TabButton);
 		setIconClass5(classes.TabIcon);
+
+		handleClose();
 	};
 
 	//	console.log('appt = ' + apptClicked);
@@ -421,24 +464,45 @@ export default function PetProfile(props) {
 							/>
 						</div>
 						<div className="age-type-sex-breed">
-							<ul className="info-list">
-								<li>
-									<h3>Age</h3>
-									<h4>{pet.age}</h4>
-								</li>
-								<li>
-									<h3>Type</h3>
-									<h4>{pet.petType}</h4>
-								</li>
-								<li>
-									<h3>Sex</h3>
-									<h4>{pet.sex}</h4>
-								</li>
-								<li>
-									<h3 className="breed">Breed</h3>
-									<h4>{pet.breed}</h4>
-								</li>
-							</ul>
+							{extraSmall ? (
+								<div>
+									<ul className="info-list-small">
+										<li className="first-set">
+											<h3>Age </h3> <p>{pet.age}</p>
+											<h3>Type</h3> <p>{pet.petType}</p>
+											{/* <h3>Sex: </h3>
+											<h3>Breed:</h3> */}
+										</li>
+										<li>
+											<h3> Sex </h3> <p>{pet.sex}</p>
+											<h3>Breed</h3> <p>{pet.breed}</p>
+											{/* <h3>Sex: </h3>
+											<h3>Breed:</h3> */}
+										</li>
+									</ul>
+								</div>
+							) : (
+								<div>
+									<ul className="info-list">
+										<li>
+											<h3>Age</h3>
+											<h4>{pet.age}</h4>
+										</li>
+										<li>
+											<h3>Type</h3>
+											<h4>{pet.petType}</h4>
+										</li>
+										<li>
+											<h3>Sex</h3>
+											<h4>{pet.sex}</h4>
+										</li>
+										<li>
+											<h3 className="breed">Breed</h3>
+											<h4>{pet.breed}</h4>
+										</li>
+									</ul>
+								</div>
+							)}
 						</div>
 						<div className="tabs-container">
 							<div className="tabs">
@@ -484,135 +548,190 @@ export default function PetProfile(props) {
 								>
 									View Veterinarians
 								</ReactTooltip>
-								<ul className="tabs-list">
-									<li>
-										<IconButton
-											data-tip
-											data-for="appt"
-											className={buttonClass1}
-											// onMouseOver={iconHoverHandler}
-											// onMouseLeave={iconHoverLeaveHandler}
-											onClick={handleApptClick}
+								{small ? (
+									<div className="view-selector">
+										<h3>View: </h3>{' '}
+										<Button
+											onClick={selectViewHandler}
+											className={
+												classes.componentSelectorButton
+											}
 										>
-											<EventIcon className={iconClass1} />
-										</IconButton>
-									</li>
-									<li>
-										<IconButton
-											data-tip
-											data-for="weights"
-											className={buttonClass2}
-											// onMouseOver={iconHoverHandler2}
-											// onMouseLeave={
-											// 	iconHoverLeaveHandler2
-											// }
-											onClick={handleWeightClick}
+											<p style={{ color: 'white' }}>
+												{viewClicked}
+											</p>
+										</Button>
+										<Menu
+											id="simple-menu"
+											anchorEl={anchorEl}
+											keepMounted
+											open={Boolean(anchorEl)}
+											onClose={handleClose}
 										>
-											<Icon
-												className={iconClass2}
-												path={mdiScaleBathroom}
-												title="Scale"
-												size={2}
-												horizontal
-												vertical
-												rotate={180}
-												// color="#1b2737"
-											/>
-										</IconButton>
-									</li>
-									<li>
-										<IconButton
-											data-tip
-											data-for="food"
-											className={buttonClass3}
-											// onMouseOver={iconHoverHandler3}
-											// onMouseLeave={
-											// 	iconHoverLeaveHandler3
-											// }
-											onClick={handleFoodClick}
-										>
-											<Icon
-												className={iconClass3}
-												path={mdiFoodDrumstick}
-												title="food"
-												size={2}
-												horizontal
-												vertical
-												rotate={180}
-												// color="#1b2737"
-											/>
-										</IconButton>
-									</li>
-									<li>
-										<IconButton
-											data-tip
-											data-for="prev"
-											className={buttonClass4}
-											// onMouseOver={iconHoverHandler3}
-											// onMouseLeave={
-											// 	iconHoverLeaveHandler3
-											// }
-											onClick={handlePrevClicked}
-										>
-											<Icon
-												className={iconClass4}
-												path={mdiNeedle}
-												title="food"
-												size={2}
-												horizontal
-												vertical
-												rotate={180}
-												// color="#1b2737"
-											/>
-										</IconButton>
-									</li>
-									<li>
-										<IconButton
-											data-tip
-											data-for="meds"
-											className={buttonClass5}
-											// onMouseOver={iconHoverHandler3}
-											// onMouseLeave={
-											// 	iconHoverLeaveHandler3
-											// }
-											onClick={handleMedClicked}
-										>
-											<Icon
-												className={iconClass5}
-												path={mdiPill}
-												title="food"
-												size={2}
-												horizontal
-												vertical
-												rotate={180}
-												// color="#1b2737"
-											/>
-										</IconButton>
-									</li>
-									<li>
-										<IconButton
-											data-tip
-											data-for="vets"
-											className={buttonClass6}
-											// onMouseOver={iconHoverHandler3}
-											// onMouseLeave={
-											// 	iconHoverLeaveHandler3
-											// }
-											onClick={handleVetClicked}
-										>
-											<Icon
-												className={iconClass6}
-												path={mdiDoctor}
-												title="food"
-												size={2}
-												horizontal
-												vertical
-												rotate={180}
-												// color="#1b2737"
-											/>
-										</IconButton>
-									</li>
-								</ul>
+											<MenuItem onClick={handleApptClick}>
+												Appointments
+											</MenuItem>
+											<MenuItem
+												onClick={handleWeightClick}
+											>
+												Weights
+											</MenuItem>
+											<MenuItem onClick={handleFoodClick}>
+												Food/Treats
+											</MenuItem>
+											<MenuItem
+												onClick={handlePrevClicked}
+											>
+												Preventative
+											</MenuItem>
+											<MenuItem
+												onClick={handleMedClicked}
+											>
+												Medications
+											</MenuItem>
+											<MenuItem
+												onClick={handleVetClicked}
+											>
+												Veterinarians
+											</MenuItem>
+										</Menu>
+									</div>
+								) : (
+									<div>
+										<ul className="tabs-list">
+											<li>
+												<IconButton
+													data-tip
+													data-for="appt"
+													className={buttonClass1}
+													// onMouseOver={iconHoverHandler}
+													// onMouseLeave={iconHoverLeaveHandler}
+													onClick={handleApptClick}
+												>
+													<EventIcon
+														className={iconClass1}
+													/>
+												</IconButton>
+											</li>
+											<li>
+												<IconButton
+													data-tip
+													data-for="weights"
+													className={buttonClass2}
+													// onMouseOver={iconHoverHandler2}
+													// onMouseLeave={
+													// 	iconHoverLeaveHandler2
+													// }
+													onClick={handleWeightClick}
+												>
+													<Icon
+														className={iconClass2}
+														path={mdiScaleBathroom}
+														title="Scale"
+														size={2}
+														horizontal
+														vertical
+														rotate={180}
+														// color="#1b2737"
+													/>
+												</IconButton>
+											</li>
+											<li>
+												<IconButton
+													data-tip
+													data-for="food"
+													className={buttonClass3}
+													// onMouseOver={iconHoverHandler3}
+													// onMouseLeave={
+													// 	iconHoverLeaveHandler3
+													// }
+													onClick={handleFoodClick}
+												>
+													<Icon
+														className={iconClass3}
+														path={mdiFoodDrumstick}
+														title="food"
+														size={2}
+														horizontal
+														vertical
+														rotate={180}
+														// color="#1b2737"
+													/>
+												</IconButton>
+											</li>
+											<li>
+												<IconButton
+													data-tip
+													data-for="prev"
+													className={buttonClass4}
+													// onMouseOver={iconHoverHandler3}
+													// onMouseLeave={
+													// 	iconHoverLeaveHandler3
+													// }
+													onClick={handlePrevClicked}
+												>
+													<Icon
+														className={iconClass4}
+														path={mdiNeedle}
+														title="food"
+														size={2}
+														horizontal
+														vertical
+														rotate={180}
+														// color="#1b2737"
+													/>
+												</IconButton>
+											</li>
+											<li>
+												<IconButton
+													data-tip
+													data-for="meds"
+													className={buttonClass5}
+													// onMouseOver={iconHoverHandler3}
+													// onMouseLeave={
+													// 	iconHoverLeaveHandler3
+													// }
+													onClick={handleMedClicked}
+												>
+													<Icon
+														className={iconClass5}
+														path={mdiPill}
+														title="food"
+														size={2}
+														horizontal
+														vertical
+														rotate={180}
+														// color="#1b2737"
+													/>
+												</IconButton>
+											</li>
+											<li>
+												<IconButton
+													data-tip
+													data-for="vets"
+													className={buttonClass6}
+													// onMouseOver={iconHoverHandler3}
+													// onMouseLeave={
+													// 	iconHoverLeaveHandler3
+													// }
+													onClick={handleVetClicked}
+												>
+													<Icon
+														className={iconClass6}
+														path={mdiDoctor}
+														title="food"
+														size={2}
+														horizontal
+														vertical
+														rotate={180}
+														// color="#1b2737"
+													/>
+												</IconButton>
+											</li>
+										</ul>
+									</div>
+								)}
+
 								{/* shows appopriate component when selected */}
 								{apptClicked &&
 								weightClicked === false &&

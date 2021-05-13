@@ -10,6 +10,7 @@ import MaterialModalProfile from '../../modal/MaterialModalProfile/MaterialModal
 import MaterialModalEditAppt from '../../modal/MaterialModalEdit/MaterialModalEditAppt';
 import EditDeleteApptButtonHandler from './EditDeleteApptButtonHandler';
 import moment from 'moment';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Appointments(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
@@ -43,7 +45,13 @@ export default function Appointments(props) {
 	const [openModal, setOpenModal] = useState(false);
 	const [editParams, setEditParams] = useState('');
 	const [sortedAppointments, setSortedAppointments] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
+	let width = '70%';
+
+	if (small) {
+		width = '90%';
+	}
 	useEffect(() => {
 		let sortedAppointmentsArray = pet.appointments.slice();
 		sortedAppointmentsArray.sort(function compare(a, b) {
@@ -256,7 +264,7 @@ export default function Appointments(props) {
 			<div
 				style={{
 					height: 400,
-					width: '70%',
+					width: width,
 					margin: '0 auto',
 				}}
 			>

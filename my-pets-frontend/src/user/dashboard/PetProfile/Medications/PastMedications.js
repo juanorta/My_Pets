@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
 import EditDeleteMedicationHandler from './EditDeleteMedicationHandler';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -32,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PastMedications(props) {
+	const theme = useTheme();
+
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
@@ -43,6 +46,13 @@ export default function PastMedications(props) {
 	const [isEditMedication, setIsEditMedication] = useState(false);
 	const [isDeleteMedication, setIsDeleteMedication] = useState(false);
 	const [rowData, setRowData] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let width = '70%';
+
+	if (small) {
+		width = '90%';
+	}
 
 	const columns = [
 		{
@@ -179,7 +189,7 @@ export default function PastMedications(props) {
 		<div
 			style={{
 				height: 400,
-				width: '70%',
+				width: width,
 				margin: '0 auto',
 				// backgroundColor: 'red',
 			}}

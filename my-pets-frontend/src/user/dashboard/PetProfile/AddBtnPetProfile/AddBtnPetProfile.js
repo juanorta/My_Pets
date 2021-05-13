@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: 38,
 		height: '4rem',
 		width: '4rem',
+		boxShadow: '0 1px 5px rgba(0, 0, 0, 0.67)',
 	},
 
 	AddIcon: {
