@@ -11,3 +11,17 @@
 	/* margin-left: 0 auto; */
 	width: 90%;
 }
+
+.appointments-profile-main-container {
+	background-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+	.view-selector-group {
+		background-color: red;
+	}
+
+	.appointments-profile-main-container {
+		background-color: transparent;
+	}
+}

@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Notes } from '@material-ui/icons';
 import EditDeleteFoodButtonHandler from '../EditDeleteFoodButtonHandler';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FoodTable(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
@@ -39,6 +41,13 @@ export default function FoodTable(props) {
 	const [isDeleteFood, setIsDeleteFood] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
 	const [rowData, setRowData] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let width = '70%';
+
+	if (small) {
+		width = '90%';
+	}
 
 	//defining columns fields
 	//using TextField in order to prevent cell data from extending past cell width
@@ -206,15 +215,18 @@ export default function FoodTable(props) {
 
 	// console.log('params : ' editParams);
 	return (
-		<div className="appointments-profile-main-container">
+		<div
+			className="appointments-profile-main-container"
+			// style={{ backgroundColor: 'red' }}
+		>
 			{/* <div className="appointments-title">
 				<h1>Food</h1>
 			</div> */}
-			<div className="spacer" style={{ marginBottom: '3rem' }}></div>
+			{/* <div className="spacer" style={{ marginBottom: '0rem' }}></div> */}
 			<div
 				style={{
 					height: 400,
-					width: '70%',
+					width: width,
 					margin: '0 auto',
 				}}
 			>

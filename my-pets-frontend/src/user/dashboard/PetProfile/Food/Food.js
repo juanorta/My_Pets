@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import FoodTable from './FoodTable/FoodTable';
 import FoodCards from './FoodCards/FoodCards';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	CardView: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Food(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
@@ -28,6 +30,13 @@ export default function Food(props) {
 	const [cardStyle, setCardStyle] = useState(classes.CardViewSelected);
 	const [tableStyle, setTableStyle] = useState(classes.TableView);
 	const [isDashboard, setIsDashboard] = useState(false);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let width = '70%';
+
+	if (small) {
+		width = '90%';
+	}
 
 	const cardViewHandler = () => {
 		console.log('card view clicked');
@@ -45,8 +54,8 @@ export default function Food(props) {
 	};
 
 	return (
-		<div className="weights-profile-main-container">
-			<div className="weights-title">
+		<div className="appointments-profile-main-container">
+			<div className="appointments-title">
 				<h1>Food</h1>
 				<ul className="view-selector-group">
 					<li className={cardStyle} onClick={cardViewHandler}>

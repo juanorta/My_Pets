@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 			color: 'white',
 		},
 		color: '#1B2737',
+		marginLeft: '-1.75rem',
 	},
 
 	closeMenuButton: {
@@ -203,7 +204,7 @@ export default function SideDrawerLoggedIn(props) {
 
 	return (
 		<div>
-			{small ? (
+			{small && location != '/' ? (
 				<div>
 					<NavLink to="/">
 						<IconButton

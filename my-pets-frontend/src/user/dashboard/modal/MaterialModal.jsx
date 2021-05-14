@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2, 4, 3),
 		height: '100%',
 		width: '100%',
+		zIndex: '6000',
 	},
 	DeleteConfirmation: {
 		backgroundColor: theme.palette.background.paper,

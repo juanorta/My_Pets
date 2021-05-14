@@ -16,6 +16,7 @@ import {
 	mdiScaleBathroom,
 } from '@mdi/js';
 import EditDeleteFoodButtonHandler from '../EditDeleteFoodButtonHandler';
+import { useLocation } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -71,6 +72,19 @@ const useStyles = makeStyles((theme) => ({
 		},
 		borderRadius: 2,
 		// justifyContent: 'center',
+	},
+	paperSmallPetProfile: {
+		height: 200,
+		width: 340,
+		display: 'inline-block',
+		margin: '1rem',
+		transition: 'all 0.2s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.0)',
+		},
+		borderRadius: 2,
+		// backgroundColor: 'red',
+		marginLeft: '-1.25rem',
 	},
 	control: {
 		padding: theme.spacing(2),
@@ -143,6 +157,7 @@ export default function FoodCards(props) {
 	const [isEditFood, setIsEditFood] = useState(false);
 	const [isDeleteFood, setIsDeleteFood] = useState(false);
 	const [rowData, setRowData] = useState('');
+	let location = useLocation().pathname;
 
 	let size = classes.paperLarge;
 	let tagStyle = classes.tagStyle;
@@ -150,6 +165,9 @@ export default function FoodCards(props) {
 	if (small) {
 		size = classes.paperSmall;
 		tagStyle = classes.tagStyleSmall;
+		if (location != '/') {
+			size = classes.paperSmallPetProfile;
+		}
 	} else if (extraLargeScreen) {
 		size = classes.paperXL;
 	}

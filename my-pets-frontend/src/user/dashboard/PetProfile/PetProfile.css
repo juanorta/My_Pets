@@ -193,8 +193,9 @@ h3 {
 
 @media screen and (max-width: 960px) {
 	.general-info {
+		/* position: relative; */
 		width: 100vw;
-		height: 150vh;
+		height: 220vh;
 		box-shadow: 0 0px 0px rgba(0, 0, 0, 0.67);
 	}
 

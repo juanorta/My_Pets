@@ -67,8 +67,8 @@ export default function Weights(props) {
 	// console.log(sortedWeights);
 	// console.log(pet.weights);
 	return (
-		<div className="weights-profile-main-container">
-			<div className="weights-title">
+		<div className="appointments-profile-main-container">
+			<div className="appointments-title">
 				<h1>Weights</h1>
 				<ul className="view-selector-group">
 					<li className={graphStyle} onClick={graphViewHandler}>
