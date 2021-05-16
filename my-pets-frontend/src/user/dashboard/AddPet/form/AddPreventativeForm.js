@@ -18,6 +18,7 @@ import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
 import { addPreventative } from '../../../../util/APIUtils';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -44,6 +45,18 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '1.5rem',
 		// marginTop: '1rem',
 		width: '19rem',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+	TextField1Small: {
+		marginLeft: '-25%',
+		marginBottom: '1rem',
+		marginTop: '1rem',
+		width: '150%',
 		'& label.Mui-focused': {
 			color: '#1B2737',
 		},
@@ -119,6 +132,18 @@ const useStyles = makeStyles((theme) => ({
 		width: '5rem',
 	},
 
+	cancelButtonSmall: {
+		backgroundColor: '#1B2737',
+		color: 'white',
+		marginRight: '1.5rem',
+		// marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#1B2737',
+		},
+		width: '5rem',
+	},
+
 	submitButton: {
 		marginTop: '-4rem',
 		backgroundColor: '#FF4F00',
@@ -131,11 +156,25 @@ const useStyles = makeStyles((theme) => ({
 
 		width: '5rem',
 	},
+
+	submitButtonSmall: {
+		backgroundColor: '#FF4F00',
+		color: 'white',
+		marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#FF4F00',
+		},
+
+		width: '5rem',
+		// marginTop: '-3rem',
+	},
 }));
 
 //form used to add a pet
 
 export default function AddPreventative(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 
 	//stores information as user is typing
@@ -146,7 +185,17 @@ export default function AddPreventative(props) {
 	const [dueNext, setDueNext] = useState(new Date());
 	const [lastGiven, setLastGiven] = useState(new Date());
 	const [notes, setNotes] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
+	let Textfield1 = classes.TextField1;
+	let cancelButton = classes.cancelButton;
+	let submitButton = classes.submitButton;
+
+	if (small) {
+		Textfield1 = classes.TextField1Small;
+		cancelButton = classes.cancelButtonSmall;
+		submitButton = classes.submitButtonSmall;
+	}
 	//handles input changes from all fields
 	const onDueNext = (date) => {
 		console.log('on due next change called');
@@ -221,7 +270,7 @@ export default function AddPreventative(props) {
 			>
 				<TextField
 					onChange={onNameChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					required
 					variant="standard"
 					type="text"
@@ -230,7 +279,7 @@ export default function AddPreventative(props) {
 				/>
 				<TextField
 					onChange={onTypeChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					type="text"
 					// inputProps={{
@@ -244,7 +293,7 @@ export default function AddPreventative(props) {
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
-							className={classes.TextField1}
+							className={Textfield1}
 							clearable
 							value={dueNext}
 							placeholder="10/10/2018"
@@ -260,7 +309,7 @@ export default function AddPreventative(props) {
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
-							className={classes.TextField1}
+							className={Textfield1}
 							clearable
 							value={lastGiven}
 							placeholder="10/10/2018"
@@ -276,7 +325,7 @@ export default function AddPreventative(props) {
 
 				<TextField
 					onChange={onNotesChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					id="standard-multiline-flexible"
 					label="Notes"
 					multiline
@@ -290,14 +339,14 @@ export default function AddPreventative(props) {
 						variant="contained"
 						// onClick={setLastAndWeightChange}
 						onClick={props.handleClose}
-						className={classes.cancelButton}
+						className={cancelButton}
 					>
 						Cancel
 					</Button>
 					<Button
 						variant="contained"
 						type="submit"
-						className={classes.submitButton}
+						className={submitButton}
 					>
 						Save
 					</Button>

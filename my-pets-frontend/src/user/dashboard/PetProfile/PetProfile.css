@@ -205,7 +205,7 @@ h3 {
 		overflow-x: hidden;
 		position: fixed;
 		float: right;
-		z-index: 2000;
+		z-index: 1200;
 		right: 5%;
 		top: 7rem;
 		background-color: transparent;

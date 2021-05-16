@@ -12,6 +12,7 @@ import EditWeightForm from '../../AddPet/form/EditWeightForm';
 import EditPreventativeForm from '../../AddPet/form/EditPreventativeForm';
 import EditMedicationForm from '../../AddPet/form/EditMedicationForm';
 import EditVetForm from '../../AddPet/form/EditVetForm';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -29,6 +30,16 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2, 4, 3),
 		height: '35rem',
 		width: '55rem',
+	},
+	AddFormSmall: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid none',
+		outline: 'none',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
+		height: '100%',
+		width: '100%',
+		zIndex: '6000',
 	},
 	EditFood: {
 		backgroundColor: theme.palette.background.paper,
@@ -54,6 +65,8 @@ const useStyles = makeStyles((theme) => ({
 
 //will open different forms depending on props received
 export default function MaterialModalProfile(props) {
+	const theme = useTheme();
+
 	const classes = useStyles();
 
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
@@ -75,6 +88,7 @@ export default function MaterialModalProfile(props) {
 	const [isEditVet, setIsEditVet] = useState(props.isEditVet);
 	const [user, setUser] = useState('ok');
 	const [fromDash, setFromDash] = useState(props.fromDash);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
@@ -91,6 +105,10 @@ export default function MaterialModalProfile(props) {
 	let style = classes.AddForm;
 	if (isEditFood) {
 		style = classes.EditFood;
+	}
+
+	if (small) {
+		style = classes.AddFormSmall;
 	}
 
 	console.log('edit vet' + isEditVet);

@@ -18,6 +18,7 @@ import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
 import { editMedication } from '../../../../util/APIUtils';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -44,6 +45,18 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '2rem',
 		// marginTop: '1rem',
 		width: '19rem',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+	TextField1Small: {
+		marginLeft: '-25%',
+		marginBottom: '1rem',
+		marginTop: '1rem',
+		width: '150%',
 		'& label.Mui-focused': {
 			color: '#1B2737',
 		},
@@ -119,6 +132,19 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '-3rem',
 	},
 
+	cancelButtonSmall: {
+		backgroundColor: '#1B2737',
+		color: 'white',
+
+		marginRight: '1.5rem',
+		// marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#1B2737',
+		},
+		width: '5rem',
+	},
+
 	submitButton: {
 		backgroundColor: '#FF4F00',
 		color: 'white',
@@ -131,11 +157,25 @@ const useStyles = makeStyles((theme) => ({
 		width: '5rem',
 		marginTop: '-3rem',
 	},
+
+	submitButtonSmall: {
+		backgroundColor: '#FF4F00',
+		color: 'white',
+		marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#FF4F00',
+		},
+
+		width: '5rem',
+		// marginTop: '-3rem',
+	},
 }));
 
 //form used to add a pet
 
 export default function EditMedicationForm(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 
 	//stores information as user is typing
@@ -148,6 +188,17 @@ export default function EditMedicationForm(props) {
 	const [dosageInstructions, setDosageInstructions] = useState(
 		rowData.dosageInstructions
 	);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let Textfield1 = classes.TextField1;
+	let cancelButton = classes.cancelButton;
+	let submitButton = classes.submitButton;
+
+	if (small) {
+		Textfield1 = classes.TextField1Small;
+		cancelButton = classes.cancelButtonSmall;
+		submitButton = classes.submitButtonSmall;
+	}
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
@@ -206,7 +257,7 @@ export default function EditMedicationForm(props) {
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onNameChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					required
 					variant="standard"
 					type="text"
@@ -222,7 +273,7 @@ export default function EditMedicationForm(props) {
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
-							className={classes.TextField1}
+							className={Textfield1}
 							clearable
 							label="Start Date"
 							value={startDate}
@@ -239,7 +290,7 @@ export default function EditMedicationForm(props) {
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
-							className={classes.TextField1}
+							className={Textfield1}
 							clearable
 							label="End Date"
 							value={endDate}
@@ -255,7 +306,7 @@ export default function EditMedicationForm(props) {
 
 				<TextField
 					onChange={onNotesChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					id="standard-multiline-flexible"
 					label="Dosage Instructions"
 					multiline
@@ -270,14 +321,14 @@ export default function EditMedicationForm(props) {
 						variant="contained"
 						// onClick={setLastAndWeightChange}
 						onClick={props.handleClose}
-						className={classes.cancelButton}
+						className={cancelButton}
 					>
 						Cancel
 					</Button>
 					<Button
 						variant="contained"
 						type="submit"
-						className={classes.submitButton}
+						className={submitButton}
 					>
 						Save
 					</Button>

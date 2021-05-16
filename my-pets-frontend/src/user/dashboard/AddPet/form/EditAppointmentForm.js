@@ -19,6 +19,7 @@ import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
 import { editAppointment } from '../../../../util/APIUtils';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -52,6 +53,18 @@ const useStyles = makeStyles((theme) => ({
 			borderBottomColor: '#1B2737',
 		},
 	},
+	TextField1Small: {
+		marginLeft: '-25%',
+		marginBottom: '1rem',
+		marginTop: '1rem',
+		width: '150%',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
 
 	TextField2: {
 		marginLeft: '15%',
@@ -64,6 +77,17 @@ const useStyles = makeStyles((theme) => ({
 			borderBottomColor: '#1B2737',
 		},
 	},
+	TextField2Small: {
+		// marginLeft: '-25%',
+		width: '40%',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+
 	TextField3: {
 		marginLeft: '5%',
 		// marginTop: '2rem',
@@ -99,6 +123,11 @@ const useStyles = makeStyles((theme) => ({
 		marginLeft: '1rem',
 		marginTop: '0rem',
 	},
+	selectDropdown2Small: {
+		width: '50%',
+		marginLeft: '2rem',
+		// marginLeft: 'rem',
+	},
 
 	birthday: {
 		marginLeft: '15%',
@@ -110,6 +139,17 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: '#1B2737',
 		color: 'white',
 		marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#1B2737',
+		},
+		width: '5rem',
+	},
+	cancelButtonSmall: {
+		backgroundColor: '#1B2737',
+		color: 'white',
+		marginRight: '1.5rem',
+		// marginLeft: '3rem',
 		fontFamily: 'Poppins',
 		'&:hover': {
 			backgroundColor: '#1B2737',
@@ -133,6 +173,8 @@ const useStyles = makeStyles((theme) => ({
 //form used to add a pet
 
 export default function AddPetForm(props) {
+	const theme = useTheme();
+
 	const classes = useStyles();
 	let amPmIndex = props.rowData.id;
 	console.log(amPmIndex);
@@ -157,12 +199,27 @@ export default function AddPetForm(props) {
 	);
 	const [notes, setNotes] = useState(props.rowData.Notes);
 	const [pictureData, setPictureData] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	useEffect(() => {
 		if (pet.petImage != null) {
 			setPictureData(pet.petImage.data);
 		}
 	}, []);
+
+	let Textfield1 = classes.TextField1;
+	let Textfield2 = classes.TextField2;
+	let inputLabel = classes.inputLabel;
+	let selectDropdown2 = classes.selectDropdown2;
+	let cancelButton = classes.cancelButton;
+
+	if (small) {
+		Textfield1 = classes.TextField1Small;
+		Textfield2 = classes.TextField2Small;
+		inputLabel = classes.inputLabelSmall;
+		selectDropdown2 = classes.selectDropdown2Small;
+		cancelButton = classes.cancelButtonSmall;
+	}
 
 	//handles input changes from all fields
 	const onDateChange = (date) => {
@@ -241,7 +298,7 @@ export default function AddPetForm(props) {
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
-							className={classes.TextField1}
+							className={Textfield1}
 							// disablePast
 							clearable
 							required
@@ -259,72 +316,129 @@ export default function AddPetForm(props) {
 					</Fragment>
 				</MuiPickersUtilsProvider>
 
-				<TextField
-					onChange={onTimeChange}
-					className={classes.TextField2}
-					required
-					variant="standard"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Time"
-					value={time}
-				/>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						AM/PM
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown2}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onAmOrPmChange}
-						value={amOrPm}
-					>
-						<MenuItem value={'AM'}>AM</MenuItem>
-						<MenuItem value={'PM'}>PM</MenuItem>
-					</Select>
-				</FormControl>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel1}
-						id="demo-controlled-open-select-label"
-					>
-						Type
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onTypeChange}
-						value={type}
-					>
-						<MenuItem value={'Vet'}>Vet</MenuItem>
-						<MenuItem value={'Grooming'}>Grooming</MenuItem>
-					</Select>
-				</FormControl>
-				<TextField
-					onChange={onReasonChange}
-					className={classes.TextField3}
-					variant="standard"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Reason"
-					value={reason}
-				/>
+				{small ? (
+					<div className="time">
+						<TextField
+							onChange={onTimeChange}
+							className={Textfield2}
+							required
+							variant="standard"
+							inputProps={{
+								style: { textAlign: 'center' },
+							}}
+							id="standard-basic"
+							label="Time"
+							value={time}
+						/>
+						<TextField
+							required
+							select
+							label="AM/PM"
+							style={{ marginTop: '0rem' }}
+							className={selectDropdown2}
+							labelId="demo-controlled-open-select-label"
+							id="demo-controlled-open-select"
+							onChange={onAmOrPmChange}
+							value={amOrPm}
+							inputProps={{ 'aria-label': 'Without label' }}
+						>
+							<MenuItem value={'AM'}>AM</MenuItem>
+							<MenuItem value={'PM'}>PM</MenuItem>
+						</TextField>
+					</div>
+				) : (
+					<div>
+						<TextField
+							onChange={onTimeChange}
+							className={classes.TextField2}
+							required
+							variant="standard"
+							inputProps={{
+								style: { textAlign: 'center' },
+							}}
+							id="standard-basic"
+							label="Time"
+							value={time}
+						/>
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								className={classes.inputLabel}
+								id="demo-controlled-open-select-label"
+							>
+								AM/PM
+							</InputLabel>
+							<Select
+								required
+								style={{ marginTop: '0rem' }}
+								className={classes.selectDropdown2}
+								labelId="demo-controlled-open-select-label"
+								id="demo-controlled-open-select"
+								onChange={onAmOrPmChange}
+								value={amOrPm}
+							>
+								<MenuItem value={'AM'}>AM</MenuItem>
+								<MenuItem value={'PM'}>PM</MenuItem>
+							</Select>
+						</FormControl>
+					</div>
+				)}
+				{small ? (
+					<div className="type">
+						<TextField
+							required
+							select
+							label="Type"
+							style={{ marginTop: '0rem' }}
+							className={selectDropdown2}
+							labelId="demo-controlled-open-select-label"
+							id="demo-controlled-open-select"
+							onChange={onTypeChange}
+							value={type}
+							style={{ marginLeft: '-0%' }}
+						>
+							<MenuItem value={'Vet'}>Vet</MenuItem>
+							<MenuItem value={'Grooming'}>Grooming</MenuItem>
+						</TextField>
+					</div>
+				) : (
+					<div>
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								className={classes.inputLabel1}
+								id="demo-controlled-open-select-label"
+							>
+								Type
+							</InputLabel>
+							<Select
+								required
+								style={{ marginTop: '0rem' }}
+								className={classes.selectDropdown}
+								labelId="demo-controlled-open-select-label"
+								id="demo-controlled-open-select"
+								onChange={onTypeChange}
+								value={type}
+							>
+								<MenuItem value={'Vet'}>Vet</MenuItem>
+								<MenuItem value={'Grooming'}>Grooming</MenuItem>
+							</Select>
+						</FormControl>
+						<TextField
+							onChange={onReasonChange}
+							className={classes.TextField3}
+							variant="standard"
+							inputProps={{
+								style: { textAlign: 'center' },
+							}}
+							id="standard-basic"
+							label="Reason"
+							value={reason}
+						/>
+					</div>
+				)}
+
 				<TextField
 					onChange={onVetOrGroomerChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					id="standard-required"
 					inputProps={{
@@ -336,7 +450,7 @@ export default function AddPetForm(props) {
 				/>
 				<TextField
 					onChange={onNotesChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					id="standard-multiline-flexible"
 					label="Notes"
 					multiline
@@ -349,7 +463,7 @@ export default function AddPetForm(props) {
 					<Button
 						variant="contained"
 						onClick={props.handleClose}
-						className={classes.cancelButton}
+						className={cancelButton}
 					>
 						Cancel
 					</Button>

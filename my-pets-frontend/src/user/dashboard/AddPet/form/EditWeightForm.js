@@ -19,6 +19,8 @@ import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
 import { editWeight } from '../../../../util/APIUtils';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 // import { addAppointment, addWeight } from '../../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +56,19 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 
+	TextField1Small: {
+		marginLeft: '-25%',
+		marginBottom: '1rem',
+		marginTop: '1rem',
+		width: '150%',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+
 	Weight: {
 		marginLeft: '15%',
 		marginBottom: '2rem',
@@ -67,6 +82,21 @@ const useStyles = makeStyles((theme) => ({
 			borderBottomColor: '#1B2737',
 		},
 	},
+
+	WeightSmall: {
+		marginLeft: '-0%',
+		marginBottom: '2rem',
+		marginTop: '2rem',
+		// marginTop: '1rem',
+		width: '50%',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+
 	TextField3: {
 		marginLeft: '5%',
 		// marginTop: '2rem',
@@ -120,6 +150,17 @@ const useStyles = makeStyles((theme) => ({
 		width: '5rem',
 	},
 
+	cancelButtonSmall: {
+		backgroundColor: '#1B2737',
+		color: 'white',
+		marginRight: '1.5rem',
+		// marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#1B2737',
+		},
+		width: '5rem',
+	},
 	submitButton: {
 		backgroundColor: '#FF4F00',
 		color: 'white',
@@ -136,6 +177,7 @@ const useStyles = makeStyles((theme) => ({
 //form used to add a pet
 
 export default function EditWeightForm(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 
 	//stores information as user is typing
@@ -154,6 +196,19 @@ export default function EditWeightForm(props) {
 	);
 	const [unit, setUnit] = useState(sortedWeights[rowData.id].unit);
 	const [notes, setNotes] = useState(sortedWeights[rowData.id].notes);
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let Weight = classes.Weight;
+	let Textfield1 = classes.TextField1;
+	let cancelButton = classes.cancelButton;
+	let submitButton = classes.submitButton;
+
+	if (small) {
+		Weight = classes.WeightSmall;
+		Textfield1 = classes.TextField1Small;
+		cancelButton = classes.cancelButtonSmall;
+		submitButton = classes.submitButtonSmall;
+	}
 	// const [dateChanged, setDateChanged] = useState();
 
 	//accesses last weight record and stores it for later use
@@ -249,44 +304,80 @@ export default function EditWeightForm(props) {
 		<div className="pet-form-main-container">
 			<h1 className="modal-title"> Edit Weight</h1>
 			<form className="pet-form" onSubmit={submitHandler}>
-				<TextField
-					onChange={onWeightValueChange}
-					className={classes.Weight}
-					required
-					variant="standard"
-					type="text"
-					inputProps={{
-						style: { textAlign: 'center' },
-						pattern: '\\d+(\\.\\d+)?',
-					}}
-					id="standard-basic"
-					label="Weight"
-					value={weightValue}
-				/>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						Unit
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '2rem' }}
-						className={classes.Unit}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						value={unit}
-						onChange={onUnitChange}
-					>
-						<MenuItem value={'lbs'}>lbs</MenuItem>
-						<MenuItem value={'kg'}>kg</MenuItem>
-					</Select>
-				</FormControl>
+				{small ? (
+					<div className="time">
+						<TextField
+							onChange={onWeightValueChange}
+							className={Weight}
+							required
+							variant="standard"
+							type="text"
+							inputProps={{
+								style: { textAlign: 'center' },
+								pattern: '\\d+(\\.\\d+)?',
+							}}
+							id="standard-basic"
+							label="Weight"
+							value={weightValue}
+						/>
+						<TextField
+							required
+							select
+							label="Weight"
+							// style={{ marginTop: '2rem' }}
+							className={classes.Unit}
+							labelId="demo-controlled-open-select-label"
+							id="demo-controlled-open-select"
+							value={unit}
+							onChange={onUnitChange}
+						>
+							<MenuItem value={'lbs'}>lbs</MenuItem>
+							<MenuItem value={'kg'}>kg</MenuItem>
+						</TextField>
+					</div>
+				) : (
+					<div>
+						<TextField
+							onChange={onWeightValueChange}
+							className={classes.Weight}
+							required
+							variant="standard"
+							type="text"
+							inputProps={{
+								style: { textAlign: 'center' },
+								pattern: '\\d+(\\.\\d+)?',
+							}}
+							id="standard-basic"
+							label="Weight"
+							value={weightValue}
+						/>
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								className={classes.inputLabel}
+								id="demo-controlled-open-select-label"
+							>
+								Unit
+							</InputLabel>
+							<Select
+								required
+								style={{ marginTop: '2rem' }}
+								className={classes.Unit}
+								labelId="demo-controlled-open-select-label"
+								id="demo-controlled-open-select"
+								value={unit}
+								onChange={onUnitChange}
+							>
+								<MenuItem value={'lbs'}>lbs</MenuItem>
+								<MenuItem value={'kg'}>kg</MenuItem>
+							</Select>
+						</FormControl>
+					</div>
+				)}
+
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					<Fragment>
 						<KeyboardDatePicker
-							className={classes.TextField1}
+							className={Textfield1}
 							clearable
 							required
 							value={selectedDate}
@@ -302,7 +393,7 @@ export default function EditWeightForm(props) {
 
 				<TextField
 					onChange={onNotesChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					id="standard-multiline-flexible"
 					label="Notes"
 					multiline
@@ -317,7 +408,7 @@ export default function EditWeightForm(props) {
 						variant="contained"
 						// onClick={setLastAndWeightChange}
 						onClick={props.handleClose}
-						className={classes.cancelButton}
+						className={cancelButton}
 					>
 						Cancel
 					</Button>

@@ -1,7 +1,7 @@
 .food-cards-main-container {
 	background-color: transparent;
 	height: auto;
-	width: 80%;
+	width: 71%;
 	margin: 0 auto;
 	font-family: 'Open Sans';
 }
@@ -60,4 +60,10 @@
 
 .food-image-btn-group Button {
 	width: 0.25rem;
+}
+
+@media screen and (max-width: 960px) {
+	.food-cards-main-container {
+		width: 80%;
+	}
 }

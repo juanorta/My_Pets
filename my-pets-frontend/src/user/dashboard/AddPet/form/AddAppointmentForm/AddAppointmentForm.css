@@ -1,0 +1,19 @@
+.time {
+	background-color: transparent;
+	display: inline-flex;
+	width: 150%;
+	margin-left: -25%;
+}
+
+.type {
+	background-color: transparent;
+	margin-top: 2rem;
+	margin-left: -25%;
+}
+
+.inputlabel {
+	background-color: transparent;
+	position: fixed;
+	margin-left: 8rem;
+	margin-top: 1rem;
+}

@@ -18,6 +18,7 @@ import Alert from 'react-s-alert';
 import { date } from 'date-fns/locale/af';
 import moment from 'moment';
 import { addVet } from '../../../../util/APIUtils';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -44,6 +45,18 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '2rem',
 		// marginTop: '1rem',
 		width: '19rem',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+	TextField1Small: {
+		marginLeft: '-25%',
+		marginBottom: '1rem',
+		marginTop: '1rem',
+		width: '150%',
 		'& label.Mui-focused': {
 			color: '#1B2737',
 		},
@@ -117,6 +130,17 @@ const useStyles = makeStyles((theme) => ({
 		},
 		width: '5rem',
 	},
+	cancelButtonSmall: {
+		backgroundColor: '#1B2737',
+		color: 'white',
+		marginRight: '1.5rem',
+		// marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#1B2737',
+		},
+		width: '5rem',
+	},
 
 	submitButton: {
 		backgroundColor: '#FF4F00',
@@ -134,6 +158,7 @@ const useStyles = makeStyles((theme) => ({
 //form used to add a pet
 
 export default function AddMedicationForm(props) {
+	const theme = useTheme();
 	const classes = useStyles();
 
 	//stores information as user is typing
@@ -143,6 +168,15 @@ export default function AddMedicationForm(props) {
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [location, setLocation] = useState('');
 	const [notes, setNotes] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	let Textfield1 = classes.TextField1;
+	let cancelButton = classes.cancelButton;
+
+	if (small) {
+		Textfield1 = classes.TextField1Small;
+		cancelButton = classes.cancelButtonSmall;
+	}
 
 	const onNameChange = (event) => {
 		console.log('name: ' + event.target.value);
@@ -200,7 +234,7 @@ export default function AddMedicationForm(props) {
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onNameChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					type="text"
 					inputProps={{
@@ -212,7 +246,7 @@ export default function AddMedicationForm(props) {
 				/>
 				<TextField
 					onChange={onNumberChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					type="text"
 					inputProps={{
@@ -223,7 +257,7 @@ export default function AddMedicationForm(props) {
 				/>
 				<TextField
 					onChange={onLocationChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					type="text"
 					inputProps={{
@@ -235,7 +269,7 @@ export default function AddMedicationForm(props) {
 
 				<TextField
 					onChange={onNotesChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					id="standard-multiline-flexible"
 					label="Notes"
 					multiline
@@ -249,7 +283,7 @@ export default function AddMedicationForm(props) {
 						// onClick={setLastAndWeightChange}
 						variant="contained"
 						onClick={props.handleClose}
-						className={classes.cancelButton}
+						className={cancelButton}
 					>
 						Cancel
 					</Button>

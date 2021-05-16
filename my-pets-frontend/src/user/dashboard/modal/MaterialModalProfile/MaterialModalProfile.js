@@ -11,6 +11,7 @@ import AddFoodForm from '../../../dashboard/AddPet/form/AddFoodForm/AddFoodForm'
 import AddPreventativeForm from '../../../dashboard/AddPet/form/AddPreventativeForm';
 import AddMedicationForm from '../../../dashboard/AddPet/form/AddMedicationForm';
 import AddVetForm from '../../../dashboard/AddPet/form/AddVetForm';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	modal: {
@@ -28,6 +29,16 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2, 4, 3),
 		height: '35rem',
 		width: '55rem',
+	},
+	AddFormSmall: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid none',
+		outline: 'none',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
+		height: '100%',
+		width: '100%',
+		zIndex: '5000',
 	},
 	AddFoodForm: {
 		backgroundColor: theme.palette.background.paper,
@@ -52,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MaterialModalProfile(props) {
+	const theme = useTheme();
 	const classes = useStyles();
-
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
 	//hooks that are passed from parent components
@@ -70,6 +81,7 @@ export default function MaterialModalProfile(props) {
 	const [isVet, setIsVet] = useState(props.isVet);
 	const [isEditAppt, setIsEditAppt] = useState(props.isEditAppt);
 	const [user, setUser] = useState('ok');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	// const [paperStyle, setPaperStyle] = useState(props.style);
 
@@ -85,10 +97,14 @@ export default function MaterialModalProfile(props) {
 
 	//used to display appropriate content
 	let style = classes.AddForm;
+
 	if (isFood === true || isPreventative === true) {
 		style = classes.AddFoodForm;
 	}
 
+	if (small) {
+		style = classes.AddFormSmall;
+	}
 	console.log(props);
 	// console.log('open => ' + open);
 

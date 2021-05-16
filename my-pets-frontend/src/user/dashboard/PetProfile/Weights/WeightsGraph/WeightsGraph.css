@@ -6,7 +6,7 @@
 	margin: 0 auto;
 	height: 50vh;
 	/* margin-left: 0 auto; */
-	width: 90%;
+	width: 70%;
 }
 
 .dashboard-graph-main-container {
@@ -17,6 +17,12 @@
 	margin-bottom: 5rem;
 	margin-left: -4rem;
 	position: relative;
+}
+
+@media screen and (max-width: 960px) {
+	.weights-graph-main-container {
+		width: 90%;
+	}
 }
 
 @media only screen and (max-width: 600px) {

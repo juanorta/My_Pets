@@ -25,6 +25,7 @@ import {
 	editPetImage,
 } from '../../../../util/APIUtils';
 import PublishIcon from '@material-ui/icons/Publish';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -51,6 +52,19 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '1rem',
 		// marginTop: '1rem',
 		width: '19rem',
+		'& label.Mui-focused': {
+			color: '#1B2737',
+		},
+		'& .MuiInput-underline:after': {
+			borderBottomColor: '#1B2737',
+		},
+	},
+
+	TextField1Small: {
+		marginLeft: '-25%',
+		marginBottom: '1rem',
+		marginTop: '1rem',
+		width: '150%',
 		'& label.Mui-focused': {
 			color: '#1B2737',
 		},
@@ -106,6 +120,14 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: '0rem',
 		width: '7rem',
 	},
+
+	selectDropdown2Small: {
+		width: '40%',
+		marginRight: '2rem',
+		// marginLeft: '2rem',
+		// marginLeft: 'rem',
+	},
+
 	birthday: {
 		marginLeft: '15%',
 		// marginTop: '2rem',
@@ -116,6 +138,18 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: '#1B2737',
 		color: 'white',
 		marginLeft: '3rem',
+		fontFamily: 'Poppins',
+		'&:hover': {
+			backgroundColor: '#1B2737',
+		},
+		width: '5rem',
+	},
+
+	cancelButtonSmall: {
+		backgroundColor: '#1B2737',
+		color: 'white',
+		marginRight: '1.5rem',
+		// marginLeft: '3rem',
 		fontFamily: 'Poppins',
 		'&:hover': {
 			backgroundColor: '#1B2737',
@@ -134,10 +168,49 @@ const useStyles = makeStyles((theme) => ({
 
 		width: '5rem',
 	},
-	imageName: {
+	imageName1: {
 		'& .MuiInputBase-root.Mui-disabled': {
 			color: 'black', // (default alpha is 0.38)
 		},
+	},
+	imageNameSmall1: {
+		'& .MuiInputBase-root.Mui-disabled': {
+			color: 'black', // (default alpha is 0.38)
+		},
+		marginTop: '2.25rem',
+		marginLeft: '1rem',
+		width: '5rem',
+	},
+
+	uploadLabel: {
+		marginLeft: '3.7rem',
+	},
+	uploadLabelSmall: {
+		marginLeft: '-2.5rem',
+		width: '150%',
+	},
+
+	uploadButton: {
+		marginTop: '1rem',
+		backgroundColor: 'white',
+		color: 'teal',
+		width: '7rem',
+		border: 'solid 1px teal',
+	},
+
+	uploadButtonSmall: {
+		marginTop: '2rem',
+		backgroundColor: 'white',
+		color: 'teal',
+		width: '5rem',
+		border: 'solid 1px teal',
+		fontSize: '10px',
+	},
+
+	publishIcon: {},
+
+	publishIconSmall: {
+		fontSize: '1.25rem',
 	},
 }));
 
@@ -145,6 +218,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditFoodForm(props) {
 	const classes = useStyles();
+	const theme = useTheme();
+
 	// let amPmIndex = props.rowData.id;
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
@@ -159,6 +234,7 @@ export default function EditFoodForm(props) {
 	const [imageName, setImageName] = useState('');
 	const [foodImageId, setFoodImageId] = useState('');
 	const [hasImage, setHasImage] = useState('');
+	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	useEffect(() => {
 		if (pet.food[rowData.id].foodImage == null) {
@@ -172,6 +248,24 @@ export default function EditFoodForm(props) {
 			setHasImage(true);
 		}
 	}, []);
+
+	let Textfield1 = classes.TextField1;
+	let selectDropdown2 = classes.selectDropdown2;
+	let cancelButton = classes.cancelButton;
+	let uploadLabel = classes.uploadLabel;
+	let uploadButton = classes.uploadButton;
+	let publishIcon = classes.publishIcon;
+	let imageName1 = classes.imageName1;
+
+	if (small) {
+		Textfield1 = classes.TextField1Small;
+		selectDropdown2 = classes.selectDropdown2Small;
+		cancelButton = classes.cancelButtonSmall;
+		uploadLabel = classes.uploadLabelSmall;
+		uploadButton = classes.uploadButtonSmall;
+		publishIcon = classes.publishIconSmall;
+		imageName1 = classes.imageNameSmall1;
+	}
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
@@ -275,7 +369,7 @@ export default function EditFoodForm(props) {
 			<form className="pet-form" onSubmit={submitHandler}>
 				<TextField
 					onChange={onFoodNameChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					id="standard-required"
 					inputProps={{
@@ -286,49 +380,86 @@ export default function EditFoodForm(props) {
 					label="Food Name"
 					value={foodName}
 				/>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						Type
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown2}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onTypeChange}
-						value={type}
-					>
-						<MenuItem value={'Primary'}>Primary</MenuItem>
-						<MenuItem value={'Treat'}>Treat</MenuItem>
-					</Select>
-				</FormControl>
-				<FormControl className={classes.formControl}>
-					<InputLabel
-						className={classes.inputLabel}
-						id="demo-controlled-open-select-label"
-					>
-						Wet/Dry
-					</InputLabel>
-					<Select
-						required
-						style={{ marginTop: '0rem' }}
-						className={classes.selectDropdown2}
-						labelId="demo-controlled-open-select-label"
-						id="demo-controlled-open-select"
-						onChange={onWetOrDryChange}
-						value={wetOrDry}
-					>
-						<MenuItem value={'Wet'}>Wet</MenuItem>
-						<MenuItem value={'Dry'}>Dry</MenuItem>
-					</Select>
-				</FormControl>
+
+				{small ? (
+					<div className="time">
+						<TextField
+							required
+							select
+							label="Type"
+							// style={{ mrginTop: '0rem' }}
+							className={selectDropdown2}
+							labelId="demo-controlled-open-select-label"
+							id="demo-controlled-open-select"
+							onChange={onTypeChange}
+							value={type}
+						>
+							<MenuItem value={'Primary'}>Primary</MenuItem>
+							<MenuItem value={'Treat'}>Treat</MenuItem>
+						</TextField>
+						<TextField
+							required
+							select
+							label="Wet/Dry"
+							// style={{ marginTop: '0rem' }}
+							className={selectDropdown2}
+							labelId="demo-controlled-open-select-label"
+							id="demo-controlled-open-select"
+							onChange={onWetOrDryChange}
+							value={wetOrDry}
+						>
+							<MenuItem value={'Wet'}>Wet</MenuItem>
+							<MenuItem value={'Dry'}>Dry</MenuItem>
+						</TextField>
+					</div>
+				) : (
+					<div>
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								className={classes.inputLabel}
+								id="demo-controlled-open-select-label"
+							>
+								Type
+							</InputLabel>
+							<Select
+								required
+								style={{ marginTop: '0rem' }}
+								className={classes.selectDropdown2}
+								labelId="demo-controlled-open-select-label"
+								id="demo-controlled-open-select"
+								onChange={onTypeChange}
+								value={type}
+							>
+								<MenuItem value={'Primary'}>Primary</MenuItem>
+								<MenuItem value={'Treat'}>Treat</MenuItem>
+							</Select>
+						</FormControl>
+						<FormControl className={classes.formControl}>
+							<InputLabel
+								className={classes.inputLabel}
+								id="demo-controlled-open-select-label"
+							>
+								Wet/Dry
+							</InputLabel>
+							<Select
+								required
+								style={{ marginTop: '0rem' }}
+								className={classes.selectDropdown2}
+								labelId="demo-controlled-open-select-label"
+								id="demo-controlled-open-select"
+								onChange={onWetOrDryChange}
+								value={wetOrDry}
+							>
+								<MenuItem value={'Wet'}>Wet</MenuItem>
+								<MenuItem value={'Dry'}>Dry</MenuItem>
+							</Select>
+						</FormControl>
+					</div>
+				)}
+
 				<TextField
 					onChange={onFlavorChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					id="standard-required"
 					inputProps={{
@@ -340,7 +471,7 @@ export default function EditFoodForm(props) {
 				/>
 				<TextField
 					onChange={onWhereToBuyChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					variant="standard"
 					inputProps={{
 						style: { textAlign: 'center' },
@@ -351,7 +482,7 @@ export default function EditFoodForm(props) {
 				/>
 				<TextField
 					onChange={onNotesChange}
-					className={classes.TextField1}
+					className={Textfield1}
 					id="standard-multiline-flexible"
 					label="Notes"
 					multiline
@@ -360,7 +491,7 @@ export default function EditFoodForm(props) {
 					// value={value}
 					// onChange={handleChange}
 				/>
-				<label htmlFor="upload-photo" style={{ marginLeft: '3.7rem' }}>
+				<label htmlFor="upload-photo" className={uploadLabel}>
 					<input
 						style={{ display: 'none' }}
 						id="upload-photo"
@@ -372,28 +503,20 @@ export default function EditFoodForm(props) {
 						// color="secondary"
 						variant="contained"
 						component="span"
-						style={{
-							marginTop: '1rem',
-							backgroundColor: 'white',
-							color: 'teal',
-							width: '7rem',
-							border: 'solid 1px teal',
-							// marginLeft: '4rem',
-							// fontSize: '12px',
-						}}
+						className={uploadButton}
 					>
-						<PublishIcon />{' '}
+						<PublishIcon className={publishIcon} />{' '}
 						<span style={{ marginLeft: '0.25rem' }}>Picture</span>
 					</Button>{' '}
 					{image == '' ? null : (
 						<TextField
 							disabled={true}
-							style={{
-								marginTop: '1.25rem',
-								marginLeft: '1rem',
-								width: '11rem',
-							}}
-							className={classes.imageName}
+							// style={{
+							// 	marginTop: '1.25rem',
+							// 	marginLeft: '1rem',
+							// 	width: '11rem',
+							// }}
+							className={imageName1}
 							value={imageName}
 						></TextField>
 					)}
@@ -402,7 +525,7 @@ export default function EditFoodForm(props) {
 					<Button
 						variant="contained"
 						onClick={props.handleClose}
-						className={classes.cancelButton}
+						className={cancelButton}
 					>
 						Cancel
 					</Button>
