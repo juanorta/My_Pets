@@ -57,11 +57,13 @@ export default function Appointments(props) {
 		sortedAppointmentsArray.sort(function compare(a, b) {
 			var dateA = new Date(a.date);
 			var dateB = new Date(b.date);
-			return dateB - dateA;
+			return dateA - dateB;
 		});
 
 		setSortedAppointments(sortedAppointmentsArray);
 	}, []);
+
+	const setRowData = (id, Date, Notes, Type, Time, VetGroomer) => {};
 
 	//defining columns fields
 	//using TextField in order to prevent cell data from extending past cell width
@@ -167,7 +169,7 @@ export default function Appointments(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						//console.log(params);
+						console.log(params);
 						setOpenModal(true);
 						setIsEditAppt(true);
 						setEditParams(params.row);
@@ -208,13 +210,14 @@ export default function Appointments(props) {
 	for (let i = 0; i < sortedAppointments.length; i++) {
 		let date = moment(sortedAppointments[i].date).format('MM/DD/YYYY');
 		rows[i] = {
-			id: i,
+			rowId: i,
 			Date: date,
 			Time: sortedAppointments[i].time + sortedAppointments[i].amOrPm,
 			Type: sortedAppointments[i].type,
 			Reason: sortedAppointments[i].reason,
 			Notes: sortedAppointments[i].notes,
 			VetGroomer: sortedAppointments[i].vetOrGroomerName,
+			id: sortedAppointments[i].id,
 		};
 	}
 

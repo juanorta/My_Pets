@@ -78,6 +78,7 @@ export default function AppHeader(props) {
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	let location = useLocation().pathname;
+	console.log(location);
 
 	let menuIconClass = 'menu-icon';
 
@@ -132,7 +133,9 @@ export default function AppHeader(props) {
 						{/* goes to home when logo is clicked */}
 						<div className="app-header">
 							<ul className="app-branding">
-								{small && location != '/' ? null : (
+								{location != '/' &&
+								location != '/login' &&
+								location != '/signup' ? null : (
 									<li>
 										<NavLink
 											to="/"

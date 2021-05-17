@@ -176,7 +176,7 @@ export default function AddPetForm(props) {
 	const theme = useTheme();
 
 	const classes = useStyles();
-	let amPmIndex = props.rowData.id;
+	let amPmIndex = props.rowData.rowId;
 	console.log(amPmIndex);
 
 	//stores information as user is typing
@@ -264,7 +264,7 @@ export default function AddPetForm(props) {
 		editAppointment(
 			currentUser.id,
 			pet.id,
-			pet.appointments[rowData.id].id,
+			rowData.id,
 			selectedDate,
 			time,
 			amOrPm,
@@ -287,9 +287,9 @@ export default function AddPetForm(props) {
 		}, 500);
 	};
 
-	console.log('am pm hook');
-	console.log(amOrPm);
-	console.log('date: ' + moment(props.rowData.Date).format('MM/DD/YYYY'));
+	// console.log('am pm hook');
+	// console.log(amOrPm);
+	// console.log('date: ' + moment(props.rowData.Date).format('MM/DD/YYYY'));
 
 	return (
 		<div className="pet-form-main-container">

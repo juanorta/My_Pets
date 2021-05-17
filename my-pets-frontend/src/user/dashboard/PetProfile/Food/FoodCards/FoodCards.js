@@ -21,6 +21,8 @@ import { useLocation } from 'react-router';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		// backgroundColor: 'red',
+		width: '110%',
 	},
 	tags: {
 		backgroundColor: 'transparent',
@@ -37,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paperXL: {
 		backgroundColor: 'transparent',
-		height: 270,
-		width: 570,
+		height: 210,
+		width: 410,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
@@ -50,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paperLarge: {
 		backgroundColor: 'transparent',
-		height: 250,
-		width: 490,
+		height: 180,
+		width: 370,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
@@ -113,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
 		// width: '1.5rem',
 	},
 	tagStyle: {
-		backgroundColor: 'teal',
+		backgroundColor: '#1b2737',
 
 		marginBottom: '-2rem',
 		color: 'white',
@@ -146,7 +148,7 @@ export default function FoodCards(props) {
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 	const mediumScreen = useMediaQuery(theme.breakpoints.down('md'));
 	const largeScreen = useMediaQuery(theme.breakpoints.down('lg'));
-	const extraLargeScreen = useMediaQuery(theme.breakpoints.down('xl'));
+	const extraLargeScreen = useMediaQuery(theme.breakpoints.up('xl'));
 
 	const [isDashboard, setIsDashboard] = useState(props.isDashboard);
 	const [style, setStyle] = useState('');
@@ -160,7 +162,7 @@ export default function FoodCards(props) {
 	let location = useLocation().pathname;
 
 	let size = classes.paperLarge;
-	let tagStyle = classes.tagStyle;
+	let tagStyle = classes.tagStyleSmall;
 
 	if (small) {
 		size = classes.paperSmall;
@@ -170,6 +172,7 @@ export default function FoodCards(props) {
 		}
 	} else if (extraLargeScreen) {
 		size = classes.paperXL;
+		tagStyle = classes.tagStyle;
 	}
 
 	useEffect(() => {
@@ -343,15 +346,19 @@ export default function FoodCards(props) {
 										/>
 									)}
 
-									{/* {food.notes == '' ? null : (
-										<Chip
-											// style={{
-											// 	backgroundColor: 'maroon',
-											// }}
-											className={tagStyle}
-											label={food.notes}
-										/>
-									)} */}
+									{/* {extraLargeScreen ? (
+										<div>
+											{food.notes == '' ? null : (
+												<Chip
+													// style={{
+													// 	backgroundColor: 'maroon',
+													// }}
+													className={tagStyle}
+													label={food.notes}
+												/>
+											)}
+										</div>
+									) : null} */}
 
 									<div className="food-image-btn-group">
 										<Button

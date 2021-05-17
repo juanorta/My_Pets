@@ -59,7 +59,8 @@ export default function DeleteApptConfirmation(props) {
 						agreeClickHandler(
 							currentUser.id,
 							pet.id,
-							pet.appointments[rowData.id].id
+							rowData.id
+							// pet.appointments[rowData.id].id
 						);
 					}}
 				>

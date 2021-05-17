@@ -28,6 +28,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		// backgroundColor: 'red',
 	},
 	paper: {
 		height: 320,

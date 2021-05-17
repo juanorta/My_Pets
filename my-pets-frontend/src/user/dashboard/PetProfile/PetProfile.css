@@ -5,6 +5,7 @@
 	color: black;
 	margin-top: 4.5rem;
 	overflow: auto;
+	overflow-x: hidden;
 }
 
 .loaded-pet-profile-main-container {
@@ -59,7 +60,7 @@ h3 {
 	height: 4rem;
 	width: 4rem;
 	float: right;
-	margin-top: -9rem;
+	margin-top: -10rem;
 	margin-right: 2rem;
 }
 
@@ -68,11 +69,14 @@ h3 {
 	margin: 0 auto;
 	margin-top: -1rem;
 	width: 70vw;
-	height: 100vh;
+	height: 110vh;
+
 	margin-bottom: 10rem;
 	overflow: auto;
 	border-radius: 10px;
 	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.67);
+	overflow: hidden;
+
 	/* justify-content: center;
 	display: flex; */
 }
@@ -194,6 +198,7 @@ h3 {
 @media screen and (max-width: 960px) {
 	.general-info {
 		/* position: relative; */
+		background-color: red;
 		width: 100vw;
 		height: 220vh;
 		box-shadow: 0 0px 0px rgba(0, 0, 0, 0.67);
@@ -251,4 +256,39 @@ h3 {
 	/* .info-list li h3 {
 		font-size: 15px;
 	} */
+}
+
+@media screen and (max-width: 1440px) {
+	.general-info {
+		background-color: transparent;
+		height: 170vh;
+		width: 80vw;
+	}
+
+	.profile-banner {
+		margin-top: -0rem;
+	}
+
+	.tabs-list {
+		margin-bottom: 4rem;
+	}
+}
+
+@media screen and (min-width: 1920px) {
+	.general-info {
+		background-color: transparent;
+		height: 150vh;
+	}
+
+	.tabs-list {
+		background-color: transparent;
+		margin-bottom: 3rem;
+	}
+}
+
+@media screen and (min-width: 2040px) {
+	.general-info {
+		background-color: transparent;
+		height: 120vh;
+	}
 }

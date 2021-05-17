@@ -75,6 +75,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	menuContents: {
+		height: '3.65rem',
+		color: 'white',
+		'&:hover': {
+			backgroundColor: '#3C4450',
+			// backgroundColor: '#FF4F00',
+		},
+	},
+
+	menuContentsLarge: {
 		height: '4rem',
 		color: 'white',
 		'&:hover': {
@@ -167,6 +176,7 @@ export default function SideDrawerLoggedIn(props) {
 		classes.menuContents
 	);
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const large = useMediaQuery(theme.breakpoints.down('lg'));
 
 	let location = useLocation().pathname;
 	console.log(location);
@@ -204,7 +214,7 @@ export default function SideDrawerLoggedIn(props) {
 
 	return (
 		<div>
-			{small && location != '/' ? (
+			{location != '/' ? (
 				<div>
 					<NavLink to="/">
 						<IconButton
@@ -295,7 +305,7 @@ export default function SideDrawerLoggedIn(props) {
 						</ListItem>
 					</NavLink>
 
-					<Link
+					{/* <Link
 						activeClass="active"
 						spy={true}
 						to="overview"
@@ -315,7 +325,7 @@ export default function SideDrawerLoggedIn(props) {
 							</ListItemIcon>
 							Overview
 						</ListItem>
-					</Link>
+					</Link> */}
 
 					<Link
 						activeClass="active"
