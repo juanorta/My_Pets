@@ -29,10 +29,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 
 	menuButton: {
-		marginRight: theme.spacing(2),
+		// marginRight: theme.spacing(2),
 		'&:hover': {
 			backgroundColor: '#FF4F00',
 		},
+		marginLeft: '5rem',
+		marginRight: '4.5rem',
 	},
 	closeMenuButton: {
 		'&:hover': {
@@ -41,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	menuContents: {
 		color: 'white',
+		height: '5rem',
 		'&:hover': {
 			backgroundColor: '#FF4F00',
 		},
@@ -128,12 +131,7 @@ export default function SideDrawerNotLoggedIn(props) {
 								setOpen(false);
 							}}
 						>
-							<ListItem
-								button
-								style={{
-									color: 'white',
-								}}
-							>
+							<ListItem button className={classes.menuContents}>
 								<ListItemIcon
 									style={{
 										color: 'white',
@@ -154,6 +152,7 @@ export default function SideDrawerNotLoggedIn(props) {
 						>
 							<ListItem
 								button
+								className={classes.menuContents}
 								style={{
 									color: 'white',
 								}}

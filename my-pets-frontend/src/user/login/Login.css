@@ -4,6 +4,7 @@
 	left: 50%;
 	margin-right: -50%;
 	transform: translate(-50%, -50%); */
+	margin-top: 5rem;
 	background-color: transparent;
 	display: flex;
 	flex-direction: column;
@@ -18,7 +19,7 @@
 	background: #ffffff;
 	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.67);
 	border-radius: 12px;
-	width: 400px;
+	width: 350px;
 	display: inline-block;
 	margin-top: 30px;
 	vertical-align: middle;
@@ -35,6 +36,7 @@
 
 .social-login {
 	background-color: transparent;
+	margin-top: 4rem;
 }
 
 .social-login ul {

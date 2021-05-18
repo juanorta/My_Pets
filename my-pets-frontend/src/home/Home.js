@@ -322,12 +322,6 @@ function Home() {
 							data-aos="fade-up"
 						>
 							<div className="feature-pic">
-								{/* <h2>Store as many pets as you want</h2>
-									<h3>
-										From dogs, cats, fish, we have a spot
-										for them{' '}
-									
-									</h3> */}
 								<MarkerAnimation />
 							</div>{' '}
 							<div className="feature-description">

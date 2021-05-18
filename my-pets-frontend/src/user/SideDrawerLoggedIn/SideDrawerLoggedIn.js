@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 		color: '#1B2737',
 		marginLeft: '-1.75rem',
+		marginTop: '0.5rem',
 	},
 
 	closeMenuButton: {
@@ -304,28 +305,6 @@ export default function SideDrawerLoggedIn(props) {
 							Home
 						</ListItem>
 					</NavLink>
-
-					{/* <Link
-						activeClass="active"
-						spy={true}
-						to="overview"
-						smooth={true}
-						duration={500}
-						offset={-60}
-						onSetActive={() => {
-							setOverviewMenuItem(classes.contentsActive);
-						}}
-						onSetInactive={() => {
-							setOverviewMenuItem(classes.menuContents);
-						}}
-					>
-						<ListItem button className={overviewMenuItem}>
-							<ListItemIcon style={{ color: 'white' }}>
-								<AssessmentIcon />
-							</ListItemIcon>
-							Overview
-						</ListItem>
-					</Link> */}
 
 					<Link
 						activeClass="active"

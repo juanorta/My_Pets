@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paperLarge: {
 		backgroundColor: 'transparent',
-		height: 180,
+		height: 200,
 		width: 370,
 		display: 'inline-block',
 		margin: '1rem',

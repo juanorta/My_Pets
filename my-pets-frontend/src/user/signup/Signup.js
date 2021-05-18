@@ -78,16 +78,6 @@ class SocialSignup extends Component {
 							</div>
 						</a>
 					</li>
-					<li>
-						<a className="btn btn-block social-btn github">
-							<div className="social-link github">
-								<div className="github-logo">
-									<img src={githubLogo} />{' '}
-								</div>
-								Sign up with Github
-							</div>
-						</a>
-					</li>
 				</ul>
 			</div>
 		);

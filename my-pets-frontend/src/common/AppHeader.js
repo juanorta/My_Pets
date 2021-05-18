@@ -78,6 +78,8 @@ export default function AppHeader(props) {
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	let location = useLocation().pathname;
+	let appBranding = 'app-branding';
+
 	console.log(location);
 
 	let menuIconClass = 'menu-icon';
@@ -98,8 +100,9 @@ export default function AppHeader(props) {
 
 	if (props.authenticated) {
 		menuIconClass = 'menu-icon-authenticated';
+	} else {
+		appBranding = 'app-branding-home';
 	}
-
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -132,7 +135,7 @@ export default function AppHeader(props) {
 
 						{/* goes to home when logo is clicked */}
 						<div className="app-header">
-							<ul className="app-branding">
+							<ul className={appBranding}>
 								{location != '/' &&
 								location != '/login' &&
 								location != '/signup' ? null : (

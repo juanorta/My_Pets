@@ -35,6 +35,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { TextField } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -82,10 +83,10 @@ const useStyles = makeStyles((theme) => ({
 	componentSelectorButton: {
 		height: '2rem',
 		width: '8rem',
-		marginTop: '0.75rem',
+		marginTop: '-0.5rem',
 		marginLeft: '1rem',
-		backgroundColor: '#1b2737',
-		color: '#1b2737',
+		// backgroundColor: '#1b2737',
+		// color: '#1b2737',
 	},
 }));
 
@@ -551,22 +552,17 @@ export default function PetProfile(props) {
 								{small ? (
 									<div className="view-selector">
 										<h3>View: </h3>{' '}
-										<Button
-											onClick={selectViewHandler}
+										<TextField
+											select
 											className={
 												classes.componentSelectorButton
 											}
-										>
-											<p style={{ color: 'white' }}>
-												{viewClicked}
-											</p>
-										</Button>
-										<Menu
-											id="simple-menu"
-											anchorEl={anchorEl}
-											keepMounted
-											open={Boolean(anchorEl)}
-											onClose={handleClose}
+											InputLabelProps={{
+												style: {
+													color: '#1b2737',
+												},
+											}}
+											label={viewClicked}
 										>
 											<MenuItem onClick={handleApptClick}>
 												Appointments
@@ -594,7 +590,7 @@ export default function PetProfile(props) {
 											>
 												Veterinarians
 											</MenuItem>
-										</Menu>
+										</TextField>
 									</div>
 								) : (
 									<div>

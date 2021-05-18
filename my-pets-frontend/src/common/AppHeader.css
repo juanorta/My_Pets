@@ -34,10 +34,28 @@
 	margin-left: 16%;
 }
 
+.app-branding-home {
+	list-style-type: none;
+	float: left;
+	background-color: transparent;
+	width: 350px;
+	height: 100%;
+	margin-top: 0rem;
+	padding-left: 4rem;
+	/* margin-left: -12rem; */
+	margin-left: 1%;
+}
+
 .app-branding li a {
 	text-decoration: none;
 	line-height: 60px;
 	margin-left: -5.5rem;
+}
+
+.app-branding-home li a {
+	text-decoration: none;
+	line-height: 60px;
+	margin-left: -7.5rem;
 }
 
 .app-options {
