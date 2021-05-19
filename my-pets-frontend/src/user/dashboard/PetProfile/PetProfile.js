@@ -137,7 +137,7 @@ export default function PetProfile(props) {
 		defaultViewHandler(defaultView);
 		getPet(user.id, petId)
 			.then((response) => {
-				//	console.log(response);
+				console.log(response);
 				setPet(response);
 				setLoading(false);
 			})
@@ -406,7 +406,7 @@ export default function PetProfile(props) {
 	//	console.log('appt = ' + apptClicked);
 	// console.log(props.currentUser);
 	//console.log(props);
-	console.log(pet);
+
 	return (
 		<div
 			className="pet-profile-main-container"

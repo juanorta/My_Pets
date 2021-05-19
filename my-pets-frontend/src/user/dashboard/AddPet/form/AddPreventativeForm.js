@@ -263,7 +263,7 @@ export default function AddPreventative(props) {
 		setTimeout(() => {
 			Alert.closeAll();
 			props.ReloadPet('PREVENTATIVES');
-		}, 500);
+		}, 3500);
 	};
 
 	return (

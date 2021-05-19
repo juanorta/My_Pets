@@ -252,7 +252,7 @@ export default function EditMedicationForm(props) {
 		setTimeout(() => {
 			Alert.closeAll();
 			props.ReloadPet('MEDICATIONS');
-		}, 500);
+		}, 3500);
 	};
 
 	// console.log('weight props');

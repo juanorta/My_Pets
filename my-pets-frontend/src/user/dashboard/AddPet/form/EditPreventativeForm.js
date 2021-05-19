@@ -267,7 +267,7 @@ export default function EditPreventativeForm(props) {
 		setTimeout(() => {
 			Alert.closeAll();
 			props.ReloadPet('PREVENTATIVES');
-		}, 500);
+		}, 3500);
 	};
 
 	console.log('ids');
