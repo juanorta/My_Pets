@@ -15,14 +15,11 @@ class OAuth2RedirectHandler extends Component {
 		return results === null
 			? ''
 			: decodeURIComponent(results[1].replace(/\+/g, ' '));
-		console.log('results2: ' + results);
 	}
 
 	render() {
-		console.log('oauth2redirecthandler');
 		const token = this.getUrlParameter('token');
 		const error = this.getUrlParameter('error');
-		console.log(token);
 		if (token) {
 			localStorage.setItem(ACCESS_TOKEN, token);
 			return (

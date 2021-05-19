@@ -127,6 +127,7 @@ export default function MaterialModalProfile(props) {
 						{/* depending on the props passed in, a unique form will be shown */}
 						{isAppointment ? (
 							<AddAppointmentForm
+								ReloadPet={props.ReloadPet}
 								handleClose={handleClose}
 								currentUser={currentUser}
 								pet={pet}
@@ -138,6 +139,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isWeight ? (
 							<AddWeightForm
+								ReloadPet={props.ReloadPet}
 								handleClose={handleClose}
 								currentUser={currentUser}
 								pet={pet}
@@ -149,6 +151,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isFood ? (
 							<AddFoodForm
+								ReloadPet={props.ReloadPet}
 								handleClose={handleClose}
 								currentUser={currentUser}
 								pet={pet}
@@ -161,6 +164,7 @@ export default function MaterialModalProfile(props) {
 
 						{isPreventative ? (
 							<AddPreventativeForm
+								ReloadPet={props.ReloadPet}
 								handleClose={handleClose}
 								currentUser={currentUser}
 								pet={pet}
@@ -173,6 +177,7 @@ export default function MaterialModalProfile(props) {
 
 						{isMedication ? (
 							<AddMedicationForm
+								ReloadPet={props.ReloadPet}
 								handleClose={handleClose}
 								currentUser={currentUser}
 								pet={pet}
@@ -185,6 +190,7 @@ export default function MaterialModalProfile(props) {
 
 						{isVet ? (
 							<AddVetForm
+								ReloadPet={props.ReloadPet}
 								handleClose={handleClose}
 								currentUser={currentUser}
 								pet={pet}

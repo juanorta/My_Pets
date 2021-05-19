@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import './PetProfile.css';
 import { getPet, getCurrentUser } from '../../../util/APIUtils';
 import LoadingIndicator from '../../../common/LoadingIndicator';
@@ -94,6 +94,7 @@ export default function PetProfile(props) {
 	const theme = useTheme();
 	const classes = useStyles();
 
+	const [value, setValue] = useState(0);
 	const [user, setUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.location.pet);
 	const [petId, setPetId] = useState(props.match.params.petID);
@@ -123,13 +124,17 @@ export default function PetProfile(props) {
 	const [buttonClass4, setButtonClass4] = useState(classes.TabButton);
 	const [buttonClass5, setButtonClass5] = useState(classes.TabButton);
 	const [buttonClass6, setButtonClass6] = useState(classes.TabButton);
-	const [defaultView, setDefaultView] = useState(props.defaultView);
+	const [defaultView, setDefaultView] = useState('APPOINTMENTS');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 	const extraSmall = useMediaQuery(theme.breakpoints.down('xs'));
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const [viewClicked, setViewClicked] = useState(defaultView);
 	//gets pet data on component load
+	// let defaultView = 'APPOINTMENTS';
+	const [viewClicked, setViewClicked] = useState(defaultView);
+
 	useEffect(() => {
+		console.log('USE EFFECT DEFAULT VIEW: ' + defaultView);
+		defaultViewHandler(defaultView);
 		getPet(user.id, petId)
 			.then((response) => {
 				//	console.log(response);
@@ -139,13 +144,15 @@ export default function PetProfile(props) {
 			.catch((error) => {
 				//console.log(error);
 			});
-		// iconHoverHandler();
-		// setApptClicked(true);
-		// setButtonClass1(classes.TabButtonClicked);
-		// iconHoverHandler();
+	}, [value]);
 
-		defaultViewHandler(defaultView);
-	}, []);
+	const ReloadPet = (viewName) => {
+		console.log('reload pet function called');
+		console.log('reload pet view: ' + viewName);
+		setDefaultView(viewName);
+		setValue(value + 1);
+		setLoading(true);
+	};
 
 	const defaultViewHandler = (viewName) => {
 		if (defaultView == 'APPOINTMENTS') {
@@ -161,7 +168,7 @@ export default function PetProfile(props) {
 		} else if (defaultView == 'VETS') {
 			handleVetClicked();
 		}
-		console.log(viewName);
+		console.log('View name: ' + viewName);
 	};
 
 	//console.log(props.match.params.petID);
@@ -448,6 +455,7 @@ export default function PetProfile(props) {
 						</div>
 						<div className="settings-button">
 							<SettingsBtnProfile
+								ReloadPet={ReloadPet}
 								currentUser={user}
 								pet={pet}
 								forceUpdate={props.forceUpdate}
@@ -456,6 +464,7 @@ export default function PetProfile(props) {
 						{/* when clicked, opens a menu that allows you to pick what you want to add */}
 						<div className="add-button-profile">
 							<AddBtnPetProfile
+								ReloadPet={ReloadPet}
 								forceUpdate={props.forceUpdate}
 								pet={pet}
 								currentUser={user}
@@ -733,6 +742,7 @@ export default function PetProfile(props) {
 								weightClicked === false &&
 								foodClicked === false ? (
 									<Appointments
+										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
@@ -747,6 +757,7 @@ export default function PetProfile(props) {
 								apptClicked === false &&
 								foodClicked === false ? (
 									<Weights
+										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
@@ -761,6 +772,7 @@ export default function PetProfile(props) {
 								weightClicked === false &&
 								apptClicked === false ? (
 									<Food
+										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
@@ -773,6 +785,7 @@ export default function PetProfile(props) {
 
 								{preventativeClicked ? (
 									<Preventatives
+										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
@@ -785,6 +798,7 @@ export default function PetProfile(props) {
 
 								{medicationClicked ? (
 									<Medications
+										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}
@@ -797,6 +811,7 @@ export default function PetProfile(props) {
 
 								{vetClicked ? (
 									<Vets
+										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
 										currentUser={user}
 										pet={pet}

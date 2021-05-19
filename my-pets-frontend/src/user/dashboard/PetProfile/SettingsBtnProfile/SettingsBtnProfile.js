@@ -141,6 +141,7 @@ export default function SettingsBtnProfile(props) {
 
 			{openModal && editButtonPressed ? (
 				<MaterialModal
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}

@@ -14,6 +14,7 @@ export default function EditDeleteMedicationHandler(props) {
 		<div>
 			{openModal && isEditVet ? (
 				<MaterialModalEditAppt
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
@@ -30,6 +31,7 @@ export default function EditDeleteMedicationHandler(props) {
 
 			{openModal && isDeleteVet ? (
 				<MaterialModal
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}

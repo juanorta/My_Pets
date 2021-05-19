@@ -120,6 +120,7 @@ export default function Preventatives(props) {
 			</div>
 			{upcomingViewSelected && loading === false ? (
 				<UpcomingPreventatives
+					ReloadPet={props.ReloadPet}
 					pet={pet}
 					currentUser={currentUser}
 					preventatives={preventatives}
@@ -133,6 +134,7 @@ export default function Preventatives(props) {
 
 			{pastViewSelected && loading === false ? (
 				<PastPreventatives
+					ReloadPet={props.ReloadPet}
 					pet={pet}
 					currentUser={currentUser}
 					preventatives={preventatives}

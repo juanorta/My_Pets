@@ -23,10 +23,7 @@ export default function DeleteVetConfirmation(props) {
 		Alert.success('Vet DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('VETS');
-
-			props.forceUpdate();
+			props.ReloadPet('VETS');
 		}, 500);
 	}
 

@@ -29,13 +29,11 @@ class App extends Component {
 			defaultView: 'APPOINTMENTS',
 		};
 
-		this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(
-			this
-		);
+		this.loadCurrentlyLoggedInUser =
+			this.loadCurrentlyLoggedInUser.bind(this);
 		this.handleLogout = this.handleLogout.bind(this);
-		this.changeDefaultViewsAndRefresh = this.changeDefaultViewsAndRefresh.bind(
-			this
-		);
+		this.changeDefaultViewsAndRefresh =
+			this.changeDefaultViewsAndRefresh.bind(this);
 	}
 
 	loadCurrentlyLoggedInUser() {
@@ -75,25 +73,11 @@ class App extends Component {
 	}
 
 	changeDefaultViewsAndRefresh(view) {
-		console.log('yooo');
-		console.log(view);
+		console.log('change default views called');
+		console.log('APP VIEW: ' + view);
 		this.setState({
 			defaultView: view,
 		});
-
-		// getCurrentUser()
-		// 	.then((response) => {
-		// 		this.setState({
-		// 			currentUser: response,
-		// 			authenticated: true,
-		// 			loading: false,
-		// 		});
-		// 	})
-		// 	.catch((error) => {
-		// 		this.setState({
-		// 			loading: false,
-		// 		});
-		// 	});
 	}
 
 	handleLogout() {
@@ -118,7 +102,7 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(localStorage);
+		// console.log(localStorage);
 		if (this.state.loading) {
 			return <LoadingIndicator />;
 		}

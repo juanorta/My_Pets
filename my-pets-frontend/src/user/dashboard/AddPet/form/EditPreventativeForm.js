@@ -187,9 +187,16 @@ export default function EditPreventativeForm(props) {
 	const [dueNext, setDueNext] = useState(rowData.dueNext);
 	const [lastGiven, setLastGiven] = useState(rowData.lastGiven);
 	const [notes, setNotes] = useState(rowData.notes);
+	const [petImage, setPetImage] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		if (pet.petImage != null) {
+			setPetImage(pet.petImage.data);
+		} else {
+			setPetImage('');
+		}
+	}, []);
 
 	let Textfield1 = classes.TextField1;
 	let cancelButton = classes.cancelButton;
@@ -253,14 +260,13 @@ export default function EditPreventativeForm(props) {
 			notes,
 			pet.petName,
 			pet.id,
-			pet.petImage.data
+			petImage
 		);
 		props.handleClose();
 		Alert.success('Preventative Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('PREVENTATIVES');
-			props.forceUpdate();
+			props.ReloadPet('PREVENTATIVES');
 		}, 500);
 	};
 

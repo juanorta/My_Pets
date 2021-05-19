@@ -23,10 +23,7 @@ export default function DeleteApptConfirmation(props) {
 		Alert.success('APPOINTMENT DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('APPOINTMENTS');
-
-			props.forceUpdate();
+			props.ReloadPet('APPOINTMENTS');
 		}, 500);
 	}
 

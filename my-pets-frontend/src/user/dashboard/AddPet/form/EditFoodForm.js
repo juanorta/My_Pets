@@ -306,10 +306,7 @@ export default function EditFoodForm(props) {
 			Alert.success('Food Edited!');
 			setTimeout(() => {
 				Alert.closeAll();
-
-				props.changeDefaultViewsAndRefresh('FOOD');
-
-				props.forceUpdate();
+				props.ReloadPet('FOOD');
 			}, 500);
 		}, 1000);
 		// props.handleClose();

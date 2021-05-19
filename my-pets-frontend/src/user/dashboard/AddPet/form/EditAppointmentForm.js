@@ -280,10 +280,7 @@ export default function AddPetForm(props) {
 		Alert.success('Appointment Edited');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('APPOINTMENTS');
-
-			props.forceUpdate();
+			props.ReloadPet('APPOINTMENTS');
 		}, 500);
 	};
 

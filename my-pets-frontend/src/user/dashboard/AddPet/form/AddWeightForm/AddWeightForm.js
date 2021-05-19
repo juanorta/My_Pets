@@ -338,8 +338,7 @@ export default function AddWeightForm(props) {
 		Alert.success('Weight Added');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
-			props.forceUpdate();
+			props.ReloadPet('WEIGHTS');
 		}, 500);
 	};
 

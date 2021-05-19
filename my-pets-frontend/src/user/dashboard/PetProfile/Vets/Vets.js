@@ -198,6 +198,7 @@ export default function Vets(props) {
 			</div>
 			{isEditVet ? (
 				<EditDeleteVetHandler
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
@@ -212,6 +213,7 @@ export default function Vets(props) {
 			) : null}
 			{isDeleteVet ? (
 				<EditDeleteVetHandler
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}

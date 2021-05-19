@@ -112,6 +112,7 @@ export default function Medications(props) {
 			</div>
 			{currentViewSelected && loading === false ? (
 				<CurrentMedications
+					ReloadPet={props.ReloadPet}
 					pet={pet}
 					currentUser={currentUser}
 					currentMedications={currentMedications}
@@ -124,6 +125,7 @@ export default function Medications(props) {
 
 			{pastViewSelected && loading === false ? (
 				<PastMedications
+					ReloadPet={props.ReloadPet}
 					pet={pet}
 					currentUser={currentUser}
 					pastMedications={pastMedications}

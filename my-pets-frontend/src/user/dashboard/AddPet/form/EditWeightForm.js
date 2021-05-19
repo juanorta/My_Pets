@@ -289,10 +289,7 @@ export default function EditWeightForm(props) {
 
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
-			//props.changeDefaultViewAndRefresh('WEIGHTS');
-
-			props.forceUpdate();
+			props.ReloadPet('WEIGHTS');
 		}, 500);
 	};
 

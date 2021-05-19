@@ -175,6 +175,7 @@ export default function MaterialModal(props) {
 
 						{isEditPet ? (
 							<EditPet
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={props.currentUser}
 								handleClose={handleClose}
@@ -192,6 +193,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteAppt ? (
 							<DeleteApptConfirmation
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}
@@ -204,6 +206,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteFood ? (
 							<DeleteFoodConfirmation
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}
@@ -216,6 +219,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteWeight ? (
 							<DeleteWeightConfirmation
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}
@@ -229,6 +233,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeletePrev ? (
 							<DeletePrevConfirmation
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}
@@ -242,6 +247,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteMedication ? (
 							<DeleteMedicationConfirmation
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}
@@ -255,6 +261,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteVet ? (
 							<DeleteVetConfirmation
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
 								currentUser={props.currentUser}

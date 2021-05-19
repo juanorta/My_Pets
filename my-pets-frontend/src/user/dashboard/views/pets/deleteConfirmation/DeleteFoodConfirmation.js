@@ -23,10 +23,7 @@ export default function DeleteFoodConfirmation(props) {
 		Alert.success('FOOD DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('FOOD');
-
-			props.forceUpdate();
+			props.ReloadPet('FOOD');
 		}, 500);
 	}
 

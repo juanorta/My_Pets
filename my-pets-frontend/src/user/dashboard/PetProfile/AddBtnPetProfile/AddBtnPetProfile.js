@@ -198,6 +198,7 @@ export default function AddBtnPetProfile(props) {
 				*/}
 				{openModal && isAppointment ? (
 					<MaterialModalProfile
+						ReloadPet={props.ReloadPet}
 						currentUser={props.currentUser}
 						openModal={openModal}
 						SetOpenModalToFalse={SetOpenModalToFalse}
@@ -212,6 +213,7 @@ export default function AddBtnPetProfile(props) {
 
 				{openModal && isWeight ? (
 					<MaterialModalProfile
+						ReloadPet={props.ReloadPet}
 						currentUser={props.currentUser}
 						openModal={openModal}
 						SetOpenModalToFalse={SetOpenModalToFalse}
@@ -226,6 +228,7 @@ export default function AddBtnPetProfile(props) {
 
 				{openModal && isFood ? (
 					<MaterialModalProfile
+						ReloadPet={props.ReloadPet}
 						currentUser={props.currentUser}
 						openModal={openModal}
 						SetOpenModalToFalse={SetOpenModalToFalse}
@@ -240,6 +243,7 @@ export default function AddBtnPetProfile(props) {
 
 				{openModal && isPreventative ? (
 					<MaterialModalProfile
+						ReloadPet={props.ReloadPet}
 						currentUser={props.currentUser}
 						openModal={openModal}
 						SetOpenModalToFalse={SetOpenModalToFalse}
@@ -254,6 +258,7 @@ export default function AddBtnPetProfile(props) {
 
 				{openModal && isMedication ? (
 					<MaterialModalProfile
+						ReloadPet={props.ReloadPet}
 						currentUser={props.currentUser}
 						openModal={openModal}
 						SetOpenModalToFalse={SetOpenModalToFalse}
@@ -268,6 +273,7 @@ export default function AddBtnPetProfile(props) {
 
 				{openModal && isVet ? (
 					<MaterialModalProfile
+						ReloadPet={props.ReloadPet}
 						currentUser={props.currentUser}
 						openModal={openModal}
 						SetOpenModalToFalse={SetOpenModalToFalse}

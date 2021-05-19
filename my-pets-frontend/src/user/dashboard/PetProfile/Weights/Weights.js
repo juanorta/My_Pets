@@ -90,6 +90,7 @@ export default function Weights(props) {
 			) : null}
 			{tableViewSelected ? (
 				<WeightsTable
+					ReloadPet={props.ReloadPet}
 					pet={pet}
 					currentUser={currentUser}
 					forceUpdate={props.forceUpdate}

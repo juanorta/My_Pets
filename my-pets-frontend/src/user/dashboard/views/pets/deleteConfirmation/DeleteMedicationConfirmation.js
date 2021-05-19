@@ -23,10 +23,7 @@ export default function DeleteMedicationConfirmation(props) {
 		Alert.success('Medication DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('MEDICATIONS');
-
-			props.forceUpdate();
+			props.ReloadPet('MEDICATIONS');
 		}, 500);
 	}
 

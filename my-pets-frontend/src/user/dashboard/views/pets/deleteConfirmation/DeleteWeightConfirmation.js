@@ -24,10 +24,7 @@ export default function DeleteApptConfirmation(props) {
 		Alert.success('WEIGHTS DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('WEIGHTS');
-
-			props.forceUpdate();
+			props.ReloadPet('WEIGHTS');
 		}, 500);
 	}
 

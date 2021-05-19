@@ -23,10 +23,7 @@ export default function DeletePrevConfirmation(props) {
 		Alert.success('Preventative DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('PREVENTATIVES');
-
-			props.forceUpdate();
+			props.ReloadPet('PREVENTATIVES');
 		}, 500);
 	}
 

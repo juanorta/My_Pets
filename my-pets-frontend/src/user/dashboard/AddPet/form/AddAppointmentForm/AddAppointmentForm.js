@@ -286,10 +286,7 @@ export default function AddPetForm(props) {
 		Alert.success('Appointment Added');
 		setTimeout(() => {
 			Alert.closeAll();
-
-			props.changeDefaultViewsAndRefresh('APPOINTMENTS');
-
-			props.forceUpdate();
+			props.ReloadPet('APPOINTMENTS');
 		}, 500);
 	};
 	// const minDate = new Date(new Date().getTime() + 86400000);

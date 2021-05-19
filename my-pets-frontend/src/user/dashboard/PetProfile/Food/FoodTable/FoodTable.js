@@ -239,6 +239,7 @@ export default function FoodTable(props) {
 			</div>
 			{isEditFood ? (
 				<EditDeleteFoodButtonHandler
+					ReloadPet={props.ReloadPet}
 					isEditFood={isEditFood}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -253,6 +254,7 @@ export default function FoodTable(props) {
 			) : null}
 			{isDeleteFood ? (
 				<EditDeleteFoodButtonHandler
+					ReloadPet={props.ReloadPet}
 					isDeleteFood={isDeleteFood}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

@@ -185,7 +185,16 @@ export default function AddPreventative(props) {
 	const [dueNext, setDueNext] = useState(new Date());
 	const [lastGiven, setLastGiven] = useState(new Date());
 	const [notes, setNotes] = useState('');
+	const [petImage, setPetImage] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	useEffect(() => {
+		if (pet.petImage != null) {
+			setPetImage(pet.petImage.data);
+		} else {
+			setPetImage('');
+		}
+	}, []);
 
 	let Textfield1 = classes.TextField1;
 	let cancelButton = classes.cancelButton;
@@ -247,14 +256,13 @@ export default function AddPreventative(props) {
 			notes,
 			pet.petName,
 			pet.id,
-			pet.petImage.data
+			petImage
 		);
 		props.handleClose();
 		Alert.success('Preventative Added');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('PREVENTATIVES');
-			props.forceUpdate();
+			props.ReloadPet('PREVENTATIVES');
 		}, 500);
 	};
 

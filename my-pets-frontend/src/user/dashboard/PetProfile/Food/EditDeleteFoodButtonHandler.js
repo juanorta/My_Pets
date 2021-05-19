@@ -20,6 +20,7 @@ export default function EditDeleteApptButtonHandler(props) {
 			{/* opening a different modal depending on what button the user pressed */}
 			{openModal && isEditFood ? (
 				<MaterialModalEditAppt
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
@@ -34,6 +35,7 @@ export default function EditDeleteApptButtonHandler(props) {
 			) : null}
 			{openModal && isDeleteFood ? (
 				<MaterialModal
+					ReloadPet={props.ReloadPet}
 					openModal={openModal}
 					rowData={rowData}
 					isDeleteFood={isDeleteFood}

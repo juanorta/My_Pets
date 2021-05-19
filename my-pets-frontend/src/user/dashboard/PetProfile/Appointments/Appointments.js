@@ -281,6 +281,7 @@ export default function Appointments(props) {
 			</div>
 			{isEditAppt ? (
 				<EditDeleteApptButtonHandler
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
@@ -297,6 +298,7 @@ export default function Appointments(props) {
 
 			{isDeleteAppt ? (
 				<EditDeleteApptButtonHandler
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}

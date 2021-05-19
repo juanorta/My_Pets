@@ -134,6 +134,7 @@ export default function MaterialModalProfile(props) {
 					<div className={style}>
 						{isEditAppt ? (
 							<EditAppointmentForm
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
 								pet={pet}
@@ -147,6 +148,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditFood ? (
 							<EditFoodForm
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
 								pet={pet}
@@ -160,6 +162,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditWeight ? (
 							<EditWeightForm
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
 								pet={pet}
@@ -173,6 +176,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditPrev ? (
 							<EditPreventativeForm
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
 								pet={pet}
@@ -186,6 +190,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditMedication ? (
 							<EditMedicationForm
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
 								pet={pet}
@@ -198,6 +203,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditVet ? (
 							<EditVetForm
+								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
 								pet={pet}

@@ -68,6 +68,7 @@ export default function Food(props) {
 			</div>
 			{tableViewSelected ? (
 				<FoodTable
+					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
 					pet={pet}
@@ -78,6 +79,7 @@ export default function Food(props) {
 			) : null}
 			{cardViewSelected ? (
 				<FoodCards
+					ReloadPet={props.ReloadPet}
 					isDashboard={isDashboard}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

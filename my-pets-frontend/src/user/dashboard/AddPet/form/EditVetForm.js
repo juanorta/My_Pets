@@ -169,10 +169,19 @@ export default function EditVetForm(props) {
 	const [phoneNumber, setPhoneNumber] = useState(rowData.phoneNumber);
 	const [location, setLocation] = useState(rowData.location);
 	const [notes, setNotes] = useState(rowData.notes);
+	const [petImage, setPetImage] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	let Textfield1 = classes.TextField1;
 	let cancelButton = classes.cancelButton;
+
+	useEffect(() => {
+		if (pet.petImage != null) {
+			setPetImage(pet.petImage.data);
+		} else {
+			setPetImage('');
+		}
+	}, []);
 
 	if (small) {
 		Textfield1 = classes.TextField1Small;
@@ -191,7 +200,7 @@ export default function EditVetForm(props) {
 	};
 
 	const onLocationChange = (event) => {
-		console.log('location: ' + event.target.value);
+		// console.log('location: ' + event.target.value);
 		setLocation(event.target.value);
 	};
 
@@ -213,14 +222,13 @@ export default function EditVetForm(props) {
 			notes,
 			pet.petName,
 			pet.id,
-			pet.petImage.data
+			petImage
 		);
 		props.handleClose();
 		Alert.success('Vet Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('VETS');
-			props.forceUpdate();
+			props.ReloadPet('VETS');
 		}, 500);
 	};
 

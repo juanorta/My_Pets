@@ -183,7 +183,16 @@ export default function AddMedicationForm(props) {
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(new Date());
 	const [dosageInstructions, setDosageInstructions] = useState('');
+	const [petImage, setPetImage] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+
+	useEffect(() => {
+		if (pet.petImage != null) {
+			setPetImage(pet.petImage.data);
+		} else {
+			setPetImage('');
+		}
+	}, []);
 
 	let Textfield1 = classes.TextField1;
 	let cancelButton = classes.cancelButton;
@@ -231,15 +240,14 @@ export default function AddMedicationForm(props) {
 			dosageInstructions,
 			pet.petName,
 			pet.id,
-			pet.petImage.data
+			petImage
 		);
 
 		props.handleClose();
 		Alert.success('Medication Added');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.changeDefaultViewsAndRefresh('MEDICATIONS');
-			props.forceUpdate();
+			props.ReloadPet('MEDICATIONS');
 		}, 500);
 	};
 

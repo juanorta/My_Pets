@@ -16,6 +16,7 @@ import {
 } from '../../../../../util/APIUtils';
 import PublishIcon from '@material-ui/icons/Publish';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useLocation } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -210,6 +211,7 @@ export default function EditPet(props) {
 	const [petImageId, setPetImageId] = useState('');
 	const [imageName, setImageName] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	let location = useLocation().pathname;
 
 	//default style classes
 	let Textfield1 = classes.TextField1;
@@ -306,7 +308,11 @@ export default function EditPet(props) {
 
 			setTimeout(() => {
 				Alert.closeAll();
-				props.forceUpdate();
+				if (location == '/') {
+					props.forceUpdate();
+				} else {
+					props.ReloadPet('APPOINTMENTS');
+				}
 			}, 500);
 		}, 1000);
 	};

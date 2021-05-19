@@ -321,8 +321,7 @@ export default function AddFoodForm(props) {
 						Alert.success('Food Added');
 						setTimeout(() => {
 							Alert.closeAll();
-							props.changeDefaultViewsAndRefresh('FOOD');
-							props.forceUpdate();
+							props.ReloadPet('FOOD');
 						}, 500);
 						// response[response.food.length-1].id;
 					})
@@ -335,8 +334,7 @@ export default function AddFoodForm(props) {
 			Alert.success('Food Added');
 			setTimeout(() => {
 				Alert.closeAll();
-				props.changeDefaultViewsAndRefresh('FOOD');
-				props.forceUpdate();
+				props.ReloadPet('FOOD');
 			}, 500);
 		}
 	};
