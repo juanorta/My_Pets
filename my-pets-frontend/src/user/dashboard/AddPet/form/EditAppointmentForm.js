@@ -281,7 +281,7 @@ export default function AddPetForm(props) {
 		setTimeout(() => {
 			Alert.closeAll();
 			props.ReloadPet('APPOINTMENTS');
-		}, 500);
+		}, 1000);
 	};
 
 	// console.log('am pm hook');
