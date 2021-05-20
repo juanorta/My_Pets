@@ -64,6 +64,18 @@ export function getCurrentUser() {
 // 	});
 // }
 
+export function getAllPets(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all pets function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets`,
+		method: 'GET',
+	});
+}
+
 export async function addPet(id, age, breed, name, type, sex) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);

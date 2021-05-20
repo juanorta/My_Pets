@@ -6,8 +6,8 @@ export default function Food(props) {
 	const [cardViewClicked, setCardViewClicked] = useState(true);
 	const [tableViewClicked, setTableViewClicked] = useState(false);
 	const [petListItemClicked, setPetListItemClicked] = useState('');
-	const [currentUser, setCurrentUser] = useState(props.currentUser);
-	const [pets, setPets] = useState(currentUser.pets);
+	// const [currentUser, setCurrentUser] = useState(props.currentUser);
+	// const [pets, setPets] = useState(currentUser.pets);
 	const [petsWithFood, setPetsWithFood] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [isDashboard, setIsDashboard] = useState(true);
@@ -23,18 +23,18 @@ export default function Food(props) {
 	// };
 
 	useEffect(() => {
-		let petsWithFood = [];
-		var j = 0;
-		for (var i = 0; i < pets.length; i++) {
-			if (pets[i].food.length != 0) {
-				petsWithFood[j] = pets[i];
-				j++;
-			}
-		}
-		// console.log(petsWithFood);
-		setPetsWithFood(petsWithFood);
-		setLoading(false);
-		setPetListItemClicked(petsWithFood[0]);
+		// let petsWithFood = [];
+		// var j = 0;
+		// for (var i = 0; i < pets.length; i++) {
+		// 	if (pets[i].food.length != 0) {
+		// 		petsWithFood[j] = pets[i];
+		// 		j++;
+		// 	}
+		// }
+		// // console.log(petsWithFood);
+		// setPetsWithFood(petsWithFood);
+		// setLoading(false);
+		// setPetListItemClicked(petsWithFood[0]);
 	}, []);
 
 	function listItemHandler(pet) {
@@ -72,7 +72,7 @@ export default function Food(props) {
 				</ul>
 			)}
 
-			{loading ? null : (
+			{/* {loading ? null : (
 				<div className="food-dash">
 					<FoodCards
 						isDashboard={isDashboard}
@@ -84,7 +84,7 @@ export default function Food(props) {
 						}
 					/>
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }

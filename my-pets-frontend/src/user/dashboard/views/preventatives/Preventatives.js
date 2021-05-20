@@ -68,68 +68,63 @@ const useStyles = makeStyles((theme) => ({
 export default function Preventatives(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
-	const [pets, setPets] = useState(props.currentUser.pets);
-	const [preventatives, setPreventatives] = useState(
-		currentUser.preventatives
-	);
+	// const [pets, setPets] = useState(props.currentUser.pets);
+	// const [preventatives, setPreventatives] = useState(
+	// 	currentUser.preventatives
+	// );
 	const [upcomingClicked, setUpcomingClicked] = useState(true);
 	const [pastClicked, setPastClicked] = useState(false);
-	const [upcomingPreventatives, setUpcomingPreventatives] = useState(
-		props.upcomingPreventatives
-	);
-	const [pastPreventatives, setPastPreventatives] = useState(
-		props.pastPreventatives
-	);
+	// const [upcomingPreventatives, setUpcomingPreventatives] = useState(
+	// 	props.upcomingPreventatives
+	// );
+	// const [pastPreventatives, setPastPreventatives] = useState(
+	// 	props.pastPreventatives
+	// );
 	const [loading, setLoading] = useState(true);
 	const [fromDash, setFromDash] = useState(true);
 
 	useEffect(() => {
-		let sortedPreventatives = preventatives.slice();
-		sortedPreventatives.sort(function compare(a, b) {
-			var dateA = new Date(a.dueNext);
-			var dateB = new Date(b.dueNext);
-			return dateB - dateA;
-		});
-
-		var now = new Date();
-		let upcomingArray = [];
-		let pastArray = [];
-		let j = 0;
-		let k = 0;
-
-		for (var i = 0; i < sortedPreventatives.length; i++) {
-			var newDate = moment(sortedPreventatives[i].dueNext).toDate();
-			var sameDate = moment(sortedPreventatives[i].dueNext).format(
-				'MM/DD/YYYY'
-			);
-
-			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
-			if (newDate > now) {
-				// console.log('UPCOMING');
-				// console.log(newDate);
-				upcomingArray[j] = sortedPreventatives[i];
-				j++;
-			} else if (sameDate == todayFormatted) {
-				// console.log('SAME');
-				// console.log(newDate);
-				upcomingArray[j] = sortedPreventatives[i];
-				j++;
-			} else {
-				// console.log('PAST');
-				// console.log(newDate);
-				pastArray[k] = sortedPreventatives[i];
-				k++;
-			}
-		}
-
-		// console.log(sortedPreventatives);
-		// console.log(upcomingArray);
-		// console.log(pastArray);
-
-		setUpcomingPreventatives(upcomingArray);
-		setPastPreventatives(pastArray);
-		setLoading(false);
+		// let sortedPreventatives = preventatives.slice();
+		// sortedPreventatives.sort(function compare(a, b) {
+		// 	var dateA = new Date(a.dueNext);
+		// 	var dateB = new Date(b.dueNext);
+		// 	return dateB - dateA;
+		// });
+		// var now = new Date();
+		// let upcomingArray = [];
+		// let pastArray = [];
+		// let j = 0;
+		// let k = 0;
+		// for (var i = 0; i < sortedPreventatives.length; i++) {
+		// 	var newDate = moment(sortedPreventatives[i].dueNext).toDate();
+		// 	var sameDate = moment(sortedPreventatives[i].dueNext).format(
+		// 		'MM/DD/YYYY'
+		// 	);
+		// 	var todayFormatted = moment(now).format('MM/DD/YYYY');
+		// 	// console.log(newDate);
+		// 	if (newDate > now) {
+		// 		// console.log('UPCOMING');
+		// 		// console.log(newDate);
+		// 		upcomingArray[j] = sortedPreventatives[i];
+		// 		j++;
+		// 	} else if (sameDate == todayFormatted) {
+		// 		// console.log('SAME');
+		// 		// console.log(newDate);
+		// 		upcomingArray[j] = sortedPreventatives[i];
+		// 		j++;
+		// 	} else {
+		// 		// console.log('PAST');
+		// 		// console.log(newDate);
+		// 		pastArray[k] = sortedPreventatives[i];
+		// 		k++;
+		// 	}
+		// }
+		// // console.log(sortedPreventatives);
+		// // console.log(upcomingArray);
+		// // console.log(pastArray);
+		// setUpcomingPreventatives(upcomingArray);
+		// setPastPreventatives(pastArray);
+		// setLoading(false);
 	}, []);
 
 	const upcomingClickedHandler = () => {
@@ -170,7 +165,7 @@ export default function Preventatives(props) {
 				</li>
 			</ul>
 
-			{upcomingClicked && loading === false ? (
+			{/* {upcomingClicked && loading === false ? (
 				<DashUpcomingPrev
 					currentUser={currentUser}
 					upcomingPreventatives={upcomingPreventatives}
@@ -181,7 +176,7 @@ export default function Preventatives(props) {
 					currentUser={currentUser}
 					pastPreventatives={pastPreventatives}
 				/>
-			) : null}
+			) : null} */}
 
 			{/* <div
 				className="appointments-table"

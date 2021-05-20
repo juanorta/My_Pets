@@ -53,7 +53,7 @@ export default function Vets(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 
-	const [vets, setVets] = useState(currentUser.vets);
+	// const [vets, setVets] = useState(currentUser.vets);
 	// console.log(vets);
 
 	const SetOpenModalToFalse = () => {
@@ -167,17 +167,17 @@ export default function Vets(props) {
 
 	let rows = [];
 
-	for (let i = 0; i < vets.length; i++) {
-		rows[i] = {
-			id: vets[i].id,
-			petName: vets[i].petName,
-			vetName: vets[i].vetName,
-			phoneNumber: vets[i].phoneNumber,
-			location: vets[i].location,
-			notes: vets[i].notes,
-			data: vets[i].data,
-		};
-	}
+	// for (let i = 0; i < vets.length; i++) {
+	// 	rows[i] = {
+	// 		id: vets[i].id,
+	// 		petName: vets[i].petName,
+	// 		vetName: vets[i].vetName,
+	// 		phoneNumber: vets[i].phoneNumber,
+	// 		location: vets[i].location,
+	// 		notes: vets[i].notes,
+	// 		data: vets[i].data,
+	// 	};
+	// }
 	return (
 		<div className="food-main-container" id="vets">
 			<div className="title">

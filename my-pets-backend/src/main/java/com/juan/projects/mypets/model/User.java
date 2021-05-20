@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -47,6 +48,7 @@ public class User {
     private List<Pet> pets;
 
     @JsonManagedReference
+   @JsonIgnore
     public List<Pet> getPets() {
         return pets;
     }
@@ -61,6 +63,7 @@ public class User {
     private List<PetImage> petImages;
 
     @JsonManagedReference(value = "user-petimage")
+    @JsonIgnore
     public List<PetImage> getPetImages(){
         return petImages;
     }
@@ -74,6 +77,7 @@ public class User {
     private List<FoodImage> foodImages;
 
     @JsonManagedReference(value = "user-foodImage")
+    @JsonIgnore
     public List<FoodImage> getFoodImages(){ return foodImages;}
 
     public void setFoodImages(List<FoodImage> foodImages){
@@ -87,6 +91,7 @@ public class User {
     private List<Appointment> appointments;
 
     @JsonManagedReference(value = "user-appt")
+    @JsonIgnore
     public List<Appointment> getAppointments(){
         return appointments;
     }
@@ -99,6 +104,7 @@ public class User {
     private List<Weight> weights;
 
     @JsonManagedReference(value = "user-weight")
+    @JsonIgnore
     public List<Weight> getWeights(){
         return weights;
     }
@@ -112,6 +118,7 @@ public class User {
     private List<Food> food;
 
     @JsonManagedReference(value = "user-food")
+    @JsonIgnore
     public List<Food> getFood(){
         return food;
     }
@@ -125,6 +132,7 @@ public class User {
     private List<Preventative> preventatives;
 
     @JsonManagedReference(value = "user-preventative")
+    @JsonIgnore
     public List<Preventative> getPreventatives(){ return preventatives;}
 
     public void setPreventatives(List<Preventative> preventatives){
@@ -136,6 +144,7 @@ public class User {
     private List<Medication> medications;
 
     @JsonManagedReference(value = "user-medication")
+    @JsonIgnore
     public List<Medication> getMedications(){
         return medications;
     }
@@ -149,6 +158,7 @@ public class User {
     private List<Vet> vets;
 
     @JsonManagedReference(value = "user-vet")
+    @JsonIgnore
     public List<Vet> getVets(){
         return vets;
     }

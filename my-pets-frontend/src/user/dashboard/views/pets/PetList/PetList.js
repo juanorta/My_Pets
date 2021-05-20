@@ -69,7 +69,7 @@ export default function PetList(props) {
 
 	//getting the current user and list of pets from Pets component
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
-	const [pets, setPets] = useState(props.currentUser.pets);
+	const [pets, setPets] = useState(props.pets);
 
 	//hook used to close modal
 	const [openModal, setOpenModal] = useState(false);
