@@ -276,13 +276,13 @@ export default function AddPetForm(props) {
 			petAptId,
 			pictureData
 		);
-
+		props.handleClose();
 		Alert.success('Appointment Edited');
 		setTimeout(() => {
-			props.handleClose();
 			Alert.closeAll();
-			props.ReloadPet('APPOINTMENTS');
-		}, 3250);
+			props.forceUpdate();
+			// props.ReloadPet('APPOINTMENTS');
+		}, 500);
 	};
 
 	// console.log('am pm hook');

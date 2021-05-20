@@ -247,9 +247,10 @@ export default function EditMedicationForm(props) {
 			pet.id,
 			petImage
 		);
-		props.handleClose();
+
 		Alert.success('Medication Added');
 		setTimeout(() => {
+			props.handleClose();
 			Alert.closeAll();
 			props.ReloadPet('MEDICATIONS');
 		}, 3500);

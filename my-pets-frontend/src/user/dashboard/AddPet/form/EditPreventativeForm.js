@@ -263,11 +263,12 @@ export default function EditPreventativeForm(props) {
 			petImage
 		);
 		props.handleClose();
-		Alert.success('Preventative Edited!');
+
 		setTimeout(() => {
+			Alert.success('Preventative Edited!');
 			Alert.closeAll();
 			props.ReloadPet('PREVENTATIVES');
-		}, 3500);
+		}, 3250);
 	};
 
 	console.log('ids');

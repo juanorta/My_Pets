@@ -267,7 +267,7 @@ export default function AddPetForm(props) {
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		// props.handleClose();
-
+		event.preventDefault();
 		addAppointment(
 			currentUser.id,
 			pet.id,
@@ -282,9 +282,10 @@ export default function AddPetForm(props) {
 			petAptId,
 			pictureData
 		);
-		props.handleClose();
+
 		Alert.success('Appointment Added');
 		setTimeout(() => {
+			props.handleClose();
 			Alert.closeAll();
 			props.ReloadPet('APPOINTMENTS');
 		}, 3500);

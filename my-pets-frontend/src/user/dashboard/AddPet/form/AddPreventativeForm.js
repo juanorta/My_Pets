@@ -258,12 +258,13 @@ export default function AddPreventative(props) {
 			pet.id,
 			petImage
 		);
-		props.handleClose();
+
 		Alert.success('Preventative Added');
 		setTimeout(() => {
+			props.handleClose();
 			Alert.closeAll();
 			props.ReloadPet('PREVENTATIVES');
-		}, 3500);
+		}, 3250);
 	};
 
 	return (

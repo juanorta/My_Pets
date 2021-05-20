@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import './Dashboard.css';
 import { addPet } from '../../util/APIUtils';
 import Alert from 'react-s-alert';
@@ -9,7 +9,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
 import Pets from './views/pets/Pets';
 import Appointments from './views/appointments/Appointments';
-import Weights from './views/weights/Weights';
+// import Weights from './views/weights/Weights';
 import AddButton from './AddPet/AddButton/AddButton';
 // import '../dashboard/modal/AddPetModal';
 import MaterialModal from './modal/MaterialModal';
@@ -18,12 +18,22 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Greeting from './views/greeting/Greeting';
 import Overview from './views/overview/Overview';
 import { getAllWeights } from '../../util/APIUtils';
-import Food from './views/food/Food';
-import DashboardAppointments from './views/appointments/DashboardAppointments';
-import Preventatives from './views/preventatives/Preventatives';
-import Medications from './views/medications/Medications';
-import Vets from './views/Vets/Vets';
 import moment from 'moment';
+
+//lazy loading components
+const DashboardAppointments = lazy(() =>
+	import('./views/appointments/DashboardAppointments')
+);
+
+const Weights = lazy(() => import('./views/weights/Weights'));
+
+const Food = lazy(() => import('./views/food/Food'));
+
+const Preventatives = lazy(() => import('./views/preventatives/Preventatives'));
+
+const Medications = lazy(() => import('./views/medications/Medications'));
+
+const Vets = lazy(() => import('./views/Vets/Vets'));
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -63,10 +73,10 @@ export default function Dashboard(props) {
 	const [pastMedications, setPastMedications] = useState('');
 
 	useEffect(() => {
-		sortAppointments();
-		sortPreventatives();
-		sortMedications();
-		setLoading(false);
+		// sortAppointments();
+		// sortPreventatives();
+		// sortMedications();
+		// setLoading(false);
 	}, []);
 
 	const sortAppointments = () => {
@@ -229,69 +239,68 @@ export default function Dashboard(props) {
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}
 			/> */}
-			{loading === false ? (
-				<div>
-					{/* <Overview
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-						upcomingAppointments={upcomingAppointments}
-						upcomingPreventatives={upcomingPreventatives}
-						currentMedications={currentMedications}
-					/> */}
-
-					<Pets
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-					/>
-
-					{/* <Appointments
+			{/* {loading === false ? (
+				<div> */}
+			<Pets
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}
-			/> */}
-					<DashboardAppointments
-						upcomingAppointments={upcomingAppointments}
-						pastAppointments={pastAppointments}
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-					/>
-					<Weights
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-					/>
-					<Food
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-						changeDefaultViewsAndRefresh={
-							props.changeDefaultViewsAndRefresh
-						}
-					/>
-					<Preventatives
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-						changeDefaultViewsAndRefresh={
-							props.changeDefaultViewsAndRefresh
-						}
-						upcomingPreventatives={upcomingPreventatives}
-						pastPreventatives={pastPreventatives}
-					/>
-					<Medications
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-						changeDefaultViewsAndRefresh={
-							props.changeDefaultViewsAndRefresh
-						}
-						currentMedications={currentMedications}
-						pastMedications={pastMedications}
-					/>
-					<Vets
-						forceUpdate={props.forceUpdate}
-						currentUser={props.currentUser}
-						changeDefaultViewsAndRefresh={
-							props.changeDefaultViewsAndRefresh
-						}
-					/>
-				</div>
-			) : null}
+			/>
+			<Suspense fallback={<div>Loading Appointments...</div>}>
+				<DashboardAppointments
+					// upcomingAppointments={upcomingAppointments}
+					// pastAppointments={pastAppointments}
+					forceUpdate={props.forceUpdate}
+					currentUser={props.currentUser}
+				/>
+			</Suspense>
+
+			<Suspense fallback={<div>Loading Weights...</div>}>
+				<Weights
+					forceUpdate={props.forceUpdate}
+					currentUser={props.currentUser}
+				/>
+			</Suspense>
+			<Suspense fallback={<div>Loading Food...</div>}>
+				<Food
+					forceUpdate={props.forceUpdate}
+					currentUser={props.currentUser}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
+				/>
+			</Suspense>
+			<Suspense fallback={<div>Loading Preventatives...</div>}>
+				<Preventatives
+					forceUpdate={props.forceUpdate}
+					currentUser={props.currentUser}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
+					upcomingPreventatives={upcomingPreventatives}
+					pastPreventatives={pastPreventatives}
+				/>
+			</Suspense>
+			<Suspense fallback={<div>Loading Medications...</div>}>
+				<Medications
+					forceUpdate={props.forceUpdate}
+					currentUser={props.currentUser}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
+					currentMedications={currentMedications}
+					pastMedications={pastMedications}
+				/>
+			</Suspense>
+
+			<Suspense fallback={<div>Loading Vets...</div>}>
+				<Vets
+					forceUpdate={props.forceUpdate}
+					currentUser={props.currentUser}
+					changeDefaultViewsAndRefresh={
+						props.changeDefaultViewsAndRefresh
+					}
+				/>
+			</Suspense>
 		</div>
 	);
 }
