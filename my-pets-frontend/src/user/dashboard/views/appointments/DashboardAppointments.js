@@ -3,6 +3,7 @@ import './DashboardAppointments.css';
 import UpcomingAppointments from './UpcomingAppointments';
 import PastAppointments from './PastAppointments';
 import moment from 'moment';
+import { getAllAppointments } from '../../../../util/APIUtils';
 
 //sorts appointments and sends upcoming appts to UpcomingAppointments
 //and past appts to PastAppointments
@@ -10,7 +11,7 @@ export default function DashboardAppointments(props) {
 	const [loading, setLoading] = useState(true);
 	const [upcomingClicked, setUpcomingClicked] = useState(true);
 	const [pastClicked, setPastClicked] = useState(false);
-	// const [currentUser, setCurrentUser] = useState(props.currentUser);
+	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	// const [pets, setPets] = useState(props.currentUser.pets);
 	// const [appointments, setAppointments] = useState(currentUser.appointments);
 	const [sortedAppointments, setSortedAppointments] = useState('');
@@ -22,51 +23,64 @@ export default function DashboardAppointments(props) {
 	);
 
 	useEffect(() => {
-		//sorting appts from future to past
-		// let sortedAppointmentsArray = appointments.slice();
-		// sortedAppointmentsArray.sort(function compare(a, b) {
-		// 	var dateA = new Date(a.date);
-		// 	var dateB = new Date(b.date);
-		// 	return dateB - dateA;
-		// });
-		// // console.log(sortedAppointmentsArray);
-		// //putting appointments in 'upcoming' or 'past' arrays
-		// var now = new Date();
-		// let upcomingArray = [];
-		// let pastArray = [];
-		// let j = 0;
-		// let k = 0;
-		// for (var i = 0; i < sortedAppointmentsArray.length; i++) {
-		// 	var newDate = moment(sortedAppointmentsArray[i].date).toDate();
-		// 	var sameDate = moment(sortedAppointmentsArray[i].date).format(
-		// 		'MM/DD/YYYY'
-		// 	);
-		// 	var todayFormatted = moment(now).format('MM/DD/YYYY');
-		// 	// console.log(newDate);
-		// 	if (newDate > now) {
-		// 		// console.log('UPCOMING');
-		// 		// console.log(newDate);
-		// 		upcomingArray[j] = sortedAppointmentsArray[i];
-		// 		j++;
-		// 	} else if (sameDate == todayFormatted) {
-		// 		// console.log('SAME');
-		// 		// console.log(newDate);
-		// 		upcomingArray[j] = sortedAppointmentsArray[i];
-		// 		j++;
-		// 	} else {
-		// 		// console.log('PAST');
-		// 		// console.log(newDate);
-		// 		pastArray[k] = sortedAppointmentsArray[i];
-		// 		k++;
-		// 	}
-		// }
-		// // console.log(upcomingArray);
-		// // console.log(pastArray);
-		// setUpcomingAppointments(upcomingArray);
-		// setPastAppointments(pastArray);
-		// setSortedAppointments(sortedAppointmentsArray);
-		setLoading(false);
+		fetchAppointments();
 	}, []);
+
+	const fetchAppointments = () => {
+		getAllAppointments(currentUser.id)
+			.then((response) => {
+				console.log(response);
+				sortAppointments(response);
+			})
+			.catch((error) => {});
+	};
+
+	const sortAppointments = (appointments) => {
+		//sorting appts from future to past
+		let sortedAppointmentsArray = appointments.slice();
+		sortedAppointmentsArray.sort(function compare(a, b) {
+			var dateA = new Date(a.date);
+			var dateB = new Date(b.date);
+			return dateB - dateA;
+		});
+		// console.log(sortedAppointmentsArray);
+		//putting appointments in 'upcoming' or 'past' arrays
+		var now = new Date();
+		let upcomingArray = [];
+		let pastArray = [];
+		let j = 0;
+		let k = 0;
+		for (var i = 0; i < sortedAppointmentsArray.length; i++) {
+			var newDate = moment(sortedAppointmentsArray[i].date).toDate();
+			var sameDate = moment(sortedAppointmentsArray[i].date).format(
+				'MM/DD/YYYY'
+			);
+			var todayFormatted = moment(now).format('MM/DD/YYYY');
+			// console.log(newDate);
+			if (newDate > now) {
+				// console.log('UPCOMING');
+				// console.log(newDate);
+				upcomingArray[j] = sortedAppointmentsArray[i];
+				j++;
+			} else if (sameDate == todayFormatted) {
+				// console.log('SAME');
+				// console.log(newDate);
+				upcomingArray[j] = sortedAppointmentsArray[i];
+				j++;
+			} else {
+				// console.log('PAST');
+				// console.log(newDate);
+				pastArray[k] = sortedAppointmentsArray[i];
+				k++;
+			}
+		}
+		// console.log(upcomingArray);
+		// console.log(pastArray);
+		setUpcomingAppointments(upcomingArray);
+		setPastAppointments(pastArray);
+		setSortedAppointments(sortedAppointmentsArray);
+		setLoading(false);
+	};
 
 	//used to switch between Upcoming and Past views
 	const upcomingHandler = () => {
@@ -117,19 +131,25 @@ export default function DashboardAppointments(props) {
 					<h2>Past</h2>
 				</li>
 			</ul>
-			{/* {loading === false && upcomingClicked === true ? (
-				<UpcomingAppointments
-					currentUser={currentUser}
-					upcomingAppointments={upcomingAppointments}
-				/>
-			) : null}
+			{loading === true ? (
+				<h2>Loading upcoming and past appointments...</h2>
+			) : (
+				<div>
+					{upcomingClicked === true ? (
+						<UpcomingAppointments
+							currentUser={currentUser}
+							upcomingAppointments={upcomingAppointments}
+						/>
+					) : null}
 
-			{loading == false && pastClicked === true ? (
-				<PastAppointments
-					currentUser={currentUser}
-					pastAppointments={pastAppointments}
-				/>
-			) : null} */}
+					{pastClicked === true ? (
+						<PastAppointments
+							currentUser={currentUser}
+							pastAppointments={pastAppointments}
+						/>
+					) : null}
+				</div>
+			)}
 		</div>
 	);
 }
