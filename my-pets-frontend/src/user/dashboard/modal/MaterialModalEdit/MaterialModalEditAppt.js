@@ -134,6 +134,8 @@ export default function MaterialModalProfile(props) {
 					<div className={style}>
 						{isEditAppt ? (
 							<EditAppointmentForm
+								ReloadAppointment={props.ReloadAppointment}
+								appointments={props.appointments}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}

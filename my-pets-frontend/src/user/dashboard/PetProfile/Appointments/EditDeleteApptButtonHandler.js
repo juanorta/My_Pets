@@ -21,6 +21,8 @@ export default function EditDeleteApptButtonHandler(props) {
 			{/* opening a different modal depending on what button the user pressed */}
 			{openModal && isEditAppt ? (
 				<MaterialModalEditAppt
+					ReloadAppointment={props.ReloadAppointment}
+					appointments={props.appointments}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -37,6 +39,7 @@ export default function EditDeleteApptButtonHandler(props) {
 			) : null}
 			{openModal && isDeleteAppt ? (
 				<MaterialModal
+					ReloadAppointment={props.ReloadAppointment}
 					ReloadPet={props.ReloadPet}
 					openModal={openModal}
 					rowData={rowData}

@@ -71,14 +71,12 @@ export default function Appointments(props) {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		// console.log(pets);
 		let sortedAppointmentsArray = appointments.slice();
 		sortedAppointmentsArray.sort(function compare(a, b) {
 			var dateA = new Date(a.date);
 			var dateB = new Date(b.date);
 			return dateB - dateA;
 		});
-		// console.log(sortedAppointmentsArray);
 		setSortedAppointments(sortedAppointmentsArray);
 		setLoading(false);
 	}, []);

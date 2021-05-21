@@ -8,21 +8,11 @@ export default function Food(props) {
 	const [tableViewClicked, setTableViewClicked] = useState(false);
 	const [petListItemClicked, setPetListItemClicked] = useState('');
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
-	// const [pets, setPets] = useState(currentUser.pets);
 	const [petsWithFood, setPetsWithFood] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [isDashboard, setIsDashboard] = useState(true);
 
-	// const cardViewHandler = () => {
-	// 	setCardViewClicked(true);
-	// 	setTableViewClicked(false);
-	// };
-
-	// const tableViewHandler = () => {
-	// 	setTableViewClicked(true);
-	// 	setCardViewClicked(false);
-	// };
-
+	//getting all pets and their respective list of food
 	useEffect(() => {
 		fetchFood();
 	}, []);
@@ -37,6 +27,7 @@ export default function Food(props) {
 			.catch((error) => {});
 	};
 
+	//keeping only the pets that have a food entry and storing them
 	const sortFood = (pets) => {
 		let petsWithFood = [];
 		var j = 0;
@@ -65,9 +56,6 @@ export default function Food(props) {
 			</div>
 			{loading ? null : (
 				<ul>
-					{/* <li>
-						<h2>All</h2>
-					</li> */}
 					{petsWithFood.map((pet) => (
 						<li
 							key={0}

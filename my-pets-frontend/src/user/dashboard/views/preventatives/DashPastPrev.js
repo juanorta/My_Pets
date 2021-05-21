@@ -209,16 +209,8 @@ export default function DashPastPrev(props) {
 		};
 	}
 
-	const SetOpenModalToFalse = () => {
-		// setOpenModal(false);
-		// setIsEditPrev(false);
-		// setIsDeletePrev(false);
-	};
+	const SetOpenModalToFalse = () => {};
 
-	// console.log(upcomingPreventatives);
-	// console.log(sortedWeights);
-	// console.log('upcoming');
-	// console.log(upcomingPreventatives);
 	return (
 		<div
 			className="appointments-table"

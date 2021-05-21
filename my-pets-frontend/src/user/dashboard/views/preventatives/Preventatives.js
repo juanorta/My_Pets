@@ -81,10 +81,12 @@ export default function Preventatives(props) {
 	const [fromDash, setFromDash] = useState(true);
 	const [petPictures, setPetPictures] = useState(props.petPictures);
 
+	//getting all preventatives and then passing them down to Upcoming and Past Preventatives
 	useEffect(() => {
 		fetchPreventatives();
 	}, []);
 
+	//sorts Preventatives into Upcoming or Past categories
 	const fetchPreventatives = () => {
 		getAllPreventatives(currentUser.id)
 			.then((response) => {
@@ -116,25 +118,16 @@ export default function Preventatives(props) {
 			var todayFormatted = moment(now).format('MM/DD/YYYY');
 			// console.log(newDate);
 			if (newDate > now) {
-				// console.log('UPCOMING');
-				// console.log(newDate);
 				upcomingArray[j] = sortedPreventatives[i];
 				j++;
 			} else if (sameDate == todayFormatted) {
-				// console.log('SAME');
-				// console.log(newDate);
 				upcomingArray[j] = sortedPreventatives[i];
 				j++;
 			} else {
-				// console.log('PAST');
-				// console.log(newDate);
 				pastArray[k] = sortedPreventatives[i];
 				k++;
 			}
 		}
-		// console.log(sortedPreventatives);
-		// console.log(upcomingArray);
-		// console.log(pastArray);
 		setUpcomingPreventatives(upcomingArray);
 		setPastPreventatives(pastArray);
 		setLoading(false);
@@ -192,19 +185,6 @@ export default function Preventatives(props) {
 					petPictures={props.petPictures}
 				/>
 			) : null}
-
-			{/* <div
-				className="appointments-table"
-				style={{ height: 450, width: '100%' }}
-			>
-				<DataGrid
-					className={classes.root}
-					rows={rows}
-					columns={columns}
-					pageSize={5}
-					rowHeight={65}
-				/>
-			</div> */}
 		</div>
 	);
 }

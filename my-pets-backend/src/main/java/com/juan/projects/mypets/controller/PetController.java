@@ -11,6 +11,7 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Filter;
 
@@ -78,8 +79,19 @@ public class PetController {
 
     //finds pet from user and pet id
     @GetMapping("users/{userId}/pets/{petId}")
-    public Pet getPetByUser(@PathVariable(value ="userId") Long userId, @PathVariable(value = "petId") Long petId){
-        return petRepository.findByIdAndUserId(petId, userId);
+     MappingJacksonValue getPetByUser(@PathVariable(value ="userId") Long userId, @PathVariable(value = "petId") Long petId){
+        SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("appointments", "weights",
+                "food", "medications", "preventatives", "vets");
+
+        FilterProvider filterProvider = new SimpleFilterProvider()
+                .addFilter("petFilter", simpleBeanPropertyFilter);
+
+        Pet pet = petRepository.findByIdAndUserId(petId, userId);
+
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(pet);
+        mappingJacksonValue.setFilters(filterProvider);
+
+        return mappingJacksonValue;
     }
 
     //add pet

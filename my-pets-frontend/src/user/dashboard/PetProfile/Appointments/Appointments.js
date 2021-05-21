@@ -11,6 +11,7 @@ import MaterialModalEditAppt from '../../modal/MaterialModalEdit/MaterialModalEd
 import EditDeleteApptButtonHandler from './EditDeleteApptButtonHandler';
 import moment from 'moment';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { getAppointmentsByPet } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -46,6 +47,8 @@ export default function Appointments(props) {
 	const [editParams, setEditParams] = useState('');
 	const [sortedAppointments, setSortedAppointments] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const [loading, setLoading] = useState(true);
+	const [value, setValue] = useState(0);
 
 	let width = '70%';
 
@@ -53,15 +56,35 @@ export default function Appointments(props) {
 		width = '90%';
 	}
 	useEffect(() => {
-		let sortedAppointmentsArray = pet.appointments.slice();
+		fetchAppointments();
+	}, [value]);
+
+	const ReloadAppointment = () => {
+		console.log('reload appointments function called');
+		setValue(value + 1);
+		setLoading(true);
+	};
+
+	const fetchAppointments = () => {
+		getAppointmentsByPet(currentUser.id, pet.id)
+			.then((response) => {
+				console.log('APPOINTMENTS BY PET');
+				console.log(response);
+				sortAppointments(response);
+			})
+			.catch((error) => {});
+	};
+
+	const sortAppointments = (appointments) => {
+		let sortedAppointmentsArray = appointments.slice();
 		sortedAppointmentsArray.sort(function compare(a, b) {
 			var dateA = new Date(a.date);
 			var dateB = new Date(b.date);
 			return dateA - dateB;
 		});
-
 		setSortedAppointments(sortedAppointmentsArray);
-	}, []);
+		setLoading(false);
+	};
 
 	const setRowData = (id, Date, Notes, Type, Time, VetGroomer) => {};
 
@@ -271,16 +294,22 @@ export default function Appointments(props) {
 					margin: '0 auto',
 				}}
 			>
-				<DataGrid
-					rows={rows}
-					columns={columns}
-					pageSize={5}
-					rowHeight={72}
-					// onCellClick={(CellParams) => {}}
-				/>
+				{loading ? (
+					<h2>Loading Appointments...</h2>
+				) : (
+					<DataGrid
+						rows={rows}
+						columns={columns}
+						pageSize={5}
+						rowHeight={72}
+						// onCellClick={(CellParams) => {}}
+					/>
+				)}
 			</div>
 			{isEditAppt ? (
 				<EditDeleteApptButtonHandler
+					ReloadAppointment={ReloadAppointment}
+					appointments={sortedAppointments}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -298,6 +327,8 @@ export default function Appointments(props) {
 
 			{isDeleteAppt ? (
 				<EditDeleteApptButtonHandler
+					ReloadAppointment={ReloadAppointment}
+					appointments={sortedAppointments}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

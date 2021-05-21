@@ -188,10 +188,8 @@ export default function AddPetForm(props) {
 	const [selectedDate, setSelectedDate] = useState(
 		moment(props.rowData.Date).format('MM/DD/YYYY')
 	);
-	const [time, setTime] = useState(props.pet.appointments[amPmIndex].time);
-	const [amOrPm, setAmOrPm] = useState(
-		props.pet.appointments[amPmIndex].amOrPm
-	);
+	const [time, setTime] = useState(props.appointments[amPmIndex].time);
+	const [amOrPm, setAmOrPm] = useState(props.appointments[amPmIndex].amOrPm);
 	const [type, setType] = useState(props.rowData.Type);
 	const [reason, setReason] = useState(props.rowData.Reason);
 	const [vetOrGroomerName, setVetOrGroomerName] = useState(
@@ -280,7 +278,7 @@ export default function AddPetForm(props) {
 		Alert.success('Appointment Edited');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.forceUpdate();
+			props.ReloadAppointment();
 			// props.ReloadPet('APPOINTMENTS');
 		}, 500);
 	};

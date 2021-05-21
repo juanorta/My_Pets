@@ -135,6 +135,10 @@ export default function PetProfile(props) {
 	useEffect(() => {
 		console.log('USE EFFECT DEFAULT VIEW: ' + defaultView);
 		defaultViewHandler(defaultView);
+		fetchPet();
+	}, [value]);
+
+	const fetchPet = () => {
 		getPet(user.id, petId)
 			.then((response) => {
 				console.log(response);
@@ -144,7 +148,7 @@ export default function PetProfile(props) {
 			.catch((error) => {
 				//console.log(error);
 			});
-	}, [value]);
+	};
 
 	const ReloadPet = (viewName) => {
 		console.log('reload pet function called');
@@ -753,7 +757,7 @@ export default function PetProfile(props) {
 									/>
 								) : null}
 
-								{weightClicked &&
+								{/* {weightClicked &&
 								apptClicked === false &&
 								foodClicked === false ? (
 									<Weights
@@ -766,9 +770,9 @@ export default function PetProfile(props) {
 											props.changeDefaultViewsAndRefresh
 										}
 									/>
-								) : null}
+								) : null} */}
 
-								{foodClicked &&
+								{/* {foodClicked &&
 								weightClicked === false &&
 								apptClicked === false ? (
 									<Food
@@ -781,9 +785,9 @@ export default function PetProfile(props) {
 											props.changeDefaultViewsAndRefresh
 										}
 									/>
-								) : null}
+								) : null} */}
 
-								{preventativeClicked ? (
+								{/* {preventativeClicked ? (
 									<Preventatives
 										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
@@ -794,9 +798,9 @@ export default function PetProfile(props) {
 											props.changeDefaultViewsAndRefresh
 										}
 									/>
-								) : null}
+								) : null} */}
 
-								{medicationClicked ? (
+								{/* {medicationClicked ? (
 									<Medications
 										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
@@ -807,9 +811,9 @@ export default function PetProfile(props) {
 											props.changeDefaultViewsAndRefresh
 										}
 									/>
-								) : null}
+								) : null} */}
 
-								{vetClicked ? (
+								{/* {vetClicked ? (
 									<Vets
 										ReloadPet={ReloadPet}
 										forceUpdate={props.forceUpdate}
@@ -820,7 +824,7 @@ export default function PetProfile(props) {
 											props.changeDefaultViewsAndRefresh
 										}
 									/>
-								) : null}
+								) : null} */}
 							</div>
 						</div>
 					</div>

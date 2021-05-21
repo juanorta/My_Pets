@@ -193,6 +193,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteAppt ? (
 							<DeleteApptConfirmation
+								ReloadAppointment={props.ReloadAppointment}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}

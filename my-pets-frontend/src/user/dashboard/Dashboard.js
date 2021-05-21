@@ -57,138 +57,24 @@ export default function Dashboard(props) {
 	const matches = useMediaQuery(theme.breakpoints.down('xs'));
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [weightObjects, setWeightObjects] = useState('');
-
-	//const [appointments, setAppointments] = useState(currentUser.appointments);
 	const [sortedAppointments, setSortedAppointments] = useState('');
 	const [upcomingAppointments, setUpcomingAppointments] = useState('');
 	const [pastAppointments, setPastAppointments] = useState('');
 	const [loading, setLoading] = useState(true);
-
-	// const [preventatives, setPreventatives] = useState(
-	// 	currentUser.preventatives
-	// );
 	const [upcomingPreventatives, setUpcomingPreventatives] = useState('');
 	const [pastPreventatives, setPastPreventatives] = useState('');
-
-	//const [medications, setMedications] = useState(currentUser.medications);
 	const [currentMedications, setCurrentMedications] = useState('');
 	const [pastMedications, setPastMedications] = useState('');
 	const [petPictures, setPetPictures] = useState('');
 
-	useEffect(() => {
-		// sortAppointments();
-		// sortPreventatives();
-		// sortMedications();
-		// setLoading(false);
-	}, []);
+	useEffect(() => {}, []);
 
+	//storing pictures from Pets to be reused in DashboardAppointments, Preventatives,
+	//Medications, and Vets
 	const getPetPics = (pictures) => {
-		// console.log('getting pet picks');
-		// console.log(pictures);
 		setPetPictures(pictures);
 	};
 
-	// const sortPreventatives = () => {
-	// 	let sortedPreventatives = preventatives.slice();
-	// 	sortedPreventatives.sort(function compare(a, b) {
-	// 		var dateA = new Date(a.dueNext);
-	// 		var dateB = new Date(b.dueNext);
-	// 		return dateB - dateA;
-	// 	});
-
-	// 	var now = new Date();
-	// 	let upcomingArray = [];
-	// 	let pastArray = [];
-	// 	let j = 0;
-	// 	let k = 0;
-
-	// 	for (var i = 0; i < sortedPreventatives.length; i++) {
-	// 		var newDate = moment(sortedPreventatives[i].dueNext).toDate();
-	// 		var sameDate = moment(sortedPreventatives[i].dueNext).format(
-	// 			'MM/DD/YYYY'
-	// 		);
-
-	// 		var todayFormatted = moment(now).format('MM/DD/YYYY');
-	// 		// console.log(newDate);
-	// 		if (newDate > now) {
-	// 			// console.log('UPCOMING');
-	// 			// console.log(newDate);
-	// 			upcomingArray[j] = sortedPreventatives[i];
-	// 			j++;
-	// 		} else if (sameDate == todayFormatted) {
-	// 			// console.log('SAME');
-	// 			// console.log(newDate);
-	// 			upcomingArray[j] = sortedPreventatives[i];
-	// 			j++;
-	// 		} else {
-	// 			// console.log('PAST');
-	// 			// console.log(newDate);
-	// 			pastArray[k] = sortedPreventatives[i];
-	// 			k++;
-	// 		}
-	// 	}
-
-	// 	// console.log(sortedPreventatives);
-	// 	// console.log(upcomingArray);
-	// 	// console.log(pastArray);
-
-	// 	setUpcomingPreventatives(upcomingArray);
-	// 	setPastPreventatives(pastArray);
-	// };
-
-	// const sortMedications = () => {
-	// 	let sortedMedications = medications.slice();
-	// 	sortedMedications.sort(function compare(a, b) {
-	// 		var dateA = new Date(a.endDate);
-	// 		var dateB = new Date(b.endDate);
-	// 		return dateB - dateA;
-	// 	});
-
-	// 	var now = new Date();
-	// 	let currentArray = [];
-	// 	let pastArray = [];
-	// 	let j = 0;
-	// 	let k = 0;
-
-	// 	for (var i = 0; i < sortedMedications.length; i++) {
-	// 		var newDate = moment(sortedMedications[i].endDate).toDate();
-	// 		var sameDate = moment(sortedMedications[i].endDate).format(
-	// 			'MM/DD/YYYY'
-	// 		);
-
-	// 		var todayFormatted = moment(now).format('MM/DD/YYYY');
-	// 		// console.log(newDate);
-	// 		if (newDate > now) {
-	// 			// console.log('UPCOMING');
-	// 			// console.log(newDate);
-	// 			currentArray[j] = sortedMedications[i];
-	// 			j++;
-	// 		} else if (sameDate == todayFormatted) {
-	// 			// console.log('SAME');
-	// 			// console.log(newDate);
-	// 			currentArray[j] = sortedMedications[i];
-	// 			j++;
-	// 		} else {
-	// 			// console.log('PAST');
-	// 			// console.log(newDate);
-	// 			pastArray[k] = sortedMedications[i];
-	// 			k++;
-	// 		}
-	// 	}
-	// 	// console.log(medications);
-	// 	// console.log(sortedMedications);
-	// 	// console.log(currentArray);
-	// 	// console.log(pastArray);
-	// 	setCurrentMedications(currentArray);
-	// 	setPastMedications(pastArray);
-	// };
-
-	// console.log(props);
-	// console.log('weight object dash');
-	// console.log(weightObjects);
-
-	// console.log('PET PICTURES');
-	// console.log(petPictures);
 	return (
 		<div
 			className="dashboard-main-container"
@@ -199,13 +85,6 @@ export default function Dashboard(props) {
 				currentUser={props.currentUser}
 			/>
 
-			{/* <Greeting
-				forceUpdate={props.forceUpdate}
-				currentUser={props.currentUser}
-			/> */}
-			{/* {loading === false ? (
-				<div> */}
-
 			<Pets
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}
@@ -215,8 +94,6 @@ export default function Dashboard(props) {
 			<Suspense fallback={<div>Loading Appointments...</div>}>
 				{petPictures == '' ? null : (
 					<DashboardAppointments
-						// upcomingAppointments={upcomingAppointments}
-						// pastAppointments={pastAppointments}
 						forceUpdate={props.forceUpdate}
 						currentUser={props.currentUser}
 						petPictures={petPictures}
@@ -248,8 +125,6 @@ export default function Dashboard(props) {
 							props.changeDefaultViewsAndRefresh
 						}
 						petPictures={petPictures}
-						// upcomingPreventatives={upcomingPreventatives}
-						// pastPreventatives={pastPreventatives}
 					/>
 				)}
 			</Suspense>
@@ -262,8 +137,6 @@ export default function Dashboard(props) {
 							props.changeDefaultViewsAndRefresh
 						}
 						petPictures={petPictures}
-						// currentMedications={currentMedications}
-						// pastMedications={pastMedications}
 					/>
 				)}
 			</Suspense>

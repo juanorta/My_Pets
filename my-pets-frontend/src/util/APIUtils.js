@@ -64,6 +64,7 @@ export function getCurrentUser() {
 // 	});
 // }
 
+//USER ENDPOINTS
 export function getAllPets(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);
@@ -136,6 +137,7 @@ export function getAllVets(id) {
 	});
 }
 
+//INDIVIDUAL PET ENDPOINTS
 export async function addPet(id, age, breed, name, type, sex) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);
@@ -208,6 +210,19 @@ export function getPet(id, petId) {
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}`,
+		method: 'GET',
+	});
+}
+
+//APPOINTMENT ENDPOINTS
+export function getAppointmentsByPet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get appts by pet function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}/appointments`,
 		method: 'GET',
 	});
 }
@@ -316,6 +331,19 @@ export async function deleteAppointment(id, petId, apptId) {
 }
 
 //create add weight, add food
+//WEIGHT ENDPOINTS
+
+export function getWeightsByPet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get weights by pet function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}/weights`,
+		method: 'GET',
+	});
+}
 
 export async function addWeight(
 	id,
@@ -400,6 +428,19 @@ export async function deleteWeight(id, petId, weightId) {
 			},
 		}
 	);
+}
+
+//FOOD ENDPOINTS
+export function getFoodByPet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get food by pet function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}/food`,
+		method: 'GET',
+	});
 }
 
 export async function addFood(
@@ -507,6 +548,7 @@ export function getAllWeights(id) {
 	});
 }
 
+//PET IMAGE ENDPOINTS
 // export function getImage(id, petId)
 export async function addPetImage(id, petId, file) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
@@ -562,6 +604,7 @@ export async function editPetImage(id, petId, imageId, file) {
 	console.log(response);
 }
 
+//FOOD IMAGE ENDPOINTS
 export async function addFoodImage(id, petId, foodId, file) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log('ADD FOOD IMAGE FUNCTION CALLED');
@@ -615,6 +658,19 @@ export async function editFoodImage(id, petId, foodId, imageId, file) {
 	);
 
 	console.log(response);
+}
+
+//PREVENTATIVE ENDPOINTS
+export function getPreventativesByPet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get preventatives by pet function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}/preventatives`,
+		method: 'GET',
+	});
 }
 
 export async function addPreventative(
@@ -709,6 +765,19 @@ export async function deletePreventative(id, petId, prevId) {
 	);
 }
 
+//MEDICATION ENDPOINTS
+export function getMedicationsByPet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get medications by pet function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}/medications`,
+		method: 'GET',
+	});
+}
+
 export async function addMedication(
 	id,
 	petId,
@@ -790,6 +859,19 @@ export async function deleteMedication(id, petId, medId) {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
+	});
+}
+
+//VETERINARIANS ENDPOINTS
+export function getVetsByPet(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get vets by pet function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}/vets`,
+		method: 'GET',
 	});
 }
 

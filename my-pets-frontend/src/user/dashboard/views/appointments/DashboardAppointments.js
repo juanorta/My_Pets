@@ -24,6 +24,7 @@ export default function DashboardAppointments(props) {
 
 	const [petPictures, setPetPictures] = useState(props.petPictures);
 
+	//getting all appointments and passing them to Upcoming and Past Appointments
 	useEffect(() => {
 		fetchAppointments();
 	}, []);
@@ -61,18 +62,12 @@ export default function DashboardAppointments(props) {
 			var todayFormatted = moment(now).format('MM/DD/YYYY');
 			// console.log(newDate);
 			if (newDate > now) {
-				// console.log('UPCOMING');
-				// console.log(newDate);
 				upcomingArray[j] = sortedAppointmentsArray[i];
 				j++;
 			} else if (sameDate == todayFormatted) {
-				// console.log('SAME');
-				// console.log(newDate);
 				upcomingArray[j] = sortedAppointmentsArray[i];
 				j++;
 			} else {
-				// console.log('PAST');
-				// console.log(newDate);
 				pastArray[k] = sortedAppointmentsArray[i];
 				k++;
 			}
@@ -100,20 +95,13 @@ export default function DashboardAppointments(props) {
 	console.log('UMM APPTS');
 	console.log(upcomingAppointments);
 
-	// console.log(pastAppointments);
-	// console.log(new Date());
-
-	// console.log('PET PICS DASH');
-	// console.log(petPictures);
 	return (
 		<div className="food-main-container" id="appointments">
 			<div className="title">
 				<h1>All Appointments</h1>
 			</div>
 			<ul>
-				{/* <li>
-						<h2>All</h2>
-					</li> */}
+				}
 				<li
 					key={0}
 					onClick={upcomingHandler}

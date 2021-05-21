@@ -284,11 +284,11 @@ export default function AddPetForm(props) {
 		);
 
 		Alert.success('Appointment Added');
+		props.handleClose();
 		setTimeout(() => {
-			props.handleClose();
 			Alert.closeAll();
 			props.ReloadPet('APPOINTMENTS');
-		}, 3500);
+		}, 500);
 	};
 	// const minDate = new Date(new Date().getTime() + 86400000);
 	// console.log(console.log(minDate);
