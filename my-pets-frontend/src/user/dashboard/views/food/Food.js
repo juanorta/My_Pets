@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getAllPetsWithWFood } from '../../../../util/APIUtils';
 import FoodCards from '../../PetProfile/Food/FoodCards/FoodCards';
 import './Food.css';
 
@@ -6,7 +7,7 @@ export default function Food(props) {
 	const [cardViewClicked, setCardViewClicked] = useState(true);
 	const [tableViewClicked, setTableViewClicked] = useState(false);
 	const [petListItemClicked, setPetListItemClicked] = useState('');
-	// const [currentUser, setCurrentUser] = useState(props.currentUser);
+	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	// const [pets, setPets] = useState(currentUser.pets);
 	const [petsWithFood, setPetsWithFood] = useState('');
 	const [loading, setLoading] = useState(true);
@@ -23,19 +24,34 @@ export default function Food(props) {
 	// };
 
 	useEffect(() => {
-		// let petsWithFood = [];
-		// var j = 0;
-		// for (var i = 0; i < pets.length; i++) {
-		// 	if (pets[i].food.length != 0) {
-		// 		petsWithFood[j] = pets[i];
-		// 		j++;
-		// 	}
-		// }
-		// // console.log(petsWithFood);
-		// setPetsWithFood(petsWithFood);
-		// setLoading(false);
-		// setPetListItemClicked(petsWithFood[0]);
+		fetchFood();
 	}, []);
+
+	const fetchFood = () => {
+		getAllPetsWithWFood(currentUser.id)
+			.then((response) => {
+				console.log('PETS W/ FOOD');
+				console.log(response);
+				sortFood(response);
+			})
+			.catch((error) => {});
+	};
+
+	const sortFood = (pets) => {
+		let petsWithFood = [];
+		var j = 0;
+		for (var i = 0; i < pets.length; i++) {
+			if (pets[i].food.length != 0) {
+				petsWithFood[j] = pets[i];
+				j++;
+			}
+		}
+		// console.log(petsWithFood);
+		setPetsWithFood(petsWithFood);
+
+		setPetListItemClicked(petsWithFood[0]);
+		setLoading(false);
+	};
 
 	function listItemHandler(pet) {
 		setPetListItemClicked(pet);
@@ -72,7 +88,7 @@ export default function Food(props) {
 				</ul>
 			)}
 
-			{/* {loading ? null : (
+			{loading ? null : (
 				<div className="food-dash">
 					<FoodCards
 						isDashboard={isDashboard}
@@ -84,7 +100,7 @@ export default function Food(props) {
 						}
 					/>
 				</div>
-			)} */}
+			)}
 		</div>
 	);
 }

@@ -31,8 +31,8 @@ export default function DashboardAppointments(props) {
 	const fetchAppointments = () => {
 		getAllAppointments(currentUser.id)
 			.then((response) => {
-				console.log('NEW APPOINTMENTS');
-				console.log(response);
+				// console.log('NEW APPOINTMENTS');
+				// console.log(response);
 				sortAppointments(response);
 			})
 			.catch((error) => {});
@@ -102,8 +102,8 @@ export default function DashboardAppointments(props) {
 	// console.log(pastAppointments);
 	// console.log(new Date());
 
-	console.log('PET PICS DASH');
-	console.log(petPictures);
+	// console.log('PET PICS DASH');
+	// console.log(petPictures);
 	return (
 		<div className="food-main-container" id="appointments">
 			<div className="title">

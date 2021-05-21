@@ -43,7 +43,7 @@ public class PetController {
 
     //get all pets with weights from a user
     @GetMapping("users/{userId}/pets/withWeights")
-    MappingJacksonValue getPetsByUserFood(@PathVariable(value = "userId") Long userId){
+    MappingJacksonValue getPetsByUserWeights(@PathVariable(value = "userId") Long userId){
         SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("appointments","medications",
                 "preventatives", "food", "vets", "petImage");
 
@@ -57,6 +57,24 @@ public class PetController {
 
         return  mappingJacksonValue;
     }
+
+    //get all pets with food from user
+    @GetMapping("/users/{userId}/pets/withFood")
+    MappingJacksonValue getPetsByUserFood(@PathVariable(value = "userId") Long userId){
+        SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("appointments", "medications", "preventatives",
+                "weights","vets","petImage");
+
+        FilterProvider filterProvider = new SimpleFilterProvider()
+                .addFilter("petFilter", simpleBeanPropertyFilter);
+
+        List<Pet> pets = petRepository.findByUserId(userId);
+
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(pets);
+        mappingJacksonValue.setFilters(filterProvider);
+
+        return  mappingJacksonValue;
+    }
+
 
     //finds pet from user and pet id
     @GetMapping("users/{userId}/pets/{petId}")

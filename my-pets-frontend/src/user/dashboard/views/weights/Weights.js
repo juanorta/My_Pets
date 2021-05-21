@@ -35,8 +35,8 @@ export default function Weights(props) {
 	const fetchWeights = () => {
 		getAllPetsWithWeights(currentUser.id)
 			.then((response) => {
-				console.log('PETS W/ WEIGHTS');
-				console.log(response);
+				// console.log('PETS W/ WEIGHTS');
+				// console.log(response);
 				sortWeights(response);
 			})
 			.catch((error) => {});
