@@ -55,6 +55,7 @@ export default function DashUpcomingPrev(props) {
 	const [upcomingPreventatives, setUpcomingPreventatives] = useState(
 		props.upcomingPreventatives
 	);
+	const [petPictures, setPetPictures] = useState(props.petPictures);
 
 	const columns = [
 		{
@@ -175,6 +176,21 @@ export default function DashUpcomingPrev(props) {
 		},
 	];
 
+	const findPictureById = (id) => {
+		console.log('hello');
+		for (var i = 0; i < petPictures.length; i++) {
+			if (petPictures[i].id == id) {
+				if (petPictures[i].petImage == null) {
+					return '';
+				}
+				//	console.log(petPictures[i].petImage.data);
+				else return petPictures[i].petImage.data;
+			} else {
+				//console.log('nah');
+			}
+		}
+	};
+
 	let rows = [];
 
 	for (let i = 0; i < upcomingPreventatives.length; i++) {
@@ -184,6 +200,10 @@ export default function DashUpcomingPrev(props) {
 		let date2 = moment(upcomingPreventatives[i].lastGiven).format(
 			'MM/DD/YYYY'
 		);
+
+		let picture = findPictureById(
+			upcomingPreventatives[i].petPreventativeId
+		);
 		rows[i] = {
 			id: upcomingPreventatives[i].id,
 			dueNext: date1,
@@ -192,7 +212,7 @@ export default function DashUpcomingPrev(props) {
 			type: upcomingPreventatives[i].type,
 			notes: upcomingPreventatives[i].notes,
 			petName: upcomingPreventatives[i].petName,
-			data: upcomingPreventatives[i].data,
+			data: picture,
 		};
 	}
 

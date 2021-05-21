@@ -97,7 +97,8 @@ export default function DashboardAppointments(props) {
 	};
 	// console.log(sortedAppointments);
 
-	// console.log(upcomingAppointments);
+	console.log('UMM APPTS');
+	console.log(upcomingAppointments);
 
 	// console.log(pastAppointments);
 	// console.log(new Date());

@@ -30,8 +30,8 @@ export default function Food(props) {
 	const fetchFood = () => {
 		getAllPetsWithWFood(currentUser.id)
 			.then((response) => {
-				console.log('PETS W/ FOOD');
-				console.log(response);
+				// console.log('PETS W/ FOOD');
+				// console.log(response);
 				sortFood(response);
 			})
 			.catch((error) => {});

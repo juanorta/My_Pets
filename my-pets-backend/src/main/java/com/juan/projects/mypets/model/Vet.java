@@ -1,6 +1,7 @@
 package com.juan.projects.mypets.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Vet {
     private String petName;
     private String petVetId;
     @Lob
+    @JsonIgnore
     private byte[] data;
 
     //creating relationship with pet

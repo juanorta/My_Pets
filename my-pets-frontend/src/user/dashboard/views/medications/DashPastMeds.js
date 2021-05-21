@@ -55,6 +55,7 @@ export default function DashCurrentMeds(props) {
 	const [pastMedications, setPastMedications] = useState(
 		props.pastMedications
 	);
+	const [petPictures, setPetPictures] = useState(props.petPictures);
 
 	const columns = [
 		{
@@ -160,11 +161,28 @@ export default function DashCurrentMeds(props) {
 		},
 	];
 
+	const findPictureById = (id) => {
+		console.log('hello');
+		for (var i = 0; i < petPictures.length; i++) {
+			if (petPictures[i].id == id) {
+				if (petPictures[i].petImage == null) {
+					return '';
+				}
+				//	console.log(petPictures[i].petImage.data);
+				else return petPictures[i].petImage.data;
+			} else {
+				//console.log('nah');
+			}
+		}
+	};
+
 	let rows = [];
 
 	for (let i = 0; i < pastMedications.length; i++) {
 		let date1 = moment(pastMedications[i].endDate).format('MM/DD/YYYY');
 		let date2 = moment(pastMedications[i].startDate).format('MM/DD/YYYY');
+		let picture = findPictureById(pastMedications[i].petMedId);
+
 		rows[i] = {
 			id: pastMedications[i].id,
 			endDate: date1,
@@ -172,7 +190,7 @@ export default function DashCurrentMeds(props) {
 			name: pastMedications[i].medicationName,
 			dosageInstructions: pastMedications[i].dosageInstructions,
 			petName: pastMedications[i].petName,
-			data: pastMedications[i].data,
+			data: picture,
 		};
 	}
 

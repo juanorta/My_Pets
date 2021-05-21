@@ -100,6 +100,42 @@ export function getAllPetsWithWFood(id) {
 	});
 }
 
+export function getAllPreventatives(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all preventatives function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/preventatives`,
+		method: 'GET',
+	});
+}
+
+export function getAllMedications(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all medications function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/medications`,
+		method: 'GET',
+	});
+}
+
+export function getAllVets(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all preventatives function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/vets`,
+		method: 'GET',
+	});
+}
+
 export async function addPet(id, age, breed, name, type, sex) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);

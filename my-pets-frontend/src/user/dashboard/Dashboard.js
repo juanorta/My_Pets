@@ -240,36 +240,45 @@ export default function Dashboard(props) {
 				/>
 			</Suspense>
 			<Suspense fallback={<div>Loading Preventatives...</div>}>
-				<Preventatives
-					forceUpdate={props.forceUpdate}
-					// currentUser={props.currentUser}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-					// upcomingPreventatives={upcomingPreventatives}
-					// pastPreventatives={pastPreventatives}
-				/>
+				{petPictures == '' ? null : (
+					<Preventatives
+						forceUpdate={props.forceUpdate}
+						currentUser={props.currentUser}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
+						petPictures={petPictures}
+						// upcomingPreventatives={upcomingPreventatives}
+						// pastPreventatives={pastPreventatives}
+					/>
+				)}
 			</Suspense>
 			<Suspense fallback={<div>Loading Medications...</div>}>
-				<Medications
-					forceUpdate={props.forceUpdate}
-					//currentUser={props.currentUser}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-					// currentMedications={currentMedications}
-					// pastMedications={pastMedications}
-				/>
+				{petPictures == '' ? null : (
+					<Medications
+						forceUpdate={props.forceUpdate}
+						currentUser={props.currentUser}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
+						petPictures={petPictures}
+						// currentMedications={currentMedications}
+						// pastMedications={pastMedications}
+					/>
+				)}
 			</Suspense>
 
 			<Suspense fallback={<div>Loading Vets...</div>}>
-				<Vets
-					forceUpdate={props.forceUpdate}
-					//currentUser={props.currentUser}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-				/>
+				{petPictures == '' ? null : (
+					<Vets
+						forceUpdate={props.forceUpdate}
+						currentUser={props.currentUser}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
+						petPictures={petPictures}
+					/>
+				)}
 			</Suspense>
 		</div>
 	);

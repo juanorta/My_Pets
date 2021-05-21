@@ -14,6 +14,7 @@ import {
 	mdiFoodDrumstick,
 	mdiScaleBathroom,
 } from '@mdi/js';
+import { getAllVets } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -52,14 +53,32 @@ const useStyles = makeStyles((theme) => ({
 export default function Vets(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
+	const [petPictures, setPetPictures] = useState(props.petPictures);
 
-	// const [vets, setVets] = useState(currentUser.vets);
+	const [vets, setVets] = useState('');
 	// console.log(vets);
+
+	useEffect(() => {
+		fetchVets();
+	}, []);
 
 	const SetOpenModalToFalse = () => {
 		// setOpenModal(false);
 		// setIsEditVet(false);
 		// setIsDeleteVet(false);
+	};
+
+	const fetchVets = () => {
+		getAllVets(currentUser.id)
+			.then((response) => {
+				console.log('ALL VETS');
+				console.log(response);
+				setVets(response);
+
+				// setPreventatives(response);
+				// sortPreventatives(response);
+			})
+			.catch((error) => {});
 	};
 
 	const columns = [
@@ -165,19 +184,35 @@ export default function Vets(props) {
 		},
 	];
 
+	const findPictureById = (id) => {
+		console.log('hello');
+		for (var i = 0; i < petPictures.length; i++) {
+			if (petPictures[i].id == id) {
+				if (petPictures[i].petImage == null) {
+					return '';
+				}
+				//	console.log(petPictures[i].petImage.data);
+				else return petPictures[i].petImage.data;
+			} else {
+				//console.log('nah');
+			}
+		}
+	};
+
 	let rows = [];
 
-	// for (let i = 0; i < vets.length; i++) {
-	// 	rows[i] = {
-	// 		id: vets[i].id,
-	// 		petName: vets[i].petName,
-	// 		vetName: vets[i].vetName,
-	// 		phoneNumber: vets[i].phoneNumber,
-	// 		location: vets[i].location,
-	// 		notes: vets[i].notes,
-	// 		data: vets[i].data,
-	// 	};
-	// }
+	for (let i = 0; i < vets.length; i++) {
+		let picture = findPictureById(vets[i].petVetId);
+		rows[i] = {
+			id: vets[i].id,
+			petName: vets[i].petName,
+			vetName: vets[i].vetName,
+			phoneNumber: vets[i].phoneNumber,
+			location: vets[i].location,
+			notes: vets[i].notes,
+			data: picture,
+		};
+	}
 	return (
 		<div className="food-main-container" id="vets">
 			<div className="title">

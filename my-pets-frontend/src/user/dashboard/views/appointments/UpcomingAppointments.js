@@ -74,8 +74,8 @@ export default function UpcomingAppointments(props) {
 	const [petPictures, setPetPictures] = useState(props.petPictures);
 
 	useEffect(() => {
-		console.log('PET PICS UPCOMING');
-		console.log(petPictures);
+		// console.log('PET PICS UPCOMING');
+		// console.log(petPictures);
 
 		setLoading(false);
 	}, []);

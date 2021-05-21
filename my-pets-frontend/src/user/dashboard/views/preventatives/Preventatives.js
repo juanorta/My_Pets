@@ -6,7 +6,10 @@ import Button from '@material-ui/core/Button';
 import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
-import { getAllAppointments } from '../../../../util/APIUtils';
+import {
+	getAllAppointments,
+	getAllPreventatives,
+} from '../../../../util/APIUtils';
 import { IconButton, TextField } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -69,63 +72,73 @@ export default function Preventatives(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	// const [pets, setPets] = useState(props.currentUser.pets);
-	// const [preventatives, setPreventatives] = useState(
-	// 	currentUser.preventatives
-	// );
+	const [preventatives, setPreventatives] = useState('');
 	const [upcomingClicked, setUpcomingClicked] = useState(true);
 	const [pastClicked, setPastClicked] = useState(false);
-	// const [upcomingPreventatives, setUpcomingPreventatives] = useState(
-	// 	props.upcomingPreventatives
-	// );
-	// const [pastPreventatives, setPastPreventatives] = useState(
-	// 	props.pastPreventatives
-	// );
+	const [upcomingPreventatives, setUpcomingPreventatives] = useState('');
+	const [pastPreventatives, setPastPreventatives] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [fromDash, setFromDash] = useState(true);
+	const [petPictures, setPetPictures] = useState(props.petPictures);
 
 	useEffect(() => {
-		// let sortedPreventatives = preventatives.slice();
-		// sortedPreventatives.sort(function compare(a, b) {
-		// 	var dateA = new Date(a.dueNext);
-		// 	var dateB = new Date(b.dueNext);
-		// 	return dateB - dateA;
-		// });
-		// var now = new Date();
-		// let upcomingArray = [];
-		// let pastArray = [];
-		// let j = 0;
-		// let k = 0;
-		// for (var i = 0; i < sortedPreventatives.length; i++) {
-		// 	var newDate = moment(sortedPreventatives[i].dueNext).toDate();
-		// 	var sameDate = moment(sortedPreventatives[i].dueNext).format(
-		// 		'MM/DD/YYYY'
-		// 	);
-		// 	var todayFormatted = moment(now).format('MM/DD/YYYY');
-		// 	// console.log(newDate);
-		// 	if (newDate > now) {
-		// 		// console.log('UPCOMING');
-		// 		// console.log(newDate);
-		// 		upcomingArray[j] = sortedPreventatives[i];
-		// 		j++;
-		// 	} else if (sameDate == todayFormatted) {
-		// 		// console.log('SAME');
-		// 		// console.log(newDate);
-		// 		upcomingArray[j] = sortedPreventatives[i];
-		// 		j++;
-		// 	} else {
-		// 		// console.log('PAST');
-		// 		// console.log(newDate);
-		// 		pastArray[k] = sortedPreventatives[i];
-		// 		k++;
-		// 	}
-		// }
-		// // console.log(sortedPreventatives);
-		// // console.log(upcomingArray);
-		// // console.log(pastArray);
-		// setUpcomingPreventatives(upcomingArray);
-		// setPastPreventatives(pastArray);
-		// setLoading(false);
+		fetchPreventatives();
 	}, []);
+
+	const fetchPreventatives = () => {
+		getAllPreventatives(currentUser.id)
+			.then((response) => {
+				// console.log('ALL PREVENTATIVES');
+				// console.log(response);
+				setPreventatives(response);
+				sortPreventatives(response);
+			})
+			.catch((error) => {});
+	};
+
+	const sortPreventatives = (preventatives) => {
+		let sortedPreventatives = preventatives.slice();
+		sortedPreventatives.sort(function compare(a, b) {
+			var dateA = new Date(a.dueNext);
+			var dateB = new Date(b.dueNext);
+			return dateB - dateA;
+		});
+		var now = new Date();
+		let upcomingArray = [];
+		let pastArray = [];
+		let j = 0;
+		let k = 0;
+		for (var i = 0; i < sortedPreventatives.length; i++) {
+			var newDate = moment(sortedPreventatives[i].dueNext).toDate();
+			var sameDate = moment(sortedPreventatives[i].dueNext).format(
+				'MM/DD/YYYY'
+			);
+			var todayFormatted = moment(now).format('MM/DD/YYYY');
+			// console.log(newDate);
+			if (newDate > now) {
+				// console.log('UPCOMING');
+				// console.log(newDate);
+				upcomingArray[j] = sortedPreventatives[i];
+				j++;
+			} else if (sameDate == todayFormatted) {
+				// console.log('SAME');
+				// console.log(newDate);
+				upcomingArray[j] = sortedPreventatives[i];
+				j++;
+			} else {
+				// console.log('PAST');
+				// console.log(newDate);
+				pastArray[k] = sortedPreventatives[i];
+				k++;
+			}
+		}
+		// console.log(sortedPreventatives);
+		// console.log(upcomingArray);
+		// console.log(pastArray);
+		setUpcomingPreventatives(upcomingArray);
+		setPastPreventatives(pastArray);
+		setLoading(false);
+	};
 
 	const upcomingClickedHandler = () => {
 		setUpcomingClicked(true);
@@ -165,18 +178,20 @@ export default function Preventatives(props) {
 				</li>
 			</ul>
 
-			{/* {upcomingClicked && loading === false ? (
+			{upcomingClicked && loading === false ? (
 				<DashUpcomingPrev
 					currentUser={currentUser}
 					upcomingPreventatives={upcomingPreventatives}
+					petPictures={props.petPictures}
 				/>
 			) : null}
 			{pastClicked && loading === false ? (
 				<DashPastPrev
 					currentUser={currentUser}
 					pastPreventatives={pastPreventatives}
+					petPictures={props.petPictures}
 				/>
-			) : null} */}
+			) : null}
 
 			{/* <div
 				className="appointments-table"

@@ -57,6 +57,9 @@ export default function Pets(props) {
 					<div style={{ marginLeft: '1rem' }}>
 						<h2>Loading Pets...</h2>
 						<h2>Loading Appointments...</h2>
+						<h2>Loading Preventatives...</h2>
+						<h2>Loading Medications...</h2>
+						<h2>Loading Veterinarians...</h2>
 					</div>
 				) : (
 					<PetList

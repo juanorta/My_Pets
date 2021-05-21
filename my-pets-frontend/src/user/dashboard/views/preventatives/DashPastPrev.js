@@ -55,6 +55,7 @@ export default function DashPastPrev(props) {
 	const [pastPreventatives, setPastPreventatives] = useState(
 		props.pastPreventatives
 	);
+	const [petPictures, setPetPictures] = useState(props.petPictures);
 
 	const columns = [
 		{
@@ -175,11 +176,27 @@ export default function DashPastPrev(props) {
 		},
 	];
 
+	const findPictureById = (id) => {
+		console.log('hello');
+		for (var i = 0; i < petPictures.length; i++) {
+			if (petPictures[i].id == id) {
+				if (petPictures[i].petImage == null) {
+					return '';
+				}
+				//	console.log(petPictures[i].petImage.data);
+				else return petPictures[i].petImage.data;
+			} else {
+				//console.log('nah');
+			}
+		}
+	};
+
 	let rows = [];
 
 	for (let i = 0; i < pastPreventatives.length; i++) {
 		let date1 = moment(pastPreventatives[i].dueNext).format('MM/DD/YYYY');
 		let date2 = moment(pastPreventatives[i].lastGiven).format('MM/DD/YYYY');
+		let picture = findPictureById(pastPreventatives[i].petPreventativeId);
 		rows[i] = {
 			id: pastPreventatives[i].id,
 			dueNext: date1,
@@ -188,7 +205,7 @@ export default function DashPastPrev(props) {
 			type: pastPreventatives[i].type,
 			notes: pastPreventatives[i].notes,
 			petName: pastPreventatives[i].petName,
-			data: pastPreventatives[i].data,
+			data: picture,
 		};
 	}
 
