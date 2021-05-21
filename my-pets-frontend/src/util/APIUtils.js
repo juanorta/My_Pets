@@ -279,8 +279,7 @@ export async function editAppointment(
 	vetOrGroomerName,
 	notes,
 	petName,
-	petAptId,
-	pictureData
+	petAptId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log('edit appointment function called');
@@ -306,10 +305,12 @@ export async function editAppointment(
 				notes: notes,
 				petName: petName,
 				petAptId: petAptId,
-				data: pictureData,
 			}),
 		}
-	);
+	).then((response) => {
+		console.log('EDIT APPOINTMENT FINISHED');
+		console.log(response);
+	});
 }
 
 export async function deleteAppointment(id, petId, apptId) {

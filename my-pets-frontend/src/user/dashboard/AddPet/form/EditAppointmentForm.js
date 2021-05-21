@@ -271,8 +271,7 @@ export default function AddPetForm(props) {
 			vetOrGroomerName,
 			notes,
 			pet.petName,
-			petAptId,
-			pictureData
+			petAptId
 		);
 		props.handleClose();
 		Alert.success('Appointment Edited');
