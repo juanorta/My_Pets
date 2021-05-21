@@ -71,8 +71,12 @@ export default function UpcomingAppointments(props) {
 	);
 
 	const [loading, setLoading] = useState(true);
+	const [petPictures, setPetPictures] = useState(props.petPictures);
 
 	useEffect(() => {
+		console.log('PET PICS UPCOMING');
+		console.log(petPictures);
+
 		setLoading(false);
 	}, []);
 
@@ -216,16 +220,41 @@ export default function UpcomingAppointments(props) {
 	//loading each row with a pet appointment object
 
 	//only complete when the component finishes loading
+
+	//if i have a hash set with key = petid, and value = data,
+	//Picture: set.lookup(petId)
+
+	const findPictureById = (id) => {
+		console.log('hello');
+		for (var i = 0; i < petPictures.length; i++) {
+			if (petPictures[i].id == id) {
+				if (petPictures[i].petImage == null) {
+					return '';
+				}
+				//	console.log(petPictures[i].petImage.data);
+				else return petPictures[i].petImage.data;
+			} else {
+				//console.log('nah');
+			}
+		}
+	};
+
+	console.log('UPCOMING APPTS');
+	console.log(upcomingAppointments);
+
 	let rows = [];
 	if (loading === false) {
 		for (let i = 0; i < upcomingAppointments.length; i++) {
 			let date = moment(upcomingAppointments[i].date).format(
 				'MM/DD/YYYY'
 			);
+
+			let picture = findPictureById(upcomingAppointments[i].petAptId);
+
 			rows[i] = {
 				id: i,
 				Date: date,
-				Picture: upcomingAppointments[i].data,
+				Picture: picture,
 				Pet: upcomingAppointments[i].petName,
 				Time:
 					upcomingAppointments[i].time +

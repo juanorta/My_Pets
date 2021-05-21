@@ -71,6 +71,7 @@ export default function PastAppointments(props) {
 	);
 
 	const [loading, setLoading] = useState(true);
+	const [petPictures, setPetPictures] = useState(props.petPictures);
 
 	useEffect(() => {
 		setLoading(false);
@@ -213,6 +214,21 @@ export default function PastAppointments(props) {
 		},
 	];
 
+	const findPictureById = (id) => {
+		console.log('hello');
+		for (var i = 0; i < petPictures.length; i++) {
+			if (petPictures[i].id == id) {
+				if (petPictures[i].petImage == null) {
+					return '';
+				}
+				//	console.log(petPictures[i].petImage.data);
+				else return petPictures[i].petImage.data;
+			} else {
+				//console.log('nah');
+			}
+		}
+	};
+
 	//loading each row with a pet appointment object
 
 	//only complete when the component finishes loading
@@ -220,10 +236,11 @@ export default function PastAppointments(props) {
 	if (loading === false) {
 		for (let i = 0; i < pastAppointments.length; i++) {
 			let date = moment(pastAppointments[i].date).format('MM/DD/YYYY');
+			let picture = findPictureById(pastAppointments[i].petAptId);
 			rows[i] = {
 				id: i,
 				Date: date,
-				Picture: pastAppointments[i].data,
+				Picture: picture,
 				Pet: pastAppointments[i].petName,
 				Time: pastAppointments[i].time + pastAppointments[i].amOrPm,
 				Type: pastAppointments[i].type,

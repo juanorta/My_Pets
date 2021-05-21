@@ -1,6 +1,8 @@
 package com.juan.projects.mypets.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +32,9 @@ public class Appointment {
     //used to identify which pet is associated with which appointment in dashboard
     private String petName;
     private String petAptId;
+
     @Lob
+    @JsonIgnore
     private byte[] data;
 
 

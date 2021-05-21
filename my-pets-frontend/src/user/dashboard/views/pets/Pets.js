@@ -12,16 +12,40 @@ import { getAllAppointments, getAllPets } from '../../../../util/APIUtils';
 export default function Pets(props) {
 	const [loading, setLoading] = useState(true);
 	const [pets, setPets] = useState('');
+
+	// var obj = {
+	// 	54: 'hey',
+	// 	46: 'yooo',
+	// 	23: 'ok',
+	// };
+
+	// console.log(obj[46]);
+
 	useEffect(() => {
 		getAllPets(props.currentUser.id)
 			.then((response) => {
-				console.log('ALL PETS');
-				console.log(response);
+				// console.log('ALL PETS');
+				// console.log(response);
+				props.getPetPics(response);
 				setPets(response);
 				setLoading(false);
 			})
 			.catch((error) => {});
 	}, []);
+
+	const savePictures = (response) => {
+		let petPictures = [];
+		let obj = {};
+		for (var i = 0; i < response.length; i++) {
+			// console.log(response[i].petImage.data);
+			obj.id = response[i].id;
+			obj.data = response[i].petImage.data;
+		}
+
+		console.log('pet pics');
+		console.log(obj);
+	};
+
 	// console.log(props);
 	return (
 		<div className="pets-main-container" id="pets">
@@ -30,7 +54,10 @@ export default function Pets(props) {
 			</div>
 			<div className="table-container">
 				{loading ? (
-					<h2>Loading pets...</h2>
+					<div style={{ marginLeft: '1rem' }}>
+						<h2>Loading Pets...</h2>
+						<h2>Loading Appointments...</h2>
+					</div>
 				) : (
 					<PetList
 						forceUpdate={props.forceUpdate}

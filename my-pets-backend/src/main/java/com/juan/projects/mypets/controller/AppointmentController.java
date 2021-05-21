@@ -35,6 +35,8 @@ public class AppointmentController {
         return appointmentRepository.findByUserId(userId);
     }
 
+
+
     //add appointment
     @PostMapping("/users/{userId}/pets/{petId}/addAppointment")
     public Appointment createAppointment(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId, @RequestBody Appointment appointment){

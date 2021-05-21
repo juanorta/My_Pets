@@ -22,6 +22,8 @@ export default function DashboardAppointments(props) {
 		props.pastAppointments
 	);
 
+	const [petPictures, setPetPictures] = useState(props.petPictures);
+
 	useEffect(() => {
 		fetchAppointments();
 	}, []);
@@ -29,6 +31,7 @@ export default function DashboardAppointments(props) {
 	const fetchAppointments = () => {
 		getAllAppointments(currentUser.id)
 			.then((response) => {
+				console.log('NEW APPOINTMENTS');
 				console.log(response);
 				sortAppointments(response);
 			})
@@ -98,6 +101,9 @@ export default function DashboardAppointments(props) {
 
 	// console.log(pastAppointments);
 	// console.log(new Date());
+
+	console.log('PET PICS DASH');
+	console.log(petPictures);
 	return (
 		<div className="food-main-container" id="appointments">
 			<div className="title">
@@ -137,6 +143,7 @@ export default function DashboardAppointments(props) {
 				<div>
 					{upcomingClicked === true ? (
 						<UpcomingAppointments
+							petPictures={props.petPictures}
 							currentUser={currentUser}
 							upcomingAppointments={upcomingAppointments}
 						/>
@@ -144,6 +151,7 @@ export default function DashboardAppointments(props) {
 
 					{pastClicked === true ? (
 						<PastAppointments
+							petPictures={props.petPictures}
 							currentUser={currentUser}
 							pastAppointments={pastAppointments}
 						/>

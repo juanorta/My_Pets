@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import './Dashboard.css';
-import { addPet } from '../../util/APIUtils';
+import { addPet, getPet } from '../../util/APIUtils';
 import Alert from 'react-s-alert';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -73,6 +73,7 @@ export default function Dashboard(props) {
 	//const [medications, setMedications] = useState(currentUser.medications);
 	const [currentMedications, setCurrentMedications] = useState('');
 	const [pastMedications, setPastMedications] = useState('');
+	const [petPictures, setPetPictures] = useState('');
 
 	useEffect(() => {
 		// sortAppointments();
@@ -81,51 +82,11 @@ export default function Dashboard(props) {
 		// setLoading(false);
 	}, []);
 
-	// const sortAppointments = () => {
-	// 	let sortedAppointmentsArray = appointments.slice();
-	// 	sortedAppointmentsArray.sort(function compare(a, b) {
-	// 		var dateA = new Date(a.date);
-	// 		var dateB = new Date(b.date);
-	// 		return dateB - dateA;
-	// 	});
-	// 	// console.log(sortedAppointmentsArray);
-
-	// 	//putting appointments in 'upcoming' or 'past' arrays
-	// 	var now = new Date();
-	// 	let upcomingArray = [];
-	// 	let pastArray = [];
-	// 	let j = 0;
-	// 	let k = 0;
-	// 	for (var i = 0; i < sortedAppointmentsArray.length; i++) {
-	// 		var newDate = moment(sortedAppointmentsArray[i].date).toDate();
-	// 		var sameDate = moment(sortedAppointmentsArray[i].date).format(
-	// 			'MM/DD/YYYY'
-	// 		);
-	// 		var todayFormatted = moment(now).format('MM/DD/YYYY');
-	// 		// console.log(newDate);
-	// 		if (newDate > now) {
-	// 			// console.log('UPCOMING');
-	// 			// console.log(newDate);
-	// 			upcomingArray[j] = sortedAppointmentsArray[i];
-	// 			j++;
-	// 		} else if (sameDate == todayFormatted) {
-	// 			// console.log('SAME');
-	// 			// console.log(newDate);
-	// 			upcomingArray[j] = sortedAppointmentsArray[i];
-	// 			j++;
-	// 		} else {
-	// 			// console.log('PAST');
-	// 			// console.log(newDate);
-	// 			pastArray[k] = sortedAppointmentsArray[i];
-	// 			k++;
-	// 		}
-
-	// 		setUpcomingAppointments(upcomingArray);
-	// 		setPastAppointments(pastArray);
-	// 		setSortedAppointments(sortedAppointmentsArray);
-	// 		// setLoading(false);
-	// 	}
-	// };
+	const getPetPics = (pictures) => {
+		// console.log('getting pet picks');
+		// console.log(pictures);
+		setPetPictures(pictures);
+	};
 
 	// const sortPreventatives = () => {
 	// 	let sortedPreventatives = preventatives.slice();
@@ -225,6 +186,9 @@ export default function Dashboard(props) {
 	// console.log(props);
 	// console.log('weight object dash');
 	// console.log(weightObjects);
+
+	// console.log('PET PICTURES');
+	// console.log(petPictures);
 	return (
 		<div
 			className="dashboard-main-container"
@@ -245,15 +209,19 @@ export default function Dashboard(props) {
 			<Pets
 				forceUpdate={props.forceUpdate}
 				currentUser={props.currentUser}
+				getPetPics={getPetPics}
 			/>
 
 			<Suspense fallback={<div>Loading Appointments...</div>}>
-				<DashboardAppointments
-					// upcomingAppointments={upcomingAppointments}
-					// pastAppointments={pastAppointments}
-					forceUpdate={props.forceUpdate}
-					currentUser={props.currentUser}
-				/>
+				{petPictures == '' ? null : (
+					<DashboardAppointments
+						// upcomingAppointments={upcomingAppointments}
+						// pastAppointments={pastAppointments}
+						forceUpdate={props.forceUpdate}
+						currentUser={props.currentUser}
+						petPictures={petPictures}
+					/>
+				)}
 			</Suspense>
 
 			<Suspense fallback={<div>Loading Weights...</div>}>
