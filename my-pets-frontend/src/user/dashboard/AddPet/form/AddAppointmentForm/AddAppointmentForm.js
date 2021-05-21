@@ -279,8 +279,7 @@ export default function AddPetForm(props) {
 			vetOrGroomerName,
 			notes,
 			petName,
-			petAptId,
-			pictureData
+			petAptId
 		);
 
 		Alert.success('Appointment Added');
@@ -442,7 +441,16 @@ export default function AddPetForm(props) {
 						/>
 					</div>
 				)}
-
+				<TextField
+					onChange={onReasonChange}
+					className={Textfield1}
+					variant="standard"
+					inputProps={{
+						style: { textAlign: 'center' },
+					}}
+					id="standard-basic"
+					label="Reason"
+				/>
 				<TextField
 					onChange={onVetOrGroomerChange}
 					className={Textfield1}

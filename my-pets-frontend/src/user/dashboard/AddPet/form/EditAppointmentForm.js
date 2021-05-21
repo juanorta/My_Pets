@@ -432,6 +432,17 @@ export default function AddPetForm(props) {
 				)}
 
 				<TextField
+					onChange={onReasonChange}
+					className={Textfield1}
+					variant="standard"
+					inputProps={{
+						style: { textAlign: 'center' },
+					}}
+					id="standard-basic"
+					label="Reason"
+					value={reason}
+				/>
+				<TextField
 					onChange={onVetOrGroomerChange}
 					className={Textfield1}
 					variant="standard"
