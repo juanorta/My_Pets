@@ -15,7 +15,8 @@ export default function Pets(props) {
 	useEffect(() => {
 		getAllPets(props.currentUser.id)
 			.then((response) => {
-				// console.log('ALL PETS');
+				console.log('ALL PETS');
+				console.log(response);
 				setPets(response);
 				setLoading(false);
 			})

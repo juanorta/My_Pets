@@ -1,6 +1,7 @@
 package com.juan.projects.mypets.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Entity
+@JsonFilter("petFilter")
 public class Pet {
     @Id
     @GeneratedValue
@@ -59,11 +61,11 @@ public class Pet {
 
     //creating relationship with appointments
     @OneToMany(mappedBy = "pet", orphanRemoval = true)
-    @JsonIgnore
+//    @JsonIgnore
     private List<Appointment> appointments;
 
     @JsonManagedReference(value = "pet-appt")
-    @JsonIgnore
+//    @JsonIgnore
     public List<Appointment> getAppointments(){
         return appointments;
     }
@@ -74,11 +76,11 @@ public class Pet {
 
     //creating relationships with weights
     @OneToMany(mappedBy = "pet", orphanRemoval = true)
-    @JsonIgnore
+//    @JsonIgnore
     public List<Weight> weights;
 
     @JsonManagedReference(value = "pet-weight")
-    @JsonIgnore
+//    @JsonIgnore
     public List<Weight> getWeights(){
         return weights;
     }
@@ -89,11 +91,11 @@ public class Pet {
 
     //creating relationship with food
     @OneToMany(mappedBy = "pet", orphanRemoval = true)
-    @JsonIgnore
+//    @JsonIgnore
     public List<Food> food;
 
     @JsonManagedReference(value = "pet-food")
-    @JsonIgnore
+//    @JsonIgnore
     public List<Food> getFood(){
         return food;
     }
@@ -104,11 +106,11 @@ public class Pet {
 
     //creating relationship with preventative
     @OneToMany(mappedBy = "pet", orphanRemoval = true)
-    @JsonIgnore
+//    @JsonIgnore
     public List<Preventative> preventatives;
 
     @JsonManagedReference(value = "pet-preventative")
-    @JsonIgnore
+//    @JsonIgnore
     public List<Preventative> getPreventatives(){
         return preventatives;
     }
@@ -119,11 +121,11 @@ public class Pet {
 
     //creating relationship with medication
     @OneToMany(mappedBy = "pet", orphanRemoval = true)
-    @JsonIgnore
+//    @JsonIgnore
     public List<Medication> medications;
 
     @JsonManagedReference(value = "pet-medication")
-    @JsonIgnore
+//    @JsonIgnore
     public List<Medication> getMedications(){
         return medications;
     }
@@ -134,11 +136,11 @@ public class Pet {
 
     //creating relationship with vet
     @OneToMany(mappedBy = "pet", orphanRemoval =true)
-    @JsonIgnore
+//    @JsonIgnore
     public List<Vet> vets;
 
     @JsonManagedReference(value = "pet-vet")
-    @JsonIgnore
+//    @JsonIgnore
     public List<Vet> getVets(){return vets;}
 
     public void setVets(List<Vet> vets){

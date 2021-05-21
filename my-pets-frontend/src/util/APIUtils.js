@@ -76,6 +76,18 @@ export function getAllPets(id) {
 	});
 }
 
+export function getAllPetsWithWeights(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all pets function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/withWeights`,
+		method: 'GET',
+	});
+}
+
 export async function addPet(id, age, breed, name, type, sex) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);
