@@ -221,8 +221,7 @@ export default function AddMedicationForm(props) {
 			location,
 			notes,
 			pet.petName,
-			pet.id,
-			petImage
+			pet.id
 		);
 		props.handleClose();
 		Alert.success('Vet Added');

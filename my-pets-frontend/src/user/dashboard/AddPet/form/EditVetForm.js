@@ -221,8 +221,7 @@ export default function EditVetForm(props) {
 			location,
 			notes,
 			pet.petName,
-			pet.id,
-			petImage
+			pet.id
 		);
 		props.handleClose();
 		Alert.success('Vet Edited!');

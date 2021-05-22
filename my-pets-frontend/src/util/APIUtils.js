@@ -874,8 +874,7 @@ export async function addVet(
 	location,
 	notes,
 	petName,
-	petVetId,
-	data
+	petVetId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 
@@ -906,8 +905,7 @@ export async function editVet(
 	location,
 	notes,
 	petName,
-	petVetId,
-	data
+	petVetId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 

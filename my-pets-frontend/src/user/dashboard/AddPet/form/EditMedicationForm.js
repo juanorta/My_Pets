@@ -244,8 +244,7 @@ export default function EditMedicationForm(props) {
 			endDate,
 			dosageInstructions,
 			pet.petName,
-			pet.id,
-			petImage
+			pet.id
 		);
 
 		Alert.success('Medication Added');
