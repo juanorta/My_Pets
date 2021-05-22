@@ -214,7 +214,7 @@ export default function Vets(props) {
 		};
 	}
 	return (
-		<div className="food-main-container" id="vets">
+		<div className="food-main-container vets" id="vets">
 			<div className="title">
 				<h1>Veterinarians</h1>
 			</div>

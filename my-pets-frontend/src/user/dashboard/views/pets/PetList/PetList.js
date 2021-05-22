@@ -42,8 +42,9 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: 6,
 	},
 	paperSmall: {
-		height: 400,
-		width: 380,
+		height: 360,
+		// width: '90%',
+		width: 340,
 		display: 'inline-block',
 		margin: '1rem',
 		transition: 'all 0.2s ease-in-out',
@@ -196,6 +197,7 @@ export default function PetList(props) {
 											data-tip
 											data-for="viewTip"
 											style={{ color: '#FF4F00' }}
+											className="view-profile-button"
 										>
 											<VisibilityIcon />
 										</Button>

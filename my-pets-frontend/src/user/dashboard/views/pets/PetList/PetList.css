@@ -105,14 +105,31 @@ h4 {
 
 	.card-options {
 		background-color: transparent;
+		text-align: center;
+		/* overflow: auto; */
 	}
 
 	.card-options Button {
 		background-color: transparent;
-		margin-left: 2.75rem;
-		margin-top: 2rem;
+		/* margin-left: 2.75rem;
+		margin-top: 2rem; */
+		/* display: inline-flex; */
+		margin: 0 auto;
+		margin-left: 2rem;
+		margin-top: 1.5rem;
 		/* margin-left: 2.5rem;
 		margin-top: 2.5rem; */
+	}
+
+	/* .view-profile-button {
+		margin-left: 2rem;
+	} */
+
+	.buttons {
+		background-color: transparent;
+		width: 100%;
+		z-index: 1000;
+		margin-left: -1rem;
 	}
 
 	h4 {

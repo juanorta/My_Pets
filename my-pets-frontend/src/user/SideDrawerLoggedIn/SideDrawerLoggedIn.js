@@ -278,7 +278,7 @@ export default function SideDrawerLoggedIn(props) {
 				</div>
 
 				<List>
-					{window.innerWidth < 768 ? (
+					{/* {window.innerWidth < 768 ? (
 						<div>
 							<ListItem style={{ color: 'white' }}>
 								<ListItemIcon>
@@ -296,15 +296,7 @@ export default function SideDrawerLoggedIn(props) {
 							</ListItem>
 							<Divider style={{ backgroundColor: '#FF4F00' }} />
 						</div>
-					) : null}
-					<NavLink to="/" className="navlink">
-						<ListItem button className={clsx(classes.menuContents)}>
-							<ListItemIcon style={{ color: 'white' }}>
-								<HomeIcon />
-							</ListItemIcon>
-							Home
-						</ListItem>
-					</NavLink>
+					) : null} */}
 
 					<Link
 						activeClass="active"
@@ -477,7 +469,7 @@ export default function SideDrawerLoggedIn(props) {
 						to="vets"
 						smooth={true}
 						duration={500}
-						offset={-60}
+						offset={-30}
 						onSetActive={() => {
 							setVetsMenuItem(classes.contentsActive);
 						}}

@@ -1,3 +1,8 @@
 .spacer {
 	height: 8rem;
 }
+
+.food-main-container.vets {
+	background-color: transparent;
+	height: 100vh;
+}
