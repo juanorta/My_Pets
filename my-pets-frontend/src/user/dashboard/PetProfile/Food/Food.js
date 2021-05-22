@@ -92,7 +92,7 @@ export default function Food(props) {
 				</ul>
 			</div>
 			{loading ? (
-				<h2>Loading food...</h2>
+				<h2 className="loading">Loading food...</h2>
 			) : (
 				<div>
 					{tableViewSelected ? (

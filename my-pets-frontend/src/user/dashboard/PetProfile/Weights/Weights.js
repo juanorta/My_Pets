@@ -109,7 +109,7 @@ export default function Weights(props) {
 			</div>
 
 			{loading ? (
-				<h2>Loading Weights...</h2>
+				<h2 className="loading">Loading Weights...</h2>
 			) : (
 				<div>
 					{graphViewSelected ? (

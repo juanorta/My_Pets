@@ -216,7 +216,7 @@ export default function Vets(props) {
 				}}
 			>
 				{loading ? (
-					<h2>Loading vets...</h2>
+					<h2 className="loading">Loading vets...</h2>
 				) : (
 					<DataGrid
 						rows={rows}

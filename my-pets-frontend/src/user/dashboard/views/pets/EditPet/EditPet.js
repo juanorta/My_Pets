@@ -379,30 +379,16 @@ export default function EditPet(props) {
 							<MenuItem value={'Male'}>Male</MenuItem>
 							<MenuItem value={'Female'}>Female</MenuItem>
 						</Select>
-						<InputLabel
-							className={inputLabel}
-							id="demo-controlled-open-select-label"
-						>
-							Age
-						</InputLabel>
-						<Select
+						<TextField
+							style={{ marginTop: '1.25rem' }}
+							type="number"
+							label="Age (yrs)"
 							className={selectDropdown}
 							labelId="demo-controlled-open-select-label"
 							id="demo-controlled-open-select"
 							onChange={onAgeChange}
 							value={age}
-						>
-							<MenuItem value={1}>1</MenuItem>
-							<MenuItem value={2}>2</MenuItem>
-							<MenuItem value={3}>3</MenuItem>
-							<MenuItem value={4}>4</MenuItem>
-							<MenuItem value={5}>5</MenuItem>
-							<MenuItem value={6}>6</MenuItem>
-							<MenuItem value={7}>7</MenuItem>
-							<MenuItem value={8}>8</MenuItem>
-							<MenuItem value={9}>9</MenuItem>
-							<MenuItem value={10}>10</MenuItem>
-						</Select>
+						></TextField>
 					</div>
 				) : (
 					<div>
@@ -425,30 +411,14 @@ export default function EditPet(props) {
 							</Select>
 						</FormControl>
 						<FormControl className={classes.formControl}>
-							<InputLabel
-								className={inputLabel}
-								id="demo-controlled-open-select-label"
-							>
-								Age
-							</InputLabel>
-							<Select
+							<TextField
+								type="number"
+								label="Age (yrs)"
 								className={selectDropdown}
 								labelId="demo-controlled-open-select-label"
 								id="demo-controlled-open-select"
 								onChange={onAgeChange}
-								value={age}
-							>
-								<MenuItem value={1}>1</MenuItem>
-								<MenuItem value={2}>2</MenuItem>
-								<MenuItem value={3}>3</MenuItem>
-								<MenuItem value={4}>4</MenuItem>
-								<MenuItem value={5}>5</MenuItem>
-								<MenuItem value={6}>6</MenuItem>
-								<MenuItem value={7}>7</MenuItem>
-								<MenuItem value={8}>8</MenuItem>
-								<MenuItem value={9}>9</MenuItem>
-								<MenuItem value={10}>10</MenuItem>
-							</Select>
+							></TextField>
 						</FormControl>
 					</div>
 				)}

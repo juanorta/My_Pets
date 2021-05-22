@@ -141,7 +141,7 @@ export default function Preventatives(props) {
 			</div>
 
 			{loading ? (
-				<h2>Loading Preventatives...</h2>
+				<h2 className="loading">Loading Preventatives...</h2>
 			) : (
 				<div>
 					{upcomingViewSelected ? (

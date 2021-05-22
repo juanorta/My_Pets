@@ -30,6 +30,14 @@
 	cursor: pointer;
 }
 
+.loading {
+	background-color: transparent;
+	width: 70%;
+
+	margin: 0 auto;
+	margin-top: 5rem;
+}
+
 @media only screen and (max-width: 600px) {
 	.weights-title {
 		background-color: transparent !important;

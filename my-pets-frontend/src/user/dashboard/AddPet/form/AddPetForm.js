@@ -15,7 +15,12 @@ import {
 	KeyboardTimePicker,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { addPet, addPetImage, getCurrentUser } from '../../../../util/APIUtils';
+import {
+	addPet,
+	addPetImage,
+	getCurrentUser,
+	getAllPets,
+} from '../../../../util/APIUtils';
 import Alert from 'react-s-alert';
 import PublishIcon from '@material-ui/icons/Publish';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -272,14 +277,14 @@ export default function AddPetForm(props) {
 		// addPetImage(1, 109, image);
 		addPet(id, age, breed, name, petType, sex);
 		setTimeout(() => {
-			getCurrentUser()
+			getAllPets(id)
 				.then((response) => {
 					console.log(response);
-					console.log(response.pets.length);
+					console.log(response.length);
 					if (image != '') {
 						addPetImage(
 							id,
-							response.pets[response.pets.length - 1].id,
+							response[response.length - 1].id,
 							image
 						);
 
@@ -367,29 +372,15 @@ export default function AddPetForm(props) {
 							<MenuItem value={'Female'}>Female</MenuItem>
 						</Select>
 
-						<InputLabel
-							className={inputLabel}
-							id="demo-controlled-open-select-label"
-						>
-							Age
-						</InputLabel>
-						<Select
+						<TextField
+							style={{ marginTop: '1.25rem' }}
+							type="number"
+							label="Age (yrs)"
 							className={selectDropdown}
 							labelId="demo-controlled-open-select-label"
 							id="demo-controlled-open-select"
 							onChange={onAgeChange}
-						>
-							<MenuItem value={1}>1</MenuItem>
-							<MenuItem value={2}>2</MenuItem>
-							<MenuItem value={3}>3</MenuItem>
-							<MenuItem value={4}>4</MenuItem>
-							<MenuItem value={5}>5</MenuItem>
-							<MenuItem value={6}>6</MenuItem>
-							<MenuItem value={7}>7</MenuItem>
-							<MenuItem value={8}>8</MenuItem>
-							<MenuItem value={9}>9</MenuItem>
-							<MenuItem value={10}>10</MenuItem>
-						</Select>
+						></TextField>
 					</div>
 				) : (
 					<div>
@@ -411,29 +402,20 @@ export default function AddPetForm(props) {
 							</Select>
 						</FormControl>
 						<FormControl className={classes.formControl}>
-							<InputLabel
+							{/* <InputLabel
 								className={inputLabel}
 								id="demo-controlled-open-select-label"
 							>
 								Age
-							</InputLabel>
-							<Select
+							</InputLabel> */}
+							<TextField
+								type="number"
+								label="Age (yrs)"
 								className={selectDropdown}
 								labelId="demo-controlled-open-select-label"
 								id="demo-controlled-open-select"
 								onChange={onAgeChange}
-							>
-								<MenuItem value={1}>1</MenuItem>
-								<MenuItem value={2}>2</MenuItem>
-								<MenuItem value={3}>3</MenuItem>
-								<MenuItem value={4}>4</MenuItem>
-								<MenuItem value={5}>5</MenuItem>
-								<MenuItem value={6}>6</MenuItem>
-								<MenuItem value={7}>7</MenuItem>
-								<MenuItem value={8}>8</MenuItem>
-								<MenuItem value={9}>9</MenuItem>
-								<MenuItem value={10}>10</MenuItem>
-							</Select>
+							></TextField>
 						</FormControl>
 					</div>
 				)}

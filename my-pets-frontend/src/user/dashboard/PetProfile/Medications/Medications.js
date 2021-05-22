@@ -134,7 +134,7 @@ export default function Medications(props) {
 			</div>
 
 			{loading ? (
-				<h2>Loading Medications...</h2>
+				<h2 className="loading">Loading Medications...</h2>
 			) : (
 				<div>
 					{currentViewSelected ? (
