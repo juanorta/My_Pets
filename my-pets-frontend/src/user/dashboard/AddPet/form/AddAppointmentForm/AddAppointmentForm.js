@@ -472,7 +472,7 @@ export default function AddPetForm(props) {
 					// value={value}
 					// onChange={handleChange}
 				/>
-				<div className="button-group">
+				<div className="button-group appointments">
 					<Button
 						variant="contained"
 						onClick={props.handleClose}

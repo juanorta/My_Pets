@@ -74,7 +74,7 @@ h3 {
 	margin-bottom: 10rem;
 	overflow: auto;
 	border-radius: 10px;
-	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.67);
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.67);
 	overflow: hidden;
 
 	/* justify-content: center;

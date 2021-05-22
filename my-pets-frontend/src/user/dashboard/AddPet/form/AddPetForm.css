@@ -16,6 +16,11 @@
 	margin: 3rem auto;
 }
 
+.button-group.appointments {
+	background-color: transparent;
+	margin-top: 1rem;
+}
+
 @media screen and (max-width: 960px) {
 	.pet-form-main-container h1 {
 		font-size: 1.5rem;

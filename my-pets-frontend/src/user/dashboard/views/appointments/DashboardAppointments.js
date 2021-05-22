@@ -98,10 +98,9 @@ export default function DashboardAppointments(props) {
 	return (
 		<div className="food-main-container" id="appointments">
 			<div className="title">
-				<h1>All Appointments</h1>
+				<h1>Appointments</h1>
 			</div>
 			<ul>
-				}
 				<li
 					key={0}
 					onClick={upcomingHandler}

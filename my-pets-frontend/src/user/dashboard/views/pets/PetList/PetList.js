@@ -152,7 +152,7 @@ export default function PetList(props) {
 							className={
 								matches ? classes.paperSmall : classes.paper
 							}
-							elevation={8}
+							elevation={5}
 						>
 							<div className="pet-card">
 								{pet.petImage == null ? (

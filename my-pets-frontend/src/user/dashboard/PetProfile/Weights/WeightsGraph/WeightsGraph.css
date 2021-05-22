@@ -29,6 +29,8 @@
 	.dashboard-graph-main-container {
 		background-color: transparent;
 		width: 140%;
+		height: 50vh;
+		/* height: 50%; */
 	}
 
 	.weights-graph-main-container {
