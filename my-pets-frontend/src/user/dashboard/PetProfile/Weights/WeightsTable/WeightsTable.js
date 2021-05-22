@@ -193,6 +193,7 @@ export default function WeightsTable(props) {
 			/>
 			{isEditWeight ? (
 				<EditDeleteFoodButtonHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -209,6 +210,7 @@ export default function WeightsTable(props) {
 			) : null}
 			{isDeleteWeight ? (
 				<EditDeleteFoodButtonHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

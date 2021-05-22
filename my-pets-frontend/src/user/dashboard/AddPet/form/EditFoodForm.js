@@ -237,14 +237,14 @@ export default function EditFoodForm(props) {
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 
 	useEffect(() => {
-		if (pet.food[rowData.id].foodImage == null) {
+		if (props.food[rowData.id].foodImage == null) {
 			console.log('doent have pic');
 			setHasImage(false);
 		} else {
 			console.log('has pic');
-			setFoodImageId(props.pet.food[rowData.id].foodImage.id);
-			setImage(props.pet.food[rowData.id].foodImage.fileName);
-			setImageName(props.pet.food[rowData.id].foodImage.fileName);
+			setFoodImageId(props.food[rowData.id].foodImage.id);
+			setImage(props.food[rowData.id].foodImage.fileName);
+			setImageName(props.food[rowData.id].foodImage.fileName);
 			setHasImage(true);
 		}
 	}, []);
@@ -273,7 +273,7 @@ export default function EditFoodForm(props) {
 		editFood(
 			currentUser.id,
 			pet.id,
-			pet.food[rowData.id].id,
+			props.food[rowData.id].id,
 			foodName,
 			type,
 			wetOrDry,
@@ -288,7 +288,7 @@ export default function EditFoodForm(props) {
 				addFoodImage(
 					currentUser.id,
 					pet.id,
-					pet.food[rowData.id].id,
+					props.food[rowData.id].id,
 					image
 				);
 				// props.handleClose();
@@ -297,7 +297,7 @@ export default function EditFoodForm(props) {
 				editFoodImage(
 					currentUser.id,
 					pet.id,
-					pet.food[rowData.id].id,
+					props.food[rowData.id].id,
 					foodImageId,
 					image
 				);
@@ -306,7 +306,7 @@ export default function EditFoodForm(props) {
 			Alert.success('Food Edited!');
 			setTimeout(() => {
 				Alert.closeAll();
-				props.ReloadPet('FOOD');
+				props.ReloadComponent();
 			}, 500);
 		}, 1000);
 		// props.handleClose();
@@ -356,7 +356,7 @@ export default function EditFoodForm(props) {
 	// console.log(pet.food[rowData.id]);
 	console.log('row data');
 	console.log(rowData);
-	console.log(pet.food[0]);
+	// console.log(pet.food[0]);
 
 	return (
 		<div className="pet-form-main-container">
@@ -505,18 +505,16 @@ export default function EditFoodForm(props) {
 						<PublishIcon className={publishIcon} />{' '}
 						<span style={{ marginLeft: '0.25rem' }}>Picture</span>
 					</Button>{' '}
-					{image == '' ? null : (
-						<TextField
-							disabled={true}
-							// style={{
-							// 	marginTop: '1.25rem',
-							// 	marginLeft: '1rem',
-							// 	width: '11rem',
-							// }}
-							className={imageName1}
-							value={imageName}
-						></TextField>
-					)}
+					<TextField
+						disabled={true}
+						// style={{
+						// 	marginTop: '1.25rem',
+						// 	marginLeft: '1rem',
+						// 	width: '11rem',
+						// }}
+						className={imageName1}
+						value={imageName}
+					></TextField>
 				</label>
 				<div className="button-group">
 					<Button

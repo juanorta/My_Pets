@@ -255,8 +255,7 @@ export default function AddPreventative(props) {
 			dueNext,
 			notes,
 			pet.petName,
-			pet.id,
-			petImage
+			pet.id
 		);
 
 		Alert.success('Preventative Added');
@@ -264,7 +263,7 @@ export default function AddPreventative(props) {
 			props.handleClose();
 			Alert.closeAll();
 			props.ReloadPet('PREVENTATIVES');
-		}, 3250);
+		}, 500);
 	};
 
 	return (

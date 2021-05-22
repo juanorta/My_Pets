@@ -227,6 +227,7 @@ export default function PastPreventatives(props) {
 			/>
 			{isEditPrev ? (
 				<EditDeletePrevBtnHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -243,6 +244,7 @@ export default function PastPreventatives(props) {
 
 			{isDeletePrev ? (
 				<EditDeletePrevBtnHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

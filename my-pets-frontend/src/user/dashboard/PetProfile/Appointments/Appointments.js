@@ -68,8 +68,8 @@ export default function Appointments(props) {
 	const fetchAppointments = () => {
 		getAppointmentsByPet(currentUser.id, pet.id)
 			.then((response) => {
-				console.log('APPOINTMENTS BY PET');
-				console.log(response);
+				// console.log('APPOINTMENTS BY PET');
+				// console.log(response);
 				sortAppointments(response);
 			})
 			.catch((error) => {});

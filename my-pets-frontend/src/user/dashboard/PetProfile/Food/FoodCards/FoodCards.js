@@ -154,11 +154,12 @@ export default function FoodCards(props) {
 	const [style, setStyle] = useState('');
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [food, setFood] = useState(props.pet.food);
+	const [food, setFood] = useState('');
 	const [openModal, setOpenModal] = useState(false);
 	const [isEditFood, setIsEditFood] = useState(false);
 	const [isDeleteFood, setIsDeleteFood] = useState(false);
 	const [rowData, setRowData] = useState('');
+	const [loading, setLoading] = useState(true);
 	let location = useLocation().pathname;
 
 	let size = classes.paperLarge;
@@ -176,7 +177,15 @@ export default function FoodCards(props) {
 	}
 
 	useEffect(() => {
-		if (isDashboard === false) {
+		console.log('LETS SEE');
+		console.log(isDashboard);
+		// if (isDashboard != true) {
+		// 	setFood(props.food);
+		// }
+		if (isDashboard) {
+			setFood(props.pet.food);
+		} else {
+			setFood(props.food);
 			setStyle('food-cards-main-container');
 		}
 		let rowDataObject = {
@@ -189,8 +198,9 @@ export default function FoodCards(props) {
 			notes: '',
 		};
 		console.log(props.pet);
-		setFood(props.pet.food);
+		// setFood(props.pet.food);
 		setRowData(rowDataObject);
+		setLoading(false);
 	}, [props.pet]);
 
 	const SetOpenModalToFalse = () => {
@@ -211,13 +221,13 @@ export default function FoodCards(props) {
 		whereToBuy,
 		notes
 	) {
-		// console.log(id);
-		// console.log(foodName);
-		// console.log(flavor);
-		// console.log(type);
-		// console.log(wetOrDry);
-		// console.log(whereToBuy);
-		// console.log(notes);
+		console.log(id);
+		console.log(foodName);
+		console.log(flavor);
+		console.log(type);
+		console.log(wetOrDry);
+		console.log(whereToBuy);
+		console.log(notes);
 
 		let rowDataObject = {
 			id: id,
@@ -276,165 +286,181 @@ export default function FoodCards(props) {
 				spacing={0}
 			>
 				<Grid item lg={12} xs={12}>
-					{food.map((food, i) => (
-						<Paper className={size} elevation={10}>
-							<div className="image-info">
-								<div className="image-section">
-									{food.foodImage == null ? (
-										<div className="no-food-picture">
-											<Icon
-												className={classes.noPicture}
-												path={mdiFoodDrumstick}
-												title="Scale"
-												size={5}
-												horizontal
-												vertical
-												rotate={180}
-												// color="#1b2737"
-											/>
+					{loading ? null : (
+						<div>
+							{food.map((food, i) => (
+								<Paper className={size} elevation={10}>
+									<div className="image-info">
+										<div className="image-section">
+											{food.foodImage == null ? (
+												<div className="no-food-picture">
+													<Icon
+														className={
+															classes.noPicture
+														}
+														path={mdiFoodDrumstick}
+														title="Scale"
+														size={5}
+														horizontal
+														vertical
+														rotate={180}
+														// color="#1b2737"
+													/>
+												</div>
+											) : (
+												<img
+													className="food-image"
+													src={`data:image/jpeg;base64,${food.foodImage.data}`}
+												/>
+											)}
 										</div>
-									) : (
-										<img
-											className="food-image"
-											src={`data:image/jpeg;base64,${food.foodImage.data}`}
-										/>
-									)}
-								</div>
-								<div className={classes.tags}>
-									<Chip
-										// style={{ backgroundColor: '#ff4f00' }}
-										className={tagStyle}
-										label={food.foodName}
-									/>
+										<div className={classes.tags}>
+											<Chip
+												// style={{ backgroundColor: '#ff4f00' }}
+												className={tagStyle}
+												label={food.foodName}
+											/>
 
-									<Chip
-										// style={{ backgroundColor: 'teal' }}
-										className={tagStyle}
-										label={food.type}
-									/>
-									{/* <Chip
+											<Chip
+												// style={{ backgroundColor: 'teal' }}
+												className={tagStyle}
+												label={food.type}
+											/>
+											{/* <Chip
 										style={{ backgroundColor: '#1b2737' }}
 										className={classes.tagStyle}
 										label="HEB Cat Food"
 									/> */}
-									{food.wetOrDry == '' ? null : (
-										<Chip
-											// style={{
-											// 	backgroundColor: '#1b2737',
-											// }}
-											className={tagStyle}
-											label={food.wetOrDry}
-										/>
-									)}
-
-									{food.flavor == '' ? null : (
-										<Chip
-											// style={{
-											// 	backgroundColor: '#336699',
-											// }}
-											className={tagStyle}
-											label={food.flavor}
-										/>
-									)}
-
-									{food.whereToBuy == '' ? null : (
-										<Chip
-											// style={{ backgroundColor: 'coral' }}
-											// color="secondary"
-											className={tagStyle}
-											label={food.whereToBuy}
-										/>
-									)}
-
-									{/* {extraLargeScreen ? (
-										<div>
-											{food.notes == '' ? null : (
+											{food.wetOrDry == '' ? null : (
 												<Chip
 													// style={{
-													// 	backgroundColor: 'maroon',
+													// 	backgroundColor: '#1b2737',
 													// }}
 													className={tagStyle}
-													label={food.notes}
+													label={food.wetOrDry}
 												/>
 											)}
+
+											{food.flavor == '' ? null : (
+												<Chip
+													// style={{
+													// 	backgroundColor: '#336699',
+													// }}
+													className={tagStyle}
+													label={food.flavor}
+												/>
+											)}
+
+											{food.whereToBuy == '' ? null : (
+												<Chip
+													// style={{ backgroundColor: 'coral' }}
+													// color="secondary"
+													className={tagStyle}
+													label={food.whereToBuy}
+												/>
+											)}
+
+											<div className="food-image-btn-group">
+												{isDashboard ? null : (
+													<div>
+														<Button
+															className={
+																classes.editButton
+															}
+															data-tip
+															data-for="editTip"
+															style={{
+																color: '#1b2737',
+															}}
+															onClick={() => {
+																editButtonHandler(
+																	i,
+																	food.foodName,
+																	food.flavor,
+																	food.type,
+																	food.wetOrDry,
+																	food.whereToBuy,
+																	food.notes
+																);
+															}}
+														>
+															<EditIcon />
+														</Button>
+
+														<Button
+															className={
+																classes.button
+															}
+															data-tip
+															data-for="deleteTip"
+															style={{
+																color: 'red',
+															}}
+															onClick={() => {
+																deleteButtonHandler(
+																	i,
+																	food.foodName,
+																	food.flavor,
+																	food.type,
+																	food.wetOrDry,
+																	food.whereToBuy,
+																	food.notes
+																);
+															}}
+														>
+															<DeleteIcon />
+														</Button>
+													</div>
+												)}
+											</div>
 										</div>
-									) : null} */}
-
-									<div className="food-image-btn-group">
-										<Button
-											className={classes.editButton}
-											data-tip
-											data-for="editTip"
-											style={{ color: '#1b2737' }}
-											onClick={() => {
-												editButtonHandler(
-													i,
-													food.foodName,
-													food.flavor,
-													food.type,
-													food.wetOrDry,
-													food.whereToBuy,
-													food.notes
-												);
-											}}
-										>
-											<EditIcon />
-										</Button>
-
-										<Button
-											className={classes.button}
-											data-tip
-											data-for="deleteTip"
-											style={{ color: 'red' }}
-											onClick={() => {
-												deleteButtonHandler(
-													i,
-													food.foodName,
-													food.flavor,
-													food.type,
-													food.wetOrDry,
-													food.whereToBuy,
-													food.notes
-												);
-											}}
-										>
-											<DeleteIcon />
-										</Button>
 									</div>
-								</div>
-							</div>
-							{isEditFood ? (
-								<EditDeleteFoodButtonHandler
-									ReloadPet={props.ReloadPet}
-									isEditFood={isEditFood}
-									forceUpdate={props.forceUpdate}
-									currentUser={currentUser}
-									pet={pet}
-									openModal={openModal}
-									SetOpenModalToFalse={SetOpenModalToFalse}
-									rowData={rowData}
-									changeDefaultViewsAndRefresh={
-										props.changeDefaultViewsAndRefresh
-									}
-								/>
-							) : null}
-							{isDeleteFood ? (
-								<EditDeleteFoodButtonHandler
-									ReloadPet={props.ReloadPet}
-									isDeleteFood={isDeleteFood}
-									forceUpdate={props.forceUpdate}
-									currentUser={currentUser}
-									pet={pet}
-									openModal={openModal}
-									SetOpenModalToFalse={SetOpenModalToFalse}
-									rowData={rowData}
-									changeDefaultViewsAndRefresh={
-										props.changeDefaultViewsAndRefresh
-									}
-								/>
-							) : null}
-						</Paper>
-					))}
+									{isEditFood ? (
+										<EditDeleteFoodButtonHandler
+											food={props.food}
+											ReloadComponent={
+												props.ReloadComponent
+											}
+											ReloadPet={props.ReloadPet}
+											isEditFood={isEditFood}
+											forceUpdate={props.forceUpdate}
+											currentUser={currentUser}
+											pet={pet}
+											openModal={openModal}
+											SetOpenModalToFalse={
+												SetOpenModalToFalse
+											}
+											rowData={rowData}
+											changeDefaultViewsAndRefresh={
+												props.changeDefaultViewsAndRefresh
+											}
+										/>
+									) : null}
+									{isDeleteFood ? (
+										<EditDeleteFoodButtonHandler
+											food={props.food}
+											ReloadComponent={
+												props.ReloadComponent
+											}
+											ReloadPet={props.ReloadPet}
+											isDeleteFood={isDeleteFood}
+											forceUpdate={props.forceUpdate}
+											currentUser={currentUser}
+											pet={pet}
+											openModal={openModal}
+											SetOpenModalToFalse={
+												SetOpenModalToFalse
+											}
+											rowData={rowData}
+											changeDefaultViewsAndRefresh={
+												props.changeDefaultViewsAndRefresh
+											}
+										/>
+									) : null}
+								</Paper>
+							))}
+						</div>
+					)}
 				</Grid>
 			</Grid>
 		</div>

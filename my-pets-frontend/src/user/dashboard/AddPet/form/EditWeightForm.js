@@ -219,28 +219,6 @@ export default function EditWeightForm(props) {
 	// 	pet.weights[pet.weights.length - 1].weightValue
 	// );
 
-	useEffect(() => {
-		// console.log('pet');
-		// console.log(pet.weights);
-		// // console.log('next pet');
-		// console.log(pet.weights[rowData.id]);
-		// console.log(pet.weights[rowData.id + 1]);
-		// console.log(nextWeight);
-		//console.log(pet.weights.length);
-		// if (pet.weights.length > 0) {
-		// 	// console.log(
-		// 	// 	'last weight date:' +
-		// 	// 		pet.weights[pet.weights.length - 1].dateWeighed
-		// 	// );
-		// 	// console.log(
-		// 	// 	'last weight value:' +
-		// 	// 		pet.weights[pet.weights.length - 1].weightValue
-		// 	// );
-		// 	setLastWeightDate(pet.weights[pet.weights.length - 1].dateWeighed);
-		// 	setLastWeightValue(pet.weights[pet.weights.length - 1].weightValue);
-		// }
-	}, []);
-
 	//handles input changes from all fields
 	const onDateChange = (date) => {
 		// setDateChanged(true);
@@ -289,7 +267,7 @@ export default function EditWeightForm(props) {
 
 		setTimeout(() => {
 			Alert.closeAll();
-			props.ReloadPet('WEIGHTS');
+			props.ReloadComponent();
 		}, 500);
 	};
 

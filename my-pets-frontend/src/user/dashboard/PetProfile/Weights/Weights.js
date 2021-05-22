@@ -9,6 +9,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableContainer from '@material-ui/core/TableContainer';
 import WeightsGraph from './WeightsGraph/WeightsGraph';
 import WeightsTable from './WeightsTable/WeightsTable';
+import { getWeightsByPet } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	GraphView: {
@@ -35,6 +36,45 @@ export default function Weights(props) {
 	const [tableViewSelected, setTableViewSelected] = useState(false);
 	const [graphStyle, setGraphStyle] = useState(classes.GraphViewSelected);
 	const [tableStyle, setTableStyle] = useState(classes.TableView);
+	const [sortedWeights, setSortedWeights] = useState('');
+	const [loading, setLoading] = useState(true);
+	const [value, setValue] = useState(0);
+
+	useEffect(() => {
+		fetchWeights();
+	}, [value]);
+
+	const fetchWeights = () => {
+		getWeightsByPet(currentUser.id, pet.id)
+			.then((response) => {
+				// console.log('WEIGHT BY PET');
+				// console.log(response);
+				sortWeights(response);
+			})
+			.catch((error) => {});
+	};
+
+	const sortWeights = (weights) => {
+		let sortedWeightsArray = [];
+
+		for (var i = 0; i < weights.length; i++) {
+			sortedWeightsArray[i] = weights[i];
+		}
+
+		sortedWeightsArray.sort(function compare(a, b) {
+			var dateA = new Date(a.dateWeighed);
+			var dateB = new Date(b.dateWeighed);
+			return dateA - dateB;
+		});
+		setSortedWeights(sortedWeightsArray);
+		setLoading(false);
+	};
+
+	const ReloadComponent = () => {
+		console.log('reload weights function called');
+		setValue(value + 1);
+		setLoading(true);
+	};
 
 	const graphViewHandler = () => {
 		// console.log('graph view clicked');
@@ -50,18 +90,6 @@ export default function Weights(props) {
 		setTableStyle(classes.TableViewSelected);
 		setGraphStyle(classes.GraphView);
 	};
-
-	let sortedWeights = [];
-
-	for (var i = 0; i < pet.weights.length; i++) {
-		sortedWeights[i] = pet.weights[i];
-	}
-
-	sortedWeights.sort(function compare(a, b) {
-		var dateA = new Date(a.dateWeighed);
-		var dateB = new Date(b.dateWeighed);
-		return dateA - dateB;
-	});
 
 	// console.log('sorted weights');
 	// console.log(sortedWeights);
@@ -79,27 +107,35 @@ export default function Weights(props) {
 					</li>
 				</ul>
 			</div>
-			{graphViewSelected ? (
-				<WeightsGraph
-					pet={pet}
-					currentUser={currentUser}
-					forceUpdate={props.forceUpdate}
-					sortedWeights={sortedWeights}
-					defaultViewHandler={props.defaultViewHandler}
-				/>
-			) : null}
-			{tableViewSelected ? (
-				<WeightsTable
-					ReloadPet={props.ReloadPet}
-					pet={pet}
-					currentUser={currentUser}
-					forceUpdate={props.forceUpdate}
-					sortedWeights={sortedWeights}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-				/>
-			) : null}
+
+			{loading ? (
+				<h2>Loading Weights...</h2>
+			) : (
+				<div>
+					{graphViewSelected ? (
+						<WeightsGraph
+							pet={pet}
+							currentUser={currentUser}
+							forceUpdate={props.forceUpdate}
+							sortedWeights={sortedWeights}
+							defaultViewHandler={props.defaultViewHandler}
+						/>
+					) : null}
+					{tableViewSelected ? (
+						<WeightsTable
+							ReloadComponent={ReloadComponent}
+							ReloadPet={props.ReloadPet}
+							pet={pet}
+							currentUser={currentUser}
+							forceUpdate={props.forceUpdate}
+							sortedWeights={sortedWeights}
+							changeDefaultViewsAndRefresh={
+								props.changeDefaultViewsAndRefresh
+							}
+						/>
+					) : null}
+				</div>
+			)}
 		</div>
 	);
 }

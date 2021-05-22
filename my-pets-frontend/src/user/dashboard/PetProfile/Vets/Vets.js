@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
 import EditDeleteVetHandler from './EditDeleteVetHandler';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { getVetsByPet } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	Button: {
@@ -38,12 +39,37 @@ export default function Vets(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [vets, setVets] = useState(props.pet.vets);
+	const [vets, setVets] = useState('');
 	const [isEditVet, setIsEditVet] = useState(false);
 	const [isDeleteVet, setIsDeleteVet] = useState(false);
 	const [rowData, setRowData] = useState('');
 	const [openModal, setOpenModal] = useState(false);
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const [loading, setLoading] = useState(true);
+	const [value, setValue] = useState(0);
+
+	useEffect(() => {
+		console.log('CURRENT USER');
+		console.log(currentUser);
+		fetchVets();
+	}, [value]);
+
+	const fetchVets = () => {
+		getVetsByPet(currentUser.id, pet.id)
+			.then((response) => {
+				console.log('VETS');
+				console.log(response);
+				setVets(response);
+				setLoading(false);
+			})
+			.catch((error) => {});
+	};
+
+	const ReloadComponent = () => {
+		console.log('reload weights function called');
+		setValue(value + 1);
+		setLoading(true);
+	};
 
 	let width = '70%';
 
@@ -189,15 +215,20 @@ export default function Vets(props) {
 					// backgroundColor: 'red',
 				}}
 			>
-				<DataGrid
-					rows={rows}
-					columns={columns}
-					pageSize={5}
-					rowHeight={72}
-				/>
+				{loading ? (
+					<h2>Loading vets...</h2>
+				) : (
+					<DataGrid
+						rows={rows}
+						columns={columns}
+						pageSize={5}
+						rowHeight={72}
+					/>
+				)}
 			</div>
 			{isEditVet ? (
 				<EditDeleteVetHandler
+					ReloadComponent={ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -213,6 +244,7 @@ export default function Vets(props) {
 			) : null}
 			{isDeleteVet ? (
 				<EditDeleteVetHandler
+					ReloadComponent={ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

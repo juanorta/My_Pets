@@ -15,6 +15,7 @@ export default function EditDeletePrevBtnHandler(props) {
 		<div>
 			{openModal && isEditPrev ? (
 				<MaterialModalEditAppt
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -33,6 +34,7 @@ export default function EditDeletePrevBtnHandler(props) {
 
 			{openModal && isDeletePrev ? (
 				<MaterialModal
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

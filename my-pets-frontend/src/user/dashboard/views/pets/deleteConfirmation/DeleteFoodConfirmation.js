@@ -23,7 +23,7 @@ export default function DeleteFoodConfirmation(props) {
 		Alert.success('FOOD DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.ReloadPet('FOOD');
+			props.ReloadComponent();
 		}, 500);
 	}
 
@@ -56,7 +56,7 @@ export default function DeleteFoodConfirmation(props) {
 						agreeClickHandler(
 							currentUser.id,
 							pet.id,
-							pet.food[rowData.id].id
+							props.food[rowData.id].id
 						);
 					}}
 				>

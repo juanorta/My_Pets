@@ -249,11 +249,11 @@ export default function EditMedicationForm(props) {
 		);
 
 		Alert.success('Medication Added');
+		props.handleClose();
 		setTimeout(() => {
-			props.handleClose();
 			Alert.closeAll();
-			props.ReloadPet('MEDICATIONS');
-		}, 3500);
+			props.ReloadComponent();
+		}, 500);
 	};
 
 	// console.log('weight props');

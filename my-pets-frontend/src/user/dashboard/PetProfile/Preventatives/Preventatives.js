@@ -3,6 +3,7 @@ import moment from 'moment';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import UpcomingPreventatives from './UpcomingPreventatives';
 import PastPreventatives from './PastPreventatives';
+import { getPreventativesByPet } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	upcomingView: {
@@ -24,10 +25,9 @@ export default function Preventatives(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
-	const [preventatives, setPreventatives] = useState(props.pet.preventatives);
+	// const [preventatives, setPreventatives] = useState(props.pet.preventatives);
 	const [upcomingPreventatives, setUpcomingPreventatives] = useState('');
 	const [pastPreventatives, setPastPreventatives] = useState('');
-
 	const [upcomingViewSelected, setUpcomingViewSelected] = useState(true);
 	const [pastViewSelected, setPastViewSelected] = useState(false);
 	const [upcomingStyle, setUpcomingStyle] = useState(
@@ -35,9 +35,24 @@ export default function Preventatives(props) {
 	);
 	const [pastStyle, setPastStyle] = useState(classes.pastView);
 	const [loading, setLoading] = useState(true);
+	const [value, setValue] = useState(0);
 
 	useEffect(() => {
+		fetchPreventatives();
 		// console.log(preventatives);
+	}, [value]);
+
+	const fetchPreventatives = () => {
+		getPreventativesByPet(currentUser.id, pet.id)
+			.then((response) => {
+				// console.log('PREVENTATIVES BY PET');
+				// console.log(response);
+				sortPreventatives(response);
+			})
+			.catch((error) => {});
+	};
+
+	const sortPreventatives = (preventatives) => {
 		let sortedPreventatives = preventatives.slice();
 		sortedPreventatives.sort(function compare(a, b) {
 			var dateA = new Date(a.dueNext);
@@ -83,7 +98,13 @@ export default function Preventatives(props) {
 		setUpcomingPreventatives(upcomingArray);
 		setPastPreventatives(pastArray);
 		setLoading(false);
-	}, []);
+	};
+
+	const ReloadComponent = () => {
+		console.log('reload weights function called');
+		setValue(value + 1);
+		setLoading(true);
+	};
 
 	const upcomingViewHandler = () => {
 		// console.log('graph view clicked');
@@ -118,33 +139,42 @@ export default function Preventatives(props) {
 					</li>
 				</ul>
 			</div>
-			{upcomingViewSelected && loading === false ? (
-				<UpcomingPreventatives
-					ReloadPet={props.ReloadPet}
-					pet={pet}
-					currentUser={currentUser}
-					preventatives={preventatives}
-					upcomingPreventatives={upcomingPreventatives}
-					forceUpdate={props.forceUpdate}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-				/>
-			) : null}
 
-			{pastViewSelected && loading === false ? (
-				<PastPreventatives
-					ReloadPet={props.ReloadPet}
-					pet={pet}
-					currentUser={currentUser}
-					preventatives={preventatives}
-					pastPreventatives={pastPreventatives}
-					forceUpdate={props.forceUpdate}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-				/>
-			) : null}
+			{loading ? (
+				<h2>Loading Preventatives...</h2>
+			) : (
+				<div>
+					{upcomingViewSelected ? (
+						<UpcomingPreventatives
+							ReloadComponent={ReloadComponent}
+							ReloadPet={props.ReloadPet}
+							pet={pet}
+							currentUser={currentUser}
+							// preventatives={preventatives}
+							upcomingPreventatives={upcomingPreventatives}
+							forceUpdate={props.forceUpdate}
+							changeDefaultViewsAndRefresh={
+								props.changeDefaultViewsAndRefresh
+							}
+						/>
+					) : null}
+
+					{pastViewSelected ? (
+						<PastPreventatives
+							ReloadComponent={ReloadComponent}
+							ReloadPet={props.ReloadPet}
+							pet={pet}
+							currentUser={currentUser}
+							// preventatives={preventatives}
+							pastPreventatives={pastPreventatives}
+							forceUpdate={props.forceUpdate}
+							changeDefaultViewsAndRefresh={
+								props.changeDefaultViewsAndRefresh
+							}
+						/>
+					) : null}
+				</div>
+			)}
 		</div>
 	);
 }

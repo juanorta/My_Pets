@@ -681,8 +681,7 @@ export async function addPreventative(
 	dueNext,
 	notes,
 	petName,
-	petPreventativeId,
-	data
+	petPreventativeId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 
@@ -701,7 +700,6 @@ export async function addPreventative(
 			notes: notes,
 			petName: petName,
 			petPreventativeId: petPreventativeId,
-			data: data,
 		}),
 	});
 }
@@ -716,8 +714,7 @@ export async function editPreventative(
 	dueNext,
 	notes,
 	petName,
-	petPreventativeId,
-	data
+	petPreventativeId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 
@@ -740,7 +737,6 @@ export async function editPreventative(
 				notes: notes,
 				petName: petName,
 				petPreventativeId: petPreventativeId,
-				data: data,
 			}),
 		}
 	);
@@ -785,8 +781,7 @@ export async function addMedication(
 	endDate,
 	dosageInstructions,
 	petName,
-	petMedId,
-	data
+	petMedId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 
@@ -804,7 +799,6 @@ export async function addMedication(
 			dosageInstructions: dosageInstructions,
 			petName: petName,
 			petMedId: petMedId,
-			data: data,
 		}),
 	});
 }
@@ -818,8 +812,7 @@ export async function editMedication(
 	endDate,
 	dosageInstructions,
 	petName,
-	petMedId,
-	data
+	petMedId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 
@@ -840,7 +833,6 @@ export async function editMedication(
 				dosageInstructions: dosageInstructions,
 				petName: petName,
 				petMedId: petMedId,
-				data: data,
 			}),
 		}
 	);
@@ -901,7 +893,6 @@ export async function addVet(
 			notes: notes,
 			petName: petName,
 			petVetId: petVetId,
-			data: data,
 		}),
 	});
 }
@@ -937,7 +928,6 @@ export async function editVet(
 				notes: notes,
 				petName: petName,
 				petVetId: petVetId,
-				data: data,
 			}),
 		}
 	);

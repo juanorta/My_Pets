@@ -112,7 +112,8 @@ export default function MaterialModalProfile(props) {
 	}
 
 	console.log('edit vet' + isEditVet);
-
+	// console.log('PROPS');
+	// console.log(props);
 	// console.log(props.changeDefaultViewsAndRefresh);
 	// console.log('open => ' + open);
 
@@ -150,6 +151,8 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditFood ? (
 							<EditFoodForm
+								food={props.food}
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
@@ -164,6 +167,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditWeight ? (
 							<EditWeightForm
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
@@ -178,6 +182,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditPrev ? (
 							<EditPreventativeForm
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
@@ -192,6 +197,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditMedication ? (
 							<EditMedicationForm
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}
@@ -205,6 +211,7 @@ export default function MaterialModalProfile(props) {
 						) : null}
 						{isEditVet ? (
 							<EditVetForm
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								currentUser={currentUser}

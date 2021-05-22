@@ -192,15 +192,15 @@ export default function FoodTable(props) {
 
 	//loading each row with a pet appointment object
 	let rows = [];
-	for (let i = 0; i < pet.food.length; i++) {
+	for (let i = 0; i < props.food.length; i++) {
 		rows[i] = {
 			id: i,
-			foodName: pet.food[i].foodName,
-			type: pet.food[i].type,
-			wetOrDry: pet.food[i].wetOrDry,
-			flavor: pet.food[i].flavor,
-			whereToBuy: pet.food[i].whereToBuy,
-			notes: pet.food[i].notes,
+			foodName: props.food[i].foodName,
+			type: props.food[i].type,
+			wetOrDry: props.food[i].wetOrDry,
+			flavor: props.food[i].flavor,
+			whereToBuy: props.food[i].whereToBuy,
+			notes: props.food[i].notes,
 		};
 		// console.log(pet.food[i].wetOrDry);
 	}
@@ -239,6 +239,8 @@ export default function FoodTable(props) {
 			</div>
 			{isEditFood ? (
 				<EditDeleteFoodButtonHandler
+					ReloadComponent={props.ReloadComponent}
+					food={props.food}
 					ReloadPet={props.ReloadPet}
 					isEditFood={isEditFood}
 					forceUpdate={props.forceUpdate}
@@ -254,6 +256,8 @@ export default function FoodTable(props) {
 			) : null}
 			{isDeleteFood ? (
 				<EditDeleteFoodButtonHandler
+					ReloadComponent={props.ReloadComponent}
+					food={props.food}
 					ReloadPet={props.ReloadPet}
 					isDeleteFood={isDeleteFood}
 					forceUpdate={props.forceUpdate}

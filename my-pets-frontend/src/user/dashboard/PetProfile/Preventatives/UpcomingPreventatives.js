@@ -238,6 +238,7 @@ export default function UpcomingPreventatives(props) {
 			/>
 			{isEditPrev ? (
 				<EditDeletePrevBtnHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -256,6 +257,7 @@ export default function UpcomingPreventatives(props) {
 
 			{isDeletePrev ? (
 				<EditDeletePrevBtnHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

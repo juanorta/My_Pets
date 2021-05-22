@@ -207,6 +207,8 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteFood ? (
 							<DeleteFoodConfirmation
+								ReloadComponent={props.ReloadComponent}
+								food={props.food}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
@@ -220,6 +222,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteWeight ? (
 							<DeleteWeightConfirmation
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
@@ -234,6 +237,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeletePrev ? (
 							<DeletePrevConfirmation
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
@@ -248,6 +252,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteMedication ? (
 							<DeleteMedicationConfirmation
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}
@@ -262,6 +267,7 @@ export default function MaterialModal(props) {
 						) : null}
 						{isDeleteVet ? (
 							<DeleteVetConfirmation
+								ReloadComponent={props.ReloadComponent}
 								ReloadPet={props.ReloadPet}
 								forceUpdate={props.forceUpdate}
 								handleClose={handleClose}

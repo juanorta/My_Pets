@@ -228,7 +228,7 @@ export default function EditVetForm(props) {
 		Alert.success('Vet Edited!');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.ReloadPet('VETS');
+			props.ReloadComponent();
 		}, 500);
 	};
 

@@ -3,6 +3,7 @@ import moment from 'moment';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CurrentMedications from './CurrentMedications';
 import PastMedications from './PastMedications';
+import { getMedicationsByPet } from '../../../../util/APIUtils';
 
 const useStyles = makeStyles((theme) => ({
 	currentView: {
@@ -35,8 +36,23 @@ export default function Medications(props) {
 	);
 	const [pastStyle, setPastStyle] = useState(classes.pastView);
 	const [loading, setLoading] = useState(true);
+	const [value, setValue] = useState(0);
 
 	useEffect(() => {
+		fetchMedications();
+	}, [value]);
+
+	const fetchMedications = () => {
+		getMedicationsByPet(currentUser.id, pet.id)
+			.then((response) => {
+				console.log('MEDICATIONS BY PET');
+				console.log(response);
+				sortMedications(response);
+			})
+			.catch((error) => {});
+	};
+
+	const sortMedications = (medications) => {
 		let sortedMedications = medications.slice();
 		sortedMedications.sort(function compare(a, b) {
 			var dateA = new Date(a.endDate);
@@ -82,7 +98,13 @@ export default function Medications(props) {
 		setCurentMedications(currentArray);
 		setPastMedications(pastArray);
 		setLoading(false);
-	}, []);
+	};
+
+	const ReloadComponent = () => {
+		console.log('reload weights function called');
+		setValue(value + 1);
+		setLoading(true);
+	};
 
 	const currentViewHandler = () => {
 		// console.log('graph view clicked');
@@ -110,31 +132,40 @@ export default function Medications(props) {
 					</li>
 				</ul>
 			</div>
-			{currentViewSelected && loading === false ? (
-				<CurrentMedications
-					ReloadPet={props.ReloadPet}
-					pet={pet}
-					currentUser={currentUser}
-					currentMedications={currentMedications}
-					forceUpdate={props.forceUpdate}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-				/>
-			) : null}
 
-			{pastViewSelected && loading === false ? (
-				<PastMedications
-					ReloadPet={props.ReloadPet}
-					pet={pet}
-					currentUser={currentUser}
-					pastMedications={pastMedications}
-					forceUpdate={props.forceUpdate}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-				/>
-			) : null}
+			{loading ? (
+				<h2>Loading Medications...</h2>
+			) : (
+				<div>
+					{currentViewSelected ? (
+						<CurrentMedications
+							ReloadComponent={ReloadComponent}
+							ReloadPet={props.ReloadPet}
+							pet={pet}
+							currentUser={currentUser}
+							currentMedications={currentMedications}
+							forceUpdate={props.forceUpdate}
+							changeDefaultViewsAndRefresh={
+								props.changeDefaultViewsAndRefresh
+							}
+						/>
+					) : null}
+
+					{pastViewSelected ? (
+						<PastMedications
+							ReloadComponent={ReloadComponent}
+							ReloadPet={props.ReloadPet}
+							pet={pet}
+							currentUser={currentUser}
+							pastMedications={pastMedications}
+							forceUpdate={props.forceUpdate}
+							changeDefaultViewsAndRefresh={
+								props.changeDefaultViewsAndRefresh
+							}
+						/>
+					) : null}
+				</div>
+			)}
 		</div>
 	);
 }

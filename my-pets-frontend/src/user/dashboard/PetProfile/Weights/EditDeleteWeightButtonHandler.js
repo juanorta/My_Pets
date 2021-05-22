@@ -24,6 +24,7 @@ export default function EditDeleteWeightButtonHandler(props) {
 			{/* opening a different modal depending on what button the user pressed */}
 			{openModal && isEditWeight ? (
 				<MaterialModalEditAppt
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -41,6 +42,7 @@ export default function EditDeleteWeightButtonHandler(props) {
 			) : null}
 			{openModal && isDeleteWeight ? (
 				<MaterialModal
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					openModal={openModal}
 					rowData={rowData}

@@ -239,8 +239,7 @@ export default function AddMedicationForm(props) {
 			endDate,
 			dosageInstructions,
 			pet.petName,
-			pet.id,
-			petImage
+			pet.id
 		);
 
 		props.handleClose();

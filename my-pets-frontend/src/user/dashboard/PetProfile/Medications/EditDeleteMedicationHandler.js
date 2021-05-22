@@ -13,10 +13,13 @@ export default function EditDeleteMedicationHandler(props) {
 		props.isDeleteMedication
 	);
 	const [rowData, setRowData] = useState(props.rowData);
+	console.log('PROPS');
+	console.log(props);
 	return (
 		<div>
 			{openModal && isEditMedication ? (
 				<MaterialModalEditAppt
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -34,6 +37,7 @@ export default function EditDeleteMedicationHandler(props) {
 
 			{openModal && isDeleteMedication ? (
 				<MaterialModal
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

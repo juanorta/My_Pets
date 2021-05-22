@@ -278,7 +278,6 @@ export default function AddPetForm(props) {
 		setTimeout(() => {
 			Alert.closeAll();
 			props.ReloadAppointment();
-			// props.ReloadPet('APPOINTMENTS');
 		}, 500);
 	};
 

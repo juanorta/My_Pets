@@ -218,6 +218,7 @@ export default function CurrentMedications(props) {
 			/>
 			{isEditMedication ? (
 				<EditDeleteMedicationHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}
@@ -233,6 +234,7 @@ export default function CurrentMedications(props) {
 			) : null}
 			{isDeleteMedication ? (
 				<EditDeleteMedicationHandler
+					ReloadComponent={props.ReloadComponent}
 					ReloadPet={props.ReloadPet}
 					forceUpdate={props.forceUpdate}
 					currentUser={currentUser}

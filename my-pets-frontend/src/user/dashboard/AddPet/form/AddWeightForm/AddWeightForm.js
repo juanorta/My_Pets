@@ -239,21 +239,21 @@ export default function AddWeightForm(props) {
 	// );
 	// const [weightChange, setWeightChange] = useState(0);
 
-	let sortedWeights = [];
+	// let sortedWeights = [];
 
-	for (var i = 0; i < pet.weights.length; i++) {
-		sortedWeights[i] = pet.weights[i];
-	}
+	// for (var i = 0; i < pet.weights.length; i++) {
+	// 	sortedWeights[i] = pet.weights[i];
+	// }
 
-	sortedWeights.sort(function compare(a, b) {
-		var dateA = new Date(a.dateWeighed);
-		var dateB = new Date(b.dateWeighed);
-		return dateA - dateB;
-	});
+	// sortedWeights.sort(function compare(a, b) {
+	// 	var dateA = new Date(a.dateWeighed);
+	// 	var dateB = new Date(b.dateWeighed);
+	// 	return dateA - dateB;
+	// });
 
-	console.log('sorted weights');
-	console.log(sortedWeights);
-	console.log(pet.weights);
+	// console.log('sorted weights');
+	// console.log(sortedWeights);
+	// console.log(pet.weights);
 	// useEffect(() => {
 	// 	console.log('pet');
 	// 	console.log(pet);
@@ -310,16 +310,16 @@ export default function AddWeightForm(props) {
 		// 	setSelectedDate(moment(selectedDate).format('dddd MMM DD, YYYY'));
 		// }
 
-		if (sortedWeights.length > 0) {
-			change =
-				weightValue -
-				sortedWeights[sortedWeights.length - 1].weightValue;
-		}
-		// setWeightChange(change);
+		// if (sortedWeights.length > 0) {
+		// 	change =
+		// 		weightValue -
+		// 		sortedWeights[sortedWeights.length - 1].weightValue;
+		// }
+		// // setWeightChange(change);
 
-		console.log('current weight: ' + weightValue);
-		console.log('unit: ' + unit);
-		console.log('date: ' + selectedDate);
+		// console.log('current weight: ' + weightValue);
+		// console.log('unit: ' + unit);
+		// console.log('date: ' + selectedDate);
 		// console.log('last weight value' + lastWeightValue);
 		// console.log('last date weighed: ' + lastDateWeighed);
 		// console.log('weight change' + change);

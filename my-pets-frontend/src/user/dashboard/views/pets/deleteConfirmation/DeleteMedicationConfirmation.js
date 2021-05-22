@@ -23,7 +23,7 @@ export default function DeleteMedicationConfirmation(props) {
 		Alert.success('Medication DELETED');
 		setTimeout(() => {
 			Alert.closeAll();
-			props.ReloadPet('MEDICATIONS');
+			props.ReloadComponent();
 		}, 500);
 	}
 
