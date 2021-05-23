@@ -80,6 +80,7 @@ export default function Preventatives(props) {
 	const [loading, setLoading] = useState(true);
 	const [fromDash, setFromDash] = useState(true);
 	const [petPictures, setPetPictures] = useState(props.petPictures);
+	const [hasPreventatives, setHasPreventatives] = useState(true);
 
 	//getting all preventatives and then passing them down to Upcoming and Past Preventatives
 	useEffect(() => {
@@ -92,8 +93,12 @@ export default function Preventatives(props) {
 			.then((response) => {
 				// console.log('ALL PREVENTATIVES');
 				// console.log(response);
-				setPreventatives(response);
-				sortPreventatives(response);
+				if (response.length < 1) {
+					setHasPreventatives(false);
+				} else {
+					setPreventatives(response);
+					sortPreventatives(response);
+				}
 			})
 			.catch((error) => {});
 	};
@@ -148,43 +153,57 @@ export default function Preventatives(props) {
 			<div className="title">
 				<h1>Preventatives</h1>
 			</div>
-			<ul>
-				<li
-					onClick={upcomingClickedHandler}
-					style={{
-						borderBottom:
-							upcomingClicked === true
-								? '3px solid #ff4f00'
-								: null,
-					}}
-				>
-					<h2>Upcoming</h2>
-				</li>
-				<li
-					onClick={pastClickedHandler}
-					style={{
-						borderBottom:
-							pastClicked === true ? '3px solid #ff4f00' : null,
-					}}
-				>
-					<h2>Past</h2>
-				</li>
-			</ul>
 
-			{upcomingClicked && loading === false ? (
-				<DashUpcomingPrev
-					currentUser={currentUser}
-					upcomingPreventatives={upcomingPreventatives}
-					petPictures={props.petPictures}
-				/>
-			) : null}
-			{pastClicked && loading === false ? (
-				<DashPastPrev
-					currentUser={currentUser}
-					pastPreventatives={pastPreventatives}
-					petPictures={props.petPictures}
-				/>
-			) : null}
+			{hasPreventatives === false ? (
+				<div className="nopets">
+					<h2>
+						No preventatives found. To add a preventative entry,
+						press the eye icon on your pet's card to go to their
+						profile and add a prevenative.
+					</h2>
+				</div>
+			) : (
+				<div>
+					<ul>
+						<li
+							onClick={upcomingClickedHandler}
+							style={{
+								borderBottom:
+									upcomingClicked === true
+										? '3px solid #ff4f00'
+										: null,
+							}}
+						>
+							<h2>Upcoming</h2>
+						</li>
+						<li
+							onClick={pastClickedHandler}
+							style={{
+								borderBottom:
+									pastClicked === true
+										? '3px solid #ff4f00'
+										: null,
+							}}
+						>
+							<h2>Past</h2>
+						</li>
+					</ul>
+					{upcomingClicked && loading === false ? (
+						<DashUpcomingPrev
+							currentUser={currentUser}
+							upcomingPreventatives={upcomingPreventatives}
+							petPictures={props.petPictures}
+						/>
+					) : null}
+					{pastClicked && loading === false ? (
+						<DashPastPrev
+							currentUser={currentUser}
+							pastPreventatives={pastPreventatives}
+							petPictures={props.petPictures}
+						/>
+					) : null}
+				</div>
+			)}
 		</div>
 	);
 }

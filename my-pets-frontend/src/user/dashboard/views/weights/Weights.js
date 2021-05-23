@@ -24,19 +24,27 @@ export default function Weights(props) {
 	const [sortedWeights, setSortedWeights] = useState('');
 	const [clicked, setClicked] = useState(false);
 	const [isDashboardWeight, setIsDashboardWeight] = useState(true);
-
+	const [hasWeights, setHasWeights] = useState(true);
 	// console.log(pets);
 
 	//initializes first pet in petsWithWeightsArray as the default selected
 	useEffect(() => {
-		fetchWeights();
+		getAllWeights(currentUser.id)
+			.then((response) => {
+				if (response.length < 1) {
+					setHasWeights(false);
+				} else {
+					fetchWeights();
+				}
+			})
+			.catch((error) => {});
 	}, []);
 
 	const fetchWeights = () => {
 		getAllPetsWithWeights(currentUser.id)
 			.then((response) => {
-				// console.log('PETS W/ WEIGHTS');
-				// console.log(response);
+				console.log('PETS W/ WEIGHTS');
+				console.log(response);
 				sortWeights(response);
 			})
 			.catch((error) => {});
@@ -97,40 +105,52 @@ export default function Weights(props) {
 				<h1 className="weights-title">Weights</h1>
 			</div>
 			{/* loading tabs with pets that have weights */}
-			{loading ? null : (
-				<ul>
-					{petsWithWeights.map((pet) => (
-						<li
-							key={pet.id}
-							style={{
-								borderBottom:
-									petListItemClicked.id === pet.id
-										? '3px solid #ff4f00'
-										: null,
-							}}
-							className="pet-with-weight"
-							onClick={() => {
-								listItemHandler(pet);
-							}}
-						>
-							{' '}
-							<h2>{pet.petName}</h2>
-						</li>
-					))}
-				</ul>
-			)}
-
-			{loading ? (
-				<h2>Loading weights...</h2>
+			{hasWeights === false ? (
+				<div className="nopets">
+					<h2>
+						No weights found. To add a weight entry, press the eye
+						icon on your pet's card to go to their profile and add a
+						weight.
+					</h2>
+				</div>
 			) : (
-				<WeightsGraph
-					sortedWeights={sortedWeights}
-					pet={petListItemClicked}
-					isDashboardWeight={isDashboardWeight}
-				/>
-			)}
+				<div>
+					{loading ? null : (
+						<ul>
+							{petsWithWeights.map((pet) => (
+								<li
+									key={pet.id}
+									style={{
+										borderBottom:
+											petListItemClicked.id === pet.id
+												? '3px solid #ff4f00'
+												: null,
+									}}
+									className="pet-with-weight"
+									onClick={() => {
+										listItemHandler(pet);
+									}}
+								>
+									{' '}
+									<h2>{pet.petName}</h2>
+								</li>
+							))}
+						</ul>
+					)}
 
-			{/* <Line data={data} options={options} /> */}
+					{loading ? (
+						<h2>Loading weights...</h2>
+					) : (
+						<WeightsGraph
+							sortedWeights={sortedWeights}
+							pet={petListItemClicked}
+							isDashboardWeight={isDashboardWeight}
+						/>
+					)}
+
+					{/* <Line data={data} options={options} /> */}
+				</div>
+			)}
 		</div>
 	);
 }

@@ -44,6 +44,11 @@ public class FoodController {
         return foodRepository.findByUserId(userId);
     }
 
+    @GetMapping("/users/{userId}/foodAmount")
+    public int totalFoodAmount(@PathVariable(value = "userId") Long userId){
+        return foodRepository.findByUserId(userId).size();
+    }
+
     //add food
     @PostMapping("/users/{userId}/pets/{petId}/addFood")
     public Food createFood(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId, @RequestBody Food food){

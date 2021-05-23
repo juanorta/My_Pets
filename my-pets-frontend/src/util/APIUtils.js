@@ -89,6 +89,30 @@ export function getAllPetsWithWeights(id) {
 	});
 }
 
+export function getAllFood(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all food function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/food`,
+		method: 'GET',
+	});
+}
+
+export function getFoodAmount(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get food amount function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/foodAmount`,
+		method: 'GET',
+	});
+}
+
 export function getAllPetsWithWFood(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);

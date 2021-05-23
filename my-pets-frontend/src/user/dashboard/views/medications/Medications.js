@@ -77,6 +77,7 @@ export default function Medications(props) {
 	const [pastMedications, setPastMedications] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [petPictures, setPetPictures] = useState(props.petPictures);
+	const [hasMedications, setHasMedications] = useState(true);
 
 	//getting all medications and passing them down to Current and Past medications
 	useEffect(() => {
@@ -86,9 +87,13 @@ export default function Medications(props) {
 	const fetchMedications = () => {
 		getAllMedications(currentUser.id)
 			.then((response) => {
-				console.log('ALL MEDICATIONS');
-				console.log(response);
-				sortMedications(response);
+				// console.log('ALL MEDICATIONS');
+				// console.log(response);
+				if (response.length < 1) {
+					setHasMedications(false);
+				} else {
+					sortMedications(response);
+				}
 			})
 			.catch((error) => {});
 	};
@@ -143,45 +148,60 @@ export default function Medications(props) {
 			<div className="title">
 				<h1>Medications</h1>
 			</div>
-			<ul>
-				<li
-					onClick={currentClickedHandler}
-					style={{
-						borderBottom:
-							currentClicked === true
-								? '3px solid #ff4f00'
-								: null,
-					}}
-				>
-					<h2>Current</h2>
-				</li>
-				<li
-					onClick={pastClickedHandler}
-					style={{
-						borderBottom:
-							pastClicked === true ? '3px solid #ff4f00' : null,
-					}}
-				>
-					<h2>Past</h2>
-				</li>
-			</ul>
-			{currentClicked && loading === false ? (
-				<DashCurrentMeds
-					currentUser={currentUser}
-					medications={medications}
-					currentMedications={currentMedications}
-					petPictures={props.petPictures}
-				/>
-			) : null}
 
-			{pastClicked && loading === false ? (
-				<DashPastMeds
-					currentUser={currentUser}
-					medications={medications}
-					pastMedications={pastMedications}
-					petPictures={props.petPictures}
-				/>
-			) : null}
+			{hasMedications === false ? (
+				<div className="nopets">
+					<h2>
+						No medications found. To add a medication entry, press
+						the eye icon on your pet's card to go to their profile
+						and add a medication.
+					</h2>
+				</div>
+			) : (
+				<div>
+					<ul>
+						<li
+							onClick={currentClickedHandler}
+							style={{
+								borderBottom:
+									currentClicked === true
+										? '3px solid #ff4f00'
+										: null,
+							}}
+						>
+							<h2>Current</h2>
+						</li>
+						<li
+							onClick={pastClickedHandler}
+							style={{
+								borderBottom:
+									pastClicked === true
+										? '3px solid #ff4f00'
+										: null,
+							}}
+						>
+							<h2>Past</h2>
+						</li>
+					</ul>
+					{currentClicked && loading === false ? (
+						<DashCurrentMeds
+							currentUser={currentUser}
+							medications={medications}
+							currentMedications={currentMedications}
+							petPictures={props.petPictures}
+						/>
+					) : null}
+
+					{pastClicked && loading === false ? (
+						<DashPastMeds
+							currentUser={currentUser}
+							medications={medications}
+							pastMedications={pastMedications}
+							petPictures={props.petPictures}
+						/>
+					) : null}
+				</div>
+			)}
 		</div>
 	);
 }

@@ -54,6 +54,7 @@ export default function Vets(props) {
 	const classes = useStyles();
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [petPictures, setPetPictures] = useState(props.petPictures);
+	const [hasVets, setHasVets] = useState(true);
 
 	const [vets, setVets] = useState('');
 	// console.log(vets);
@@ -71,10 +72,13 @@ export default function Vets(props) {
 	const fetchVets = () => {
 		getAllVets(currentUser.id)
 			.then((response) => {
-				console.log('ALL VETS');
-				console.log(response);
-				setVets(response);
-
+				// console.log('ALL VETS');
+				// console.log(response);
+				if (response.length < 1) {
+					setHasVets(false);
+				} else {
+					setVets(response);
+				}
 				// setPreventatives(response);
 				// sortPreventatives(response);
 			})
@@ -218,22 +222,33 @@ export default function Vets(props) {
 			<div className="title">
 				<h1>Veterinarians</h1>
 			</div>
-			<div
-				className="appointments-table"
-				style={{
-					height: 400,
-					width: '90%',
-					marginLeft: '1rem',
-					// backgroundColor: 'red',
-				}}
-			>
-				<DataGrid
-					rows={rows}
-					columns={columns}
-					pageSize={5}
-					rowHeight={72}
-				/>
-			</div>
+			{hasVets === false ? (
+				<div className="nopets">
+					<h2>
+						No veterinarians found. To add a veterinarian, press the
+						eye icon on your pet's card to go to their profile and
+						add a veterinarian.
+					</h2>
+				</div>
+			) : (
+				<div
+					className="appointments-table"
+					style={{
+						height: 400,
+						width: '90%',
+						marginLeft: '1rem',
+						// backgroundColor: 'red',
+					}}
+				>
+					<DataGrid
+						rows={rows}
+						columns={columns}
+						pageSize={5}
+						rowHeight={72}
+					/>
+				</div>
+			)}
+
 			<div className="spacer"> </div>
 		</div>
 	);

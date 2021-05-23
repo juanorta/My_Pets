@@ -32,6 +32,17 @@
 	height: 71%;
 }
 
+.nopets {
+	background-color: transparent;
+	width: 60%;
+	margin: 0 auto;
+	height: 100%;
+}
+
+.nopets h2 {
+	font-weight: 500;
+}
+
 @media only screen and (max-width: 1000px) {
 	.pets-main-container {
 		width: 95%;

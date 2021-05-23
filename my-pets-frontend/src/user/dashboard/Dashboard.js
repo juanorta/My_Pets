@@ -102,19 +102,23 @@ export default function Dashboard(props) {
 			</Suspense>
 
 			<Suspense fallback={<div>Loading Weights...</div>}>
-				<Weights
-					forceUpdate={props.forceUpdate}
-					currentUser={props.currentUser}
-				/>
+				{petPictures.length < 1 ? null : (
+					<Weights
+						forceUpdate={props.forceUpdate}
+						currentUser={props.currentUser}
+					/>
+				)}
 			</Suspense>
 			<Suspense fallback={<div>Loading Food...</div>}>
-				<Food
-					forceUpdate={props.forceUpdate}
-					currentUser={props.currentUser}
-					changeDefaultViewsAndRefresh={
-						props.changeDefaultViewsAndRefresh
-					}
-				/>
+				{petPictures.length < 1 ? null : (
+					<Food
+						forceUpdate={props.forceUpdate}
+						currentUser={props.currentUser}
+						changeDefaultViewsAndRefresh={
+							props.changeDefaultViewsAndRefresh
+						}
+					/>
+				)}
 			</Suspense>
 			<Suspense fallback={<div>Loading Preventatives...</div>}>
 				{petPictures == '' ? null : (

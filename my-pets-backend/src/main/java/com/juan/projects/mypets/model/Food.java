@@ -1,6 +1,7 @@
 package com.juan.projects.mypets.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +29,8 @@ public class Food {
 
     //used to identify which pet is associated with food in dashboard
     private String petName;
-    private String petFoodId;  
+    private String petFoodId;
+
     @Lob
     private byte[] data;
 

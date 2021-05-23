@@ -23,6 +23,7 @@ export default function DashboardAppointments(props) {
 	);
 
 	const [petPictures, setPetPictures] = useState(props.petPictures);
+	const [hasAppointments, setHasAppointments] = useState(true);
 
 	//getting all appointments and passing them to Upcoming and Past Appointments
 	useEffect(() => {
@@ -32,9 +33,13 @@ export default function DashboardAppointments(props) {
 	const fetchAppointments = () => {
 		getAllAppointments(currentUser.id)
 			.then((response) => {
-				// console.log('NEW APPOINTMENTS');
-				// console.log(response);
-				sortAppointments(response);
+				if (response.length < 1) {
+					setHasAppointments(false);
+				} else {
+					// console.log('NEW APPOINTMENTS');
+					// console.log(response);
+					sortAppointments(response);
+				}
 			})
 			.catch((error) => {});
 	};
@@ -100,50 +105,65 @@ export default function DashboardAppointments(props) {
 			<div className="title">
 				<h1>Appointments</h1>
 			</div>
-			<ul>
-				<li
-					key={0}
-					onClick={upcomingHandler}
-					style={{
-						borderBottom:
-							upcomingClicked === true
-								? '3px solid #ff4f00'
-								: null,
-					}}
-				>
-					{' '}
-					<h2>Upcoming</h2>
-				</li>
-				<li
-					key={0}
-					onClick={pastHandler}
-					style={{
-						borderBottom:
-							pastClicked === true ? '3px solid #ff4f00' : null,
-					}}
-				>
-					<h2>Past</h2>
-				</li>
-			</ul>
-			{loading === true ? (
-				<h2>Loading upcoming and past appointments...</h2>
+
+			{hasAppointments === false ? (
+				<div className="nopets">
+					<h2>
+						No Appointments found. To add an appointment entry,
+						press the eye icon on your pet's card to go to their
+						profile and add an appointment.
+					</h2>
+				</div>
 			) : (
 				<div>
-					{upcomingClicked === true ? (
-						<UpcomingAppointments
-							petPictures={props.petPictures}
-							currentUser={currentUser}
-							upcomingAppointments={upcomingAppointments}
-						/>
-					) : null}
+					{loading === true ? (
+						<h2>Loading upcoming and past appointments...</h2>
+					) : (
+						<div>
+							<ul>
+								<li
+									key={0}
+									onClick={upcomingHandler}
+									style={{
+										borderBottom:
+											upcomingClicked === true
+												? '3px solid #ff4f00'
+												: null,
+									}}
+								>
+									{' '}
+									<h2>Upcoming</h2>
+								</li>
+								<li
+									key={0}
+									onClick={pastHandler}
+									style={{
+										borderBottom:
+											pastClicked === true
+												? '3px solid #ff4f00'
+												: null,
+									}}
+								>
+									<h2>Past</h2>
+								</li>
+							</ul>
+							{upcomingClicked === true ? (
+								<UpcomingAppointments
+									petPictures={props.petPictures}
+									currentUser={currentUser}
+									upcomingAppointments={upcomingAppointments}
+								/>
+							) : null}
 
-					{pastClicked === true ? (
-						<PastAppointments
-							petPictures={props.petPictures}
-							currentUser={currentUser}
-							pastAppointments={pastAppointments}
-						/>
-					) : null}
+							{pastClicked === true ? (
+								<PastAppointments
+									petPictures={props.petPictures}
+									currentUser={currentUser}
+									pastAppointments={pastAppointments}
+								/>
+							) : null}
+						</div>
+					)}
 				</div>
 			)}
 		</div>

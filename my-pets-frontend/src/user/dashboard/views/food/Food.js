@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getAllPetsWithWFood } from '../../../../util/APIUtils';
+import {
+	getAllFood,
+	getAllPetsWithWFood,
+	getFoodAmount,
+} from '../../../../util/APIUtils';
 import FoodCards from '../../PetProfile/Food/FoodCards/FoodCards';
 import './Food.css';
 
@@ -11,17 +15,26 @@ export default function Food(props) {
 	const [petsWithFood, setPetsWithFood] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [isDashboard, setIsDashboard] = useState(true);
+	const [hasFood, setHasFood] = useState(true);
 
 	//getting all pets and their respective list of food
 	useEffect(() => {
-		fetchFood();
+		getFoodAmount(currentUser.id)
+			.then((response) => {
+				if (response < 1) {
+					setHasFood(false);
+				} else {
+					fetchFood();
+				}
+			})
+			.catch((error) => {});
 	}, []);
 
 	const fetchFood = () => {
 		getAllPetsWithWFood(currentUser.id)
 			.then((response) => {
-				// console.log('PETS W/ FOOD');
-				// console.log(response);
+				console.log('PETS W/ FOOD');
+				console.log(response);
 				sortFood(response);
 			})
 			.catch((error) => {});
@@ -54,39 +67,51 @@ export default function Food(props) {
 			<div className="title">
 				<h1>Food</h1>
 			</div>
-			{loading ? null : (
-				<ul>
-					{petsWithFood.map((pet) => (
-						<li
-							key={0}
-							onClick={() => {
-								listItemHandler(pet);
-							}}
-							style={{
-								borderBottom:
-									petListItemClicked.id === pet.id
-										? '3px solid #ff4f00'
-										: null,
-							}}
-						>
-							{' '}
-							<h2>{pet.petName}</h2>
-						</li>
-					))}
-				</ul>
-			)}
 
-			{loading ? null : (
-				<div className="food-dash">
-					<FoodCards
-						isDashboard={isDashboard}
-						forceUpdate={props.forceUpdate}
-						currentUser={currentUser}
-						pet={petListItemClicked}
-						changeDefaultViewsAndRefresh={
-							props.changeDefaultViewsAndRefresh
-						}
-					/>
+			{hasFood === false ? (
+				<div className="nopets">
+					<h2>
+						No food found. To add a food entry, press the eye icon
+						on your pet's card to go to their profile and add food.
+					</h2>
+				</div>
+			) : (
+				<div>
+					{loading ? null : (
+						<ul>
+							{petsWithFood.map((pet) => (
+								<li
+									key={0}
+									onClick={() => {
+										listItemHandler(pet);
+									}}
+									style={{
+										borderBottom:
+											petListItemClicked.id === pet.id
+												? '3px solid #ff4f00'
+												: null,
+									}}
+								>
+									{' '}
+									<h2>{pet.petName}</h2>
+								</li>
+							))}
+						</ul>
+					)}
+
+					{loading ? null : (
+						<div className="food-dash">
+							<FoodCards
+								isDashboard={isDashboard}
+								forceUpdate={props.forceUpdate}
+								currentUser={currentUser}
+								pet={petListItemClicked}
+								changeDefaultViewsAndRefresh={
+									props.changeDefaultViewsAndRefresh
+								}
+							/>
+						</div>
+					)}
 				</div>
 			)}
 		</div>
