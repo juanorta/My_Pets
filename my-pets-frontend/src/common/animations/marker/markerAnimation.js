@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 
-import * as markerAnimation from './marker-new.json';
+import * as markerAnimation from './vet-mpf.json';
 
 const defaultOptions = {
 	loop: true,
@@ -16,7 +16,7 @@ const defaultOptions = {
 const MarkerAnimation = () => {
 	return (
 		<div style={{}}>
-			<Lottie options={defaultOptions} height="10%" width="180px" />
+			<Lottie options={defaultOptions} height="20%" width="330px" />
 		</div>
 	);
 };

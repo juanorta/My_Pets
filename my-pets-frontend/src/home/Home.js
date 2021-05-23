@@ -47,12 +47,15 @@ function Home() {
 	}, []);
 
 	return (
-		<div className="home-main-container" style={{ overflowX: 'hidden' }}>
+		<div
+			className="home-main-container"
+			style={{ overflowX: 'hidden', overflowY: 'hidden !important' }}
+		>
 			{/* banner/intro container */}
 			<Grid container className="grid-container-banner">
 				<Grid item lg={12} xs={12} className="grid-banner">
 					<div className="intro-statement">
-						<h1>Your Pet's Information in One Place</h1>
+						<h1>Your Pet Information in One Place</h1>
 					</div>
 					<NavLink
 						to="/signup"
@@ -86,19 +89,36 @@ function Home() {
 				// style={{ overflowY: 'hidden' }}
 				// style={{ overflowX: 'hidden' }}
 			>
-				<Grid item lg={8} xs={12} className="grid-body">
+				<Grid
+					item
+					lg={8}
+					xs={12}
+					className="grid-body"
+					style={{ overflowY: 'hidden !important' }}
+				>
 					{/* <Grid item lg={12} className="grid-whitespace"></Grid> */}
 					{/* <div>body</div> */}
-					<Grid container className="feature-grid">
+					<Grid
+						container
+						className="feature-grid"
+						style={{ overflowY: 'hidden !important' }}
+					>
 						<Grid
 							item
 							lg={6}
 							md={12}
 							xs={12}
-							className="feature-container"
+							className="feature-container first"
 							data-aos="fade-up"
+							style={{
+								overflowY: 'hidden !important',
+								// backgroundColor: 'green',
+							}}
 						>
-							<div className="feature-pic">
+							<div
+								className="feature-pic"
+								style={{ overflowY: 'hidden !important' }}
+							>
 								{/* <h2>Store as many pets as you want</h2>
 									<h3>
 										From dogs, cats, fish, we have a spot
@@ -107,7 +127,10 @@ function Home() {
 									</h3> */}
 								<DogAnimation />
 							</div>{' '}
-							<div className="feature-description">
+							<div
+								className="feature-description first"
+								style={{ overflowY: 'hidden !important' }}
+							>
 								<h2>
 									{' '}
 									<h2
@@ -123,9 +146,12 @@ function Home() {
 								</h2>
 								<h3>
 									My Pet Family is an all in one pet manager
-									dedicated
+									dedicated to help easily manage your furry
+									friends. Track your pet's weight, create a
+									favorite foods list, view upcoming
+									appointments, and much more!
 								</h3>
-								<h3>
+								{/* <h3>
 									to help easily manage your furry friends.
 									From{' '}
 								</h3>
@@ -142,10 +168,8 @@ function Home() {
 									Track your pet's weight, create a favorite
 									foods
 								</h3>
-								<h3>
-									list, view upcoming appointments, find pet-
-								</h3>{' '}
-								<h3> friendly places and much more!</h3>
+								<h3>list, view upcoming appointments,</h3>{' '}
+								<h3> and much more!</h3> */}
 							</div>
 						</Grid>
 
@@ -336,13 +360,12 @@ function Home() {
 										{' '}
 										|{' '}
 									</h2>{' '}
-									Find nearby stores, vets, and dog parks
+									Always have your vet information ready
 								</h2>
 								<h3>
-									View a map that shows all nearby
-									pet-friendly
+									Phone numbers and addresses available where
 								</h3>
-								<h3>services near you!</h3>
+								<h3>all your other information is!</h3>
 							</div>
 						</Grid>
 					</Grid>
