@@ -354,9 +354,8 @@ function Home() {
 				<div className="get-started">
 					<h1>Ready to get started?</h1>
 					<h2>
-						Create an account with either your Google, Facebook, or
-						Github account and try it out now. Your pets will thank
-						you
+						Create an account with your Google or Facebook account
+						and try it out now!
 					</h2>{' '}
 					<NavLink
 						to="/signup"
