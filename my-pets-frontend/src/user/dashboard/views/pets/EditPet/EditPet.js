@@ -302,7 +302,6 @@ export default function EditPet(props) {
 				// Alert.success('PET EDITED');
 			} else {
 				editPetImage(id, petId, petImageId, image);
-				Alert.success('NO INITIAL IMAGE');
 				//edit pic endpoint goes here
 			}
 

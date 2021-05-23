@@ -392,21 +392,31 @@ export default function AddPetForm(props) {
 				)}
 
 				{small ? (
-					<div className="type">
+					<div>
 						<TextField
 							required
 							select
 							label="Type"
 							style={{ marginTop: '0rem' }}
-							className={selectDropdown2}
+							className={Textfield1}
 							labelId="demo-controlled-open-select-label"
 							id="demo-controlled-open-select"
 							onChange={onTypeChange}
-							style={{ marginLeft: '-0%' }}
+							style={{ marginLeft: '-25%' }}
 						>
 							<MenuItem value={'Vet'}>Vet</MenuItem>
 							<MenuItem value={'Grooming'}>Grooming</MenuItem>
 						</TextField>
+						<TextField
+							onChange={onReasonChange}
+							className={Textfield1}
+							variant="standard"
+							inputProps={{
+								style: { textAlign: 'center' },
+							}}
+							id="standard-basic"
+							label="Reason"
+						/>
 					</div>
 				) : (
 					<div>
@@ -441,16 +451,7 @@ export default function AddPetForm(props) {
 						/>
 					</div>
 				)}
-				<TextField
-					onChange={onReasonChange}
-					className={Textfield1}
-					variant="standard"
-					inputProps={{
-						style: { textAlign: 'center' },
-					}}
-					id="standard-basic"
-					label="Reason"
-				/>
+
 				<TextField
 					onChange={onVetOrGroomerChange}
 					className={Textfield1}
