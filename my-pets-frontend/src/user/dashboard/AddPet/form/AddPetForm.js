@@ -25,6 +25,7 @@ import {
 import Alert from 'react-s-alert';
 import PublishIcon from '@material-ui/icons/Publish';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import SpinnerAnimation from '../../../../common/animations/spinner/spinner';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -215,6 +216,7 @@ export default function AddPetForm(props) {
 	const [age, setAge] = useState(0);
 	const [image, setImage] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const [saveClicked, setSaveClicked] = useState(false);
 
 	//default style classes
 	let Textfield1 = classes.TextField1;
@@ -241,44 +243,37 @@ export default function AddPetForm(props) {
 	}
 
 	const handleFileChange = (event) => {
-		console.log(event.target.files[0]);
 		setImage(event.target.files[0]);
 	};
 
 	const onNameChange = (event) => {
-		console.log('name: ' + event.target.value);
 		setName(event.target.value);
 	};
 
 	const onPetTypeChange = (event) => {
-		console.log('pet type: ' + event.target.value);
 		setPetType(event.target.value);
 	};
 
 	const onBreedChange = (event) => {
-		console.log('breed: ' + event.target.value);
 		setBreed(event.target.value);
 	};
 
 	const onSexChange = (event) => {
-		console.log('sex: ' + event.target.value);
 		setSex(event.target.value);
 	};
 
 	const onAgeChange = (event) => {
-		console.log('age: ' + event.target.value);
 		setAge(event.target.value);
 	};
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
+		setSaveClicked(true);
 		event.preventDefault();
 		addPet(id, age, breed, name, petType, sex);
 		setTimeout(() => {
 			getAllPetsWithoutPictures(id)
 				.then((response) => {
-					console.log(response);
-					console.log(response.length);
 					if (image != '') {
 						addPetImage(
 							id,
@@ -294,9 +289,7 @@ export default function AddPetForm(props) {
 						}, 1500);
 					}
 				})
-				.catch((error) => {
-					console.log(error);
-				});
+				.catch((error) => {});
 		}, 1000);
 
 		if (image == '') {
@@ -396,12 +389,6 @@ export default function AddPetForm(props) {
 							</Select>
 						</FormControl>
 						<FormControl className={classes.formControl}>
-							{/* <InputLabel
-								className={inputLabel}
-								id="demo-controlled-open-select-label"
-							>
-								Age
-							</InputLabel> */}
 							<TextField
 								type="number"
 								label="Age (yrs)"
@@ -449,13 +436,22 @@ export default function AddPetForm(props) {
 					>
 						Cancel
 					</Button>
-					<Button
-						variant="contained"
-						type="submit"
-						className={classes.submitButton}
-					>
-						Save
-					</Button>
+					{saveClicked ? (
+						<Button
+							variant="contained"
+							className={classes.submitButton}
+						>
+							<SpinnerAnimation />
+						</Button>
+					) : (
+						<Button
+							variant="contained"
+							type="submit"
+							className={classes.submitButton}
+						>
+							Save
+						</Button>
+					)}
 				</div>
 			</form>
 		</div>

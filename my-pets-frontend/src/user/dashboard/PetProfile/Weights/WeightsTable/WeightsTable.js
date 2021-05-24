@@ -49,11 +49,6 @@ export default function WeightsTable(props) {
 	if (small) {
 		width = '90%';
 	}
-	// console.log('unsorted weights');
-	// console.log(pet.weights);
-	// console.log('sorted weights');
-	// console.log(sortedWeights);
-
 	const columns = [
 		{
 			field: 'Date',
@@ -110,7 +105,6 @@ export default function WeightsTable(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						console.log(params.row);
 						setOpenModal(true);
 						setIsEditWeight(true);
 						setRowData(params.row);
@@ -119,12 +113,6 @@ export default function WeightsTable(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -134,7 +122,6 @@ export default function WeightsTable(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsDeleteWeight(true);
 						setRowData(params.row);
@@ -159,7 +146,6 @@ export default function WeightsTable(props) {
 		};
 		j++;
 	}
-	// console.log(pet.weights);
 
 	const SetOpenModalToFalse = () => {
 		// setOpenModal(false);
@@ -168,7 +154,7 @@ export default function WeightsTable(props) {
 		setIsDeleteWeight(false);
 		// props.forceUpdate();
 	};
-	// console.log(sortedWeights);
+
 	return (
 		<div
 			style={{

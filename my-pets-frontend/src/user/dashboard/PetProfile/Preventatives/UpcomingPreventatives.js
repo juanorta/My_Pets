@@ -141,7 +141,6 @@ export default function UpcomingPreventatives(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsEditPrev(true);
 						setRowData(params.row);
@@ -150,12 +149,6 @@ export default function UpcomingPreventatives(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -165,7 +158,6 @@ export default function UpcomingPreventatives(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsDeletePrev(true);
 						setRowData(params.row);
@@ -204,10 +196,6 @@ export default function UpcomingPreventatives(props) {
 		setIsDeletePrev(false);
 	};
 
-	// console.log(upcomingPreventatives);
-	// console.log(sortedWeights);
-	console.log('unsorted preventatives');
-	console.log(preventatives);
 	return (
 		<div
 			style={{

@@ -133,7 +133,6 @@ export default function PetProfile(props) {
 	const [viewClicked, setViewClicked] = useState(defaultView);
 
 	useEffect(() => {
-		console.log('USE EFFECT DEFAULT VIEW: ' + defaultView);
 		defaultViewHandler(defaultView);
 		fetchPet();
 	}, [value]);
@@ -141,18 +140,13 @@ export default function PetProfile(props) {
 	const fetchPet = () => {
 		getPet(user.id, petId)
 			.then((response) => {
-				console.log(response);
 				setPet(response);
 				setLoading(false);
 			})
-			.catch((error) => {
-				//console.log(error);
-			});
+			.catch((error) => {});
 	};
 
 	const ReloadPet = (viewName) => {
-		console.log('reload pet function called');
-		console.log('reload pet view: ' + viewName);
 		setDefaultView(viewName);
 		setValue(value + 1);
 		setLoading(true);
@@ -172,14 +166,10 @@ export default function PetProfile(props) {
 		} else if (defaultView == 'VETS') {
 			handleVetClicked();
 		}
-		console.log('View name: ' + viewName);
 	};
-
-	//console.log(props.match.params.petID);
 
 	//changes icon color when hovered over
 	const iconHoverHandler = () => {
-		console.log('hover');
 		setIconClass1(classes.TabIconMouseHover);
 	};
 	const iconHoverHandler2 = () => {
@@ -189,7 +179,6 @@ export default function PetProfile(props) {
 		setIconClass3(classes.TabIconMouseHover);
 	};
 	const iconHoverHandler4 = () => {
-		console.log('hover');
 		setIconClass4(classes.TabIconMouseHover);
 	};
 	const iconHoverHandler5 = () => {
@@ -219,7 +208,6 @@ export default function PetProfile(props) {
 
 	const selectViewHandler = (event) => {
 		setAnchorEl(event.currentTarget);
-		console.log('view selector clicked');
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
@@ -229,7 +217,6 @@ export default function PetProfile(props) {
 	//changes icon color to white
 	//sets other 2 buttons back to normal colors
 	const handleApptClick = () => {
-		//console.log('appt clicked');
 		setApptClicked(true);
 		setViewClicked('Appointments');
 		setButtonClass1(classes.TabButtonClicked);
@@ -260,7 +247,6 @@ export default function PetProfile(props) {
 	};
 
 	const handleWeightClick = () => {
-		//		console.log('weight clicked');
 		setWeightClicked(true);
 		setViewClicked('Weights');
 		setButtonClass2(classes.TabButtonClicked);
@@ -291,7 +277,6 @@ export default function PetProfile(props) {
 	};
 
 	const handleFoodClick = () => {
-		//console.log('food clicked');
 		setFoodClicked(true);
 		setViewClicked('Food/Treats');
 		setButtonClass3(classes.TabButtonClicked);
@@ -406,10 +391,6 @@ export default function PetProfile(props) {
 
 		handleClose();
 	};
-
-	//	console.log('appt = ' + apptClicked);
-	// console.log(props.currentUser);
-	//console.log(props);
 
 	return (
 		<div

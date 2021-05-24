@@ -126,16 +126,8 @@ export default function Overview(props) {
 		props.currentMedications
 	);
 
-	useEffect(() => {
-		console.log('overview');
-		console.log(upcomingAppointments[upcomingAppointments.length - 1]);
-		console.log(nextDuePreventatives[nextDuePreventatives.length - 1]);
-		console.log(endDateMedications[endDateMedications.length - 1]);
-	}, []);
+	useEffect(() => {}, []);
 
-	console.log(upcomingAppointments);
-	console.log(nextDuePreventatives);
-	console.log(endDateMedications);
 	return (
 		<div
 			className="appointments-main-container"

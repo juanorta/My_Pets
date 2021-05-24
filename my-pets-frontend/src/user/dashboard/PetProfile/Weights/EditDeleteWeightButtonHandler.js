@@ -14,11 +14,6 @@ export default function EditDeleteWeightButtonHandler(props) {
 	const [rowData, setRowData] = useState(props.rowData);
 	const [sortedWeights, setSortedWeights] = useState(props.sortedWeights);
 
-	// console.log(rowData);
-	// console.log(pet);
-	// console.log(currentUser);
-	// console.log(sortedWeights);
-	console.log(props.changeDefaultViewsAndRefresh);
 	return (
 		<div className="edit-appt-main-container">
 			{/* opening a different modal depending on what button the user pressed */}

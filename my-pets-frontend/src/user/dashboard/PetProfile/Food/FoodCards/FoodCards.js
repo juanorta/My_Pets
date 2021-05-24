@@ -177,11 +177,6 @@ export default function FoodCards(props) {
 	}
 
 	useEffect(() => {
-		console.log('LETS SEE');
-		console.log(isDashboard);
-		// if (isDashboard != true) {
-		// 	setFood(props.food);
-		// }
 		if (isDashboard) {
 			setFood(props.pet.food);
 		} else {
@@ -197,8 +192,6 @@ export default function FoodCards(props) {
 			whereToBuy: '',
 			notes: '',
 		};
-		console.log(props.pet);
-		// setFood(props.pet.food);
 		setRowData(rowDataObject);
 		setLoading(false);
 	}, [props.pet]);
@@ -209,9 +202,6 @@ export default function FoodCards(props) {
 		setIsDeleteFood(false);
 		// props.forceUpdate();
 	};
-	// console.log(food);
-	// console.log(rowData);
-
 	function editButtonHandler(
 		id,
 		foodName,
@@ -221,14 +211,6 @@ export default function FoodCards(props) {
 		whereToBuy,
 		notes
 	) {
-		console.log(id);
-		console.log(foodName);
-		console.log(flavor);
-		console.log(type);
-		console.log(wetOrDry);
-		console.log(whereToBuy);
-		console.log(notes);
-
 		let rowDataObject = {
 			id: id,
 			foodName: foodName,
@@ -270,11 +252,6 @@ export default function FoodCards(props) {
 		setIsDeleteFood(true);
 	}
 
-	// console.log('large screen');
-	// console.log(largeScreen);
-	// console.log('XL screen');
-	// console.log(extraLargeScreen);
-	// console.log(rowData);
 	//sends data to EditDeleteFoodButtonHandler, which will reorganize data and open a
 	//delete modal or edit modal
 	return (

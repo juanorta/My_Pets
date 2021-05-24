@@ -14,19 +14,9 @@ export default function Pets(props) {
 	const [pets, setPets] = useState('');
 	const [hasPets, setHasPets] = useState(true);
 
-	// var obj = {
-	// 	54: 'hey',
-	// 	46: 'yooo',
-	// 	23: 'ok',
-	// };
-
-	// console.log(obj[46]);
-
 	useEffect(() => {
 		getAllPets(props.currentUser.id)
 			.then((response) => {
-				console.log('ALL PETS');
-				console.log(response);
 				if (response < 1) {
 					setHasPets(false);
 					// setLoading(false);
@@ -43,16 +33,11 @@ export default function Pets(props) {
 		let petPictures = [];
 		let obj = {};
 		for (var i = 0; i < response.length; i++) {
-			// console.log(response[i].petImage.data);
 			obj.id = response[i].id;
 			obj.data = response[i].petImage.data;
 		}
-
-		console.log('pet pics');
-		console.log(obj);
 	};
 
-	// console.log(props);
 	return (
 		<div className="pets-main-container" id="pets">
 			<div className="title">

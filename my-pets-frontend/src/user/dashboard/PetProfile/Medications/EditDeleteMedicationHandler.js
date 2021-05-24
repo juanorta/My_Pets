@@ -13,8 +13,7 @@ export default function EditDeleteMedicationHandler(props) {
 		props.isDeleteMedication
 	);
 	const [rowData, setRowData] = useState(props.rowData);
-	console.log('PROPS');
-	console.log(props);
+
 	return (
 		<div>
 			{openModal && isEditMedication ? (

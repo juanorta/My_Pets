@@ -180,7 +180,6 @@ export default function SideDrawerLoggedIn(props) {
 	const large = useMediaQuery(theme.breakpoints.down('lg'));
 
 	let location = useLocation().pathname;
-	console.log(location);
 
 	//hook that gets set to true when the dashboard page gets loaded for the first time
 	//used to trigger a slide-open animation on first load
@@ -189,20 +188,10 @@ export default function SideDrawerLoggedIn(props) {
 
 	//waiting 250ms to open the side drawer if the page hasn't been loaded yet
 	// setTimeout(function () {
-	// 	if (
-	// 		props.authenticated &&
-	// 		window.innerWidth >= 768 &&
-	// 		dashboardLoadedForFirstTime == false
-	// 	) {
-	// 		setDashboardLoadedForFirstTime(true);
-	// 		setOpen(true);
-	// 	}
-	// }, 400);
 
 	//functions to handle drawer open/close
 	const handleLoggedInDrawerOpen = () => {
 		setOpen(true);
-		console.log('hey');
 	};
 
 	const handleLoggedInDrawerClose = () => {

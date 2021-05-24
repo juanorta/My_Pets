@@ -47,8 +47,6 @@ export default function Weights(props) {
 	const fetchWeights = () => {
 		getWeightsByPet(currentUser.id, pet.id)
 			.then((response) => {
-				// console.log('WEIGHT BY PET');
-				// console.log(response);
 				sortWeights(response);
 			})
 			.catch((error) => {});
@@ -71,29 +69,23 @@ export default function Weights(props) {
 	};
 
 	const ReloadComponent = () => {
-		console.log('reload weights function called');
 		setValue(value + 1);
 		setLoading(true);
 	};
 
 	const graphViewHandler = () => {
-		// console.log('graph view clicked');
 		setTableViewSelected(false);
 		setGraphViewSelected(true);
 		setGraphStyle(classes.GraphViewSelected);
 		setTableStyle(classes.TableView);
 	};
 	const tableViewHandler = () => {
-		// console.log('table view clicked');
 		setGraphViewSelected(false);
 		setTableViewSelected(true);
 		setTableStyle(classes.TableViewSelected);
 		setGraphStyle(classes.GraphView);
 	};
 
-	// console.log('sorted weights');
-	// console.log(sortedWeights);
-	// console.log(pet.weights);
 	return (
 		<div className="appointments-profile-main-container">
 			<div className="appointments-title">

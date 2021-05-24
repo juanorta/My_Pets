@@ -26,6 +26,7 @@ import {
 } from '../../../../util/APIUtils';
 import PublishIcon from '@material-ui/icons/Publish';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import SpinnerAnimation from '../../../../common/animations/spinner/spinner';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -235,13 +236,13 @@ export default function EditFoodForm(props) {
 	const [foodImageId, setFoodImageId] = useState('');
 	const [hasImage, setHasImage] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const [imageAdded, setImageAdded] = useState(false);
+	const [saveClicked, setSaveClicked] = useState(false);
 
 	useEffect(() => {
 		if (props.food[rowData.id].foodImage == null) {
-			console.log('doent have pic');
 			setHasImage(false);
 		} else {
-			console.log('has pic');
 			setFoodImageId(props.food[rowData.id].foodImage.id);
 			setImage(props.food[rowData.id].foodImage.fileName);
 			setImageName(props.food[rowData.id].foodImage.fileName);
@@ -268,6 +269,7 @@ export default function EditFoodForm(props) {
 	}
 	//makes API call to submit form information
 	const submitHandler = (event) => {
+		setSaveClicked(true);
 		event.preventDefault();
 
 		editFood(
@@ -282,81 +284,71 @@ export default function EditFoodForm(props) {
 			notes
 		);
 
-		setTimeout(() => {
-			if (hasImage === false) {
-				// Alert.success('no image');
-				addFoodImage(
-					currentUser.id,
-					pet.id,
-					props.food[rowData.id].id,
-					image
-				);
-				// props.handleClose();
-			} else {
-				// Alert.success('has image');
-				editFoodImage(
-					currentUser.id,
-					pet.id,
-					props.food[rowData.id].id,
-					foodImageId,
-					image
-				);
-			}
-			props.handleClose(0);
-			Alert.success('Food Edited!');
+		if (imageAdded) {
+			setTimeout(() => {
+				if (hasImage === false) {
+					addFoodImage(
+						currentUser.id,
+						pet.id,
+						props.food[rowData.id].id,
+						image
+					);
+				} else {
+					editFoodImage(
+						currentUser.id,
+						pet.id,
+						props.food[rowData.id].id,
+						foodImageId,
+						image
+					);
+				}
+				props.handleClose(0);
+				Alert.success('Food Edited!');
+				setTimeout(() => {
+					Alert.closeAll();
+					props.ReloadComponent();
+				}, 1500);
+			}, 1000);
+		} else {
 			setTimeout(() => {
 				Alert.closeAll();
 				props.ReloadComponent();
 			}, 500);
-		}, 1000);
+		}
 		// props.handleClose();
 	};
 
 	const handleFileChange = (event) => {
-		console.log(event.target.files[0]);
-		console.log(event.target.files[0].name);
 		setImage(event.target.files[0]);
 		setImageName(event.target.files[0].name);
+		setImageAdded(true);
 	};
 
 	const onFoodNameChange = (event) => {
-		console.log('Foodname: ' + event.target.value);
 		setFoodName(event.target.value);
 	};
 
 	const onTypeChange = (event) => {
-		console.log('type: ' + event.target.value);
 		setType(event.target.value);
 	};
 
 	const onWetOrDryChange = (event) => {
-		console.log('wet or dry: ' + event.target.value);
 		setWetOrDry(event.target.value);
 	};
 
 	const onFlavorChange = (event) => {
-		console.log('flavor: ' + event.target.value);
 		setFlavor(event.target.value);
 	};
 
 	const onWhereToBuyChange = (event) => {
-		console.log('where to buy: ' + event.target.value);
 		setWhereToBuy(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('notes: ' + event.target.value);
 		setNotes(event.target.value);
 	};
 
 	//makes API call to submit form informati
-
-	// console.log('food props');
-	// // console.log(props);
-	// console.log(pet.food[rowData.id]);
-	console.log('row data');
-	console.log(rowData);
-	// console.log(pet.food[0]);
 
 	return (
 		<div className="pet-form-main-container">
@@ -524,13 +516,22 @@ export default function EditFoodForm(props) {
 					>
 						Cancel
 					</Button>
-					<Button
-						variant="contained"
-						type="submit"
-						className={classes.submitButton}
-					>
-						Save
-					</Button>
+					{saveClicked ? (
+						<Button
+							variant="contained"
+							className={classes.submitButton}
+						>
+							<SpinnerAnimation />
+						</Button>
+					) : (
+						<Button
+							variant="contained"
+							type="submit"
+							className={classes.submitButton}
+						>
+							Save
+						</Button>
+					)}
 				</div>
 			</form>
 		</div>

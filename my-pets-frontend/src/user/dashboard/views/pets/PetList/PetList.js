@@ -106,8 +106,6 @@ export default function PetList(props) {
 	}
 
 	function editPetHandler(petObj, currentUser) {
-		console.log('edit pressed');
-		console.log(petObj);
 		setPet(petObj);
 		setOpenModal(true);
 		setEditOpenModal(true);
@@ -116,15 +114,9 @@ export default function PetList(props) {
 	}
 
 	function viewProfileHandler(petObj, currentUser) {
-		console.log('view profile pressed');
-		console.log(petObj);
 		// <PetProfile />;
 	}
 
-	// console.log('delete');
-	// console.log(deleteButtonPressed);
-	// console.log(pets);
-	// const data = pets[0].petImage.data;
 	return (
 		<div className="pet-table-main-container">
 			<Grid

@@ -210,25 +210,21 @@ export default function EditMedicationForm(props) {
 	}
 
 	const onNameChange = (event) => {
-		console.log('name: ' + event.target.value);
 		setName(event.target.value);
 	};
 
 	//handles input changes from all fields
 	const onStartDate = (date) => {
-		console.log('start date change called');
 		const formattedDate = moment(date).format('MM/DD/YYYY');
 		setStartDate(formattedDate);
 	};
 
 	const onEndDate = (date) => {
-		console.log('end date called');
 		const formattedDate = moment(date).format('MM/DD/YYYY');
 		setEndDate(formattedDate);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('dosage instructions: ' + event.target.value);
 		setDosageInstructions(event.target.value);
 	};
 
@@ -255,10 +251,6 @@ export default function EditMedicationForm(props) {
 		}, 500);
 	};
 
-	// console.log('weight props');
-	// console.log(props);
-	// console.log('date: ' + selectedDate);
-
 	return (
 		<div className="pet-form-main-container">
 			<h1 className="modal-title">Edit Medication</h1>
@@ -269,10 +261,6 @@ export default function EditMedicationForm(props) {
 					required
 					variant="standard"
 					type="text"
-					// inputProps={{
-					// 	style: { textAlign: 'center' },
-					// 	pattern: '\\d+(\\.\\d+)?',
-					// }}
 					id="standard-basic"
 					label="Name"
 					value={name}
@@ -286,7 +274,6 @@ export default function EditMedicationForm(props) {
 							label="Start Date"
 							value={startDate}
 							placeholder="10/10/2018"
-							// onChange={(date) => handleDateChange(date)}
 							onChange={(date) => {
 								onStartDate(date);
 							}}
@@ -303,7 +290,6 @@ export default function EditMedicationForm(props) {
 							label="End Date"
 							value={endDate}
 							placeholder="10/10/2018"
-							// onChange={(date) => handleDateChange(date)}
 							onChange={(date) => {
 								onEndDate(date);
 							}}
@@ -320,14 +306,11 @@ export default function EditMedicationForm(props) {
 					multiline
 					rowsMax={2}
 					value={dosageInstructions}
-					// value={value}
-					// onChange={handleChange}
 				/>
 
 				<div className="button-group">
 					<Button
 						variant="contained"
-						// onClick={setLastAndWeightChange}
 						onClick={props.handleClose}
 						className={cancelButton}
 					>

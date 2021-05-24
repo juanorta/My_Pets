@@ -80,8 +80,6 @@ export default function AppHeader(props) {
 	let location = useLocation().pathname;
 	let appBranding = 'app-branding';
 
-	console.log(location);
-
 	let menuIconClass = 'menu-icon';
 
 	//functions to handle events

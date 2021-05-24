@@ -36,15 +36,13 @@ export default function AddButton(props) {
 
 	const AddButtonClickHandler = () => {
 		setOpenModal(true);
-		console.log('add button clicked');
 	};
 
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
 		// props.forceUpdate();
 	};
-	// console.log(props.currentUser);
-	// console.log('openModal =>' + openModal);
+
 	return (
 		<div className="add-button-main-container">
 			<div className="add-button">

@@ -87,7 +87,6 @@ export default function SettingsBtnProfile(props) {
 
 	const settingsButtonHandler = (event) => {
 		setAnchorEl(event.currentTarget);
-		console.log(props);
 	};
 
 	const handleClose = () => {

@@ -177,16 +177,12 @@ export default function DashUpcomingPrev(props) {
 	];
 
 	const findPictureById = (id) => {
-		console.log('hello');
 		for (var i = 0; i < petPictures.length; i++) {
 			if (petPictures[i].id == id) {
 				if (petPictures[i].petImage == null) {
 					return '';
-				}
-				//	console.log(petPictures[i].petImage.data);
-				else return petPictures[i].petImage.data;
+				} else return petPictures[i].petImage.data;
 			} else {
-				//console.log('nah');
 			}
 		}
 	};
@@ -216,16 +212,8 @@ export default function DashUpcomingPrev(props) {
 		};
 	}
 
-	const SetOpenModalToFalse = () => {
-		// setOpenModal(false);
-		// setIsEditPrev(false);
-		// setIsDeletePrev(false);
-	};
+	const SetOpenModalToFalse = () => {};
 
-	// console.log(upcomingPreventatives);
-	// console.log(sortedWeights);
-	// console.log('upcoming');
-	// console.log(upcomingPreventatives);
 	return (
 		<div
 			className="appointments-table"

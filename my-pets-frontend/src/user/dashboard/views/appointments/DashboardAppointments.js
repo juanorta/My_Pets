@@ -36,8 +36,6 @@ export default function DashboardAppointments(props) {
 				if (response.length < 1) {
 					setHasAppointments(false);
 				} else {
-					// console.log('NEW APPOINTMENTS');
-					// console.log(response);
 					sortAppointments(response);
 				}
 			})
@@ -52,7 +50,6 @@ export default function DashboardAppointments(props) {
 			var dateB = new Date(b.date);
 			return dateB - dateA;
 		});
-		// console.log(sortedAppointmentsArray);
 		//putting appointments in 'upcoming' or 'past' arrays
 		var now = new Date();
 		let upcomingArray = [];
@@ -65,7 +62,6 @@ export default function DashboardAppointments(props) {
 				'MM/DD/YYYY'
 			);
 			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
 			if (newDate > now) {
 				upcomingArray[j] = sortedAppointmentsArray[i];
 				j++;
@@ -77,8 +73,7 @@ export default function DashboardAppointments(props) {
 				k++;
 			}
 		}
-		// console.log(upcomingArray);
-		// console.log(pastArray);
+
 		setUpcomingAppointments(upcomingArray);
 		setPastAppointments(pastArray);
 		setSortedAppointments(sortedAppointmentsArray);
@@ -95,10 +90,6 @@ export default function DashboardAppointments(props) {
 		setPastClicked(true);
 		setUpcomingClicked(false);
 	};
-	// console.log(sortedAppointments);
-
-	console.log('UMM APPTS');
-	console.log(upcomingAppointments);
 
 	return (
 		<div className="food-main-container" id="appointments">

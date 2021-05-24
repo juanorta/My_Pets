@@ -9,7 +9,6 @@ export default function EditDeleteMedicationHandler(props) {
 	const [isEditVet, setIsEditVet] = useState(props.isEditVet);
 	const [isDeleteVet, setIsDeleteVet] = useState(props.isDeleteVet);
 	const [rowData, setRowData] = useState(props.rowData);
-	console.log(props);
 	return (
 		<div>
 			{openModal && isEditVet ? (

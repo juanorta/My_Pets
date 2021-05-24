@@ -25,7 +25,6 @@ export default function Weights(props) {
 	const [clicked, setClicked] = useState(false);
 	const [isDashboardWeight, setIsDashboardWeight] = useState(true);
 	const [hasWeights, setHasWeights] = useState(true);
-	// console.log(pets);
 
 	//initializes first pet in petsWithWeightsArray as the default selected
 	useEffect(() => {
@@ -43,8 +42,6 @@ export default function Weights(props) {
 	const fetchWeights = () => {
 		getAllPetsWithWeights(currentUser.id)
 			.then((response) => {
-				console.log('PETS W/ WEIGHTS');
-				console.log(response);
 				sortWeights(response);
 			})
 			.catch((error) => {});
@@ -80,8 +77,6 @@ export default function Weights(props) {
 	};
 	//handles tab click
 	function listItemHandler(pet) {
-		// console.log(pet);
-
 		//same process as code in useEffect
 		let sortedWeights = [];
 		for (var i = 0; i < pet.weights.length; i++) {

@@ -37,26 +37,19 @@ class App extends Component {
 	}
 
 	loadCurrentlyLoggedInUser() {
-		console.log('loadcurrentlyloggedinuser');
 		this.setState({
 			loading: true,
 		});
 
 		getCurrentUser()
 			.then((response) => {
-				console.log('response');
-				console.log(response);
 				this.setState(
 					{
 						currentUser: response,
 						authenticated: true,
 						loading: false,
 					},
-					() => {
-						console.log(
-							'authenticated : ' + this.state.authenticated
-						);
-					}
+					() => {}
 				);
 			})
 			.catch((error) => {
@@ -64,17 +57,9 @@ class App extends Component {
 					loading: false,
 				});
 			});
-
-		// getAllWeights(currentUser.id).then((response) => {
-		// 	this.setState({
-		// 		weights: response,
-		// 	});
-		// });
 	}
 
 	changeDefaultViewsAndRefresh(view) {
-		console.log('change default views called');
-		console.log('APP VIEW: ' + view);
 		this.setState({
 			defaultView: view,
 		});
@@ -90,9 +75,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		console.log('DID MOUTN');
 		this.loadCurrentlyLoggedInUser();
-		// this.changeDefaultViewsAndRefresh();
 	}
 
 	refresh() {
@@ -102,12 +85,10 @@ class App extends Component {
 	}
 
 	render() {
-		// console.log(localStorage);
 		if (this.state.loading) {
 			return <LoadingIndicator />;
 		}
 
-		// console.log(this.state.authenticated);
 		return (
 			<div className="app">
 				<div className="app-top-box">
@@ -149,12 +130,7 @@ class App extends Component {
 						) : (
 							<Route exact path="/" component={Home}></Route>
 						)}
-						{/* <PrivateRoute
-							path="/profile"
-							authenticated={this.state.authenticated}
-							currentUser={this.state.currentUser}
-							component={Profile}
-						></PrivateRoute> */}
+
 						<Route
 							path="/login"
 							render={(props) => (

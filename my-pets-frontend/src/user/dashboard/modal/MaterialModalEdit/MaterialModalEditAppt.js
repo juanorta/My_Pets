@@ -111,12 +111,6 @@ export default function MaterialModalProfile(props) {
 		style = classes.AddFormSmall;
 	}
 
-	console.log('edit vet' + isEditVet);
-	// console.log('PROPS');
-	// console.log(props);
-	// console.log(props.changeDefaultViewsAndRefresh);
-	// console.log('open => ' + open);
-
 	return (
 		<div className="add-pet-modal-main-container">
 			<Modal

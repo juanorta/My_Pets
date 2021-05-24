@@ -31,7 +31,6 @@ export default function WeightsGraph(props) {
 				'MM/DD/YYYY'
 			);
 			dates[i] = date;
-			// console.log(date);
 			weightValues[i] = props.sortedWeights[i].weightValue;
 		}
 

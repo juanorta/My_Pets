@@ -57,30 +57,21 @@ export default function Vets(props) {
 	const [hasVets, setHasVets] = useState(true);
 
 	const [vets, setVets] = useState('');
-	// console.log(vets);
 
 	useEffect(() => {
 		fetchVets();
 	}, []);
 
-	const SetOpenModalToFalse = () => {
-		// setOpenModal(false);
-		// setIsEditVet(false);
-		// setIsDeleteVet(false);
-	};
+	const SetOpenModalToFalse = () => {};
 
 	const fetchVets = () => {
 		getAllVets(currentUser.id)
 			.then((response) => {
-				// console.log('ALL VETS');
-				// console.log(response);
 				if (response.length < 1) {
 					setHasVets(false);
 				} else {
 					setVets(response);
 				}
-				// setPreventatives(response);
-				// sortPreventatives(response);
 			})
 			.catch((error) => {});
 	};
@@ -189,16 +180,12 @@ export default function Vets(props) {
 	];
 
 	const findPictureById = (id) => {
-		console.log('hello');
 		for (var i = 0; i < petPictures.length; i++) {
 			if (petPictures[i].id == id) {
 				if (petPictures[i].petImage == null) {
 					return '';
-				}
-				//	console.log(petPictures[i].petImage.data);
-				else return petPictures[i].petImage.data;
+				} else return petPictures[i].petImage.data;
 			} else {
-				//console.log('nah');
 			}
 		}
 	};

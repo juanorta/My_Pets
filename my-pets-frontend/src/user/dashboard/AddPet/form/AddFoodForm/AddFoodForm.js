@@ -27,6 +27,7 @@ import {
 } from '../../../../../util/APIUtils';
 import PublishIcon from '@material-ui/icons/Publish';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import SpinnerAnimation from '../../../../../common/animations/spinner/spinner';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -232,6 +233,7 @@ export default function AddFoodForm(props) {
 	const [image, setImage] = useState('');
 	const [imageName, setImageName] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
+	const [saveClicked, setSaveClicked] = useState(false);
 
 	//handles input changes from all fields
 	const [notes, setNotes] = useState('');
@@ -255,44 +257,37 @@ export default function AddFoodForm(props) {
 	}
 
 	const handleFileChange = (event) => {
-		console.log(event.target.files[0]);
-		console.log(event.target.files[0].name);
 		setImage(event.target.files[0]);
 		setImageName(event.target.files[0].name);
 	};
 
 	const onFoodNameChange = (event) => {
-		console.log('Foodname: ' + event.target.value);
 		setFoodName(event.target.value);
 	};
 
 	const onTypeChange = (event) => {
-		console.log('type: ' + event.target.value);
 		setType(event.target.value);
 	};
 
 	const onWetOrDryChange = (event) => {
-		console.log('wet or dry: ' + event.target.value);
 		setWetOrDry(event.target.value);
 	};
 
 	const onFlavorChange = (event) => {
-		console.log('flavor: ' + event.target.value);
 		setFlavor(event.target.value);
 	};
 
 	const onWhereToBuyChange = (event) => {
-		console.log('where to buy: ' + event.target.value);
 		setWhereToBuy(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('notes: ' + event.target.value);
 		setNotes(event.target.value);
 	};
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
+		setSaveClicked(true);
 		event.preventDefault();
 
 		addFood(
@@ -310,7 +305,6 @@ export default function AddFoodForm(props) {
 			setTimeout(() => {
 				getPetWithoutPictureWithFood(currentUser.id, pet.id)
 					.then((response) => {
-						console.log(response);
 						//if user selected an image
 						addFoodImage(
 							currentUser.id,
@@ -323,12 +317,10 @@ export default function AddFoodForm(props) {
 						setTimeout(() => {
 							Alert.closeAll();
 							props.ReloadPet('FOOD');
-						}, 500);
+						}, 1500);
 						// response[response.food.length-1].id;
 					})
-					.catch((error) => {
-						console.log(error);
-					});
+					.catch((error) => {});
 			}, 1000);
 		} else {
 			props.handleClose();
@@ -339,9 +331,6 @@ export default function AddFoodForm(props) {
 			}, 500);
 		}
 	};
-
-	console.log('food props');
-	console.log(props);
 
 	return (
 		<div className="pet-form-main-container">
@@ -509,13 +498,22 @@ export default function AddFoodForm(props) {
 					>
 						Cancel
 					</Button>
-					<Button
-						variant="contained"
-						type="submit"
-						className={classes.submitButton}
-					>
-						Save
-					</Button>
+					{saveClicked ? (
+						<Button
+							variant="contained"
+							className={classes.submitButton}
+						>
+							<SpinnerAnimation />
+						</Button>
+					) : (
+						<Button
+							variant="contained"
+							type="submit"
+							className={classes.submitButton}
+						>
+							Save
+						</Button>
+					)}
 				</div>
 			</form>
 		</div>

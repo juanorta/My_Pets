@@ -7,8 +7,6 @@ import { deleteWeight } from '../../../../../util/APIUtils';
 //a confirmation display
 //will delete selected appointment if user clicks 'Yes'
 export default function DeleteApptConfirmation(props) {
-	// console.log('delete confirmation');
-	// console.log(props);
 	const [currentUser, setCurrentUser] = useState(props.currentUser);
 	const [pet, setPet] = useState(props.pet);
 	const [rowData, setRowData] = useState(props.rowData);
@@ -31,11 +29,6 @@ export default function DeleteApptConfirmation(props) {
 	const close = () => {
 		props.handleClose();
 	};
-
-	console.log(currentUser);
-	console.log(pet);
-	console.log(rowData);
-	console.log(sortedWeights);
 
 	return (
 		<div className="delete-confirmation-main-container">

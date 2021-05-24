@@ -141,10 +141,6 @@ export default function MaterialModal(props) {
 		}
 	}
 
-	// console.log(props);
-	// console.log('open => ' + open);
-	// console.log(props.changeDefaultViewsAndRefresh);
-
 	return (
 		<div className="add-pet-modal-main-container">
 			<Modal

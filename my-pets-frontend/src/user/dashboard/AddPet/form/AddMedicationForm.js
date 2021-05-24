@@ -205,25 +205,21 @@ export default function AddMedicationForm(props) {
 	}
 
 	const onNameChange = (event) => {
-		console.log('name: ' + event.target.value);
 		setName(event.target.value);
 	};
 
 	//handles input changes from all fields
 	const onStartDate = (date) => {
-		console.log('start date change called');
 		const formattedDate = moment(date).format('MM/DD/YYYY');
 		setStartDate(formattedDate);
 	};
 
 	const onEndDate = (date) => {
-		console.log('end date called');
 		const formattedDate = moment(date).format('MM/DD/YYYY');
 		setEndDate(formattedDate);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('dosage instructions: ' + event.target.value);
 		setDosageInstructions(event.target.value);
 	};
 
@@ -250,10 +246,6 @@ export default function AddMedicationForm(props) {
 		}, 500);
 	};
 
-	// console.log('weight props');
-	// console.log(props);
-	// console.log('date: ' + selectedDate);
-
 	return (
 		<div className="pet-form-main-container">
 			<h1 className="modal-title">Add New Medication</h1>
@@ -264,10 +256,6 @@ export default function AddMedicationForm(props) {
 					required
 					variant="standard"
 					type="text"
-					// inputProps={{
-					// 	style: { textAlign: 'center' },
-					// 	pattern: '\\d+(\\.\\d+)?',
-					// }}
 					id="standard-basic"
 					label="Name"
 				/>
@@ -280,7 +268,6 @@ export default function AddMedicationForm(props) {
 							label="Start Date"
 							value={startDate}
 							placeholder="10/10/2018"
-							// onChange={(date) => handleDateChange(date)}
 							onChange={(date) => {
 								onStartDate(date);
 							}}
@@ -297,7 +284,6 @@ export default function AddMedicationForm(props) {
 							label="End Date"
 							value={endDate}
 							placeholder="10/10/2018"
-							// onChange={(date) => handleDateChange(date)}
 							onChange={(date) => {
 								onEndDate(date);
 							}}
@@ -313,13 +299,10 @@ export default function AddMedicationForm(props) {
 					label="Dosage Instructions"
 					multiline
 					rowsMax={2}
-					// value={value}
-					// onChange={handleChange}
 				/>
 
 				<div className="button-group">
 					<Button
-						// onClick={setLastAndWeightChange}
 						variant="contained"
 						onClick={props.handleClose}
 						className={cancelButton}

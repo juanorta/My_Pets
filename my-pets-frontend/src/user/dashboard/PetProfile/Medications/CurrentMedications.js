@@ -125,7 +125,6 @@ export default function CurrentMedications(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsEditMedication(true);
 						setRowData(params.row);
@@ -134,12 +133,6 @@ export default function CurrentMedications(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -149,7 +142,6 @@ export default function CurrentMedications(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsDeleteMedication(true);
 						setRowData(params.row);
@@ -187,7 +179,6 @@ export default function CurrentMedications(props) {
 		setIsDeleteMedication(false);
 		// props.forceUpdate();
 	};
-	// console.log(sortedWeights);
 	return (
 		<div
 			style={{

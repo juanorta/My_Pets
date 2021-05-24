@@ -209,39 +209,24 @@ export default function EditWeightForm(props) {
 		cancelButton = classes.cancelButtonSmall;
 		submitButton = classes.submitButtonSmall;
 	}
-	// const [dateChanged, setDateChanged] = useState();
 
 	//accesses last weight record and stores it for later use
-	// const [lastDateWeighed, setLastWeightDate] = useState(
-	// 	pet.weights[pet.weights.length - 1].dateWeighed
-	// );
-	// const [lastWeightValue, setLastWeightValue] = useState(
-	// 	pet.weights[pet.weights.length - 1].weightValue
-	// );
 
 	//handles input changes from all fields
 	const onDateChange = (date) => {
-		// setDateChanged(true);
-		console.log('on date change called');
-		console.log(date);
 		const formattedDate = moment(date).format('dddd MMM DD, YYYY');
 		setSelectedDate(formattedDate);
 	};
 
 	const onWeightValueChange = (event) => {
-		console.log('weight: ' + event.target.value);
 		setWeightValue(event.target.value);
-		// setTime(event.target.value);
 	};
 
 	const onUnitChange = (event) => {
-		console.log('unit: ' + event.target.value);
 		setUnit(event.target.value);
-		// setAmOrPm(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('notes: ' + event.target.value);
 		setNotes(event.target.value);
 	};
 
@@ -261,19 +246,14 @@ export default function EditWeightForm(props) {
 			pet.petName,
 			pet.id
 		);
-		// props.handleClose();
+
 		Alert.success('Weight Added');
-		// console.log(props.forceUpdate);
 
 		setTimeout(() => {
 			Alert.closeAll();
 			props.ReloadComponent();
 		}, 500);
 	};
-
-	// console.log('weight props');
-	// console.log(props.changeDefaultViewsAndRefresh);
-	// console.log('date: ' + selectedDate);
 
 	return (
 		<div className="pet-form-main-container">

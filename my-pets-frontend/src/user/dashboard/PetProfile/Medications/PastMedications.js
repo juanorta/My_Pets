@@ -125,7 +125,6 @@ export default function PastMedications(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsEditMedication(true);
 						setRowData(params.row);
@@ -134,12 +133,6 @@ export default function PastMedications(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -149,7 +142,6 @@ export default function PastMedications(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsDeleteMedication(true);
 						setRowData(params.row);
@@ -184,7 +176,6 @@ export default function PastMedications(props) {
 		setIsEditMedication(false);
 		setIsDeleteMedication(false);
 	};
-	// console.log(sortedWeights);
 	return (
 		<div
 			style={{
@@ -199,14 +190,6 @@ export default function PastMedications(props) {
 				columns={columns}
 				pageSize={5}
 				rowHeight={72}
-
-				// sortModel={[
-				// 	{
-				// 		field: 'commodity',
-				// 		sort: 'asc',
-				// 	},
-				// ]}
-				// onCellClick={(CellParams) => {}}
 			/>
 			{isEditMedication ? (
 				<EditDeleteMedicationHandler

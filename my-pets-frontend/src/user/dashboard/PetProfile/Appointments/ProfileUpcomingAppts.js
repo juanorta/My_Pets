@@ -152,7 +152,6 @@ export default function ProfileUpcomingAppts(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						//console.log(params);
 						setOpenModal(true);
 						setIsEditAppt(true);
 						setEditParams(params.row);
@@ -161,12 +160,6 @@ export default function ProfileUpcomingAppts(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -215,19 +208,12 @@ export default function ProfileUpcomingAppts(props) {
 		setOpenModal(true);
 		setIsEditAppt(true);
 		setIsDeleteAppt(false);
-		console.log(params);
-		console.log('edit');
-		// console.log(pet);
-		console.log(pet.appointments[params.row.id]);
 	};
 
 	const deleteHandler = (params) => {
 		setOpenModal(true);
 		setIsDeleteAppt(true);
 		setIsEditAppt(true);
-		console.log(params);
-		console.log('delete');
-		console.log(pet.appointments[params.row.id]);
 	};
 
 	//sets all flags to false
@@ -239,8 +225,6 @@ export default function ProfileUpcomingAppts(props) {
 		// props.forceUpdate();
 	};
 
-	// console.log(props);
-	// console.log('params : ' editParams);
 	return (
 		<div className="appointments-profile-main-container">
 			<h2>upcoming</h2>

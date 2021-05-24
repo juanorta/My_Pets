@@ -38,7 +38,6 @@ export default function ProfileAppointments(props) {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		// console.log(appointments);
 		let sortedAppointmentsArray = appointments.slice();
 		sortedAppointmentsArray.sort(function compare(a, b) {
 			var dateA = new Date(a.date);
@@ -58,26 +57,17 @@ export default function ProfileAppointments(props) {
 				'MM/DD/YYYY'
 			);
 			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
 			if (newDate > now) {
-				console.log('UPCOMING');
-				console.log(newDate);
 				upcomingArray[j] = sortedAppointmentsArray[i];
 				j++;
 			} else if (sameDate == todayFormatted) {
-				console.log('SAME');
-				console.log(newDate);
 				upcomingArray[j] = sortedAppointmentsArray[i];
 				j++;
 			} else {
-				console.log('PAST');
-				console.log(newDate);
 				pastArray[k] = sortedAppointmentsArray[i];
 				k++;
 			}
 		}
-		// console.log(upcomingArray);
-		// console.log(pastArray);
 		setUpcomingAppointments(upcomingArray);
 		setPastAppointments(pastArray);
 		setSortedAppointments(sortedAppointmentsArray);
@@ -97,10 +87,6 @@ export default function ProfileAppointments(props) {
 		setPastStyle(classes.pastSelected);
 		setUpcomingStyle(classes.upcoming);
 	};
-
-	console.log(upcomingAppointments);
-	console.log(pastAppointments);
-	console.log(sortedAppointments);
 
 	return (
 		<div className="weights-profile-main-container">

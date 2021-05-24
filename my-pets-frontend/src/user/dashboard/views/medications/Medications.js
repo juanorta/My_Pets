@@ -87,8 +87,6 @@ export default function Medications(props) {
 	const fetchMedications = () => {
 		getAllMedications(currentUser.id)
 			.then((response) => {
-				// console.log('ALL MEDICATIONS');
-				// console.log(response);
 				if (response.length < 1) {
 					setHasMedications(false);
 				} else {

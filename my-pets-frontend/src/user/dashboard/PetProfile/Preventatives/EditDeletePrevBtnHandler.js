@@ -10,7 +10,6 @@ export default function EditDeletePrevBtnHandler(props) {
 	const [isDeletePrev, setIsDeletePrev] = useState(props.isDeletePrev);
 	const [rowData, setRowData] = useState(props.rowData);
 	const [fromDash, setFromDash] = useState(props.fromDash);
-	console.log(props);
 	return (
 		<div>
 			{openModal && isEditPrev ? (

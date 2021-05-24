@@ -207,45 +207,31 @@ export default function AddPreventative(props) {
 	}
 	//handles input changes from all fields
 	const onDueNext = (date) => {
-		console.log('on due next change called');
-		console.log(date);
 		const formattedDate = moment(date).format('MM/DD/YYYY');
 		setDueNext(formattedDate);
 	};
 
 	const onLastGiven = (date) => {
-		console.log('on last given change called');
 		const formattedDate = moment(date).format('MM/DD/YYYY');
 		setLastGiven(formattedDate);
 	};
 
 	const onNameChange = (event) => {
-		console.log('name: ' + event.target.value);
 		setName(event.target.value);
-		// setWeightValue(event.target.value);
-		// setTime(event.target.value);
 	};
 
 	const onTypeChange = (event) => {
-		console.log('type: ' + event.target.value);
 		setType(event.target.value);
-		// setUnit(event.target.value);
-		// // setAmOrPm(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('notes: ' + event.target.value);
 		setNotes(event.target.value);
 	};
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
-		console.log('name: ' + name);
-		console.log('type: ' + type);
-		console.log('due next: ' + dueNext);
-		console.log('last given: ' + lastGiven);
-		console.log('notes: ' + notes);
+
 		addPreventative(
 			currentUser.id,
 			pet.id,
@@ -290,10 +276,6 @@ export default function AddPreventative(props) {
 					className={Textfield1}
 					variant="standard"
 					type="text"
-					// inputProps={{
-					// 	style: { textAlign: 'center' },
-					// 	pattern: '\\d+(\\.\\d+)?',
-					// }}
 					id="standard-basic"
 					label="Type"
 				/>
@@ -305,7 +287,6 @@ export default function AddPreventative(props) {
 							clearable
 							value={dueNext}
 							placeholder="10/10/2018"
-							// onChange={(date) => handleDateChange(date)}
 							onChange={(date) => {
 								onDueNext(date);
 							}}
@@ -321,7 +302,6 @@ export default function AddPreventative(props) {
 							clearable
 							value={lastGiven}
 							placeholder="10/10/2018"
-							// onChange={(date) => handleDateChange(date)}
 							onChange={(date) => {
 								onLastGiven(date);
 							}}
@@ -338,14 +318,11 @@ export default function AddPreventative(props) {
 					label="Notes"
 					multiline
 					rowsMax={2}
-					// value={value}
-					// onChange={handleChange}
 				/>
 
 				<div className="button-group">
 					<Button
 						variant="contained"
-						// onClick={setLastAndWeightChange}
 						onClick={props.handleClose}
 						className={cancelButton}
 					>

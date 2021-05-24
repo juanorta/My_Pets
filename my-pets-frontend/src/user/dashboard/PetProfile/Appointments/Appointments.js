@@ -60,7 +60,6 @@ export default function Appointments(props) {
 	}, [value]);
 
 	const ReloadAppointment = () => {
-		console.log('reload appointments function called');
 		setValue(value + 1);
 		setLoading(true);
 	};
@@ -68,8 +67,6 @@ export default function Appointments(props) {
 	const fetchAppointments = () => {
 		getAppointmentsByPet(currentUser.id, pet.id)
 			.then((response) => {
-				// console.log('APPOINTMENTS BY PET');
-				// console.log(response);
 				sortAppointments(response);
 			})
 			.catch((error) => {});
@@ -192,7 +189,6 @@ export default function Appointments(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						console.log(params);
 						setOpenModal(true);
 						setIsEditAppt(true);
 						setEditParams(params.row);
@@ -201,12 +197,6 @@ export default function Appointments(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -256,19 +246,12 @@ export default function Appointments(props) {
 		setOpenModal(true);
 		setIsEditAppt(true);
 		setIsDeleteAppt(false);
-		console.log(params);
-		console.log('edit');
-		// console.log(pet);
-		console.log(pet.appointments[params.row.id]);
 	};
 
 	const deleteHandler = (params) => {
 		setOpenModal(true);
 		setIsDeleteAppt(true);
 		setIsEditAppt(true);
-		console.log(params);
-		console.log('delete');
-		console.log(pet.appointments[params.row.id]);
 	};
 
 	//sets all flags to false
@@ -280,8 +263,6 @@ export default function Appointments(props) {
 		// props.forceUpdate();
 	};
 
-	// console.log(props);
-	// console.log('params : ' editParams);
 	return (
 		<div className="appointments-profile-main-container">
 			<div className="appointments-title">

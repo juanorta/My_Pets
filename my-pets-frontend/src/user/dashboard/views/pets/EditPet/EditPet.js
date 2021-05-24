@@ -17,6 +17,7 @@ import {
 import PublishIcon from '@material-ui/icons/Publish';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useLocation } from 'react-router';
+import SpinnerAnimation from '../../../../../common/animations/spinner/spinner';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -212,6 +213,8 @@ export default function EditPet(props) {
 	const [imageName, setImageName] = useState('');
 	const small = useMediaQuery(theme.breakpoints.down('sm'));
 	let location = useLocation().pathname;
+	const [imageAdded, setImageAdded] = useState(false);
+	const [saveClicked, setSaveClicked] = useState(false);
 
 	//default style classes
 	let Textfield1 = classes.TextField1;
@@ -241,10 +244,8 @@ export default function EditPet(props) {
 	//if so, will grab the photo and store it
 	useEffect(() => {
 		if (props.pet.petImage == null) {
-			console.log('doent have pic');
 			setHasImage(false);
 		} else {
-			console.log('has pic');
 			setPetImageId(props.pet.petImage.id);
 			setImage(props.pet.petImage.fileName);
 			setImageName(props.pet.petImage.fileName);
@@ -253,38 +254,34 @@ export default function EditPet(props) {
 	}, []);
 
 	const handleFileChange = (event) => {
-		console.log(event.target.files[0]);
 		setImage(event.target.files[0]);
 		setImageName(event.target.files[0].name);
+		setImageAdded(true);
 	};
 
 	const onNameChange = (event) => {
-		console.log('name: ' + event.target.value);
 		setName(event.target.value);
 	};
 
 	const onPetTypeChange = (event) => {
-		console.log('pet type: ' + event.target.value);
 		setPetType(event.target.value);
 	};
 
 	const onBreedChange = (event) => {
-		console.log('breed: ' + event.target.value);
 		setBreed(event.target.value);
 	};
 
 	const onSexChange = (event) => {
-		console.log('sex: ' + event.target.value);
 		setSex(event.target.value);
 	};
 
 	const onAgeChange = (event) => {
-		console.log('age: ' + event.target.value);
 		setAge(event.target.value);
 	};
 
 	//makes API call to submit form information
 	const submitHandler = (event) => {
+		setSaveClicked(true);
 		event.preventDefault();
 
 		editPet(id, petId, name, petType, breed, sex, age);
@@ -292,19 +289,30 @@ export default function EditPet(props) {
 
 		//will call two different endpoints depending if use is editing a current photo
 		//or if user is adding photo to pet for the first time
-		setTimeout(() => {
-			if (hasImage === false) {
-				// Alert.success('image is null');
-				// props.handleClose();
-				addPetImage(id, petId, image);
-				Alert.success('PET EDITED');
-				props.handleClose();
-				// Alert.success('PET EDITED');
-			} else {
-				editPetImage(id, petId, petImageId, image);
-				//edit pic endpoint goes here
-			}
+		if (imageAdded) {
+			setTimeout(() => {
+				if (hasImage === false) {
+					// Alert.success('image is null');
+					// props.handleClose();
+					addPetImage(id, petId, image);
+					Alert.success('PET EDITED');
+					props.handleClose();
+					// Alert.success('PET EDITED');
+				} else {
+					editPetImage(id, petId, petImageId, image);
+					//edit pic endpoint goes here
+				}
 
+				setTimeout(() => {
+					Alert.closeAll();
+					if (location == '/') {
+						props.forceUpdate();
+					} else {
+						props.ReloadPet('APPOINTMENTS');
+					}
+				}, 1500);
+			}, 1000);
+		} else {
 			setTimeout(() => {
 				Alert.closeAll();
 				if (location == '/') {
@@ -313,10 +321,8 @@ export default function EditPet(props) {
 					props.ReloadPet('APPOINTMENTS');
 				}
 			}, 500);
-		}, 1000);
+		}
 	};
-
-	console.log(hasImage);
 
 	return (
 		<div className="edit-pet-main-container">
@@ -456,13 +462,22 @@ export default function EditPet(props) {
 					>
 						Cancel
 					</Button>
-					<Button
-						variant="contained"
-						type="submit"
-						className={classes.submitButton}
-					>
-						Save
-					</Button>
+					{saveClicked ? (
+						<Button
+							variant="contained"
+							className={classes.submitButton}
+						>
+							<SpinnerAnimation />
+						</Button>
+					) : (
+						<Button
+							variant="contained"
+							type="submit"
+							className={classes.submitButton}
+						>
+							Save
+						</Button>
+					)}
 				</div>
 			</form>
 		</div>

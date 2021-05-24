@@ -39,14 +39,11 @@ export default function Preventatives(props) {
 
 	useEffect(() => {
 		fetchPreventatives();
-		// console.log(preventatives);
 	}, [value]);
 
 	const fetchPreventatives = () => {
 		getPreventativesByPet(currentUser.id, pet.id)
 			.then((response) => {
-				// console.log('PREVENTATIVES BY PET');
-				// console.log(response);
 				sortPreventatives(response);
 			})
 			.catch((error) => {});
@@ -73,27 +70,17 @@ export default function Preventatives(props) {
 			);
 
 			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
 			if (newDate > now) {
-				// console.log('UPCOMING');
-				// console.log(newDate);
 				upcomingArray[j] = sortedPreventatives[i];
 				j++;
 			} else if (sameDate == todayFormatted) {
-				// console.log('SAME');
-				// console.log(newDate);
 				upcomingArray[j] = sortedPreventatives[i];
 				j++;
 			} else {
-				// console.log('PAST');
-				// console.log(newDate);
 				pastArray[k] = sortedPreventatives[i];
 				k++;
 			}
 		}
-		// console.log(sortedPreventatives);
-		// console.log(upcomingArray);
-		// console.log(pastArray);
 
 		setUpcomingPreventatives(upcomingArray);
 		setPastPreventatives(pastArray);
@@ -101,13 +88,11 @@ export default function Preventatives(props) {
 	};
 
 	const ReloadComponent = () => {
-		console.log('reload weights function called');
 		setValue(value + 1);
 		setLoading(true);
 	};
 
 	const upcomingViewHandler = () => {
-		// console.log('graph view clicked');
 		setPastViewSelected(false);
 		setUpcomingViewSelected(true);
 		setUpcomingStyle(classes.upcomingViewSelected);
@@ -119,12 +104,6 @@ export default function Preventatives(props) {
 		setPastStyle(classes.pastViewSelected);
 		setUpcomingStyle(classes.upcomingView);
 	};
-
-	// console.log(upcomingPreventatives);
-	// console.log(pastPreventatives);
-	// console.log(preventatives);
-	// console.log('non sorted preventatives');
-	// console.log(preventatives);
 
 	return (
 		<div className="appointments-profile-main-container">

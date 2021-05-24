@@ -33,8 +33,6 @@ export default function Food(props) {
 	const fetchFood = () => {
 		getAllPetsWithWFood(currentUser.id)
 			.then((response) => {
-				console.log('PETS W/ FOOD');
-				console.log(response);
 				sortFood(response);
 			})
 			.catch((error) => {});
@@ -50,7 +48,7 @@ export default function Food(props) {
 				j++;
 			}
 		}
-		// console.log(petsWithFood);
+
 		setPetsWithFood(petsWithFood);
 
 		setPetListItemClicked(petsWithFood[0]);
@@ -61,7 +59,6 @@ export default function Food(props) {
 		setPetListItemClicked(pet);
 	}
 
-	console.log(petsWithFood);
 	return (
 		<div className="food-main-container" id="food">
 			<div className="title">

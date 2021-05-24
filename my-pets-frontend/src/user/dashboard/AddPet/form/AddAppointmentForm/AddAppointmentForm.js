@@ -228,39 +228,31 @@ export default function AddPetForm(props) {
 
 	//handles input changes from all fields
 	const onDateChange = (date) => {
-		console.log('on date change called');
-		console.log(date);
 		const formattedDate = moment(date).format('dddd MMM DD, YYYY');
 		setSelectedDate(formattedDate);
 	};
 
 	const onTimeChange = (event) => {
-		console.log('time: ' + event.target.value);
 		setTime(event.target.value);
 	};
 
 	const onAmOrPmChange = (event) => {
-		console.log('am/pm: ' + event.target.value);
 		setAmOrPm(event.target.value);
 	};
 
 	const onTypeChange = (event) => {
-		console.log('type: ' + event.target.value);
 		setType(event.target.value);
 	};
 
 	const onReasonChange = (event) => {
-		console.log('reason: ' + event.target.value);
 		setReason(event.target.value);
 	};
 
 	const onVetOrGroomerChange = (event) => {
-		console.log('vet/groomer: ' + event.target.value);
 		setVetOrGroomerName(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('notes: ' + event.target.value);
 		setNotes(event.target.value);
 	};
 
@@ -289,11 +281,7 @@ export default function AddPetForm(props) {
 			props.ReloadPet('APPOINTMENTS');
 		}, 500);
 	};
-	// const minDate = new Date(new Date().getTime() + 86400000);
-	// console.log(console.log(minDate);
-	// console.log('appointment props');
-	// console.log(props);
-	// console.log('date: ' + selectedDate);
+
 	return (
 		<div className="pet-form-main-container">
 			<h1 className="modal-title">Add New Appointment</h1>
@@ -329,13 +317,6 @@ export default function AddPetForm(props) {
 							id="standard-basic"
 							label="Time"
 						/>
-						{/* <InputLabel
-							// className={inputLabel}
-							className="inputlabel"
-							id="demo-controlled-open-select-label"
-						>
-							AM/PM
-						</InputLabel> */}
 
 						<TextField
 							required

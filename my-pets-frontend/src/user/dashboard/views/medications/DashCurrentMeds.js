@@ -162,16 +162,12 @@ export default function DashCurrentMeds(props) {
 	];
 
 	const findPictureById = (id) => {
-		console.log('hello');
 		for (var i = 0; i < petPictures.length; i++) {
 			if (petPictures[i].id == id) {
 				if (petPictures[i].petImage == null) {
 					return '';
-				}
-				//	console.log(petPictures[i].petImage.data);
-				else return petPictures[i].petImage.data;
+				} else return petPictures[i].petImage.data;
 			} else {
-				//console.log('nah');
 			}
 		}
 	};
@@ -183,9 +179,7 @@ export default function DashCurrentMeds(props) {
 		let date2 = moment(currentMedications[i].startDate).format(
 			'MM/DD/YYYY'
 		);
-		let picture = findPictureById(
-			currentMedications[i].petMedId
-		);
+		let picture = findPictureById(currentMedications[i].petMedId);
 		rows[i] = {
 			id: currentMedications[i].id,
 			endDate: date1,
@@ -197,16 +191,8 @@ export default function DashCurrentMeds(props) {
 		};
 	}
 
-	const SetOpenModalToFalse = () => {
-		// setOpenModal(false);
-		// setIsEditPrev(false);
-		// setIsDeletePrev(false);
-	};
+	const SetOpenModalToFalse = () => {};
 
-	// console.log(upcomingPreventatives);
-	// console.log(sortedWeights);
-	// console.log('upcoming');
-	// console.log(upcomingPreventatives);
 	return (
 		<div
 			className="appointments-table"

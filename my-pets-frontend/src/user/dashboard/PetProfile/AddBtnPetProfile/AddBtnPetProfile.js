@@ -54,7 +54,6 @@ export default function AddBtnPetProfile(props) {
 
 	const addButtonHandler = (event) => {
 		setAnchorEl(event.currentTarget);
-		console.log('profile add clicked');
 	};
 
 	//sets the modal and respective option flag to true.
@@ -72,7 +71,6 @@ export default function AddBtnPetProfile(props) {
 	};
 
 	const newWeightHandler = () => {
-		console.log('weight clicked');
 		setOpenModal(true);
 		setIsWeight(true);
 		setIsAppointment(false);
@@ -89,7 +87,6 @@ export default function AddBtnPetProfile(props) {
 	};
 
 	const newPreventativeHandler = () => {
-		console.log('preventative clicked');
 		setOpenModal(true);
 		setIsPreventative(true);
 		setIsAppointment(false);
@@ -99,7 +96,6 @@ export default function AddBtnPetProfile(props) {
 	};
 
 	const newMedicationHandler = () => {
-		console.log('medication clicked');
 		setOpenModal(true);
 		setIsMedication(true);
 		setIsAppointment(false);
@@ -109,7 +105,6 @@ export default function AddBtnPetProfile(props) {
 	};
 
 	const newVetHandler = () => {
-		console.log('vet clicked');
 		setOpenModal(true);
 		setIsVet(true);
 		setIsAppointment(false);

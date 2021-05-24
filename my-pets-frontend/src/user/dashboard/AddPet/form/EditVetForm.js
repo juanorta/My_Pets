@@ -188,24 +188,20 @@ export default function EditVetForm(props) {
 		cancelButton = classes.cancelButtonSmall;
 	}
 	const onNameChange = (event) => {
-		console.log('name: ' + event.target.value);
 		setName(event.target.value);
 	};
 
 	const onNumberChange = (event) => {
-		console.log('number: ' + event.target.value);
 		setPhoneNumber(event.target.value);
 		// setUnit(event.target.value);
 		// // setAmOrPm(event.target.value);
 	};
 
 	const onLocationChange = (event) => {
-		// console.log('location: ' + event.target.value);
 		setLocation(event.target.value);
 	};
 
 	const onNotesChange = (event) => {
-		console.log('notes: ' + event.target.value);
 		setNotes(event.target.value);
 	};
 
@@ -231,10 +227,6 @@ export default function EditVetForm(props) {
 		}, 500);
 	};
 
-	// console.log('weight props');
-	// console.log(props);
-	// console.log('date: ' + selectedDate);
-	console.log(rowData);
 	return (
 		<div className="pet-form-main-container">
 			<h1 className="modal-title">Edit Veterinarian</h1>

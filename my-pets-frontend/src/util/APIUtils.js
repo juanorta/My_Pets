@@ -12,7 +12,6 @@ const request = (options) => {
 		'Content-Type': 'application/json',
 	});
 
-	console.log(localStorage.getItem(ACCESS_TOKEN));
 	if (localStorage.getItem(ACCESS_TOKEN)) {
 		headers.append(
 			'Authorization',
@@ -22,13 +21,11 @@ const request = (options) => {
 
 	const defaults = { headers: headers };
 	options = Object.assign({}, defaults, options);
-	console.log(options);
 	return fetch(options.url, options).then((response) =>
 		response.json().then((json) => {
 			if (!response.ok) {
 				return Promise.reject(json);
 			}
-			console.log(json);
 			return json;
 		})
 	);
@@ -36,7 +33,6 @@ const request = (options) => {
 
 export function getCurrentUser() {
 	if (!localStorage.getItem(ACCESS_TOKEN)) {
-		console.log('no access token set');
 		return Promise.reject('No access token set.');
 	}
 
@@ -46,30 +42,9 @@ export function getCurrentUser() {
 	});
 }
 
-// export function login(loginRequest) {
-// 	return request({
-// 		url: API_BASE_URL + '/auth/login',
-// 		method: 'POST',
-// 		body: JSON.stringify(loginRequest),
-// 	});
-// }
-
-// export function signup(signupRequest) {
-// 	console.log('sign up');
-// 	console.log(signupRequest);
-// 	return request({
-// 		url: API_BASE_URL + '/auth/signup',
-// 		method: 'POST',
-// 		body: JSON.stringify(signupRequest),
-// 	});
-// }
-
 //USER ENDPOINTS
 export function getAllPets(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all pets function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets`,
@@ -79,9 +54,6 @@ export function getAllPets(id) {
 
 export function getAllPetsWithoutPictures(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all pets with no pictures function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/noPictures`,
@@ -91,9 +63,6 @@ export function getAllPetsWithoutPictures(id) {
 
 export function getAllPetsWithWeights(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all pets function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/withWeights`,
@@ -103,9 +72,6 @@ export function getAllPetsWithWeights(id) {
 
 export function getAllFood(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all food function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/food`,
@@ -115,9 +81,6 @@ export function getAllFood(id) {
 
 export function getFoodAmount(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get food amount function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/foodAmount`,
@@ -127,10 +90,6 @@ export function getFoodAmount(id) {
 
 export function getAllPetsWithWFood(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all pets function called');
-
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/withFood`,
 		method: 'GET',
@@ -139,9 +98,6 @@ export function getAllPetsWithWFood(id) {
 
 export function getAllPreventatives(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all preventatives function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/preventatives`,
@@ -151,9 +107,6 @@ export function getAllPreventatives(id) {
 
 export function getAllMedications(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all medications function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/medications`,
@@ -163,10 +116,6 @@ export function getAllMedications(id) {
 
 export function getAllVets(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all preventatives function called');
-
 	return request({
 		url: API_BASE_URL + `/users/${id}/vets`,
 		method: 'GET',
@@ -176,14 +125,7 @@ export function getAllVets(id) {
 //INDIVIDUAL PET ENDPOINTS
 export async function addPet(id, age, breed, name, type, sex) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-	console.log('add pet function called');
-	console.log(id);
-	console.log(age);
-	console.log(breed);
-	console.log(name);
-	console.log(type);
-	console.log(sex);
+
 	await fetch(API_BASE_URL + `/users/${id}/addPet`, {
 		method: 'POST',
 		headers: {
@@ -203,7 +145,6 @@ export async function addPet(id, age, breed, name, type, sex) {
 
 export async function editPet(id, petId, petName, petType, breed, sex, age) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('edit function called');
 
 	await fetch(API_BASE_URL + `/users/${id}/pets/update`, {
 		method: 'PUT',
@@ -225,9 +166,7 @@ export async function editPet(id, petId, petName, petType, breed, sex, age) {
 
 export async function deletePet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	// console.log(token);
-	console.log('delete pet function called');
-	console.log('id: ' + id + ' petId: ' + petId);
+
 	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}`, {
 		method: 'DELETE',
 		headers: {
@@ -240,9 +179,6 @@ export async function deletePet(id, petId) {
 
 export function getPet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get pet function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}`,
@@ -252,10 +188,6 @@ export function getPet(id, petId) {
 
 export function getPetWithoutPictureWithFood(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get without picture with food function called');
-
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}/noPicture/withFood`,
 		method: 'GET',
@@ -265,9 +197,6 @@ export function getPetWithoutPictureWithFood(id, petId) {
 //APPOINTMENT ENDPOINTS
 export function getAppointmentsByPet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get appts by pet function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}/appointments`,
@@ -289,8 +218,6 @@ export async function addAppointment(
 	petAptId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-	console.log('add appointment called');
 
 	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addAppointment`, {
 		method: 'POST',
@@ -328,7 +255,6 @@ export async function editAppointment(
 	petAptId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('edit appointment function called');
 
 	await fetch(
 		API_BASE_URL +
@@ -353,17 +279,11 @@ export async function editAppointment(
 				petAptId: petAptId,
 			}),
 		}
-	).then((response) => {
-		console.log('EDIT APPOINTMENT FINISHED');
-		console.log(response);
-	});
+	).then((response) => {});
 }
 
 export async function deleteAppointment(id, petId, apptId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	// console.log(token);
-	console.log('delete appointment function called');
-	console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + apptId);
 	await fetch(
 		API_BASE_URL + `/users/${id}/pets/${petId}/appointments/${apptId}`,
 		{
@@ -382,9 +302,6 @@ export async function deleteAppointment(id, petId, apptId) {
 
 export function getWeightsByPet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get weights by pet function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}/weights`,
@@ -403,7 +320,6 @@ export async function addWeight(
 	petWeightId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('add appointment called');
 
 	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/addWeight`, {
 		method: 'POST',
@@ -435,7 +351,6 @@ export async function editWeight(
 	petWeightId
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('edit food function called');
 
 	await fetch(
 		API_BASE_URL + `/users/${id}/pets/${petId}/weights/${weightId}/update`,
@@ -461,9 +376,6 @@ export async function editWeight(
 
 export async function deleteWeight(id, petId, weightId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	// console.log(token);
-	console.log('delete weight function called');
-	console.log('id: ' + id + ' petId: ' + petId + ' weightId: ' + weightId);
 	await fetch(
 		API_BASE_URL + `/users/${id}/pets/${petId}/weights/${weightId}`,
 		{
@@ -480,9 +392,6 @@ export async function deleteWeight(id, petId, weightId) {
 //FOOD ENDPOINTS
 export function getFoodByPet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get food by pet function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}/food`,
@@ -532,7 +441,6 @@ export async function editFood(
 	notes
 ) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('edit food function called');
 
 	await fetch(
 		API_BASE_URL + `/users/${id}/pets/${petId}/food/${foodId}/update`,
@@ -558,9 +466,7 @@ export async function editFood(
 
 export async function deleteFood(id, petId, foodId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	// console.log(token);
-	console.log('delete food function called');
-	console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+
 	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/food/${foodId}`, {
 		method: 'DELETE',
 		headers: {
@@ -573,9 +479,6 @@ export async function deleteFood(id, petId, foodId) {
 
 export function getAllAppointments(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all appointments function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/appointments`,
@@ -585,10 +488,6 @@ export function getAllAppointments(id) {
 
 export function getAllWeights(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get all weights function called');
-
 	return request({
 		url: API_BASE_URL + `/users/${id}/weights`,
 		method: 'GET',
@@ -599,16 +498,10 @@ export function getAllWeights(id) {
 // export function getImage(id, petId)
 export async function addPetImage(id, petId, file) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('ADD PET FUNCTION CALLED');
-	// console.log('file ->');
-	// console.log(file);
 	const formData = new FormData();
 	formData.append('file', file);
 	for (var pair of formData.entries()) {
-		console.log(pair[1]);
 	}
-
-	// console.log(formData.entries());
 
 	const response = await fetch(
 		API_BASE_URL + `/users/${id}/pets/${petId}/uploadImage`,
@@ -621,19 +514,15 @@ export async function addPetImage(id, petId, file) {
 			body: formData,
 		}
 	);
-
-	console.log(response);
 }
 
 export async function editPetImage(id, petId, imageId, file) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('EDIT PET FUNCTION CALLED');
 
 	const formData = new FormData();
 	formData.append('file', file);
 
 	for (var pair of formData.entries()) {
-		console.log(pair[1]);
 	}
 
 	const response = await fetch(
@@ -647,23 +536,15 @@ export async function editPetImage(id, petId, imageId, file) {
 			body: formData,
 		}
 	);
-
-	console.log(response);
 }
 
 //FOOD IMAGE ENDPOINTS
 export async function addFoodImage(id, petId, foodId, file) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('ADD FOOD IMAGE FUNCTION CALLED');
-	// console.log('file ->');
-	// console.log(file);
 	const formData = new FormData();
 	formData.append('file', file);
 	for (var pair of formData.entries()) {
-		console.log(pair[1]);
 	}
-
-	// console.log(formData.entries());
 
 	const response = await fetch(
 		API_BASE_URL + `/users/${id}/pets/${petId}/food/${foodId}/uploadImage`,
@@ -676,19 +557,15 @@ export async function addFoodImage(id, petId, foodId, file) {
 			body: formData,
 		}
 	);
-
-	console.log(response);
 }
 
 export async function editFoodImage(id, petId, foodId, imageId, file) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log('EDIT PET FUNCTION CALLED');
 
 	const formData = new FormData();
 	formData.append('file', file);
 
 	for (var pair of formData.entries()) {
-		console.log(pair[1]);
 	}
 
 	const response = await fetch(
@@ -703,16 +580,11 @@ export async function editFoodImage(id, petId, foodId, imageId, file) {
 			body: formData,
 		}
 	);
-
-	console.log(response);
 }
 
 //PREVENTATIVE ENDPOINTS
 export function getPreventativesByPet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get preventatives by pet function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}/preventatives`,
@@ -792,9 +664,7 @@ export async function editPreventative(
 
 export async function deletePreventative(id, petId, prevId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	// console.log(token);
-	console.log('delete prev function called');
-	// console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+
 	await fetch(
 		API_BASE_URL + `/users/${id}/pets/${petId}/preventatives/${prevId}`,
 		{
@@ -811,9 +681,6 @@ export async function deletePreventative(id, petId, prevId) {
 //MEDICATION ENDPOINTS
 export function getMedicationsByPet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get medications by pet function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}/medications`,
@@ -888,9 +755,7 @@ export async function editMedication(
 
 export async function deleteMedication(id, petId, medId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	// console.log(token);
-	console.log('delete medication function called');
-	// console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+
 	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/meds/${medId}`, {
 		method: 'DELETE',
 		headers: {
@@ -904,9 +769,6 @@ export async function deleteMedication(id, petId, medId) {
 //VETERINARIANS ENDPOINTS
 export function getVetsByPet(id, petId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	console.log(token);
-
-	console.log('get vets by pet function called');
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}/vets`,
@@ -981,9 +843,7 @@ export async function editVet(
 
 export async function deleteVet(id, petId, vetId) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
-	// console.log(token);
-	console.log('delete vet function called');
-	// console.log('id: ' + id + ' petId: ' + petId + ' apptId: ' + foodId);
+
 	await fetch(API_BASE_URL + `/users/${id}/pets/${petId}/vets/${vetId}`, {
 		method: 'DELETE',
 		headers: {

@@ -49,16 +49,12 @@ export default function Vets(props) {
 	const [value, setValue] = useState(0);
 
 	useEffect(() => {
-		console.log('CURRENT USER');
-		console.log(currentUser);
 		fetchVets();
 	}, [value]);
 
 	const fetchVets = () => {
 		getVetsByPet(currentUser.id, pet.id)
 			.then((response) => {
-				console.log('VETS');
-				console.log(response);
 				setVets(response);
 				setLoading(false);
 			})
@@ -66,7 +62,6 @@ export default function Vets(props) {
 	};
 
 	const ReloadComponent = () => {
-		console.log('reload weights function called');
 		setValue(value + 1);
 		setLoading(true);
 	};
@@ -154,7 +149,6 @@ export default function Vets(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params.row);
 						setOpenModal(true);
 						setIsEditVet(true);
 						setRowData(params.row);
@@ -163,12 +157,6 @@ export default function Vets(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{

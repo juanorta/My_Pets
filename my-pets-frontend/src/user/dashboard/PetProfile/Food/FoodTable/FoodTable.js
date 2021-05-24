@@ -153,7 +153,6 @@ export default function FoodTable(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						console.log(params);
 						setOpenModal(true);
 						setIsEditFood(true);
 						setRowData(params.row);
@@ -162,12 +161,6 @@ export default function FoodTable(props) {
 				>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -177,7 +170,6 @@ export default function FoodTable(props) {
 			renderCell: (params) => (
 				<Button
 					onClick={() => {
-						// console.log(params);
 						setOpenModal(true);
 						setIsDeleteFood(true);
 						setRowData(params.row);
@@ -202,7 +194,6 @@ export default function FoodTable(props) {
 			whereToBuy: props.food[i].whereToBuy,
 			notes: props.food[i].notes,
 		};
-		// console.log(pet.food[i].wetOrDry);
 	}
 
 	//sets all flags to false
@@ -213,7 +204,6 @@ export default function FoodTable(props) {
 		// props.forceUpdate();
 	};
 
-	// console.log('params : ' editParams);
 	return (
 		<div
 			className="appointments-profile-main-container"

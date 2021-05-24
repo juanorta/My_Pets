@@ -43,8 +43,6 @@ export default function Food(props) {
 	const fetchFood = () => {
 		getFoodByPet(currentUser.id, pet.id)
 			.then((response) => {
-				// console.log('FOOD BY PET');
-				// console.log(response);
 				setFood(response);
 				setLoading(false);
 			})
@@ -52,7 +50,6 @@ export default function Food(props) {
 	};
 
 	const ReloadComponent = () => {
-		console.log('reload weights function called');
 		setValue(value + 1);
 		setLoading(true);
 	};
@@ -64,14 +61,12 @@ export default function Food(props) {
 	}
 
 	const cardViewHandler = () => {
-		console.log('card view clicked');
 		setTableViewSelected(false);
 		setCardViewSelected(true);
 		setCardStyle(classes.CardViewSelected);
 		setTableStyle(classes.TableView);
 	};
 	const tableViewHandler = () => {
-		console.log('table view clicked');
 		setCardViewSelected(false);
 		setTableViewSelected(true);
 		setTableStyle(classes.TableViewSelected);

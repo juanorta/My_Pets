@@ -128,9 +128,7 @@ export default function Appointments(props) {
 
 					<TextField
 						style={{ cursor: 'pointer' }}
-						onClick={() => {
-							console.log(params);
-						}}
+						onClick={() => {}}
 						className={classes.TextFieldPet}
 						// style={{ color: 'red' }}
 						InputProps={{ disableUnderline: true }}
@@ -221,20 +219,9 @@ export default function Appointments(props) {
 			headerName: 'Edit',
 			width: 77,
 			renderCell: (params) => (
-				<Button
-					onClick={() => {
-						//console.log(params);
-					}}
-					className={classes.Button}
-				>
+				<Button onClick={() => {}} className={classes.Button}>
 					<EditIcon className={classes.EditIcon} />
 				</Button>
-
-				// <EditButton
-				// 	onClick={(params) => {
-				// 		console.log(params);
-				// 	}}
-				// />
 			),
 		},
 		{
@@ -269,7 +256,6 @@ export default function Appointments(props) {
 			};
 		}
 	}
-	// console.log(sortedAppointments);
 	return (
 		<div className="appointments-main-container" id="appointments">
 			<div className="title">

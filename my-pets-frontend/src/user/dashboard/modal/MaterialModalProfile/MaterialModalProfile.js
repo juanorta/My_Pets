@@ -105,8 +105,6 @@ export default function MaterialModalProfile(props) {
 	if (small) {
 		style = classes.AddFormSmall;
 	}
-	console.log(props);
-	// console.log('open => ' + open);
 
 	return (
 		<div className="add-pet-modal-main-container">

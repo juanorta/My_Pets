@@ -91,8 +91,6 @@ export default function Preventatives(props) {
 	const fetchPreventatives = () => {
 		getAllPreventatives(currentUser.id)
 			.then((response) => {
-				// console.log('ALL PREVENTATIVES');
-				// console.log(response);
 				if (response.length < 1) {
 					setHasPreventatives(false);
 				} else {
@@ -121,7 +119,6 @@ export default function Preventatives(props) {
 				'MM/DD/YYYY'
 			);
 			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
 			if (newDate > now) {
 				upcomingArray[j] = sortedPreventatives[i];
 				j++;

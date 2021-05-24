@@ -45,8 +45,6 @@ export default function Medications(props) {
 	const fetchMedications = () => {
 		getMedicationsByPet(currentUser.id, pet.id)
 			.then((response) => {
-				console.log('MEDICATIONS BY PET');
-				console.log(response);
 				sortMedications(response);
 			})
 			.catch((error) => {});
@@ -73,41 +71,29 @@ export default function Medications(props) {
 			);
 
 			var todayFormatted = moment(now).format('MM/DD/YYYY');
-			// console.log(newDate);
 			if (newDate > now) {
-				// console.log('UPCOMING');
-				// console.log(newDate);
 				currentArray[j] = sortedMedications[i];
 				j++;
 			} else if (sameDate == todayFormatted) {
-				// console.log('SAME');
-				// console.log(newDate);
 				currentArray[j] = sortedMedications[i];
 				j++;
 			} else {
-				// console.log('PAST');
-				// console.log(newDate);
 				pastArray[k] = sortedMedications[i];
 				k++;
 			}
 		}
-		// console.log(medications);
-		// console.log(sortedMedications);
-		// console.log(currentArray);
-		// console.log(pastArray);
+
 		setCurentMedications(currentArray);
 		setPastMedications(pastArray);
 		setLoading(false);
 	};
 
 	const ReloadComponent = () => {
-		console.log('reload weights function called');
 		setValue(value + 1);
 		setLoading(true);
 	};
 
 	const currentViewHandler = () => {
-		// console.log('graph view clicked');
 		setPastViewSelected(false);
 		setCurrentViewSelected(true);
 		setCurrentStyle(classes.currentViewSelected);
