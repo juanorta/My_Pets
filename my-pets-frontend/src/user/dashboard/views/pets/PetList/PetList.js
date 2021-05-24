@@ -24,6 +24,8 @@ import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import PetProfile from '../../../PetProfile/PetProfile';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Icon from '@mdi/react';
+import { mdiDog } from '@mdi/js';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -87,16 +89,11 @@ export default function PetList(props) {
 	//hook used to store a single pet
 	const [pet, setPet] = useState('');
 
-	// console.log('dashboard');
-	// console.log(props.currentUser.pets);
-
 	//function that is later passed to MaterialModal so that setOpenModal can be reset after each use
 	const SetOpenModalToFalse = () => {
 		setOpenModal(false);
 		setEditOpenModal(false);
 		setOpenDeleteModal(false);
-		// props.forceUpdate();
-		// console.log(props.currentUser.pets);
 	};
 
 	//used to send the correct pet information to MaterialModal
@@ -156,20 +153,24 @@ export default function PetList(props) {
 						>
 							<div className="pet-card">
 								{pet.petImage == null ? (
-									<div className="no-picture"></div>
+									<div className="no-picture">
+										<Icon
+											className="no-picture-icon"
+											path={mdiDog}
+											title="Dog Profile"
+											size={8}
+											horizontal
+											vertical
+											rotate={180}
+											color="#1b2737"
+										/>
+									</div>
 								) : (
 									<img
 										className="image"
 										src={`data:image/jpeg;base64,${pet.petImage.data}`}
 									/>
 								)}
-
-								{/* <h4>id: {pet.id}</h4>
-								<h4>name: {pet.petName}</h4>
-								<h4>type: {pet.petType}</h4>
-								<h4>breed: {pet.breed}</h4>
-								<h4>sex: {pet.sex}</h4>
-								<h4>age: {pet.age}</h4> */}
 							</div>
 
 							<div className="card-options">
@@ -188,10 +189,6 @@ export default function PetList(props) {
 
 									<NavLink
 										to={`/petprofile/${pet.id}/${pet.petName}`}
-										// to={{
-										// 	pathname: `/petprofile/${pet.id}/${pet.petName}`,
-										// 	currentUser: currentUser,
-										// }}
 									>
 										<Button
 											data-tip

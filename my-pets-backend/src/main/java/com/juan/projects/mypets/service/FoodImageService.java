@@ -30,8 +30,7 @@ public class FoodImageService {
     private FoodRepository foodRepository;
 
     public FoodImage storeFile(MultipartFile file, Long userId, Long petId, Long foodId){
-        System.out.println("file!!");
-        System.out.println(StringUtils.cleanPath(file.getOriginalFilename()));
+
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -48,10 +47,6 @@ public class FoodImageService {
             Optional<Food> foodResponse = foodRepository.findById(foodId);
             Food food = foodResponse.get();
 
-            System.out.println("USER: " );
-            System.out.println(user.getName());
-            System.out.println(pet.getPetName());
-            System.out.println(food.getFoodName());
 
             foodImage.setUser(user);
             foodImage.setFood(food);

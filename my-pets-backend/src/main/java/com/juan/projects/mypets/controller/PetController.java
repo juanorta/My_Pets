@@ -42,6 +42,23 @@ public class PetController {
         return mappingJacksonValue;
     }
 
+    //get all pets from a user without pictures
+    @GetMapping("users/{userId}/pets/noPictures")
+    MappingJacksonValue getPetsByUserWithNoPictures(@PathVariable(value = "userId") Long userId){
+        SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("appointments","weights",
+                "medications", "preventatives", "food", "vets","petImage");
+
+        FilterProvider filterProvider = new SimpleFilterProvider()
+                .addFilter("petFilter", simpleBeanPropertyFilter);
+
+        List<Pet> pets = petRepository.findByUserId(userId);
+
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(pets);
+        mappingJacksonValue.setFilters(filterProvider);
+
+        return mappingJacksonValue;
+    }
+
     //get all pets with weights from a user
     @GetMapping("users/{userId}/pets/withWeights")
     MappingJacksonValue getPetsByUserWeights(@PathVariable(value = "userId") Long userId){
@@ -93,6 +110,24 @@ public class PetController {
 
         return mappingJacksonValue;
     }
+
+    //finds pet without picture from user and pet id
+    @GetMapping("users/{userId}/pets/{petId}/noPicture/withFood")
+    MappingJacksonValue getPetByUserWithoutPicture(@PathVariable(value ="userId") Long userId, @PathVariable(value = "petId") Long petId){
+        SimpleBeanPropertyFilter simpleBeanPropertyFilter = SimpleBeanPropertyFilter.serializeAllExcept("appointments", "weights"
+                , "medications", "preventatives", "vets", "petImage");
+
+        FilterProvider filterProvider = new SimpleFilterProvider()
+                .addFilter("petFilter", simpleBeanPropertyFilter);
+
+        Pet pet = petRepository.findByIdAndUserId(petId, userId);
+
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(pet);
+        mappingJacksonValue.setFilters(filterProvider);
+
+        return mappingJacksonValue;
+    }
+
 
     //add pet
     @PostMapping("users/{userId}/addPet")

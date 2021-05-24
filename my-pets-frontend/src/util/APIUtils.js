@@ -77,6 +77,18 @@ export function getAllPets(id) {
 	});
 }
 
+export function getAllPetsWithoutPictures(id) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get all pets with no pictures function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/noPictures`,
+		method: 'GET',
+	});
+}
+
 export function getAllPetsWithWeights(id) {
 	let token = localStorage.getItem(ACCESS_TOKEN);
 	console.log(token);
@@ -234,6 +246,18 @@ export function getPet(id, petId) {
 
 	return request({
 		url: API_BASE_URL + `/users/${id}/pets/${petId}`,
+		method: 'GET',
+	});
+}
+
+export function getPetWithoutPictureWithFood(id, petId) {
+	let token = localStorage.getItem(ACCESS_TOKEN);
+	console.log(token);
+
+	console.log('get without picture with food function called');
+
+	return request({
+		url: API_BASE_URL + `/users/${id}/pets/${petId}/noPicture/withFood`,
 		method: 'GET',
 	});
 }

@@ -49,12 +49,16 @@
 }
 
 .no-picture {
-	background-color: #1b2737;
+	background-color: transparent;
 	height: 95%;
 	width: 100%;
 	border-top-left-radius: 2%;
 
 	border-top-right-radius: 2%;
+}
+
+.no-picture-icon {
+	margin-left: 2.5rem;
 }
 
 .pet-card {
@@ -115,19 +119,15 @@ h4 {
 
 	.card-options Button {
 		background-color: transparent;
-		/* margin-left: 2.75rem;
-		margin-top: 2rem; */
-		/* display: inline-flex; */
 		margin: 0 auto;
 		margin-left: 2rem;
 		margin-top: 1.5rem;
-		/* margin-left: 2.5rem;
-		margin-top: 2.5rem; */
 	}
 
-	/* .view-profile-button {
-		margin-left: 2rem;
-	} */
+	.no-picture-icon {
+		margin-left: 4.5rem;
+		margin-top: 2rem;
+	}
 
 	.buttons {
 		background-color: transparent;
@@ -139,8 +139,4 @@ h4 {
 	h4 {
 		font-size: 1.15rem;
 	}
-
-	/* .pet-card {
-		background-color: red;
-	} */
 }

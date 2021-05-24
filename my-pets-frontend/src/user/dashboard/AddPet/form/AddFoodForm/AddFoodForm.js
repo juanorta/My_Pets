@@ -23,6 +23,7 @@ import {
 	addFoodImage,
 	getCurrentUser,
 	getPet,
+	getPetWithoutPictureWithFood,
 } from '../../../../../util/APIUtils';
 import PublishIcon from '@material-ui/icons/Publish';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -307,7 +308,7 @@ export default function AddFoodForm(props) {
 
 		if (image != '') {
 			setTimeout(() => {
-				getPet(currentUser.id, pet.id)
+				getPetWithoutPictureWithFood(currentUser.id, pet.id)
 					.then((response) => {
 						console.log(response);
 						//if user selected an image

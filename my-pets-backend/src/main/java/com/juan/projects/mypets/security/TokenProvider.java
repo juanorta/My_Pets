@@ -23,8 +23,6 @@ public class TokenProvider {
     public String createToken(Authentication authentication){
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
-        System.out.println("principal!!");
-        System.out.println(userPrincipal.getId());
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
         return Jwts.builder()

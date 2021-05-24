@@ -20,6 +20,7 @@ import {
 	addPetImage,
 	getCurrentUser,
 	getAllPets,
+	getAllPetsWithoutPictures,
 } from '../../../../util/APIUtils';
 import Alert from 'react-s-alert';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -272,12 +273,9 @@ export default function AddPetForm(props) {
 	//makes API call to submit form information
 	const submitHandler = (event) => {
 		event.preventDefault();
-		// console.log('image');
-		// console.log(image);
-		// addPetImage(1, 109, image);
 		addPet(id, age, breed, name, petType, sex);
 		setTimeout(() => {
-			getAllPets(id)
+			getAllPetsWithoutPictures(id)
 				.then((response) => {
 					console.log(response);
 					console.log(response.length);
@@ -312,9 +310,6 @@ export default function AddPetForm(props) {
 		}
 	};
 
-	// const [name2, setName2] = useState('Male');
-	// console.log('props');
-	// console.log(props);
 	return (
 		<div className="pet-form-main-container">
 			<h1 className="modal-title">Add Pet</h1>

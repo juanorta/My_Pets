@@ -40,38 +40,15 @@ public class PetImageService {
 
             PetImage petImage = new PetImage(fileName, file.getContentType(), file.getBytes());
 
-//            userRepository.findById(userId).map(user -> {
-//            petImage.setUser(user);
-//            petRepository.findById(petId).map(pet -> {
-//                petImage.setPet(pet);
-//
-////               petImageRepository.save(petImage);
-//                return pet;
-//            }).orElseThrow();
-//            return user;
-//        }).orElseThrow();
 
-//            petRepository.findById(petId).map(pet -> {
-//                petim
-//            })
             Optional<User> response = userRepository.findById(userId);
             Optional<Pet> petResponse = petRepository.findById(petId);
             User user = response.get();
             Pet pet = petResponse.get();
 
-            System.out.println("USER ID: " + userId);
-            System.out.println(response.isPresent());
-            System.out.println(user.getName());
-
-            System.out.println("PET ID: "+petId);
-            System.out.println(petResponse.isPresent());
-            System.out.println(pet.getPetName());
 
 
-//            System.out.println(user.getName());
-//            System.out.println(pet);
             petImage.setUser(user);
-//            Pet pet = response.get();
             petImage.setPet(pet);
             return petImageRepository.save(petImage);
         }

@@ -31,10 +31,7 @@ public class FoodController {
     //get all food for a pet
     @GetMapping("/users/{userId}/pets/{petId}/food")
     public List<Food> getFoodByPet(@PathVariable(value = "userId") Long userId, @PathVariable(value = "petId") Long petId){
-//        System.out.println(foodRepository.findById((long) 80).orElse(null));
-//
-//        List<Food> foodOptional= foodRepository.findByPetId(petId);
-//        System.out.println(foodOptional);
+
         return foodRepository.findByPetId(petId);
     }
 
