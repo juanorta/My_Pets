@@ -274,26 +274,30 @@ export default function AddPetForm(props) {
 	const submitHandler = (event) => {
 		event.preventDefault();
 		addPet(id, age, breed, name, petType, sex);
-		// setTimeout(() => {
-		getAllPetsWithoutPictures(id)
-			.then((response) => {
-				console.log(response);
-				console.log(response.length);
-				if (image != '') {
-					addPetImage(id, response[response.length - 1].id, image);
+		setTimeout(() => {
+			getAllPetsWithoutPictures(id)
+				.then((response) => {
+					console.log(response);
+					console.log(response.length);
+					if (image != '') {
+						addPetImage(
+							id,
+							response[response.length - 1].id,
+							image
+						);
 
-					props.handleClose();
-					Alert.success('PET ADDED');
-					setTimeout(() => {
-						Alert.closeAll();
-						props.forceUpdate();
-					}, 1500);
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-		// }, 1000);
+						props.handleClose();
+						Alert.success('PET ADDED');
+						setTimeout(() => {
+							Alert.closeAll();
+							props.forceUpdate();
+						}, 1500);
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}, 1000);
 
 		if (image == '') {
 			props.handleClose();
