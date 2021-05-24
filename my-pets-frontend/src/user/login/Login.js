@@ -74,7 +74,10 @@ class SocialLogin extends Component {
 						>
 							<div className="social-link google">
 								<div className="google-logo">
-									<img src={googleLogo} />{' '}
+									<img
+										style={{ marginTop: '-0.3rem' }}
+										src={googleLogo}
+									/>{' '}
 								</div>
 								Log in with Google
 							</div>
