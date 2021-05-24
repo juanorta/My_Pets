@@ -81,7 +81,13 @@ class SocialLogin extends Component {
 						</a>
 					</li>
 					<li>
-						<a
+						<h3>Demo Account Credentials:</h3>
+						<h3 className="credential">
+							mypetfamily.demo@gmail.com
+						</h3>
+						<h3 className="credential">Mypetfamilydemo1!</h3>
+
+						{/* <a
 							className="btn btn-block social-btn facebook"
 							href={FACEBOOK_AUTH_URL}
 						>
@@ -91,7 +97,7 @@ class SocialLogin extends Component {
 								</div>
 								Log in with Facebook
 							</div>
-						</a>
+						</a> */}
 					</li>
 				</ul>
 				{/* <div className="test">

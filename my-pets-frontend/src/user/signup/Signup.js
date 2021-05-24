@@ -31,9 +31,7 @@ class Signup extends Component {
 		return (
 			<div className="login-container">
 				<div className="login-content">
-					<h1 className="login-title">
-						Create your My Pet Family account
-					</h1>
+					<h1 className="login-title">Create a new account</h1>
 					<SocialSignup />
 					<div className="or-separator">
 						<h3 className="or-text">OR</h3>
@@ -66,17 +64,11 @@ class SocialSignup extends Component {
 						</a>
 					</li>
 					<li>
-						<a
-							className="btn btn-block social-btn facebook"
-							href={FACEBOOK_AUTH_URL}
-						>
-							<div className="social-link facebook">
-								<div className="fb-logo">
-									<img src={fbLogo} />{' '}
-								</div>
-								Sign up with Facebook
-							</div>
-						</a>
+						<h3>Demo Account Credentials:</h3>
+						<h3 className="credential">
+							mypetfamily.demo@gmail.com
+						</h3>
+						<h3 className="credential">Mypetfamilydemo1!</h3>
 					</li>
 				</ul>
 			</div>

@@ -149,3 +149,17 @@
 .test {
 	background-color: red;
 }
+.credential {
+	background-color: transparent;
+	font-weight: 500;
+}
+
+@media screen and (max-width: 600px) {
+	.login-content {
+		background-color: transparent;
+		height: 500px;
+	}
+	.social-login {
+		background-color: transparent;
+	}
+}

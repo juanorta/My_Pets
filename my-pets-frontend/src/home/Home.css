@@ -8,7 +8,7 @@
 
 /* banner */
 .grid-container-banner {
-	background-color: blue;
+	background-color: white;
 	height: 90vh;
 }
 
@@ -40,7 +40,7 @@
 
 .grid-body {
 	background-color: transparent;
-	/* box-shadow: 0 0px 29px #1b2737; */
+	box-shadow: 0 0px 29px #1b2737;
 	border-radius: 5px;
 	/* border-radius: 25px; */
 	z-index: 999;
@@ -50,12 +50,12 @@
 }
 
 .feature-grid {
-	background-color: royalblue;
+	background-color: transparent;
 	height: 100%;
 }
 
 .feature-container {
-	background-color: green;
+	background-color: transparent;
 	height: 550px;
 	width: 400px;
 	justify-content: center;
@@ -70,7 +70,7 @@
 .feature-description {
 	/* margin-top: 2rem; */
 	margin-top: -1rem;
-	background-color: violet;
+	background-color: transparent;
 	/* width: 440px; */
 	width: 60%;
 	height: 350px;
@@ -85,15 +85,17 @@
 
 .feature-description h3 {
 	font-weight: 400;
+	font-size: 15px;
+	line-height: 40px;
 }
 
 .feature-pic-container {
-	background-color: aqua;
+	background-color: transparent;
 	height: 16.6%;
 }
 
 .feature-pic {
-	background-color: maroon;
+	background-color: transparent;
 	width: 60%;
 	height: 40%;
 	margin-left: 20%;
@@ -278,6 +280,59 @@
 	}
 }
 
+@media screen and (min-width: 600px) {
+	.home-main-container {
+		height: 570vh;
+	}
+
+	.home-main-container h1 {
+		font-size: 50px;
+	}
+
+	.grid-banner {
+		background-color: transparent;
+	}
+
+	.intro-statement {
+		margin-top: -7rem;
+	}
+
+	.grid-container-body {
+		background-color: transparent;
+		position: relative;
+		box-sizing: border-box;
+		height: 400vh;
+	}
+
+	.grid-container-body::after {
+		position: absolute;
+		content: '';
+		background: #1b2737;
+		z-index: -1;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transform-origin: top left;
+		transform: skewY(-8deg);
+		box-shadow: -70vw -10px 0px 10px #ff4f00, 70vw 50px 0px -30px #ff4f00;
+
+		/* border-bottom: 22px solid #f51c40; */
+	}
+
+	.feature-grid {
+		background-color: transparent;
+		height: 390vh;
+	}
+	.feature-container h2 {
+		background-color: transparent;
+		color: white;
+	}
+	.feature-description h3 {
+		color: white;
+	}
+}
+
 /* mobile landscape */
 /* @media only screen and (min-width: 600px) {
 	.home-main-container {
@@ -363,8 +418,9 @@
 	}
 
 	.grid-banner h1 {
-		margin-top: 17%;
+		margin-top: 20%;
 		font-size: 50px;
+		margin-bottom: 4rem;
 	}
 
 	.grid-banner {

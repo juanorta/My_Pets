@@ -25,11 +25,12 @@ const useStyles = makeStyles((theme) => ({
 		background: '#FF4F00',
 		borderRadius: 3,
 		border: 0,
-		borderRadius: '25px',
+		borderRadius: '5px',
 		color: 'white',
 		height: 48,
 		padding: '0 30px',
-		boxShadow: 'none',
+		// boxShadow: theme.shadows[3],
+
 		'&:hover': {
 			backgroundColor: '#FF4F00',
 		},
@@ -67,6 +68,7 @@ function Home() {
 							classes={{
 								root: classes.root,
 							}}
+							variant="contained"
 						>
 							Sign Up
 						</Button>
@@ -204,13 +206,11 @@ function Home() {
 									</h2>{' '}
 									Keep track of each pet's weight
 								</h2>
-								<h3>Let's keep your family healthy. Store</h3>
-								<h3>your pet's weight and view a detailed</h3>
 								<h3>
-									chart. Keeping your pet at a healthy weight
-								</h3>
-								<h3>
-									is an investment in their long-term health.
+									Let's keep your family healthy. Store your
+									pet's weight and view a detailed chart.
+									Keeping your pet at a healthy weight is an
+									investment in their long-term health.
 								</h3>
 							</div>
 						</Grid>
@@ -250,9 +250,11 @@ function Home() {
 									</h2>{' '}
 									Stay up to date on vaccinations
 								</h2>
-								<h3>Whether you have 4 pets, or just one, </h3>
-								<h3>we know how easy it is to forget</h3>
-								<h3>a vaccination appointment.</h3>
+								<h3>
+									Whether you have 4 pets, or just one, we
+									know how easy it is to forget a vaccination
+									appointment.
+								</h3>
 							</div>
 						</Grid>
 						<Grid
@@ -288,16 +290,10 @@ function Home() {
 								</h2>
 								<h3>
 									Are you sending a relative to the store and
-								</h3>
-								<h3>
 									telling them to get cat food and treats?
-								</h3>
-								<h3>
 									Share your pet's favorite food and treats
-									with
-								</h3>
-								<h3>
-									others to make sure they get the right kind
+									with others to make sure they get the right
+									kind
 								</h3>
 							</div>
 						</Grid>
@@ -332,9 +328,11 @@ function Home() {
 									</h2>{' '}
 									Never miss a dose of medicine
 								</h2>
-								<h3>Store all dosage information. Share</h3>
-								<h3>this information with dog sitters to</h3>
-								<h3>ensure your pets are staying healthy.</h3>
+								<h3>
+									Store all dosage information. Share this
+									information with dog sitters to ensure your
+									pets are staying healthy.
+								</h3>
 							</div>
 						</Grid>
 						<Grid
@@ -364,8 +362,8 @@ function Home() {
 								</h2>
 								<h3>
 									Phone numbers and addresses available where
+									all your other information is!
 								</h3>
-								<h3>all your other information is!</h3>
 							</div>
 						</Grid>
 					</Grid>
@@ -377,8 +375,8 @@ function Home() {
 				<div className="get-started">
 					<h1>Ready to get started?</h1>
 					<h2>
-						Create an account with your Google or Facebook account
-						and try it out now!
+						Create an account with your Google account and try it
+						out now!
 					</h2>{' '}
 					<NavLink
 						to="/signup"
@@ -390,6 +388,7 @@ function Home() {
 							classes={{
 								root: classes.root,
 							}}
+							variant="contained"
 						>
 							Sign Up
 						</Button>
