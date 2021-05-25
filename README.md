@@ -28,3 +28,13 @@ Logged-in Dashboard View
 
 Dashboard Appointments section
 ![Screen Shot 2021-05-25 at 5 46 42 PM](https://user-images.githubusercontent.com/44252033/119577944-34406b80-bd81-11eb-9b25-8141cf2cb0f5.png)
+
+Dashboard Weights section
+![Screen Shot 2021-05-25 at 5 47 40 PM](https://user-images.githubusercontent.com/44252033/119578008-51753a00-bd81-11eb-80da-21712d3d60ba.png)
+
+Food and Preventatives Section
+![Screen Shot 2021-05-25 at 5 48 17 PM](https://user-images.githubusercontent.com/44252033/119578051-6a7deb00-bd81-11eb-9957-a6b1c5cad328.png)
+
+Medications and Vets section
+![Screen Shot 2021-05-25 at 5 48 58 PM](https://user-images.githubusercontent.com/44252033/119578094-81bcd880-bd81-11eb-9899-82a67a24a477.png)
+
