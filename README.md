@@ -1,5 +1,5 @@
 # My Pet Family
-A web app to help users manage their pets and their needs
+A pet manager to help keep track of all your pet needs. With an easy to use interface. you can addd multiple pets and their respective appointments, food, weights, preventatives, medications, and veterinarians.
 
 # Where you can use it
 
