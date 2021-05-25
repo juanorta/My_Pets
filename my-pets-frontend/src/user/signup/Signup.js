@@ -57,7 +57,10 @@ class SocialSignup extends Component {
 						>
 							<div className="social-link google">
 								<div className="google-logo">
-									<img src={googleLogo} />{' '}
+									<img
+										src={googleLogo}
+										style={{ marginTop: '-0.3rem' }}
+									/>{' '}
 								</div>
 								Sign up with Google
 							</div>
