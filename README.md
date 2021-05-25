@@ -17,3 +17,10 @@ The project is on https://mypetfamily.io/
 * Create, update, and delete API calls
 * Docker and NGINX for containerizing an application so it can be deployed and run on any environment without any issues
 * Amazon EC2 for hosting a web server
+
+#Screenshots
+
+Landing Page 1
+![Screen Shot 2021-05-25 at 5 42 52 PM](https://user-images.githubusercontent.com/44252033/119577708-c136f500-bd80-11eb-8ab6-cca7c107d81f.png)
+
+
