@@ -20,7 +20,11 @@ The project is on https://mypetfamily.io/
 
 #Screenshots
 
-Landing Page 1
+Landing Page 
 ![Screen Shot 2021-05-25 at 5 42 52 PM](https://user-images.githubusercontent.com/44252033/119577708-c136f500-bd80-11eb-8ab6-cca7c107d81f.png)
 
+Logged-in Dashboard View
+![Screen Shot 2021-05-25 at 5 45 50 PM](https://user-images.githubusercontent.com/44252033/119577873-11ae5280-bd81-11eb-933a-bcf3bf48fe10.png)
 
+Dashboard Appointments section
+![Screen Shot 2021-05-25 at 5 46 42 PM](https://user-images.githubusercontent.com/44252033/119577944-34406b80-bd81-11eb-9b25-8141cf2cb0f5.png)
